@@ -1156,15 +1156,15 @@ Access to patient record database.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Operational}:] \textbf{Operational Requirement}
 
-    \textbf{Requirement:} The system must maintain a 99.9\% uptime during operational hours and implement real-time data duplication to mitigate data loss.
+    \textbf{Requirement:} The system must maintain a 99.9\% uptime during operational hours and implement real-time data duplicationm across multiple servers to mitigate data loss.
 
     \textbf{Rationale:} Reliable uptime ensures consistent system for healthcare workers, specially in time-sensitive atmospheres like hospitals.
 
-    \textbf{Fit Criterion:} System logs will validate that the 99.9\% uptime is maintained over a 30-day period. Backup servers should engage within 10 seconds of downtime, with real-time data replication ensuring minimal data loss. 
+    \textbf{Fit Criterion:} System logs will validate that the 99.9\% uptime is maintained over a 30-day period. different servers should engage in the backup process, with real-time data replication ensuring minimal data loss. 
 
     \textbf{Dependencies:} N/A
     
-    \textbf{Undesired Event Handling:} Data should be buffered in a temporary storage solution if a server switch occurs, ensuring that no data is lost during system recovery.
+    \textbf{Undesired Event Handling:} Data should be duplicated across different servers to ensure consistency. In case of downtime, it should be stored in temporary data containers before starting the syncing process.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:] \textbf{Maintainability Requirement}
 

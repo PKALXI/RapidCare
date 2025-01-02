@@ -22,8 +22,8 @@ export const getClassifiedAudio = (audioChunk : Blob) => async (dispatch: Dispat
         });
 
         dispatch({
-            type: SET_CLASSIFIED_DATA,
-            payload: data,
+            type: SET_TRANSCRIBED_TEXT,
+            payload: transcribedText,
         });
     }catch(error){
         console.log("OMG SOME ERROR BEN STOKES")

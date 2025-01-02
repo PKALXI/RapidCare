@@ -3,6 +3,7 @@ import { getClassifiedAudio, sendAudio, fetchTranscribedText, fetchClassifiedDat
 import Poc from '../views/poc';
 import { AppState } from '../reducers/AppState';
 import { useState, useEffect } from 'react';
+import { CircularProgress } from '@mui/material';
 
 const POLLING_INTERVAL = 1000;
 
@@ -33,8 +34,8 @@ const mapDispatchToProps: DispatchProps = {
 };
 
 const Connector = (props: PocConnectorProps) => {
-  const { sendAudio, fetchTranscribedText, fetchClassifiedData, getClassifiedAudio } = props;
-    const [isRecording, setIsRecording] = useState(false);
+  const {sendAudio, fetchTranscribedText, fetchClassifiedData, getClassifiedAudio} = props;
+  const [isRecording, setIsRecording] = useState(false);
   const [isPolling, setIsPolling] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const audioChunks: BlobPart[] = [];
@@ -69,7 +70,7 @@ const Connector = (props: PocConnectorProps) => {
         stream.getTracks().forEach(track => track.stop());
       };
 
-      recorder.start(20000);
+      recorder.start(60000);
       setIsRecording(true);
       setTimeout(() => setIsPolling(true), 1000);
     } catch (error) {

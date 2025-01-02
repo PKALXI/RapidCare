@@ -6,8 +6,9 @@ export interface AppState {
   //future step state
 }
 
+
 export const initialPocState: PocState = {
-  testMode: true,
+  testMode: false,
   isRecording: false,
   transcribedText: '',
   classifiedData: {

@@ -5,15 +5,33 @@ const API_URL = 'localhost:8080/';
 const TRANSCRIPTION_API_URL = 'TRANSCRIPTION_API_URL';
 const CLASSIFICATION_API_URL = 'CLASSIFICATION_API_URL';
 
-const fillClassifiedData = (rawData : Map<string, string>) => {
+const fillClassifiedData = (rawData: Record<string, string | undefined>) => {
+    const cleanValue = (value?: string) =>
+        value && !value.toLowerCase().includes("none") ? value.trim() : '';
+
+    const parseList = (value?: string) =>
+        value && !value.toLowerCase().includes("none") ? value.split(',').map(v => v.trim()) : [];
+
     const data: IClassifiedData = { 
-        ...Object.fromEntries(['name', 'age', 'gender', 'insurance', 'reasonForVisit', 'symptoms', 'notes'].map(k => [k, rawData.get(k)])), 
-        ...Object.fromEntries(['medicalHistory', 'allergies', 'diagnoses', 'prescriptions'].map(k => [k, rawData.get(k)?.split(',') || []])),
-        labResults: [{ testName: 'Blood Glucose', result: '180 mg/dL', date: '2024-11-08' }, { testName: 'Cholesterol', result: '210 mg/dL', date: '2024-11-08' }]
+        name: cleanValue(rawData.name),
+        age: cleanValue(rawData.age),
+        gender: cleanValue(rawData.gender),
+        insurance: cleanValue(rawData.insurance),
+        reasonForVisit: cleanValue(rawData.reasonForVisit?.replace("reasonForVisit: ", '')),
+        symptoms: cleanValue(rawData.symptoms),
+        notes: cleanValue(rawData.notes?.replace("notes mentioned: ", '')),
+        medicalHistory: parseList(rawData.medicalHistory),
+        allergies: parseList(rawData.allergies),
+        diagnoses: parseList(rawData.diagnoses),
+        prescriptions: parseList(rawData.prescription?.replace("prescription: ", '')),
+        labResults: [
+            { testName: 'Blood Glucose', result: '180 mg/dL', date: '2024-11-08' },
+            { testName: 'Cholesterol', result: '210 mg/dL', date: '2024-11-08' }
+        ]
     };
 
     return data;
-}
+};
 
 export const getClassifiedNotes = async (audioChunk: Blob): Promise<{ 
     classifiedData: IClassifiedData; 
@@ -22,7 +40,9 @@ export const getClassifiedNotes = async (audioChunk: Blob): Promise<{
     console.log("Hitting");
     const sampleToken = "placeholder";
     const formData = new FormData();
-    formData.append('file', audioChunk, 'recording.wav');
+    formData.append('file', audioChunk);
+    formData.append('fields', "name,age,gender,insurance,reasonForVisit,symptoms,notes,medicalHistory,allergies,diagnoses,prescription");
+
     
     try {
         const response = await fetch(`http://${process.env.REACT_APP_API}/${process.env.REACT_APP_API_CLFT}`, {
@@ -34,8 +54,34 @@ export const getClassifiedNotes = async (audioChunk: Blob): Promise<{
         });
         
         const data = await response.json();
-        const classifiedData: IClassifiedData = fillClassifiedData(data.classified);
-        return { classifiedData, transcribedText: data.transcribedText };
+        const rawData = data.classifiedData;
+        console.log(data);
+        // const classifiedData: IClassifiedData = fillClassifiedData(data.classified);
+
+        const cleanValue = (value?: string) =>
+            value && !value.toLowerCase().includes("none") ? value.trim() : '';
+    
+        const parseList = (value?: string) =>
+            value && !value.toLowerCase().includes("none") ? value.split(',').map(v => v.trim()) : [];
+    
+        const classifiedData: IClassifiedData = { 
+            name: cleanValue(rawData.name),
+            age: cleanValue(rawData.age),
+            gender: cleanValue(rawData.gender),
+            insurance: cleanValue(rawData.insurance),
+            reasonForVisit: cleanValue(rawData.reasonForVisit?.replace("reasonForVisit: ", '')),
+            symptoms: cleanValue(rawData.symptoms),
+            notes: cleanValue(rawData.notes?.replace("notes mentioned: ", '')),
+            medicalHistory: parseList(rawData.medicalHistory),
+            allergies: parseList(rawData.allergies),
+            diagnoses: parseList(rawData.diagnoses),
+            prescriptions: parseList(rawData.prescription?.replace("prescription: ", '')),
+            labResults: [
+                { testName: 'Blood Glucose', result: '180 mg/dL', date: '2024-11-08' },
+                { testName: 'Cholesterol', result: '210 mg/dL', date: '2024-11-08' }
+            ]
+        };
+        return { classifiedData: classifiedData, transcribedText: data.transcribedText };
     } catch (error) {
         console.error('Error processing audio:', error);
         throw error;

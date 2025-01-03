@@ -2,6 +2,8 @@ package com.rapidcare.api.controllers;
 import com.rapidcare.api.services.ClassifyTextService;
 import com.rapidcare.api.services.VoiceToTextService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParser;
+import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -20,28 +24,45 @@ public class APIController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/classifyText")
-    public ResponseEntity<String> classifyData(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Map<String, Object>> classifyData(@RequestParam("file") MultipartFile file, @RequestParam("fields") String fields) {
         if (file.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty");
+            Map <String, Object> response = new HashMap<>();
+            response.put("response", "FILE IS EMPTY");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
         try {
-            byte[] soundBytes = file.getBytes();
-
+            //Store a temp file
             String filePath = "C:\\Users\\prana\\Downloads\\test.wav"; // Specify your desired save path
             File savedFile = new File(filePath);
             file.transferTo(savedFile);
 
             String resp = voiceToTextService.hitVoicetoText(savedFile);
-            System.out.println("------------" + resp);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Classification process not yet implemented." + resp);
+            JsonParser jsonParser = JsonParserFactory.getJsonParser();
+            Map <String, Object> response = jsonParser.parseMap(resp);
+
+            String plainText = String.valueOf(response.get("resp"));
+
+            String classifiedResp = classifyTextService.classifyData(fields, plainText);
+            Map<String, Object> classifiedData = jsonParser.parseMap(classifiedResp);
+
+            Map<String, Object> responseData = Map.of(
+                    "classifiedData", classifiedData,
+                    "transcribedText", plainText
+            );
+
+            System.out.println("------------" + classifiedResp);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseData);
         } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Backend error has occurred");
+            Map <String, Object> response = new HashMap<>();
+            response.put("response", "Backend error has occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
     @GetMapping("/heartbeat")
     public String isUp(){
-        return "API is up and well";
+        String resp = classifyTextService.classifyData("fields", "context");
+        return resp;
     }
 }

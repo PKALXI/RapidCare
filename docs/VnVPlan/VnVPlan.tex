@@ -289,7 +289,7 @@ Initial State: The system is set up, open to the relevant section (e.g., Healthc
 
 Input: Invalid input data.
 
-Output: An appropriate error message.
+Output: An error message outlining the invalid fields along with a possible steps to guide the users to recover from the error state.
 
 Test Case Derivation: The system will validate the input data and prompt an error message outlining why the system is not able to accept the input data. No new document is added to the database.
 
@@ -327,7 +327,7 @@ Initial State: The system is set up, open to the relevant section (e.g., Healthc
 
 Input: An invalid identifier for the document to be deleted.
 
-Output: An appropriate error message.
+Output: An error message outlining the invalid input along with a possible steps to guide the users to recover from the error state.
 
 Test Case Derivation: The system should be able to validate the provided identifier and prevent the deletion of any existing document. 
 
@@ -365,7 +365,7 @@ Initial State: The system is set up, open to the relevant section (e.g., Healthc
 
 Input: An invalid identifier for the document to be updated.
 
-Output: An appropriate error message.
+Output: An error message outlining the invalid input along with a possible steps to guide the users to recover from the error state.
 
 Test Case Derivation: The system should be able to validate the provided identifier and prevent the update of any document.
 
@@ -403,7 +403,7 @@ Initial State: The system is set up, open to the relevant section (e.g., Healthc
 
 Input: Invalid credentials for login.
 
-Output: An appropriate error message.
+Output: An error message outlining the invalid fields.
 
 Test Case Derivation: The system should be able to validate the provided credentials and prevent unauthorized access to the database.
 
@@ -423,13 +423,13 @@ Control: Manual
 
 Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
 
-Input: A valid sentence from the conversation between the healthcare professional and the patient.
+Input: A valid audio chunk from the conversation between the healthcare professional and the patient.
 
 Output: A confirmation message indicating successful transcription and the screen shows the transcribed text.
 
 Test Case Derivation: The system should be able to validate the voice input by processing it and transcribe to written text in real-time.
 
-How test will be performed: The test controller will input a valid sentence from the conversation and check if the system is able to process the valid input. The controller will verify that a confirmation message appears and the voice input is transcribed to written text.
+How test will be performed: The test controller will input a valid audio chunk and check if the system is able to transcribe the valid input. The controller will verify that a confirmation message appears and the voice input is transcribed to written text.
 
 
 \item{test-FR11-2} \label{test-FR11-2}
@@ -438,13 +438,13 @@ Control: Manual
 
 Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
 
-Input: An unclear sentence from the conversation.
+Input: An invalid data format for transcription.
 
-Output: An appropriate error message.
+Output: An error message saying that the file or data format is not valid.
 
-Test Case Derivation: The system should be able to validate the invalid input and prevent transcription of that sentence.
+Test Case Derivation: The system should be able to validate the invalid input data format.
 
-How test will be performed: The test controller will input an unclear sentence and check if the system is able to validate and reject the input. The controller will verify that an error message appears and audio input will not be transcribed to written text.
+How test will be performed: The test controller will input an invalid data format and check if the system is able to validate and reject the input. The controller will verify that an error message appears.
 
 \end{enumerate}
 

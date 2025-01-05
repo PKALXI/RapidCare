@@ -304,13 +304,12 @@ The intended users of this product are healthcare professionals, specifically th
 
 The following are the user characteristics associated with the intended users:\\
 
-\textbf{Education Level:} All users are expected to have a minimum of a college diploma and basic reading, writing, and speaking skills. The education level of the intended users will vary based on their role, generally a bachelor’s degree or college diploma in nursing, medicine, or other healthcare fields. \\
-
-\textbf{Experience:} All users will be expected to have basic familiarity with EHR systems or similar applications. This experience will depend on their roles ranging from entry-level positions to experienced professionals. \\
-
-\textbf{Technical Expertise:} The users should have basic technical skills to use EHR systems and other healthcare software applications. In addition to this, the users should have familiarity with data entry processes and analytics interpretation. \\
-
-\textbf{Accessibility Considerations:} It is anticipated that some users may have accessibility issues. The user interface should be designed for ease of navigation, incorporating various accessibility featuresm such as providing step-by-step instructions .\\
+\begin{itemize}
+  \item\textbf{Education Level:} All users are expected to have a minimum of a college diploma and basic reading, writing, and speaking skills. The education level of the intended users will vary based on their role, generally a bachelor’s degree or college diploma in nursing, medicine, or other healthcare fields. \\
+  \item\textbf{Experience:} All users will be expected to have basic familiarity with EHR systems or similar applications. This experience will depend on their roles ranging from entry-level positions to experienced professionals. \\
+  \item\textbf{Technical Expertise:} The users should have basic technical skills to use EHR systems and other healthcare software applications. In addition to this, the users should have familiarity with data entry processes and analytics interpretation. \\
+  \item\textbf{Accessibility Considerations:} It is anticipated that some users may have accessibility issues. The user interface should be designed for ease of navigation, incorporating various accessibility featuresm such as providing step-by-step instructions .\\
+\end{itemize}
 
 Specific requirements must be specified to accommodate users with varying technical expertise and diverse educational backgrounds. This will ensure the application is usable by all healthcare staff, regardless of their abilities.
 
@@ -345,11 +344,11 @@ Ontario is facing an extreme shortage of family doctors, with the number of pati
 The following is the glossary for this document:
 
 \begin{itemize}
-  \item \textbf{System:} When referring to a system the document refers to the intended solution/product.
-  \item \textbf{User:} When referring to a user the document refers to a person who will use the product.
-  \item \textbf{Healthcare Professional:} When referring to healthcare professionals the document refers to doctors, nurses, and other healthcare professionals who will be using the product.
-  \item \textbf{Patient:} When referring to a patient the document refers to any person who is receiving medical treatment.
-  \item \textbf{Healthcare Network:} When referring to a healthcare network the document refers to an organisation that has group of hospitals or clinics and will use the system.
+  \item \textbf{System:} The intended solution/product.
+  \item \textbf{User:} A person who will use the product.
+  \item \textbf{Healthcare Professional:} A doctor, nurse, and other healthcare professional who will be using the product.
+  \item \textbf{Patient:} Any person who is receiving medical treatment.
+  \item \textbf{Healthcare Network:} An organisation that has group of hospitals or clinics and will use the system.
 \end{itemize}
 
 
@@ -528,7 +527,7 @@ Since this is a software application, the properties of correctness can be descr
 
 \subsubsection{Risks and Mitigation}
 
-Looking at implementation details there are a few risks that come up, if these risks can be addressed or have a clearer roadmap that will make us more confident in the project. 
+Following are the anticipated risks in this project. If these risks can be addressed or have a clearer roadmap that will make us more confident in the project. 
 
 \begin{itemize}
   \item \textbf{Speech Input:} A hospital or a clinic can be a loud place, in the event audio input is taken we need to ensure that it is clean and clear. This would mean essentially blocking outside noise. 
@@ -1150,7 +1149,7 @@ Access to patient record database.
     
     \textbf{Fit Criterion:} The system will consistently generate completed transcription live or off a recording within 30 seconds. Additionally, the accuracy will be greater than 85\%.
 
-    \textbf{Dependencies:} NFR\ref{NFR_Operational}, \label{FR_DictationRecording}
+    \textbf{Dependencies:} NFR\ref{NFR_Operational}, FR\ref{FR_DictationRecording}
 
     \textbf{Undesired Event Handling:} In case of transcription delay or failure, a feedback bar will indicate the status of the transcription.
 
@@ -1232,6 +1231,28 @@ Access to patient record database.
 
 Already completed.
 
+\section{Phase-In Plan}
+
+All requirements with High priority must be implemented prior to the Revision 0 demonstration as they represent the core functionality of our system.\\
+FR\ref{FR_AddHealthProfessional}\\
+FR\ref{FR_login}\\
+FR\ref{FR_createRecord}\\
+FR\ref{FR_deleteRecord}\\
+FR\ref{FR_updateRecordtyping}\\ 
+FR\ref{FR_DictationRecording}\\
+
+All requirements with Medium priority will be implemented before the Revision 1 demonstration.\\
+FR\ref{FR_addHealthNetwork}\\
+FR\ref{FR_DiagnosticSuggestions}\\
+FR\ref{FR_medicalSuggestions}\\
+
+All requirements with Low priority will be added after all High and Medium requirements are implemented, time permitting.\\
+FR\ref{FR_removeHealthNetwork}\\
+FR\ref{FR_UpdateHealthNetwork}\\
+FR\ref{FR_RemoveHealthProfessionals}\\
+FR\ref{FR_UpdateHealthProfessionals}\\ 
+FR\ref{FR_transferPatient}\\
+
 \section{Likely Changes}
 
 \subsection{Functional Requirements}
@@ -1312,7 +1333,7 @@ Already completed.
   \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_performance}:] The system should convert voice recordings into text onto medical charts within 30 seconds of recording.(NFR\ref{NFR_Performance})\\
   \textbf{Rationale:} This is unlikely to change because this is a key functionality that addresses the overhead of the healthcare documentation process.
 
-  \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_security}:] The system should have all patient data encrypted, and in compliance with HIPAA standards.(NFR\ref{NFR_Security})\\
+  \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_security}:] The system should have all patient data encrypted, and in compliance with PIPEDA standards.(NFR\ref{NFR_Security})\\
   \textbf{Rationale:} This is unlikely to change because patient data must be stored securely and protected against unauthorized access.
 
   \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_legal}:] The system should comply with all healthcare data protection regulations. (NFR\ref{NFR_Legal})\\
@@ -1340,7 +1361,7 @@ Already completed.
 
   FR\ref{FR_UpdateHealthProfessionals} &  FR\ref{FR_AddHealthProfessional} \\  
 
-  FR\ref{FR_login} &  FR\ref{FR_AddHealthProfessional}, FR\ref{NFR_Security}  \\     
+  FR\ref{FR_login} &  FR\ref{FR_AddHealthProfessional}, NFR\ref{NFR_Security}  \\     
 
   FR\ref{FR_createRecord} & FR\ref{FR_login} \\  
 
@@ -1356,7 +1377,7 @@ Already completed.
 
   FR\ref{FR_transferPatient} &  FR\ref{FR_createRecord}\\  
 
-  NFR\ref{NFR_LookAndFeel} & NFR\ref{NFR_Usability} \\  
+  NFR\ref{NFR_LookAndFeel} & none \\  
 
   NFR\ref{NFR_Usability} &  NFR\ref{NFR_LookAndFeel} \\  
 

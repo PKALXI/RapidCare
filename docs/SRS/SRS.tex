@@ -156,7 +156,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+01-06-2025 & 1.1 & Pranav Updated: TA feedback parts (Removed implementation details, fixed wordings, Traceability Matrix)\\
 \bottomrule
 \end{tabularx}
 
@@ -468,7 +468,7 @@ Since this is a software application, the properties of correctness can be descr
   \item\textbf{UC2 Recording Clinical Notes:}
   \begin{itemize}
     \item The user accesses patient’s record.
-    \item The user selects dictate button.
+    \item The user initiates dictation.
     \item The user dictates the notes and hit the stop button.
     \item The user reviews the transcribed text.
     \item The user selects the submit button.
@@ -500,10 +500,10 @@ Since this is a software application, the properties of correctness can be descr
   \item\textbf{Use Case:} UC2, UC3
   \item\textbf{Primary Actor:} Healthcare professional (such as a medical doctor or a nurse)
   \item\textbf{Precondition:} The user has been successfully authenticated, logged into the system and has patient’s profile is created. The basic information such as name, contact information, and history is prefilled.
-  \item\textbf{Trigger:} The user will press the dictate button.
+  \item\textbf{Trigger:} The user will initiate dictation.
   \item\textbf{Main Success Scenario:}
   \begin{itemize}
-    \item The user will press the dictate button.
+    \item The user will initiate dictation.
     \item The system will convert audio to text in real-time.
     \item The user will press stop button.
     \item The user reviews the transcribed notes. 
@@ -754,7 +754,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Rationale:} Sometimes healthcare professionals receive promotions or other changes in their roles which require updating the information in their profiles. Therefore, it is essential for functionality that allows to edit the data in case there are inaccuracies.  
 
-\textbf{Fit Criterion:} The healthcare professional’s data will be up to date in its current state (i.e. role of a healthcare professional, the organization they work in etc), the data’s latency will depend on the networks’ need. 
+\textbf{Fit Criterion:} The healthcare professional’s data will be up to date in its current state (i.e. role of each healthcare professional and the organization they work in etc). 
 
 \textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}
 
@@ -1040,9 +1040,9 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Requirement:} The system should provide a list of frequently used medicines based on accepted diagnosis.
 
-\textbf{Rationale:} As the patients’ medical records and data is being added into the charts, having a model that can provide a preliminary set of diagnosis such that documentation time can be saved. This will be a supplementary auto-complete type of tool again to continue to speed up documentation.
+\textbf{Rationale:} As the patients’ medical records and data is being added into the charts, having a model that can provide a preliminary set of diagnosis such that documentation time can be saved. This supplementary tool will provide auto-completion analogous to what auto-completion tools programmers use.
 
-\textbf{Fit Criterion:} Auto-completion accuracy is 85+ percent as that the benchmark for most autocompleting keyboards etc. The model will be measured through cross validation techniques.
+\textbf{Fit Criterion:} Auto-completion suggestions regarding diagnoses and medicine are applicable 85+\% of the time. The model will be measured through cross validation techniques.
  
 \textbf{Dependencies:} FR\ref{FR_DictationRecording}, FR\ref{FR_DiagnosticSuggestions}
 
@@ -1050,7 +1050,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Performance Requirements:}
 \begin{itemize}
-  \item The autocompletion is accurate, such that it is correct 85+ percent of the time. 
+  \item The autocompletion is accurate, such that it is correct 85+\% of the time. 
 \end{itemize}
 
 \textbf{Hardware Requirements:} 
@@ -1100,15 +1100,18 @@ Access to patient record database.
 \end{itemize}
 
 \textbf{Normal Behavior:}
-\begin{itemize}
-  \item A patient file is requested, the request is approved then the files are transferred.
-\end{itemize}
+\begin{enumerate}
+  \item A patient file is requested
+  \item The request is approved then the files are transferred.
+\end{enumerate}
 
 \textbf{Undesired Event Handling:}
-\begin{itemize}
-  \item A patient file is requested, the request is denied then a detailed request is submitted.
-\end{itemize}
-\end{itemize}
+\begin{enumerate}
+  \item A patient file is requested 
+  \item The request for the file is denied. 
+  \item A detailed request is submitted for approval to provide further information that may have been missing.
+\end{enumerate}
+\end{enumerate}
 
 
 
@@ -1151,7 +1154,7 @@ Access to patient record database.
 
     \textbf{Dependencies:} NFR\ref{NFR_Operational}, FR\ref{FR_DictationRecording}
 
-    \textbf{Undesired Event Handling:} In case of transcription delay or failure, a feedback bar will indicate the status of the transcription.
+    \textbf{Undesired Event Handling:} In case of transcription delay or failure, feedback regarding the transcription will be provided to the user.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Operational}:] \textbf{Operational Requirement}
 

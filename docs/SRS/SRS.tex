@@ -1178,17 +1178,17 @@ Access to patient record database.
 
     \textbf{Undesired Event Handling:} If an update fails, the system will automatically revert to the last stable version.
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Security}:] \textbf{Security Requirement}
+    \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Security}:] \textbf{Security Requirement}
 
-    \textbf{Requirement:} The system should have all patient data encrypted, and in compliance with Personal Information Protection and Electronic Documents Act (PIPEDA) standards.
+    \textbf{Constraint:} The system must encrypt all patient data using AES-256 encryption or an equivalent standard and comply with the Personal Information Protection and Electronic Documents Act (PIPEDA).
 
-    \textbf{Rationale:} A secure and confidential system ensures the user to be confident in using the application while protecting sensitive patient data.
-
-    \textbf{Fit Criterion:} Security audits will confirm full compliance with PIPEDA, encryption and data protection standards.  
-
+    \textbf{Rationale:} A secure and confidential system ensures the user is confident in using the application while protecting sensitive patient data from unauthorized access.
+    
+    \textbf{Verification:} Security audits will confirm full compliance with PIPEDA and adherence to encryption and data protection standards.
+    
     \textbf{Dependencies:} N/A
-
-    \textbf{Undesired Event Handling:} If a security breach is detected, all users will be logged out, access will be locked, and administrators alerted.
+    
+    \textbf{Undesired Event Handling:} In the event of a security breach, all users will be logged out, access will be locked, and administrators will be alerted immediately.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Cultural}:] \textbf{Cultural Requirement}
 
@@ -1201,18 +1201,18 @@ Access to patient record database.
     \textbf{Dependencies:} N/A
 
     \textbf{Undesired Event Handling:} If a language bundle fails to load, the system will revert to the default language and notify the user.
-    
+
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Legal}:] \textbf{Legal Requirement}
 
-    \textbf{Requirement:} The system should comply with all healthcare data protection regulations. 
+    \textbf{Constraint:} The system must comply with the Personal Information Protection and Electronic Documents Act (PIPEDA).
 
-    \textbf{Rationale:} Legal compliance is necessary to ensure patient data protection and avoid potential legal penalties.  
-
-    \textbf{Fit Criterion:} Legal audits will confirm full compliance with PIPEDA and any other relevant data protection laws.  
-
+    \textbf{Rationale:} Legal compliance is necessary to ensure patient data protection and to avoid potential legal penalties.
+    
+    \textbf{Verification:} Legal audits will confirm compliance with PIPEDA.
+    
     \textbf{Dependencies:} N/A
-
-    \textbf{Undesired Event Handling:} If the system fails to comply with regulations, it will be updated within 24 hours to meet compliance.
+    
+    \textbf{Undesired Event Handling:} If the system fails to comply with regulations, it will be updated within 24 hours to meet compliance requirements.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Scalability}:] \textbf{Scalability Requirement}
 

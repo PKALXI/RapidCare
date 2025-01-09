@@ -305,7 +305,7 @@ The intended users of this product are healthcare professionals, specifically th
 The following are the user characteristics associated with the intended users:\\
 
 \begin{itemize}
-  \item\textbf{Education Level:} All users are expected to have a minimum of a college diploma and basic reading, writing, and speaking skills. The education level of the intended users will vary based on their role, generally a bachelor’s degree or college diploma in nursing, medicine, or other healthcare fields. \\
+  \item\textbf{Education Level:} All users are expected to have a minimum of a college diploma and basic reading, writing, and speaking skills. The education level of the intended users will vary based on their role, generally a bachelor's degree or college diploma in nursing, medicine, or other healthcare fields. \\
   \item\textbf{Experience:} All users will be expected to have basic familiarity with EHR systems or similar applications. This experience will depend on their roles ranging from entry-level positions to experienced professionals. \\
   \item\textbf{Technical Expertise:} The users should have basic technical skills to use EHR systems and other healthcare software applications. In addition to this, the users should have familiarity with data entry processes and analytics interpretation. \\
   \item\textbf{Accessibility Considerations:} It is anticipated that some users may have accessibility issues. The user interface should be designed for ease of navigation, incorporating various accessibility featuresm such as providing step-by-step instructions .\\
@@ -368,7 +368,7 @@ The goals for this project are as follows:
         \midrule
         G\refstepcounter{goalnum}\thegoalnum \label{G_reduceOverhead}: Reduce documentation overhead time.  & Through tracking the whole patient journey in the app, we look to reduce the overhead of triaging, clinical documentation, and other registrations.  & This helps hospital healthcare professionals focus on care and lowers the time taken through registration for hospital staff. \\ 
         \midrule
-        G\refstepcounter{goalnum}\thegoalnum \label{G_integrateEnv}: Integrates with the existing hospital environment. & We want the solution to be portable such that it can be implemented in existing hospital and clinic ecosystems.  & Portability will ensure that hospitals and clinics won’t have to upgrade their existing hardware to use the application. \\
+        G\refstepcounter{goalnum}\thegoalnum \label{G_integrateEnv}: Integrates with the existing hospital environment. & We want the solution to be portable such that it can be implemented in existing hospital and clinic ecosystems.  & Portability will ensure that hospitals and clinics won't have to upgrade their existing hardware to use the application. \\
         \midrule 
         G\refstepcounter{goalnum}\thegoalnum \label{G_hNetworkProfiles}: Allow health networks profiles with in service. & Need the ability for health networks to add, update, and delete network profile details. & This will ensure that the list of hospitals and staff in the network is up to date with appropriate permissions. \\
         \midrule 
@@ -430,7 +430,7 @@ N/A
 \begin{itemize}
   \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_reliableInternet}:] \textbf{Reliable Internet Connection:} We assume that the user has a reliable internet connection throughout their operational hours.
   \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sufficientHardware}:] \textbf{Sufficient Hardware Accessories:} We are assuming that the user has the required hardware devices such as monitors, iPads etc. to access the system.
-  \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_patientConsent}:] \textbf{Patient’s Consent:} We also assume that medical staff will obtain patients’ consent when required.  
+  \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_patientConsent}:] \textbf{Patient's Consent:} We also assume that medical staff will obtain patients' consent when required.  
 \end{itemize}
 
 
@@ -467,7 +467,7 @@ Since this is a software application, the properties of correctness can be descr
   \end{itemize}
   \item\textbf{UC2 Recording Clinical Notes:}
   \begin{itemize}
-    \item The user accesses patient’s record.
+    \item The user accesses patient's record.
     \item The user initiates dictation.
     \item The user dictates the notes and hit the stop button.
     \item The user reviews the transcribed text.
@@ -482,7 +482,7 @@ Since this is a software application, the properties of correctness can be descr
   \item\textbf{UC4 Create Patient Profile:}
   \begin{itemize}
     \item The user log into the system.
-    \item The user selects the ‘create a new record’ button.
+    \item The user selects the 'create a new record' button.
     \item The user provide input for the required fields.    
     \item The user selects the submit button.
   \end{itemize}
@@ -499,7 +499,7 @@ Since this is a software application, the properties of correctness can be descr
 \begin{itemize}
   \item\textbf{Use Case:} UC2, UC3
   \item\textbf{Primary Actor:} Healthcare professional (such as a medical doctor or a nurse)
-  \item\textbf{Precondition:} The user has been successfully authenticated, logged into the system and has patient’s profile is created. The basic information such as name, contact information, and history is prefilled.
+  \item\textbf{Precondition:} The user has been successfully authenticated, logged into the system and has patient's profile is created. The basic information such as name, contact information, and history is prefilled.
   \item\textbf{Trigger:} The user will initiate dictation.
   \item\textbf{Main Success Scenario:}
   \begin{itemize}
@@ -533,8 +533,8 @@ Following are the anticipated risks in this project. If these risks can be addre
   \item \textbf{Speech Input:} A hospital or a clinic can be a loud place, in the event audio input is taken we need to ensure that it is clean and clear. This would mean essentially blocking outside noise. 
   \item \textbf{Pre-Trained Models:} To manipulate and use both inputs above we need to create a model to be accurate and provide accuracy when filling in charts. 
   \item \textbf{User Acceptance:} This will require further elicitation from outside supervisors. We need to gather data on what critical needs of healthcare professionals such that critical features are present.
-  \item \textbf{Technical Delay:} Integration with EHR systems might cause some delays if there’s any technical issue or if the software faces compatibility issues. This will require sample testing to make sure that the system is compatible in the early stage of the development process.
-  \item \textbf{Professional Verification:} Misinterpretation of some words might lead to inaccurate records and wrong diagnosis. Therefore, it’s important for the healthcare professionals to verify the final version of the document and manually delete anything that was falsely recorded. 
+  \item \textbf{Technical Delay:} Integration with EHR systems might cause some delays if there's any technical issue or if the software faces compatibility issues. This will require sample testing to make sure that the system is compatible in the early stage of the development process.
+  \item \textbf{Professional Verification:} Misinterpretation of some words might lead to inaccurate records and wrong diagnosis. Therefore, it's important for the healthcare professionals to verify the final version of the document and manually delete anything that was falsely recorded. 
 \end{itemize}
 
 ~\newpage
@@ -642,7 +642,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Rationale:} The healthcare network will update its own organizational changes. This will include creating and maintaining the staff present as well as the hospitals in the network.
 
-\textbf{Fit Criterion:} The healthcare network data will be up to date with its current state (i.e. number of hospitals, staff etc.), the data’s recency will depend on the networks need. 
+\textbf{Fit Criterion:} The healthcare network data will be up to date with its current state (i.e. number of hospitals, staff etc.), the data's recency will depend on the networks need. 
 
 \textbf{Dependencies:} FR\ref{FR_addHealthNetwork}
 
@@ -680,7 +680,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Rationale:} When new healthcare professionals join the healthcare network, their information is to be added to the system for authentication purposes. This will include adding a list of hospital staff members to the network.
 
-\textbf{Fit Criterion:} The healthcare professional’s data will be up to date in the system so that they can get authenticated without any delay. 
+\textbf{Fit Criterion:} The healthcare professional's data will be up to date in the system so that they can get authenticated without any delay. 
 
 \textbf{Dependencies:} N/A 
 
@@ -708,7 +708,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Undesired Event Handling:}
 \begin{itemize}
-  \item When the healthcare professional’s data is being added and the database is overloaded with requests, then updates will be queued.
+  \item When the healthcare professional's data is being added and the database is overloaded with requests, then updates will be queued.
 \end{itemize} 
 
 \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_RemoveHealthProfessionals}:] 
@@ -745,16 +745,16 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Undesired Event Handling:}
 \begin{itemize}
-  \item When the healthcare professional’s data is being removed and the database is overloaded with requests, then updates will be queued.
+  \item When the healthcare professional's data is being removed and the database is overloaded with requests, then updates will be queued.
 \end{itemize} 
 
 \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_UpdateHealthProfessionals}:]
 
-\textbf{Requirement:} The system should allow healthcare network administrators to update healthcare professional’s data in the system.
+\textbf{Requirement:} The system should allow healthcare network administrators to update healthcare professional's data in the system.
 
 \textbf{Rationale:} Sometimes healthcare professionals receive promotions or other changes in their roles which require updating the information in their profiles. Therefore, it is essential for functionality that allows to edit the data in case there are inaccuracies.  
 
-\textbf{Fit Criterion:} The healthcare professional’s data will be up to date in its current state (i.e. role of each healthcare professional and the organization they work in etc). 
+\textbf{Fit Criterion:} The healthcare professional's data will be up to date in its current state (i.e. role of each healthcare professional and the organization they work in etc). 
 
 \textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}
 
@@ -783,7 +783,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Undesired Event Handling:}
 \begin{itemize}
-  \item When the healthcare professional’s data is being updated and the database is overloaded with requests, then updates will be queued.
+  \item When the healthcare professional's data is being updated and the database is overloaded with requests, then updates will be queued.
 \end{itemize} 
 
 \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_login}:]
@@ -794,7 +794,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Fit Criterion:} The system only authenticates the authorized users to log into the system and has 100\% accuracy. 
 
-\textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}, \label{NFR_Security}
+\textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}, \ref{NFR_Security}
 
 \textbf{Monitored and Controlled Variables:} number of failed login attempts
 
@@ -1001,7 +1001,7 @@ The network data and profiles are fully deleted from the database. This could be
     
 \textbf{Rationale:} This alerts the healthcare professionals about the possible diagnostics and helps them to diagnose the patients quicker based on suggested options.
     
-\textbf{Fit Criterion:} The system must suggest diagnoses within 5 seconds after transcript is provided, with 85\% accuracy based on known patient’s medical record.
+\textbf{Fit Criterion:} The system must suggest diagnoses within 5 seconds after transcript is provided, with 85\% accuracy based on known patient's medical record.
     
 \textbf{Dependencies:} FR\ref{FR_DictationRecording}
     
@@ -1027,12 +1027,12 @@ The network data and profiles are fully deleted from the database. This could be
     
 \textbf{Normal Use:} 
   \begin{itemize}
-    \item The system analyzes the transcribed conversation and suggests possible diagnoses based on a patient’s medical record. 
+    \item The system analyzes the transcribed conversation and suggests possible diagnoses based on a patient's medical record. 
   \end{itemize}
     
 \textbf{Undesired Event Handling:} 
   \begin{itemize}
-    \item If the system can’t suggest a diagnosis, it should notify the user and offer a manual search option. 
+    \item If the system can't suggest a diagnosis, it should notify the user and offer a manual search option. 
   \end{itemize}
 
 
@@ -1040,7 +1040,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Requirement:} The system should provide a list of frequently used medicines based on accepted diagnosis.
 
-\textbf{Rationale:} As the patients’ medical records and data is being added into the charts, having a model that can provide a preliminary set of diagnosis such that documentation time can be saved. This supplementary tool will provide auto-completion analogous to what auto-completion tools programmers use.
+\textbf{Rationale:} As the patients' medical records and data is being added into the charts, having a model that can provide a preliminary set of diagnosis such that documentation time can be saved. This supplementary tool will provide auto-completion analogous to what auto-completion tools programmers use.
 
 \textbf{Fit Criterion:} Auto-completion suggestions regarding diagnoses and medicine are applicable 85+\% of the time. The model will be measured through cross validation techniques.
  
@@ -1104,17 +1104,14 @@ Access to patient record database.
   \item A patient file is requested
   \item The request is approved then the files are transferred.
 \end{enumerate}
-
+-
 \textbf{Undesired Event Handling:}
 \begin{enumerate}
   \item A patient file is requested 
   \item The request for the file is denied. 
   \item A detailed request is submitted for approval to provide further information that may have been missing.
 \end{enumerate}
-\end{enumerate}
-
-
-
+\end{itemize}
 \subsection{Non-functional Requirements} \label{sec_NonFunctionalRequirements}
 
 \noindent \begin{itemize}
@@ -1399,6 +1396,88 @@ FR\ref{FR_transferPatient}\\
   \bottomrule 
 
   \end{tabularx} 
+
+  \section{Traceability Matrices and Graphs}
+
+  The purpose of the traceability matrices is to provide easy references on what
+  has to be additionally modified if a certain component is changed.  Every time a
+  component is changed, the items in the column of that component that are marked
+  with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
+  dependencies of theoretical models, general definitions, data definitions, and
+  instance models with each other. Table~\ref{Table:R_trace} shows the
+  dependencies of instance models, requirements, and data constraints on each
+  other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
+  general definitions, data definitions, instance models, and likely changes on
+  the assumptions.
+  
+  \plt{You will have to modify these tables for your problem.}
+  
+  \plt{The traceability matrix is not generally symmetric.  If GD1 uses A1, that
+    means that GD1's derivation or presentation requires invocation of A1.  A1
+    does not use GD1.  A1 is ``used by'' GD1.}
+  
+  \plt{The traceability matrix is challenging to maintain manually.  Please do
+    your best.  In the future tools (like Drasil) will make this much easier.}
+  
+  \afterpage{
+    \begin{landscape}
+      \begin{table}[htbp]
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+      \hline
+      & \rotatebox{90}{FR\ref{FR_addHealthNetwork}} & \rotatebox{90}{FR\ref{FR_removeHealthNetwork}} & \rotatebox{90}{FR\ref{FR_UpdateHealthNetwork}} & \rotatebox{90}{FR\ref{FR_AddHealthProfessional}} & \rotatebox{90}{FR\ref{FR_RemoveHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_UpdateHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_login}} & \rotatebox{90}{FR\ref{FR_createRecord}} & \rotatebox{90}{FR\ref{FR_deleteRecord}} & \rotatebox{90}{FR\ref{FR_updateRecordtyping}} & \rotatebox{90}{FR\ref{FR_DictationRecording}} & \rotatebox{90}{FR\ref{FR_DiagnosticSuggestions}} & \rotatebox{90}{FR\ref{FR_medicalSuggestions}} & \rotatebox{90}{FR\ref{FR_transferPatient}} & \rotatebox{90}{NFR\ref{NFR_LookAndFeel}} & \rotatebox{90}{NFR\ref{NFR_Usability}} & \rotatebox{90}{NFR\ref{NFR_Performance}} & \rotatebox{90}{NFR\ref{NFR_Operational}} & \rotatebox{90}{NFR\ref{NFR_Maintainability}} & \rotatebox{90}{NFR\ref{NFR_Security}} & \rotatebox{90}{NFR\ref{NFR_Cultural}} & \rotatebox{90}{NFR\ref{NFR_Legal}} \\
+      \hline
+      FR\ref{FR_addHealthNetwork} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_removeHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_UpdateHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_AddHealthProfessional} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_RemoveHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_UpdateHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_login} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - \\ \hline
+      FR\ref{FR_createRecord} & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_deleteRecord} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_updateRecordtyping} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_DictationRecording} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_DiagnosticSuggestions} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_medicalSuggestions} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_transferPatient} & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_LookAndFeel} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Usability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Performance} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & X & - & - & - & - \\ \hline
+      NFR\ref{NFR_Operational} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & X \\ \hline
+      NFR\ref{NFR_Maintainability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Security} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Cultural} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Legal} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      \end{tabular}
+      \caption{Traceability Matrix Showing the Connections Between Requirements}
+      \label{Table:A_trace}
+      \end{table}
+      \end{landscape}
+  }
+  
+  % \begin{figure}[h!]
+  % 	\begin{center}
+  % 		%\rotatebox{-90}
+  % 		{
+  % 			\includegraphics[width=\textwidth]{ATrace.png}
+  % 		}
+  % 		\caption{\label{Fig_ATrace} Traceability Matrix Showing the Connections Between Items of Different Sections}
+  % 	\end{center}
+  % \end{figure}
+  
+  
+  % \begin{figure}[h!]
+  % 	\begin{center}
+  % 		%\rotatebox{-90}
+  % 		{
+  % 			\includegraphics[width=0.7\textwidth]{RTrace.png}
+  % 		}
+  % 		\caption{\label{Fig_RTrace} Traceability Matrix Showing the Connections Between Requirements, Instance Models, and Data Constraints}
+  % 	\end{center}
+  % \end{figure}
+  
+
+
 \section{Development Plan}
 N/A
 
@@ -1413,13 +1492,13 @@ N/A
 
 \begin{itemize}
   \item
-  [1]N. Ireland, “Number of Ontarians without family doctor reaches 2.5 million, college says,” CBC, Jul. 12, 2024. https://www.cbc.ca/news/canada/toronto/ontario-family-doctor-shortage-record-high-1.7261558
+  [1]N. Ireland, "Number of Ontarians without family doctor reaches 2.5 million, college says," CBC, Jul. 12, 2024. https://www.cbc.ca/news/canada/toronto/ontario-family-doctor-shortage-record-high-1.7261558
   \href{https://www.cbc.ca/news/canada/toronto/ontario-family-doctor-shortage-record-high-1.7261558}{[1] Article on Doctor Shortage.}
   \item 
-  [2]Ryan Patrick Jones, “Family doctor shortage affects every region and is getting worse, Ontario Medical Association says,” CBC, Jan. 29, 2024. https://www.cbc.ca/news/canada/toronto/family-doctor-shortage-oma-1.7097935
+  [2]Ryan Patrick Jones, "Family doctor shortage affects every region and is getting worse, Ontario Medical Association says," CBC, Jan. 29, 2024. https://www.cbc.ca/news/canada/toronto/family-doctor-shortage-oma-1.7097935
   \href{https://www.cbc.ca/news/canada/toronto/family-doctor-shortage-oma-1.7097935}{[2] Article on Doctor Shortage.}
   \item
-  [3]“ICES | Association between waiting times and short term mortality and hospital admission after departure from the emergency department: population-based cohort study from Ontario, Canada,” ICES, Jun. 14, 2023. https://www.ices.on.ca/publications/journal-articles/association-between-waiting-times-and-short-term-mortality-and-hospital-admission-after-departure-from-the-emergency-department-population-based-cohort-study-from-ontario-canada/ (accessed Oct. 12, 2024).
+  [3]"ICES | Association between waiting times and short term mortality and hospital admission after departure from the emergency department: population-based cohort study from Ontario, Canada," ICES, Jun. 14, 2023. https://www.ices.on.ca/publications/journal-articles/association-between-waiting-times-and-short-term-mortality-and-hospital-admission-after-departure-from-the-emergency-department-population-based-cohort-study-from-ontario-canada/ (accessed Oct. 12, 2024).
   \href{https://www.ices.on.ca/publications/journal-articles/association-between-waiting-times-and-short-term-mortality-and-hospital-admission-after-departure-from-the-emergency-department-population-based-cohort-study-from-ontario-canada/}{[3] Article on ER patients leaving without being seen.}
 \end{itemize}
 
@@ -1441,12 +1520,12 @@ graduate attribute of Lifelong Learning.
   \item What pain points did you experience during this deliverable, and how did
   you resolve them?
 
-  There are obstacles in any team project that must be overcome for it to proceed successfully. To ensure seamless operations, we had to develop a strategy for contributions. We must plan a template that aligns with our project to make sure we have all the requirements for the system. We also needed to create a schedule to contribute to the template and review each other’s work in the best way possible.
+  There are obstacles in any team project that must be overcome for it to proceed successfully. To ensure seamless operations, we had to develop a strategy for contributions. We must plan a template that aligns with our project to make sure we have all the requirements for the system. We also needed to create a schedule to contribute to the template and review each other's work in the best way possible.
   
   \item How many of your requirements were inspired by speaking to your
   client(s) or their proxies (e.g. your peers, stakeholders, potential users)?
 
-  The stakeholder didn’t explicitly contribute to the requirements section of the project, however, the stakeholder did give us her insight on the working of the software and EMR apps in clinics and hospitals. This helped us to refine our usage scenario diagram and has been a great source of help in the progress of the project.
+  The stakeholder didn't explicitly contribute to the requirements section of the project, however, the stakeholder did give us her insight on the working of the software and EMR apps in clinics and hospitals. This helped us to refine our usage scenario diagram and has been a great source of help in the progress of the project.
 
   \item Which of the courses you have taken, or are currently taking, will help
   your team to be successful with your capstone project.

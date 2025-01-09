@@ -202,30 +202,27 @@ This section provides an overview of the module design. Modules are summarized i
   \item [\refstepcounter{mnum} \mthemnum \label{mDLM}:] Data Layer Module
 \end{description}
 
-
 \begin{table}[h!]
 \centering
 \begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
 \toprule
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
-
-{Hardware-Hiding Module} & ~ \\
+{Hardware-Hiding Module} & None \\
+\midrule
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & M1 (\mref{mAM})\\
+& M2 (\mref{mUAM})\\
+& M3 (\mref{mAPM})\\
+& M4 (\mref{mAVM})\\
+& M5 (\mref{mCVM})\\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
-\midrule
-
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{3}{0.3\textwidth}{Software Decision Module} & M6 - (\mref{mAMM})\\
+& M7 (\mref{mRGM})\\
+& M8 (\mref{mTM})\\
+& M9 (\mref{mDPM})\\
+& M10 (\mref{mMPM})\\
+& M11 (\mref{mDLM})\\
 \bottomrule
 
 \end{tabular}

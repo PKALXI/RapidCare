@@ -376,6 +376,7 @@ The goals for this project are as follows:
         \midrule 
         G\refstepcounter{goalnum}\thegoalnum \label{G_medicineSuggestions}: Automated medicine suggestions. & Based on diagnosis and patient data provide medicine suggestions. & This will help doctors fill out their charts faster. \\ % Row 1
         \midrule 
+        G\refstepcounter{goalnum}\thegoalnum \label{G_diagnosisSuggestions}: Automated diagnosis suggestions.  & Use AI to suggest possible diagnoses based on what the doctor and patient discuss.  & This will help doctors make faster, more accurate diagnoses, especially in tricky cases.\\ 
     \end{tabular}
 \end{table}
 
@@ -389,7 +390,7 @@ The stretch goals for this project are as follows:
         % \midrule
         % STG\refstepcounter{stretchgoalnum}\thestretchgoalnum \label{STG_medicineSuggestions}: Automated medicine suggestions. & Based on diagnosis and patient data provide medicine suggestions. & This will help doctors fill out their charts faster. \\ % Row 1
         \midrule
-        STG\refstepcounter{stretchgoalnum}\thestretchgoalnum \label{STG_diagnosisSuggestions}: Automated diagnosis suggestions.  & Use AI to suggest possible diagnoses based on what the doctor and patient discuss.  & This will help doctors make faster, more accurate diagnoses, especially in tricky cases.\\ 
+        % STG\refstepcounter{stretchgoalnum}\thestretchgoalnum \label{STG_diagnosisSuggestions}: Automated diagnosis suggestions.  & Use AI to suggest possible diagnoses based on what the doctor and patient discuss.  & This will help doctors make faster, more accurate diagnoses, especially in tricky cases.\\ 
         \midrule
         STG\refstepcounter{stretchgoalnum}\thestretchgoalnum \label{STG_triage}: Increase efficiency for triage.  & Create functionality to prioritize patients based on the severity of their condition. & This ensures the most critical patients get treated first, improving care in emergencies. \\
         \bottomrule
@@ -795,7 +796,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Fit Criterion:} The system only authenticates the authorized users to log into the system and has 100\% accuracy. 
 
-\textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}, \ref{NFR_Security}
+\textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}, FR\ref{NFR_Security}
 
 \textbf{Monitored and Controlled Variables:} number of failed login attempts
 
@@ -964,7 +965,7 @@ The network data and profiles are fully deleted from the database. This could be
     
 \textbf{Fit Criterion:} The system should use voice dictation to document medical reports with a minimum of 90\% accuracy. 
     
-\textbf{Dependencies:} FR\ref{FR_login}, FR\ref{FR_createRecord}, 
+\textbf{Dependencies:} FR\ref{FR_login}, FR\ref{FR_createRecord} 
     
 \textbf{Monitored Variables:} Accuracy
     
@@ -1125,7 +1126,7 @@ Access to patient record database.
 
     \textbf{Fit Criterion:} UI prototypes will be tested with healthcare workers to confirm that they find the interface easy to use and navigate, with primary functions accessible within two clicks from the main screen.
 
-    \textbf{Dependencies:} NFR\ref{NFR_Usability}
+    \textbf{Dependencies:} N/A
 
     \textbf{Undesired Event Handling:} If the surveys shows less than 80\% satisfaction, UI will be revised.
 
@@ -1341,88 +1342,12 @@ FR\ref{FR_transferPatient}\\
   \textbf{Rationale:} This is unlikely to change because patient data must be protected and compliant with healthcare data protection regulations.
 \end{itemize}
 
+\newpage
 
-
-\section{Traceability Matrices and Graphs}
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X} 
-
-  \toprule {\bf Requirements} & {\bf Dependencies}\\ 
-
-  \midrule 
-
-  FR\ref{FR_addHealthNetwork} &   none  \\   
-
-  FR\ref{FR_removeHealthNetwork} &  FR\ref{FR_addHealthNetwork}\\   
-
-  FR\ref{FR_UpdateHealthNetwork} &  FR\ref{FR_addHealthNetwork} \\  
-
-  FR\ref{FR_AddHealthProfessional} &  None  \\   
-
-  FR\ref{FR_RemoveHealthProfessionals} &  FR\ref{FR_AddHealthProfessional} \\  
-
-  FR\ref{FR_UpdateHealthProfessionals} &  FR\ref{FR_AddHealthProfessional} \\  
-
-  FR\ref{FR_login} &  FR\ref{FR_AddHealthProfessional}, NFR\ref{NFR_Security}  \\     
-
-  FR\ref{FR_createRecord} & FR\ref{FR_login} \\  
-
-  FR\ref{FR_deleteRecord} & FR\ref{FR_login}, FR\ref{FR_createRecord} \\  
-
-  FR\ref{FR_updateRecordtyping} & FR\ref{FR_login}, FR\ref{FR_createRecord} \\     
-
-  FR\ref{FR_DictationRecording} & FR\ref{FR_login}, FR\ref{FR_createRecord} \\  
-
-  FR\ref{FR_DiagnosticSuggestions} &  FR\ref{FR_DictationRecording} \\       
-
-  FR\ref{FR_medicalSuggestions} & FR\ref{FR_DictationRecording}, FR\ref{FR_DiagnosticSuggestions}  \\  
-
-  FR\ref{FR_transferPatient} &  FR\ref{FR_createRecord}\\  
-
-  NFR\ref{NFR_LookAndFeel} & none \\  
-
-  NFR\ref{NFR_Usability} &  NFR\ref{NFR_LookAndFeel} \\  
-
-  NFR\ref{NFR_Performance} & NFR\ref{NFR_Operational}, FR\ref{FR_DictationRecording} \\  
-
-  NFR\ref{NFR_Operational} & NFR\ref{NFR_Legal}, FR\ref{FR_DictationRecording} \\  
-
-  NFR\ref{NFR_Maintainability} & None \\  
-
-  NFR\ref{NFR_Security} & None \\  
-
-  NFR\ref{NFR_Cultural} & None \\  
-
-  NFR\ref{NFR_Legal} & None \\ 
-
-  \bottomrule 
-
-  \end{tabularx} 
-
-  \section{Traceability Matrices and Graphs}
-
-  The purpose of the traceability matrices is to provide easy references on what
-  has to be additionally modified if a certain component is changed.  Every time a
-  component is changed, the items in the column of that component that are marked
-  with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
-  dependencies of theoretical models, general definitions, data definitions, and
-  instance models with each other. Table~\ref{Table:R_trace} shows the
-  dependencies of instance models, requirements, and data constraints on each
-  other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
-  general definitions, data definitions, instance models, and likely changes on
-  the assumptions.
-  
-  \plt{You will have to modify these tables for your problem.}
-  
-  \plt{The traceability matrix is not generally symmetric.  If GD1 uses A1, that
-    means that GD1's derivation or presentation requires invocation of A1.  A1
-    does not use GD1.  A1 is ``used by'' GD1.}
-  
-  \plt{The traceability matrix is challenging to maintain manually.  Please do
-    your best.  In the future tools (like Drasil) will make this much easier.}
-  
-  \afterpage{
+    
     \begin{landscape}
-      \begin{table}[htbp]
+      \section{Traceability Matrices and Graphs}
+      \begin{table}[H]
       \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
       \hline
       & \rotatebox{90}{FR\ref{FR_addHealthNetwork}} & \rotatebox{90}{FR\ref{FR_removeHealthNetwork}} & \rotatebox{90}{FR\ref{FR_UpdateHealthNetwork}} & \rotatebox{90}{FR\ref{FR_AddHealthProfessional}} & \rotatebox{90}{FR\ref{FR_RemoveHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_UpdateHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_login}} & \rotatebox{90}{FR\ref{FR_createRecord}} & \rotatebox{90}{FR\ref{FR_deleteRecord}} & \rotatebox{90}{FR\ref{FR_updateRecordtyping}} & \rotatebox{90}{FR\ref{FR_DictationRecording}} & \rotatebox{90}{FR\ref{FR_DiagnosticSuggestions}} & \rotatebox{90}{FR\ref{FR_medicalSuggestions}} & \rotatebox{90}{FR\ref{FR_transferPatient}} & \rotatebox{90}{NFR\ref{NFR_LookAndFeel}} & \rotatebox{90}{NFR\ref{NFR_Usability}} & \rotatebox{90}{NFR\ref{NFR_Performance}} & \rotatebox{90}{NFR\ref{NFR_Operational}} & \rotatebox{90}{NFR\ref{NFR_Maintainability}} & \rotatebox{90}{NFR\ref{NFR_Security}} & \rotatebox{90}{NFR\ref{NFR_Cultural}} & \rotatebox{90}{NFR\ref{NFR_Legal}} \\
@@ -1453,8 +1378,7 @@ FR\ref{FR_transferPatient}\\
       \caption{Traceability Matrix Showing the Connections Between Requirements}
       \label{Table:A_trace}
       \end{table}
-      \end{landscape}
-  }
+    \end{landscape}
   
   % \begin{figure}[h!]
   % 	\begin{center}

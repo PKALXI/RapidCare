@@ -49,7 +49,6 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Date & Rev 0 & Section 2: Reference Material\\
-Date & Rev 0 & Section 3: Introduction\\
 Date & Rev 0 & Section 4: Anticipated and Unlikely Changes\\
 Jan 9, 2025 & Rev 0 & Section 5: Module Hierarchy\\
 Date & Rev 0 & Section 6: Connection Between Requirements And Design\\
@@ -199,15 +198,19 @@ This section provides an overview of the module design. Modules are summarized i
 \begin{description}
   \item [\refstepcounter{mnum} \mthemnum \label{mAM}:] App Module
   \item [\refstepcounter{mnum} \mthemnum \label{mUAM}:] User Authentication Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAPM}:] API Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAPIM}:] API Module
   \item [\refstepcounter{mnum} \mthemnum \label{mAVM}:] Administrator View Module
   \item [\refstepcounter{mnum} \mthemnum \label{mCVM}:] Client View Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Account Management Module
   \item [\refstepcounter{mnum} \mthemnum \label{mRGM}:] Report Generating Module
   \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Classification Module
   \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
   \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mDLM}:] Data Layer Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mPAM}:] Patient Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mDDM}:] Diagnosis Data Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mMDM}:] Medicine Data Module
+
 \end{description}
 
 \begin{table}[h!]
@@ -219,18 +222,21 @@ This section provides an overview of the module design. Modules are summarized i
 {Hardware-Hiding Module} & None \\
 \midrule
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & \mref{mUAM}\\
-& \mref{mAPM}\\
+& \mref{mAPIM}\\
 & \mref{mAVM}\\
 & \mref{mCVM}\\
-& \mref{mAMM}\\
+& \mref{mDDM}\\
+& \mref{mMDM}\\
 \midrule
 
 \multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mAM}\\
 & \mref{mRGM}\\
 & \mref{mTM}\\
+& \mref{mCM}\\
 & \mref{mDPM}\\
 & \mref{mMPM}\\
-& \mref{mDLM}\\
+& \mref{mAMM}\\
+& \mref{mPAM}\\
 \bottomrule
 
 \end{tabular}
@@ -273,61 +279,60 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Implemented By:] --
 \end{description}
 
-
 \subsubsection{User Authentication Module (\mref{mUAM})} Moamen
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the input parameters module.
+\item[Secrets:]
+\item[Services:]
 \item[Implemented By:] [Your Program Name Here]
 \item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
+  
 \end{description}
 
-
-\subsubsection{API Module (\mref{mAPM})} Moamen
+\subsubsection{API Module (\mref{mAPIM})} Moamen
 
 \begin{description}
 \item[Secrets:]
 \item[Services:]
 \item[Implemented By:] []
 \item[Type of Module:] []
-  []
 \end{description}
 
-\subsubsection{Administrator View Module (\mref{mAVM})} Inreet
+\subsubsection{Administrator View Module (\mref{mAVM})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-    [Information to include for leaf modules in the decomposition by secrets tree.]
+\item[Secrets:]User interface customization based on the administrative tools and functionality required by healthcare networks.
+\item[Services:]Provide healthcare network adminstrators with tools to onboard, update, and remove thier network on the system. Provide healthcare network adminstrators with tools to add healthcare professionals under a healthcare network to the system.
+\item[Implemented By:]TypeScript, React
+\item[Type of Module:]Abstract Object
 \end{description}
 
-
-\subsubsection{Client View Module (\mref{mCVM})} Inreet
+\subsubsection{Client View Module (\mref{mCVM})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
-  []
+\item[Secrets:]User interface customization based on the tools and functionality required by healthcare professionals.
+\item[Services:]Provides healthcare professionals with tools to login, create, update, and delete patient records, provide diagnostic suggestions, and medication suggestions.
+\item[Implemented By:]TypeScript, React
+\item[Type of Module:]Abstract Object
 \end{description}
 
-
-\subsubsection{Account Management Module (\mref{mAMM})} Moamen
+\subsubsection{Diagnosis Data Module (\mref{mDDM})}  Pranav
 
 \begin{description}
 \item[Secrets:]
 \item[Services:]
 \item[Implemented By:] []
 \item[Type of Module:] []
-  []
 \end{description}
 
+\subsubsection{Medicine Data Module (\mref{mMDM})}  Pranav
 
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+\end{description}
 
 
 \subsection{Software Decision Module}
@@ -342,7 +347,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \end{description}
 
 
-
 \subsubsection{App Module (\mref{mAM})} Gurleen
 
 \begin{description}
@@ -352,8 +356,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] []
   []
 \end{description}
-
-
 
 \subsubsection{Report Generation Module (\mref{mRGM})} Gurleen
 
@@ -365,8 +367,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   []
 \end{description}
 
-
-
 \subsubsection{Transcription Module (\mref{mTM})} Gurleen
 
 \begin{description}
@@ -374,10 +374,16 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Services:]
 \item[Implemented By:] []
 \item[Type of Module:] []
-  []
 \end{description}
 
+\subsubsection{Classification Module (\mref{mCM})} Gurleen
 
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+\end{description}
 
 \subsubsection{Diagonsis Prediction Module (\mref{mDPM})} Pranav
 
@@ -389,8 +395,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   []
 \end{description}
 
-
-
 \subsubsection{Medicine Prediction Module (\mref{mMPM})} Pranav
 
 \begin{description}
@@ -401,21 +405,23 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   []
 \end{description}
 
-
-
-
-\subsubsection{Data Layer Module (\mref{mDLM})} Inreet
+\subsubsection{Administrator Account Management Module (\mref{mAMM})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
-  []
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks and healthcare professionals.
+\item[Implemented By:]MongoDB, Spring
+\item[Type of Module:]Record
 \end{description}
 
+\subsubsection{Patient Account Management Module (\mref{mPAM})}
 
-
+\begin{description}
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to patient records.
+\item[Implemented By:]MongoDB, Spring
+\item[Type of Module:]Record
+\end{description}
 
 
 \section{Traceability Matrix} \label{SecTM}

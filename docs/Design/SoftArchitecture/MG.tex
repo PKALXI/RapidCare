@@ -8,6 +8,8 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{ulem}
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -46,8 +48,16 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Date & Rev 0 & Section 2: Reference Material\\
+Date & Rev 0 & Section 3: Introduction\\
+Date & Rev 0 & Section 4: Anticipated and Unlikely Changes\\
+Jan 9, 2025 & Rev 0 & Section 5: Module Hierarchy\\
+Date & Rev 0 & Section 6: Connection Between Requirements And Design\\
+Date & Rev 0 & Section 7: Module Decomposition\\
+Date & Rev 0 & Section 8: Traceability Matrix\\
+Date & Rev 0 & Section 9: Use Hierarchy Between Modules\\
+Date & Rev 0 & Section 10: Timeline\\
+Date & Rev 0 & Section 11: Reflection\\
 \bottomrule
 \end{tabularx}
 
@@ -74,7 +84,6 @@ This section records information for easy reference.
   SRS & Software Requirements Specification\\
   \progname & Explanation of program name\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -185,16 +194,21 @@ decisions will be changed.
 
 \section{Module Hierarchy} \label{SecMH}
 
-This section provides an overview of the module design. Modules are summarized
-in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed
-below, which are leaves in the hierarchy tree, are the modules that will
-actually be implemented.
+This section provides an overview of the module design. Modules are summarized in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed below, which are leaves in the hierarchy tree, are the modules that will actually be implemented.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+  \item [\refstepcounter{mnum} \mthemnum \label{mAM}:] App Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mUAM}:] User Authentication Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAPM}:] API Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAVM}:] Administrator View Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mCVM}:] Client View Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mRGM}:] Report Generating Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mDLM}:] Data Layer Module
 \end{description}
-
 
 \begin{table}[h!]
 \centering
@@ -202,23 +216,21 @@ actually be implemented.
 \toprule
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
-
-{Hardware-Hiding Module} & ~ \\
+{Hardware-Hiding Module} & None \\
+\midrule
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & \mref{mUAM}\\
+& \mref{mAPM}\\
+& \mref{mAVM}\\
+& \mref{mCVM}\\
+& \mref{mAMM}\\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
-\midrule
-
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mAM}\\
+& \mref{mRGM}\\
+& \mref{mTM}\\
+& \mref{mDPM}\\
+& \mref{mMPM}\\
+& \mref{mDLM}\\
 \bottomrule
 
 \end{tabular}
@@ -232,80 +244,179 @@ The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
 between requirements and modules is listed in Table~\ref{TblRT}.
 
-\wss{The intention of this section is to document decisions that are made
-  ``between'' the requirements and the design.  To satisfy some requirements,
-  design decisions need to be made.  Rather than make these decisions implicit,
-  they are explicitly recorded here.  For instance, if a program has security
-  requirements, a specific design decision may be made to satisfy those
-  requirements with a password.}
+% \wss{The intention of this section is to document decisions that are made
+%   ``between'' the requirements and the design.  To satisfy some requirements,
+%   design decisions need to be made.  Rather than make these decisions implicit,
+%   they are explicitly recorded here.  For instance, if a program has security
+%   requirements, a specific design decision may be made to satisfy those
+%   requirements with a password.}
 
 \section{Module Decomposition} \label{SecMD}
 
-Modules are decomposed according to the principle of ``information hiding''
-proposed by \citet{ParnasEtAl1984}. The \emph{Secrets} field in a module
-decomposition is a brief statement of the design decision hidden by the
-module. The \emph{Services} field specifies \emph{what} the module will do
-without documenting \emph{how} to do it. For each module, a suggestion for the
-implementing software is given under the \emph{Implemented By} title. If the
-entry is \emph{OS}, this means that the module is provided by the operating
-system or by standard programming language libraries.  \emph{\progname{}} means the
-module will be implemented by the \progname{} software.
+Modules are decomposed according to the principle of ``information hiding'' proposed by \citet{ParnasEtAl1984}. The \emph{Secrets} field in a module decomposition is a brief statement of the design decision hidden by the module. The \emph{Services} field specifies \emph{what} the module will do without documenting \emph{how} to do it. For each module, a suggestion for the implementing software is given under the \emph{Implemented By} title. If the entry is \emph{OS}, this means that the module is provided by the operating system or by standard programming language libraries.  \emph{\progname{}} means the module will be implemented by the \progname{} software.
 
-Only the leaf modules in the hierarchy have to be implemented. If a dash
-(\emph{--}) is shown, this means that the module is not a leaf and will not have
-to be implemented.
+Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{--}) is shown, this means that the module is not a leaf and will not have to be implemented.
 
-\subsection{Hardware Hiding Modules (\mref{mHH})}
+% \subsection{Hardware Hiding Modules (\mref{mHH})}
 
-\begin{description}
-\item[Secrets:]The data structure and algorithm used to implement the virtual
-  hardware.
-\item[Services:]Serves as a virtual hardware used by the rest of the
-  system. This module provides the interface between the hardware and the
-  software. So, the system can use it to display outputs or to accept inputs.
-\item[Implemented By:] OS
-\end{description}
+% \begin{description}
+% \item[Secrets:]The data structure and algorithm used to implement the virtual hardware.
+% \item[Services:]Serves as a virtual hardware used by the rest of the system. This module provides the interface between the hardware and the software. So, the system can use it to display outputs or to accept inputs.
+% \item[Implemented By:] OS
+% \end{description}
 
 \subsection{Behaviour-Hiding Module}
 
 \begin{description}
 \item[Secrets:]The contents of the required behaviours.
-\item[Services:]Includes programs that provide externally visible behaviour of
-  the system as specified in the software requirements specification (SRS)
-  documents. This module serves as a communication layer between the
-  hardware-hiding module and the software decision module. The programs in this
-  module will need to change if there are changes in the SRS.
+\item[Services:]Includes programs that provide externally visible behaviour of the system as specified in the software requirements specification (SRS) documents. This module serves as a communication layer between the hardware-hiding module and the software decision module. The programs in this module will need to change if there are changes in the SRS.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+
+\subsubsection{User Authentication Module (\mref{mUAM})} Moamen
 
 \begin{description}
 \item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
+\item[Services:]Converts the input data into the data structure used by the input parameters module.
 \item[Implemented By:] [Your Program Name Here]
 \item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
   [Information to include for leaf modules in the decomposition by secrets tree.]
 \end{description}
 
-\subsubsection{Etc.}
+
+\subsubsection{API Module (\mref{mAPM})} Moamen
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+\subsubsection{Administrator View Module (\mref{mAVM})} Inreet
+
+\begin{description}
+\item[Secrets:]The format and structure of the input data.
+\item[Services:]Converts the input data into the data structure used by the input parameters module.
+\item[Implemented By:] [Your Program Name Here]
+\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
+    [Information to include for leaf modules in the decomposition by secrets tree.]
+\end{description}
+
+
+\subsubsection{Client View Module (\mref{mCVM})} Inreet
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+
+\subsubsection{Account Management Module (\mref{mAMM})} Moamen
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+
 
 
 \subsection{Software Decision Module}
 
 \begin{description}
-\item[Secrets:] The design decision based on mathematical theorems, physical
-  facts, or programming considerations. The secrets of this module are
+\item[Secrets:] The design decision based on mathematical theorems, physical facts, or programming considerations. The secrets of this module are
   \emph{not} described in the SRS.
-\item[Services:] Includes data structure and algorithms used in the system that
-  do not provide direct interaction with the user. 
+\item[Services:] Includes data structure and algorithms used in the system that do not provide direct interaction with the user. 
   % Changes in these modules are more likely to be motivated by a desire to
   % improve performance than by externally imposed changes.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Etc.}
+
+
+\subsubsection{App Module (\mref{mAM})} Gurleen
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+
+
+\subsubsection{Report Generation Module (\mref{mRGM})} Gurleen
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+
+
+\subsubsection{Transcription Module (\mref{mTM})} Gurleen
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+
+
+\subsubsection{Diagonsis Prediction Module (\mref{mDPM})} Pranav
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+
+
+\subsubsection{Medicine Prediction Module (\mref{mMPM})} Pranav
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+
+
+
+\subsubsection{Data Layer Module (\mref{mDLM})} Inreet
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
+  []
+\end{description}
+
+
+
+
 
 \section{Traceability Matrix} \label{SecTM}
 

@@ -49,7 +49,6 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Date & Rev 0 & Section 2: Reference Material\\
-Date & Rev 0 & Section 3: Introduction\\
 Date & Rev 0 & Section 4: Anticipated and Unlikely Changes\\
 Jan 9, 2025 & Rev 0 & Section 5: Module Hierarchy\\
 Date & Rev 0 & Section 6: Connection Between Requirements And Design\\
@@ -273,17 +272,15 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Implemented By:] --
 \end{description}
 
-
 \subsubsection{User Authentication Module (\mref{mUAM})} Moamen
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the input parameters module.
+\item[Secrets:]
+\item[Services:]
 \item[Implemented By:] [Your Program Name Here]
 \item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
+  
 \end{description}
-
 
 \subsubsection{API Module (\mref{mAPM})} Moamen
 
@@ -292,30 +289,25 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Services:]
 \item[Implemented By:] []
 \item[Type of Module:] []
-  []
 \end{description}
 
-\subsubsection{Administrator View Module (\mref{mAVM})} Inreet
+\subsubsection{Administrator View Module (\mref{mAVM})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-    [Information to include for leaf modules in the decomposition by secrets tree.]
+\item[Secrets:]User Interface customization based on the administrative tools and functionality required by healthcare networks.
+\item[Services:]Provide healthcare network adminstrators with tools to onboard, update, and remove thier network on the system. Provide healthcare network adminstrators with tools to add healthcare professionals under a healthcare network to the system.
+\item[Implemented By:]TypeScript, React
+\item[Type of Module:]Abstract Object
 \end{description}
 
-
-\subsubsection{Client View Module (\mref{mCVM})} Inreet
+\subsubsection{Client View Module (\mref{mCVM})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
-  []
+\item[Secrets:]User Interface customization based on the tools and functionality required by healthcare professionals.
+\item[Services:]Provides healthcare professionals with tools to login, create, update, and delete patient records, diagnostic suggestions, and medication recommendations.
+\item[Implemented By:]TypeScript, React
+\item[Type of Module:]Abstract Object
 \end{description}
-
 
 \subsubsection{Account Management Module (\mref{mAMM})} Moamen
 
@@ -326,8 +318,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] []
   []
 \end{description}
-
-
 
 
 \subsection{Software Decision Module}
@@ -342,7 +332,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \end{description}
 
 
-
 \subsubsection{App Module (\mref{mAM})} Gurleen
 
 \begin{description}
@@ -352,8 +341,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] []
   []
 \end{description}
-
-
 
 \subsubsection{Report Generation Module (\mref{mRGM})} Gurleen
 
@@ -365,8 +352,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   []
 \end{description}
 
-
-
 \subsubsection{Transcription Module (\mref{mTM})} Gurleen
 
 \begin{description}
@@ -376,8 +361,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] []
   []
 \end{description}
-
-
 
 \subsubsection{Diagonsis Prediction Module (\mref{mDPM})} Pranav
 
@@ -389,8 +372,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   []
 \end{description}
 
-
-
 \subsubsection{Medicine Prediction Module (\mref{mMPM})} Pranav
 
 \begin{description}
@@ -401,17 +382,13 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   []
 \end{description}
 
-
-
-
-\subsubsection{Data Layer Module (\mref{mDLM})} Inreet
+\subsubsection{Data Layer Module (\mref{mDLM})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
-  []
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks, healthcare professionals, patient records, diagonsis prediction, and medicine prediction.
+\item[Implemented By:]MongoDB, Node.js
+\item[Type of Module:]Abstract Object
 \end{description}
 
 

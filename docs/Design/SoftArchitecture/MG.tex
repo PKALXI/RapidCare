@@ -48,15 +48,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date & Rev 0 & Section 2: Reference Material\\
-Date & Rev 0 & Section 4: Anticipated and Unlikely Changes\\
-Jan 9, 2025 & Rev 0 & Section 5: Module Hierarchy\\
-Date & Rev 0 & Section 6: Connection Between Requirements And Design\\
-Date & Rev 0 & Section 7: Module Decomposition\\
-Date & Rev 0 & Section 8: Traceability Matrix\\
-Date & Rev 0 & Section 9: Use Hierarchy Between Modules\\
-Date & Rev 0 & Section 10: Timeline\\
-Date & Rev 0 & Section 11: Reflection\\
+Jan 9, 2025 & 1.1 & Initial Document\\
+
 \bottomrule
 \end{tabularx}
 
@@ -423,8 +416,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 
 \section{Traceability Matrix} \label{SecTM}
 
-This section shows two traceability matrices: between the modules and the
-requirements and between the modules and the anticipated changes.
+This section shows traceability matrices: between the modules and the requirements and between the modules and the anticipated changes.
 
 % the table should use mref, the requirements should be named, use something
 % like fref
@@ -434,20 +426,66 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+FR1 & \mref{mAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+FR2 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+FR3 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+FR4 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+FR5 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+FR6 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+FR7 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAMM}\\
+FR8 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
+FR9 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
+FR10 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
+FR11 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mTM}, \mref{mCM}, \mref{mPAM}\\
+FR12 & \mref{mAM},\mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mDPM}, \mref{mPAM}, \mref{mDDM}\\
+FR13 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mMPM}, \mref{mPAM}, \mref{mMDM}\\
+FR14 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mPAM}\\
 \bottomrule
 \end{tabular}
-\caption{Trace Between Requirements and Modules}
+\caption{Trace Between Functional Requirements and Modules}
+\label{TblRT}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+\toprule
+\textbf{Req.} & \textbf{Modules}\\
+\midrule
+NFR1 & \mref{mAM}, \mref{mAVM}, \mref{mCVM}\\
+NFR2 & \mref{mAM}, \mref{mAVM}, \mref{mCVM}\\
+NFR3 & \mref{mAM}, \mref{mTM}\\
+NFR4 & \mref{mAM}, \mref{mAMM}, \mref{mPAM}, \mref{mDDM}, \mref{mMDM}\\
+NFR5 & All \\
+NFR6 & \mref{mAM}, \mref{mUAM}, \mref{mPAM}\\
+NFR7 & \mref{mAM}, \mref{mCVM}\\
+NFR8 & All \\
+NFR9 & All \\
+\bottomrule
+\end{tabular}
+\caption{Trace Between Non-Functional Requirements and Modules}
+\label{TblRT}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+\toprule
+\textbf{Req.} & \textbf{Modules}\\
+\midrule
+AC1 & \mref{mAPIM}\\
+AC2 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+IR1 & \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+IR2 & All \\
+IR3 & \mref{mDPM}, \mref{mMPM}\\
+IR4 & \mref{mAMM}, \mref{mPAM}\\
+IR5 & \mref{mDPM}, \mref{mMPM}\\
+IR6 & \mref{mRGM}, \mref{mCM}\\
+IR7 & \mref{mRGM}, \mref{mTM}\\
+\bottomrule
+\end{tabular}
+\caption{Trace Between Safety and Security Requirements and Modules}
 \label{TblRT}
 \end{table}
 

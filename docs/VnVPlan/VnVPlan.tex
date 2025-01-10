@@ -563,19 +563,26 @@ How test will be performed: Tester will send a sample patient profile from one d
 
 \subsubsection{Usability Requirement (NFR2)} \label{section:4.2.2}
 
-\begin{enumerate}
-    \item{test-UR1} \label{test-UR1}
-    
-    Type: Non-functional, Dynamic, Manual
-    
-    Initial State: System is fully available and accessible to healthcare workers.
-    
-    Input/Condition: Healthcare workers perform key functions after a 30-minute training session.
-    
-    Output/Result: 90\% of healthcare workers complete tasks without assistance and within the expected time frame.
-    
-    How this test will be performed: A test group of healthcare workers and the supervisor will be given the system, and a set of key functions to perform after a 30-minute training. They will be asked to complete these functions independently. After they do this, they will be given a task completion survey. In the task completion survey, the supervisor will verify that 90\% of workers completed tasks without assistance.
 
+\begin{enumerate}
+  \item{test-UR1} \label{test-UR1}
+  
+  Type: Non-functional, Dynamic, Manual
+  
+  Initial State: System is fully available and accessible to healthcare workers. Healthcare workers are provided a brief 30-minute training session on key system features and navigation.
+
+  Input/Condition: Healthcare workers perform the following key functions:
+  \begin{itemize}
+      \item Logging in and out of the system.
+      \item Accessing patient records.
+      \item Adding new entries to the database.
+      \item Generating a report from transcribed audio data.
+  \end{itemize}
+
+  Output/Result: 90\% of healthcare workers complete the listed tasks without assistance and within the expected time frame (average of 2 minutes per task).
+
+  How this test will be performed: A test group of healthcare workers and the supervisor will be given access to the system, along with a set of key functions as listed above to perform after a 30-minute training session. They will be asked to complete these functions independently. After completing the tasks, participants will fill out a task completion survey. The supervisor will use the survey and observations to verify that 90\% of healthcare workers completed the listed tasks independently.
+  
     \item{test-UR2} \label{test-UR2}
     
     Type: Non-functional, Dynamic, Manual

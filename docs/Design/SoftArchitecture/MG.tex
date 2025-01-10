@@ -84,7 +84,6 @@ This section records information for easy reference.
   SRS & Software Requirements Specification\\
   \progname & Explanation of program name\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -197,7 +196,6 @@ decisions will be changed.
 
 This section provides an overview of the module design. Modules are summarized in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed below, which are leaves in the hierarchy tree, are the modules that will actually be implemented.
 
-
 \begin{description}
   \item [\refstepcounter{mnum} \mthemnum \label{mAM}:] App Module
   \item [\refstepcounter{mnum} \mthemnum \label{mUAM}:] User Authentication Module
@@ -207,8 +205,8 @@ This section provides an overview of the module design. Modules are summarized i
   \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Account Management Module
   \item [\refstepcounter{mnum} \mthemnum \label{mRGM}:] Report Generating Module
   \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagonsis Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicicne Prediction Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
   \item [\refstepcounter{mnum} \mthemnum \label{mDLM}:] Data Layer Module
 \end{description}
 
@@ -246,12 +244,12 @@ The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
 between requirements and modules is listed in Table~\ref{TblRT}.
 
-\wss{The intention of this section is to document decisions that are made
-  ``between'' the requirements and the design.  To satisfy some requirements,
-  design decisions need to be made.  Rather than make these decisions implicit,
-  they are explicitly recorded here.  For instance, if a program has security
-  requirements, a specific design decision may be made to satisfy those
-  requirements with a password.}
+% \wss{The intention of this section is to document decisions that are made
+%   ``between'' the requirements and the design.  To satisfy some requirements,
+%   design decisions need to be made.  Rather than make these decisions implicit,
+%   they are explicitly recorded here.  For instance, if a program has security
+%   requirements, a specific design decision may be made to satisfy those
+%   requirements with a password.}
 
 \section{Module Decomposition} \label{SecMD}
 
@@ -300,12 +298,12 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{Administrator View Module (\mref{mAVM})} Inreet
 
 \begin{description}
-  \item[Secrets:]The format and structure of the input data.
-  \item[Services:]Converts the input data into the data structure used by the input parameters module.
-  \item[Implemented By:] [Your Program Name Here]
-  \item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
+\item[Secrets:]The format and structure of the input data.
+\item[Services:]Converts the input data into the data structure used by the input parameters module.
+\item[Implemented By:] [Your Program Name Here]
+\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
     [Information to include for leaf modules in the decomposition by secrets tree.]
-  \end{description}
+\end{description}
 
 
 \subsubsection{Client View Module (\mref{mCVM})} Inreet

@@ -198,15 +198,19 @@ This section provides an overview of the module design. Modules are summarized i
 \begin{description}
   \item [\refstepcounter{mnum} \mthemnum \label{mAM}:] App Module
   \item [\refstepcounter{mnum} \mthemnum \label{mUAM}:] User Authentication Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAPM}:] API Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAPIM}:] API Module
   \item [\refstepcounter{mnum} \mthemnum \label{mAVM}:] Administrator View Module
   \item [\refstepcounter{mnum} \mthemnum \label{mCVM}:] Client View Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Account Management Module
   \item [\refstepcounter{mnum} \mthemnum \label{mRGM}:] Report Generating Module
   \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Classification Module
   \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
   \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mDLM}:] Data Layer Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mPAM}:] Patient Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mDDM}:] Diagnosis Data Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mMDM}:] Medicine Data Module
+
 \end{description}
 
 \begin{table}[h!]
@@ -218,18 +222,21 @@ This section provides an overview of the module design. Modules are summarized i
 {Hardware-Hiding Module} & None \\
 \midrule
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & \mref{mUAM}\\
-& \mref{mAPM}\\
+& \mref{mAPIM}\\
 & \mref{mAVM}\\
 & \mref{mCVM}\\
-& \mref{mAMM}\\
+& \mref{mDDM}\\
+& \mref{mMDM}\\
 \midrule
 
 \multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mAM}\\
 & \mref{mRGM}\\
 & \mref{mTM}\\
+& \mref{mCM}\\
 & \mref{mDPM}\\
 & \mref{mMPM}\\
-& \mref{mDLM}\\
+& \mref{mAMM}\\
+& \mref{mPAM}\\
 \bottomrule
 
 \end{tabular}
@@ -282,7 +289,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   
 \end{description}
 
-\subsubsection{API Module (\mref{mAPM})} Moamen
+\subsubsection{API Module (\mref{mAPIM})} Moamen
 
 \begin{description}
 \item[Secrets:]
@@ -309,14 +316,22 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Account Management Module (\mref{mAMM})} Moamen
+\subsubsection{Diagnosis Data Module (\mref{mDDM})}  Pranav
 
 \begin{description}
 \item[Secrets:]
 \item[Services:]
 \item[Implemented By:] []
 \item[Type of Module:] []
-  []
+\end{description}
+
+\subsubsection{Medicine Data Module (\mref{mMDM})}  Pranav
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
 \end{description}
 
 
@@ -359,7 +374,15 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Services:]
 \item[Implemented By:] []
 \item[Type of Module:] []
-  []
+\end{description}
+
+\subsubsection{Classification Module (\mref{mCM})} Gurleen
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:] []
+\item[Type of Module:] []
 \end{description}
 
 \subsubsection{Diagonsis Prediction Module (\mref{mDPM})} Pranav
@@ -382,17 +405,23 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   []
 \end{description}
 
-\subsubsection{Data Layer Module (\mref{mDLM})}
+\subsubsection{Administrator Account Management Module (\mref{mAMM})}
 
 \begin{description}
 \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks, healthcare professionals, patient records, diagonsis predictions, and medicine predictions.
-\item[Implemented By:]MongoDB, Node.js
-\item[Type of Module:]Abstract Object
+\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks and healthcare professionals.
+\item[Implemented By:]MongoDB, Spring
+\item[Type of Module:]Record
 \end{description}
 
+\subsubsection{Patient Account Management Module (\mref{mPAM})}
 
-
+\begin{description}
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to patient records.
+\item[Implemented By:]MongoDB, Spring
+\item[Type of Module:]Record
+\end{description}
 
 
 \section{Traceability Matrix} \label{SecTM}

@@ -319,19 +319,19 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{Diagnosis Data Module (\mref{mDDM})}  Pranav
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
+  \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+  \item[Services:]Manages secure storage, retrieval, and updates of data related to diagnosis records. The ultimate purpose for this is to provide training data for the ciagnosis prediction module.
+  \item[Implemented By:]MongoDB, Spring
+  \item[Type of Module:]Record
 \end{description}
 
 \subsubsection{Medicine Data Module (\mref{mMDM})}  Pranav
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
+  \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+  \item[Services:]Manages secure storage, retrieval, and updates of data related to drug records. The ultimate purpose for this is to provide training data for the medicine prediction module.
+  \item[Implemented By:]MongoDB, Spring
+  \item[Type of Module:]Record
 \end{description}
 
 
@@ -388,21 +388,19 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{Diagonsis Prediction Module (\mref{mDPM})} Pranav
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
-  []
+\item[Secrets:] The algorithms used to predict possible diagnoses.
+\item[Services:] Predicts a set of applicable diagnoses for a patient based on patient characteristics, symptoms, and past medical history.
+\item[Implemented By:] Python
+\item[Type of Module:] Abstract Object
 \end{description}
 
 \subsubsection{Medicine Prediction Module (\mref{mMPM})} Pranav
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
-  []
+\item[Secrets:] The algorithms used to give possible medicines applicable.
+\item[Services:] Predicts a set of applicable medicines for a patient based on patient characteristics, symptoms, and past medical history.
+\item[Implemented By:] Python
+\item[Type of Module:] Abstract object
 \end{description}
 
 \subsubsection{Administrator Account Management Module (\mref{mAMM})}

@@ -72,6 +72,7 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
   M            & Module                                                                                                \\
   MIS          & Module Interface Specification                                                                        \\
   API          & Application Programming Interface                                                                     \\
+  MFA          & Multi-Factor Authentication                                                                           \\
   \bottomrule
 \end{tabularx}
 
@@ -241,32 +242,33 @@ The following table is taken directly from the Module Guide document for this pr
 
 
   
-\section{MIS of User Authentication Module} \label{Module} Moamen
-\wss{Use labels for cross-referencing}
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\section{MIS of User Authentication Module} \label{Module_UserAuth} Moamen
 
 \subsection{Module}
 
-\wss{Short name for the module}
+User Authentication
 
 \subsection{Uses}
 
+Provides secure login and session management. It validates user credentials and enforces multi-factor authentication (MFA).
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+\begin{itemize}
+    \item \texttt{MAX\_LOGIN\_ATTEMPTS}: Maximum allowed login attempts before locking the account.
+\end{itemize}
 
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{3cm} p{4cm} p{3cm} p{3.5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+\texttt{login} & Username, Password & Session Token & Invalid credentials \\
+\texttt{logout} & Session Token & Boolean & Invalid/expired session \\
+\texttt{resetPassword} & Email Address & Boolean & Invalid email address \\
 \hline
 \end{tabular}
 \end{center}
@@ -275,42 +277,39 @@ The following table is taken directly from the Module Guide document for this pr
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+\texttt{activeUsers}: Tracks currently logged-in users.
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+\begin{itemize}
+    \item Database for storing user credentials and session data.
+\end{itemize}
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+    \item Passwords follow defined complexity rules.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent \texttt{login()}:
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+    \item \textbf{Transition:} Validates credentials and generates a session token.
+    \item \textbf{Output:} Active session token.
+    \item \textbf{Exception:} Invalid credentials.
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent \texttt{resetPassword()}:
+\begin{itemize}
+    \item \textbf{Transition:} Sends a reset link to the provided email.
+    \item \textbf{Output:} Confirmation status.
+    \item \textbf{Exception:} Invalid email address.
+\end{itemize}
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+\texttt{encryptPassword(password: String) -> String}: Encrypts a plain-text password.
 
 
 \newpage
@@ -319,34 +318,35 @@ The following table is taken directly from the Module Guide document for this pr
 
 
 
-
-\section{MIS of API Module} \label{Module} Moamen
-\wss{Use labels for cross-referencing}
-
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\section{MIS of API Module (OAuth)} \label{Module_OAuth}
+Moamen
 
 \subsection{Module}
 
-\wss{Short name for the module}
+OAuth API Module
 
 \subsection{Uses}
 
+This module facilitates secure authentication and authorization processes. Implements the OAuth 2.0 protocol to manage user authentication, issue access tokens, and validate token requests for secure resource access.
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+\begin{itemize}
+    \item \texttt{TOKEN\_EXPIRY}: Defines the duration of token validity (e.g., 3600 seconds).
+    \item \texttt{AUTH\_URL}: URL endpoint for authorization.
+\end{itemize}
 
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3.5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+\texttt{authorize} & Client ID, Scope & Authorization Code & Invalid credentials \\
+\texttt{getToken} & Auth Code, Client Secret & Access Token & Expired/invalid code \\
+\texttt{validateToken} & Access Token & Boolean & Expired/invalid token \\
 \hline
 \end{tabular}
 \end{center}
@@ -355,43 +355,41 @@ The following table is taken directly from the Module Guide document for this pr
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+\texttt{activeTokens}: Stores active access tokens and their metadata.
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+\begin{itemize}
+    \item Requires a stable database connection for token storage.
+    \item Relies on network connectivity for OAuth communications.
+\end{itemize}
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+    \item The external client configurations align with OAuth 2.0 standards.
+    \item Tokens are used within their defined expiry period.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent \texttt{authorize()}:
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+    \item \textbf{Transition:} Generates an authorization code upon successful client validation.
+    \item \textbf{Output:} Authorization code.
+    \item \textbf{Exception:} Invalid client credentials.
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent \texttt{getToken()}:
+\begin{itemize}
+    \item \textbf{Transition:} Issues an access token and stores it in \texttt{activeTokens}.
+    \item \textbf{Output:} Access token.
+    \item \textbf{Exception:} Invalid or expired authorization code.
+\end{itemize}
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
+\texttt{hashSecret(secret: String) -> String}: Hashes the provided client secret for secure storage.
 
 \newpage
 ~\newpage

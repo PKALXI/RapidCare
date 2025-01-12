@@ -160,7 +160,7 @@ adapted here is called design for change.
 \item[\refstepcounter{acnum} \actheacnum \label{acLogin}:] The system should support different authentication methods, such as password-based, biometric login etc.
 \item[\refstepcounter{acnum} \actheacnum \label{acTransSpeed}:] The transcription module needs to be optimized to enhance the transcription speed from audio data to written text in real-time. 
 \item[\refstepcounter{acnum} \actheacnum \label{acPredModules}:] The diagnosis prediction and medicine prediction modules should be updated with the latest medical knowledge based on the new medical research.
-\item[\refstepcounter{acnum} \actheacnum \label{acrealtime}:] The system shall enable real-time streaming of audio input to written text to ensure immediate transcription without delays.   
+\item[\refstepcounter{acnum} \actheacnum \label{acRealTime}:] The system shall enable real-time streaming of audio input to written text to ensure immediate transcription without delays.   
 \end{description}
 
 \wss{Anticipated changes relate to changes that would be made in requirements,
@@ -493,18 +493,10 @@ IR7 & \mref{mRGM}, \mref{mTM}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acLogin} & \mref{mAM}, \mref{mUAM}\\
+\acref{acTransSpeed} & \mref{mTM}\\
+\acref{acPredModules} & \mref{mDPM}, \mref{mMPM}\\
+\acref{acRealTime} & \mref{mAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mTM}, \mref{mcM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}

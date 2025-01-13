@@ -36,6 +36,8 @@ urlcolor=cyan          % color of external links
 \input{../../Comments}
 \input{../../Common}
 
+\newcommand{\projname}{RapidCare}
+
 \begin{document}
 
 \title{Module Interface Specification for \progname{}}
@@ -88,7 +90,7 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
 
 The following document details the Module Interface Specifications for the \projname application.
 
-Complementary documents include the System Requirement Specifications and Module Guide.  The full documentation and implementation can be found at \url{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftArchitecture/MG.pdf}.
+Complementary documents include the System Requirement Specifications and Module Guide. The full documentation and implementation can be found at \url{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftArchitecture/MG.pdf}.
 
 \section{Notation}
 
@@ -709,10 +711,6 @@ User has a functional screen and keyboard.
 
 \newpage
 ~\newpage
-
-
-
-
   
 \section{MIS of Classification Module} \label{Module} Gurleen
 \wss{Use labels for cross-referencing}
@@ -791,24 +789,36 @@ User has a functional screen and keyboard.
 ~\newpage
  
 
-\section{MIS of Daigonsis Prediction Module} \label{Module} Pranav
-\wss{Use labels for cross-referencing}
-
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\section{MIS of Diagnosis Prediction Module} \label{diag_pred_mod}
 
 \subsection{Module}
 
-\wss{Short name for the module}
+DiagnosisPred
 
 \subsection{Uses}
-
+\begin{itemize}
+  \item Report Generation Module. Specific inputs for exported access programs:
+    \begin{itemize}
+      \item Past medical history : text
+      \item Symptoms : text
+      \item User characteristics :
+        \begin{itemize}
+          \item Age : integer
+          \item Weight : integer
+        \end{itemize}
+    \end{itemize}
+  \item Preprocessing Module
+  \item Tensorflow
+  \item Scikit-Learn
+  \item Flask
+  \item Flask-CORS
+  \item Diagnostic Database (for training the model) [\ref{diag_data}]
+\end{itemize}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+The exported constants for this module would a prediction of the possible diagnosis.
 
 \subsubsection{Exported Access Programs}
 
@@ -817,7 +827,7 @@ User has a functional screen and keyboard.
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+Flask Application (Python) & Symptoms, Past medical History, User characteristics & Prediction of possible Diagnosis & InputDimError \\
 \hline
 \end{tabular}
 \end{center}
@@ -826,64 +836,80 @@ User has a functional screen and keyboard.
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+\begin{itemize}
+  \item model: Tensorflow model
+  % \item modelPipline : Abstract Object
+\end{itemize}
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+There will be no environment variables that this module will interact with.
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+  \item Patients are not making up symptoms and all input features are accurate.
+  % \item Training pipeline for the model is setup
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+
+\noindent diagnosePatient(request : FormData):
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: preprocess the request body (FormData) which contain the inputs as specified above using the preprocess local function. 
+\item output: Returns the predicted diagnosis for the patient.
+\item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+
+\noindent preProcessData(pastHistory: String, symptoms: String, user -> \{age, weight\}):
+\begin{itemize}
+\item transition: Preprocess the text using TF-ID and normalize the continuous inputs.
+\item output: Return the preprocessed data.
+\item exception: InputDimError - The expected arguments were not received or were in the wrong format.
+\end{itemize}
 
 
 \newpage
 ~\newpage
   
-\section{MIS of Medicine Prediction Module} \label{Module} Pranav
-\wss{Use labels for cross-referencing}
+\section{MIS of Medicine Prediction Module} \label{med_pred_mod}
 
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
 
 \subsection{Module}
 
-\wss{Short name for the module}
+MedPred
 
 \subsection{Uses}
+\begin{itemize}
+  \item Report Generation Module. Specific inputs for exported access programs:
+    \begin{itemize}
+      \item Past medical history : text
+      \item Symptoms : text
+      \item User characteristics :
+        \begin{itemize}
+          \item Age : integer
+          \item Weight : integer
+        \end{itemize}
+      \item Physician confirmed diagnosis.
+    \end{itemize}
+  \item Preprocessing Module
+  \item Tensorflow
+  \item Flask
+  \item Flask-CORS
+  \item Scikit-Learn
+  \item Medicine Database (for training the model) [\ref{med_data}]
 
+\end{itemize}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+The exported constants for this module would be a prediction of the possible medicine to treat the diagnosis.
 
 \subsubsection{Exported Access Programs}
 
@@ -892,7 +918,7 @@ User has a functional screen and keyboard.
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+Flask Application (Python) & Symptoms, Past medical History, User characteristics, Diagnosis & Prediction of possible Medicine & InputDimError \\
 \hline
 \end{tabular}
 \end{center}
@@ -901,42 +927,44 @@ User has a functional screen and keyboard.
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+
+\begin{itemize}
+  \item model: Tensorflow model
+  % \item modelPipeline : Abstract Object
+\end{itemize}
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+There will be no environment variables that this module will interact with.
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+
+\begin{itemize}
+  \item All input features are accurate.
+  % \item Training pipeline for the model is setup
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+
+
+\noindent medicatePatient(request : FormData):
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: preprocess the request body (FormData) which contain the inputs as specified above using the preprocess local function. 
+\item output: Returns the predicted medicine for the patient.
+\item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+\noindent preProcessData(diagnosis: String, pastHistory: String, symptoms: String, user -> \{age, weight\}):
+\begin{itemize}
+\item transition: Preprocess the text using TF-ID and normalize the continuous inputs, finally the diagnosis will be encoded using a LabelEncoder.
+\item output: Return the preprocessed data.
+\item exception: InputDimError - The expected arguments were not received or were in the wrong format.
+\end{itemize}
 
 
 \newpage
@@ -1097,24 +1125,21 @@ User has a functional screen and keyboard.
 
 
 
-\section{MIS of Diagnosis Data Module} \label{Module} Pranav
-\wss{Use labels for cross-referencing}
-
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\section{MIS of Diagnosis Data Module} \label{diag_data} Pranav
 
 \subsection{Module}
 
-\wss{Short name for the module}
+DiagnosisData
 
 \subsection{Uses}
-
+\begin{itemize}
+  \item Database of Diagnosis Prediction Data (features -> labels)
+\end{itemize}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+- Trained Model
 
 \subsubsection{Exported Access Programs}
 
@@ -1123,7 +1148,9 @@ User has a functional screen and keyboard.
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+addData & id:string, value: FormData & - & InputDimError \\
+deleteData & id:string & - & IdNotFound\\
+updateData & id:string, value: FormData & - & InputDimError \\
 \hline
 \end{tabular}
 \end{center}
@@ -1132,43 +1159,44 @@ User has a functional screen and keyboard.
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+dbConnection : Database connection point.
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+N/A
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+Database containing the training data for the Diagnosis prediction module exists/
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent addData(id:string, record: FormData):
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: Add record to database.
+\item output: N/A
+\item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
+\noindent deleteData(id:string):
+\begin{itemize}
+\item transition: Delete record from the record with the attitude.
+\item output: N/A
+\item exception: IdNotFound - Provided Id does not exist.
+\end{itemize}
 
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent updateData(id:string, record: FormData):
+\begin{itemize}
+\item transition: Update record in database based on key.
+\item output: N/A
+\item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
+\end{itemize}
+
+
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
+N/A
 
 \newpage
 ~\newpage
@@ -1176,24 +1204,20 @@ User has a functional screen and keyboard.
 
 
 
-\section{MIS of Medicine Data Module} \label{Module} Pranav
-\wss{Use labels for cross-referencing}
-
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
-
+\section{MIS of Medicine Data Module} \label{med_data} Pranav
 \subsection{Module}
 
-\wss{Short name for the module}
+MedData
 
 \subsection{Uses}
-
+\begin{itemize}
+  \item Database of Medicine Prediction Data (features -> labels)
+\end{itemize}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+- Trained Model
 
 \subsubsection{Exported Access Programs}
 
@@ -1202,7 +1226,9 @@ User has a functional screen and keyboard.
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+addData & id:string, value: FormData & - &  InputDimError \\
+deleteData & id:string & - & IdNotFound\\
+updateData & id:string, value: FormData & - & InputDimError \\
 \hline
 \end{tabular}
 \end{center}
@@ -1211,42 +1237,44 @@ User has a functional screen and keyboard.
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+dbConnection : Database connection point.
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+N/A
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+Database containing the training data for medicine prediction module exists.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent addData(id:string, record: FormData):
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: Add record to database.
+\item output: N/A
+\item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
+\noindent deleteData(id:string):
+\begin{itemize}
+\item transition: Delete record from the record with the attitude.
+\item output: N/A
+\item exception: IdNotFound - Provided Id does not exist.
+\end{itemize}
 
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent updateData(id:string, record: FormData):
+\begin{itemize}
+\item transition: Update record in database based on key.
+\item output: N/A
+\item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
+\end{itemize}
+
+
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+N/A
 
 
 \newpage

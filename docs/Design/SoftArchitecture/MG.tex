@@ -160,12 +160,8 @@ adapted here is called design for change.
 \item[\refstepcounter{acnum} \actheacnum \label{acLogin}:] The system should support different authentication methods, such as password-based, biometric login etc.
 \item[\refstepcounter{acnum} \actheacnum \label{acTransSpeed}:] The transcription module needs to be optimized to enhance the transcription speed from audio data to written text in real-time. 
 \item[\refstepcounter{acnum} \actheacnum \label{acPredModules}:] The diagnosis prediction and medicine prediction modules should be updated with the latest medical knowledge based on the new medical research.
-\item[\refstepcounter{acnum} \actheacnum \label{acrealtime}:] The system shall enable real-time streaming of audio input to written text to ensure immediate transcription without delays.   
+\item[\refstepcounter{acnum} \actheacnum \label{acRealTime}:] The system shall enable real-time streaming of audio input to written text to ensure immediate transcription without delays.   
 \end{description}
-
-\wss{Anticipated changes relate to changes that would be made in requirements,
-design or implementation choices.  They are not related to changes that are made
-at run-time, like the values of parameters.}
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
@@ -255,13 +251,13 @@ Modules are decomposed according to the principle of ``information hiding'' prop
 
 Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{--}) is shown, this means that the module is not a leaf and will not have to be implemented.
 
-% \subsection{Hardware Hiding Modules (\mref{mHH})}
+\subsection{Hardware Hiding Modules (\mref{mHH})}
 
-% \begin{description}
-% \item[Secrets:]The data structure and algorithm used to implement the virtual hardware.
-% \item[Services:]Serves as a virtual hardware used by the rest of the system. This module provides the interface between the hardware and the software. So, the system can use it to display outputs or to accept inputs.
-% \item[Implemented By:] OS
-% \end{description}
+\begin{description}
+\item[Secrets:]The data structure and algorithm used to implement the virtual hardware.
+\item[Services:]Serves as a virtual hardware used by the rest of the system. This module provides the interface between the hardware and the software. So, the system can use it to display outputs or to accept inputs.
+\item[Implemented By:] OS
+\end{description}
 
 \subsection{Behaviour-Hiding Module}
 
@@ -308,7 +304,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Diagnosis Data Module (\mref{mDDM})}  Pranav
+\subsubsection{Diagnosis Data Module (\mref{mDDM})}
 
 \begin{description}
   \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
@@ -317,7 +313,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
   \item[Type of Module:]Record
 \end{description}
 
-\subsubsection{Medicine Data Module (\mref{mMDM})}  Pranav
+\subsubsection{Medicine Data Module (\mref{mMDM})}
 
 \begin{description}
   \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
@@ -339,7 +335,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \end{description}
 
 
-\subsubsection{App Module (\mref{mAM})} Gurleen
+\subsubsection{App Module (\mref{mAM})}
 
 \begin{description}
 \item[Secrets:] The algorithm used to control and coordinate the flow of data between different modules.
@@ -348,7 +344,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Report Generation Module (\mref{mRGM})} Gurleen
+\subsubsection{Report Generation Module (\mref{mRGM})}
 
 \begin{description}
 \item[Secrets:] The algorithm to generate accurate reports based on the transcribed data from the conversation.
@@ -357,7 +353,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Library
 \end{description}
 
-\subsubsection{Transcription Module (\mref{mTM})} Gurleen
+\subsubsection{Transcription Module (\mref{mTM})}
 
 \begin{description}
 \item[Secrets:] The algorithm used to convert audio data into written text.
@@ -366,7 +362,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Library
 \end{description}
 
-\subsubsection{Classification Module (\mref{mCM})} Gurleen
+\subsubsection{Classification Module (\mref{mCM})}
 
 \begin{description}
 \item[Secrets:] The algorithm used to classify the medical data after the transcription module.
@@ -375,7 +371,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Library
 \end{description}
 
-\subsubsection{Diagonsis Prediction Module (\mref{mDPM})} Pranav
+\subsubsection{Diagonsis Prediction Module (\mref{mDPM})}
 
 \begin{description}
 \item[Secrets:] The algorithms used to predict possible diagnoses.
@@ -384,7 +380,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Medicine Prediction Module (\mref{mMPM})} Pranav
+\subsubsection{Medicine Prediction Module (\mref{mMPM})}
 
 \begin{description}
 \item[Secrets:] The algorithms used to give possible medicines applicable.
@@ -493,18 +489,10 @@ IR7 & \mref{mRGM}, \mref{mTM}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acLogin} & \mref{mAM}, \mref{mUAM}\\
+\acref{acTransSpeed} & \mref{mTM}\\
+\acref{acPredModules} & \mref{mDPM}, \mref{mMPM}\\
+\acref{acRealTime} & \mref{mAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mTM}, \mref{mcM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}

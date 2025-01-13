@@ -866,7 +866,7 @@ There will be no environment variables that this module will interact with.
 \subsubsection{Local Functions}
 
 
-\noindent preProcessData(pastHistory: String, symptoms: String, user -> {age, weight}):
+\noindent preProcessData(pastHistory: String, symptoms: String, user -> \{age, weight\}):
 \begin{itemize}
 \item transition: Preprocess the text using TF-ID and normalize the continuous inputs.
 \item output: Return the preprocessed data.
@@ -959,7 +959,7 @@ There will be no environment variables that this module will interact with.
 
 \subsubsection{Local Functions}
 
-\noindent preProcessData(diagnosis: String, pastHistory: String, symptoms: String, user -> {age, weight}):
+\noindent preProcessData(diagnosis: String, pastHistory: String, symptoms: String, user -> \{age, weight\}):
 \begin{itemize}
 \item transition: Preprocess the text using TF-ID and normalize the continuous inputs, finally the diagnosis will be encoded using a LabelEncoder.
 \item output: Return the preprocessed data.
@@ -1188,7 +1188,7 @@ Database containing the training data for the Diagnosis prediction module exists
 \noindent updateData(id:string, record: FormData):
 \begin{itemize}
 \item transition: Update record in database based on key.
-\item output:
+\item output: N/A
 \item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
 \end{itemize}
 
@@ -1266,7 +1266,7 @@ Database containing the training data for medicine prediction module exists.
 \noindent updateData(id:string, record: FormData):
 \begin{itemize}
 \item transition: Update record in database based on key.
-\item output:
+\item output: N/A
 \item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
 \end{itemize}
 

@@ -523,7 +523,7 @@ arrows in the diagram typically correspond to the presence of import statement.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{use-hierarchy.png}
+\includegraphics[width=0.7\textwidth]{user-hierarchy.png}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
@@ -537,7 +537,10 @@ needed. Drawings, Sketches, Figma}
 
 \section{Design of Communication Protocols}
 
-\wss{If appropriate}
+Due to the the broker architectures connecting with various services the communication protocols differ slightly. For most of the communication as they will be simply `POST` or `GET`. Examples if this communication being used would be fetching Patient data from the database, classifying the transcription, or employee retrieval, etc... HTTP communication will be used in \textbf{all} but one use case.
+
+The one use case where HTTP communication will not be used is for the transcription service. For this service we will be using web socket communication as this will provide streaming capabilities for real time transcription. The frontend will act as the client who will send audio chunks to the backend to be transcribed. This will facilitate bidirectional communcation as well.
+
 
 \section{Timeline}
 

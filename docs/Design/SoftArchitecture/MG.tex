@@ -544,10 +544,59 @@ arrows in the diagram typically correspond to the presence of import statement.}
 
 %\section*{References}
 
-\section{User Interfaces}
+\section{User Interfaces} \label{sec:UserInterfaces}
 
-\wss{Design of user interface for software and hardware.  Attach an appendix if
-needed. Drawings, Sketches, Figma}
+The user interfaces for the system are designed to provide an intuitive and efficient user experience for all stakeholders, including administrators and healthcare professionals. Below are the key interfaces:
+
+\subsection{Administrator Interface}
+\begin{description}
+    \item[Purpose:] Enable administrators to manage healthcare networks, onboard professionals, and maintain system configurations.
+    
+    \item[Key Features:] The following are the primary features designed to enhance system functionality and usability:
+    \begin{itemize}
+        \item Dashboard with system metrics (e.g., active users, reports generated).
+        \item Tools for adding, updating, and removing healthcare professionals and networks.
+        \item Secure authentication and role-based access.
+    \end{itemize}
+    
+    \item[Visual Design:] Includes a responsive layout with menus for navigation and data tables for record management.
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{admin.png}} % Replace with your actual image path
+    \caption{Administrator Interface Example}
+    \label{fig:admin-interface}
+\end{figure}
+
+\subsection{Healthcare Professional Interface}
+\begin{description}
+    \item[Purpose:] Facilitate healthcare professionals in managing patient records and accessing diagnostic tools.
+    
+    \item[Key Features:] The following are the primary features designed to enhance system functionality and usability:
+    \begin{itemize}
+        \item Login and authentication screens.
+        \item Forms for adding, updating, and deleting patient records.
+        \item Sections for generating diagnostic reports and viewing predictions for diagnosis and medications.
+        \item Quick access to transcription and classification results.
+    \end{itemize}
+    
+    \item[Visual Design:] Includes a sidebar navigation menu and form inputs optimized for rapid data entry.
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{healthcare_1.png}} % Replace with your actual image path
+    \caption{Healthcare Professional Interface - Login Screen}
+    \label{fig:healthcare-interface-1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{healthcare_2.png}} % Replace with your actual image path
+    \caption{Healthcare Professional Interface - Patient Record Form}
+    \label{fig:healthcare-interface-2}
+\end{figure}
 
 \section{Design of Communication Protocols}
 

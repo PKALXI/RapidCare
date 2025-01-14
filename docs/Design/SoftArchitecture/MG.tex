@@ -186,20 +186,16 @@ decisions will be changed.
 This section provides an overview of the module design. Modules are summarized in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed below, which are leaves in the hierarchy tree, are the modules that will actually be implemented.
 
 \begin{description}
-  \item [\refstepcounter{mnum} \mthemnum \label{mAM}:] App Module
   \item [\refstepcounter{mnum} \mthemnum \label{mUAM}:] User Authentication Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAPIM}:] API Module
   \item [\refstepcounter{mnum} \mthemnum \label{mAVM}:] Administrator View Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mCVM}:] Client View Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mRGM}:] Report Generating Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mPVM}:] Patient View Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mBM}:] Broker Module
   \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
   \item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Classification Module
   \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
   \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
   \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Account Management Module
   \item [\refstepcounter{mnum} \mthemnum \label{mPAM}:] Patient Account Management Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mDDM}:] Diagnosis Data Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mMDM}:] Medicine Data Module
 
 \end{description}
 
@@ -212,16 +208,12 @@ This section provides an overview of the module design. Modules are summarized i
 {Hardware-Hiding Module} & None \\
 \midrule
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & \mref{mUAM}\\
-& \mref{mAPIM}\\
 & \mref{mAVM}\\
-& \mref{mCVM}\\
-& \mref{mDDM}\\
-& \mref{mMDM}\\
+& \mref{mPVM}\\
+& \mref{mBM}\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mAM}\\
-& \mref{mRGM}\\
-& \mref{mTM}\\
+\multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mTM}\\
 & \mref{mCM}\\
 & \mref{mDPM}\\
 & \mref{mMPM}\\
@@ -285,21 +277,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{API Module (\mref{mAPIM})}
-
-\begin{description}
-\item[Secrets:] The logic for generating and validating OAuth tokens, handling API request routing, and defining access control policies for secure data sharing.
-\item[Services:] This module provides:
-\begin{itemize}
-    \item OAuth 2.0-based authentication and authorization for external API consumers.
-    \item Secure token generation, validation, and renewal.
-    \item Routing requests from external systems to the relevant internal modules.
-    \item Access control enforcement to protect sensitive data and resources.
-\end{itemize}
-\item[Implemented By:] Spring, OAuth 2.0
-\item[Type of Module:] Library
-\end{description}
-
 \subsubsection{Administrator View Module (\mref{mAVM})}
 
 \begin{description}
@@ -318,23 +295,38 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Diagnosis Data Module (\mref{mDDM})}
+\subsubsection{API Module (\mref{mAPIM})}
 
 \begin{description}
-  \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-  \item[Services:]Manages secure storage, retrieval, and updates of data related to diagnosis records. The ultimate purpose for this is to provide training data for the ciagnosis prediction module.
-  \item[Implemented By:]MongoDB, Spring
-  \item[Type of Module:]Record
+\item[Secrets:] The logic for generating and validating OAuth tokens, handling API request routing, and defining access control policies for secure data sharing.
+\item[Services:] This module provides:
+\begin{itemize}
+    \item OAuth 2.0-based authentication and authorization for external API consumers.
+    \item Secure token generation, validation, and renewal.
+    \item Routing requests from external systems to the relevant internal modules.
+    \item Access control enforcement to protect sensitive data and resources.
+\end{itemize}
+\item[Implemented By:] Spring, OAuth 2.0
+\item[Type of Module:] Library
 \end{description}
 
-\subsubsection{Medicine Data Module (\mref{mMDM})}
+% \subsubsection{Diagnosis Data Module (\mref{mDDM})}
 
-\begin{description}
-  \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-  \item[Services:]Manages secure storage, retrieval, and updates of data related to drug records. The ultimate purpose for this is to provide training data for the medicine prediction module.
-  \item[Implemented By:]MongoDB, Spring
-  \item[Type of Module:]Record
-\end{description}
+% \begin{description}
+%   \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+%   \item[Services:]Manages secure storage, retrieval, and updates of data related to diagnosis records. The ultimate purpose for this is to provide training data for the ciagnosis prediction module.
+%   \item[Implemented By:]MongoDB, Spring
+%   \item[Type of Module:]Record
+% \end{description}
+
+% \subsubsection{Medicine Data Module (\mref{mMDM})}
+
+% \begin{description}
+%   \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+%   \item[Services:]Manages secure storage, retrieval, and updates of data related to drug records. The ultimate purpose for this is to provide training data for the medicine prediction module.
+%   \item[Implemented By:]MongoDB, Spring
+%   \item[Type of Module:]Record
+% \end{description}
 
 
 \subsection{Software Decision Module}
@@ -348,24 +340,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Implemented By:] --
 \end{description}
 
-
-\subsubsection{App Module (\mref{mAM})}
-
-\begin{description}
-\item[Secrets:] The algorithm used to control and coordinate the flow of data between different modules.
-\item[Services:] Facilitates communication between different independent modules and manages the state of the application.
-\item[Implemented By:] React
-\item[Type of Module:] Abstract Object
-\end{description}
-
-\subsubsection{Report Generation Module (\mref{mRGM})}
-
-\begin{description}
-\item[Secrets:] The algorithm to generate accurate reports based on the transcribed data from the conversation.
-\item[Services:] Extracts the important aspects of medical data and compiled into the report.
-\item[Implemented By:] Python
-\item[Type of Module:] Library
-\end{description}
 
 \subsubsection{Transcription Module (\mref{mTM})}
 
@@ -434,20 +408,20 @@ This section shows traceability matrices: between the modules and the requiremen
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-FR1 & \mref{mAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR2 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR3 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR4 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR5 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR6 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR7 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAMM}\\
-FR8 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
-FR9 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
-FR10 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
-FR11 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mTM}, \mref{mCM}, \mref{mPAM}\\
-FR12 & \mref{mAM},\mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mDPM}, \mref{mPAM}, \mref{mDDM}\\
-FR13 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mMPM}, \mref{mPAM}, \mref{mMDM}\\
-FR14 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mPAM}\\
+FR1 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
+FR2 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
+FR3 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
+FR4 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
+FR5 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
+FR6 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
+FR7 & \mref{mUAM}, \mref{mBM}, \mref{mAMM}\\
+FR8 & \mref{mUAM}, \mref{mPVM}, \mref{mBM}, \mref{mPAM}\\
+FR9 & \mref{mUAM}, \mref{mPVM}, \mref{mBM}, \mref{mPAM}\\
+FR10 & \mref{mPVM}, \mref{mBM}, \mref{mPAM}\\
+FR11 & \mref{mPVM}, \mref{mBM}, \mref{mTM}, \mref{mCM}, \mref{mPAM}\\
+FR12 & \mref{mPVM}, \mref{mBM}, \mref{mDPM}, \mref{mPAM}\\
+FR13 & \mref{mPVM}, \mref{mBM}, \mref{mMPM}, \mref{mPAM}\\
+FR14 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mPAM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Functional Requirements and Modules}
@@ -460,13 +434,13 @@ FR14 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mPAM}\\
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-NFR1 & \mref{mAM}, \mref{mAVM}, \mref{mCVM}\\
-NFR2 & \mref{mAM}, \mref{mAVM}, \mref{mCVM}\\
-NFR3 & \mref{mAM}, \mref{mTM}\\
-NFR4 & \mref{mAM}, \mref{mAMM}, \mref{mPAM}, \mref{mDDM}, \mref{mMDM}\\
+NFR1 & \mref{mAVM}, \mref{mPVM}\\
+NFR2 & \mref{mAVM}, \mref{mPVM}\\
+NFR3 & \mref{mTM}\\
+NFR4 & \mref{mAMM}, \mref{mPAM}\\
 NFR5 & All \\
-NFR6 & \mref{mAM}, \mref{mUAM}, \mref{mPAM}\\
-NFR7 & \mref{mAM}, \mref{mCVM}\\
+NFR6 & \mref{mUAM}, \mref{mPAM}\\
+NFR7 & \mref{mPVM}\\
 NFR8 & All \\
 NFR9 & All \\
 \bottomrule
@@ -482,15 +456,15 @@ NFR9 & All \\
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-AC1 & \mref{mAPIM}\\
-AC2 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-IR1 & \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+AC1 & \mref{mBM}\\
+AC2 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAMM}\\
+IR1 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAMM}\\
 IR2 & All \\
 IR3 & \mref{mDPM}, \mref{mMPM}\\
 IR4 & \mref{mAMM}, \mref{mPAM}\\
 IR5 & \mref{mDPM}, \mref{mMPM}\\
-IR6 & \mref{mRGM}, \mref{mCM}\\
-IR7 & \mref{mRGM}, \mref{mTM}\\
+IR6 & \mref{mPVM}, \mref{mCM}\\
+IR7 & \mref{mPVM}, \mref{mTM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Safety and Security Requirements and Modules}
@@ -503,10 +477,10 @@ IR7 & \mref{mRGM}, \mref{mTM}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acLogin} & \mref{mAM}, \mref{mUAM}\\
+\acref{acLogin} & \mref{mUAM}\\
 \acref{acTransSpeed} & \mref{mTM}\\
 \acref{acPredModules} & \mref{mDPM}, \mref{mMPM}\\
-\acref{acRealTime} & \mref{mAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mTM}, \mref{mcM}\\
+\acref{acRealTime} & \mref{mBM}, \mref{mPVM}, \mref{mTM}, \mref{mCM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}

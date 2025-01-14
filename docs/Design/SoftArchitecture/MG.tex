@@ -76,6 +76,8 @@ This section records information for easy reference.
   SRS & Software Requirements Specification\\
   \progname & Explanation of program name\\
   UC & Unlikely Change \\
+  JWT & JSON Web Tokens \\
+  MFA & Multi-Factor Authentication \\
   \bottomrule
 \end{tabular}\\
 
@@ -267,23 +269,35 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{User Authentication Module (\mref{mUAM})} Moamen
+\subsubsection{User Authentication Module (\mref{mUAM})} 
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  
+\item[Secrets:] The implementation details of the authentication mechanism, including secure storage and validation of user credentials, session management, and MFA logic.
+\item[Services:] This module handles user authentication, including:
+\begin{itemize}
+    \item Validating user credentials during login.
+    \item Generating and validating session tokens.
+    \item Managing password recovery and reset processes.
+    \item Enforcing MFA where applicable.
+    \item Logging authentication attempts for security auditing.
+\end{itemize}
+\item[Implemented By:] Spring, JWT
+\item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{API Module (\mref{mAPIM})} Moamen
+\subsubsection{API Module (\mref{mAPIM})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
+\item[Secrets:] The logic for generating and validating OAuth tokens, handling API request routing, and defining access control policies for secure data sharing.
+\item[Services:] This module provides:
+\begin{itemize}
+    \item OAuth 2.0-based authentication and authorization for external API consumers.
+    \item Secure token generation, validation, and renewal.
+    \item Routing requests from external systems to the relevant internal modules.
+    \item Access control enforcement to protect sensitive data and resources.
+\end{itemize}
+\item[Implemented By:] Spring, OAuth 2.0
+\item[Type of Module:] Library
 \end{description}
 
 \subsubsection{Administrator View Module (\mref{mAVM})}
@@ -530,10 +544,59 @@ arrows in the diagram typically correspond to the presence of import statement.}
 
 %\section*{References}
 
-\section{User Interfaces}
+\section{User Interfaces} \label{sec:UserInterfaces}
 
-\wss{Design of user interface for software and hardware.  Attach an appendix if
-needed. Drawings, Sketches, Figma}
+The user interfaces for the system are designed to provide an intuitive and efficient user experience for all stakeholders, including administrators and healthcare professionals. Below are the key interfaces:
+
+\subsection{Administrator Interface}
+\begin{description}
+    \item[Purpose:] Enable administrators to manage healthcare networks, onboard professionals, and maintain system configurations.
+    
+    \item[Key Features:] The following are the primary features designed to enhance system functionality and usability:
+    \begin{itemize}
+        \item Dashboard with system metrics (e.g., active users, reports generated).
+        \item Tools for adding, updating, and removing healthcare professionals and networks.
+        \item Secure authentication and role-based access.
+    \end{itemize}
+    
+    \item[Visual Design:] Includes a responsive layout with menus for navigation and data tables for record management.
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{admin.png}}
+    \caption{Administrator Interface Example}
+    \label{fig:admin-interface}
+\end{figure}
+
+\subsection{Healthcare Professional Interface}
+\begin{description}
+    \item[Purpose:] Facilitate healthcare professionals in managing patient records and accessing diagnostic tools.
+    
+    \item[Key Features:] The following are the primary features designed to enhance system functionality and usability:
+    \begin{itemize}
+        \item Login and authentication screens.
+        \item Forms for adding, updating, and deleting patient records.
+        \item Sections for generating diagnostic reports and viewing predictions for diagnosis and medications.
+        \item Quick access to transcription and classification results.
+    \end{itemize}
+    
+    \item[Visual Design:] Includes a sidebar navigation menu and form inputs optimized for rapid data entry.
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{healthcare_1.png}} 
+    \caption{Healthcare Professional Interface - Patient Record Form}
+    \label{fig:healthcare-interface-1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{healthcare_2.png}} 
+    \caption{Healthcare Professional Interface - Patient Record Form - Continued}
+    \label{fig:healthcare-interface-2}
+\end{figure}
 
 \section{Design of Communication Protocols}
 

@@ -189,13 +189,15 @@ This section provides an overview of the module design. Modules are summarized i
   \item [\refstepcounter{mnum} \mthemnum \label{mUAM}:] User Authentication Module
   \item [\refstepcounter{mnum} \mthemnum \label{mAVM}:] Administrator View Module
   \item [\refstepcounter{mnum} \mthemnum \label{mPVM}:] Patient View Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Model Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mPMM}:] Patient Model Module
   \item [\refstepcounter{mnum} \mthemnum \label{mBM}:] Broker Module
   \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
   \item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Classification Module
   \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
   \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Account Management Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mPAM}:] Patient Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAAMM}:] Administrator Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mPAMM}:] Patient Account Management Module
 
 \end{description}
 
@@ -210,6 +212,8 @@ This section provides an overview of the module design. Modules are summarized i
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & \mref{mUAM}\\
 & \mref{mAVM}\\
 & \mref{mPVM}\\
+& \mref{mAMM}\\
+& \mref{mPMM}\\
 & \mref{mBM}\\
 \midrule
 
@@ -217,8 +221,8 @@ This section provides an overview of the module design. Modules are summarized i
 & \mref{mCM}\\
 & \mref{mDPM}\\
 & \mref{mMPM}\\
-& \mref{mAMM}\\
-& \mref{mPAM}\\
+& \mref{mAAMM}\\
+& \mref{mPAMM}\\
 \bottomrule
 
 \end{tabular}
@@ -265,15 +269,8 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 
 \begin{description}
 \item[Secrets:] The implementation details of the authentication mechanism, including secure storage and validation of user credentials, session management, and MFA logic.
-\item[Services:] This module handles user authentication, including:
-\begin{itemize}
-    \item Validating user credentials during login.
-    \item Generating and validating session tokens.
-    \item Managing password recovery and reset processes.
-    \item Enforcing MFA where applicable.
-    \item Logging authentication attempts for security auditing.
-\end{itemize}
-\item[Implemented By:] Spring, JWT
+\item[Services:] Authenticates users to grant access to the system based on credentials.
+\item[Implemented By:] Spring, React
 \item[Type of Module:] Abstract Object
 \end{description}
 
@@ -286,7 +283,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Client View Module (\mref{mCVM})}
+\subsubsection{Patient View Module (\mref{mPVM})}
 
 \begin{description}
 \item[Secrets:]User interface customization based on the tools and functionality required by healthcare professionals.
@@ -295,7 +292,25 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{API Module (\mref{mAPIM})}
+\subsubsection{Adminstrator Model Module (\mref{mAMM})} Gurleen
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Patient Model Module (\mref{mPMM})} Gurleen
+
+\begin{description}
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Broker Module (\mref{mBM})}
 
 \begin{description}
 \item[Secrets:] The logic for generating and validating OAuth tokens, handling API request routing, and defining access control policies for secure data sharing.
@@ -309,24 +324,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Implemented By:] Spring, OAuth 2.0
 \item[Type of Module:] Library
 \end{description}
-
-% \subsubsection{Diagnosis Data Module (\mref{mDDM})}
-
-% \begin{description}
-%   \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-%   \item[Services:]Manages secure storage, retrieval, and updates of data related to diagnosis records. The ultimate purpose for this is to provide training data for the ciagnosis prediction module.
-%   \item[Implemented By:]MongoDB, Spring
-%   \item[Type of Module:]Record
-% \end{description}
-
-% \subsubsection{Medicine Data Module (\mref{mMDM})}
-
-% \begin{description}
-%   \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-%   \item[Services:]Manages secure storage, retrieval, and updates of data related to drug records. The ultimate purpose for this is to provide training data for the medicine prediction module.
-%   \item[Implemented By:]MongoDB, Spring
-%   \item[Type of Module:]Record
-% \end{description}
 
 
 \subsection{Software Decision Module}
@@ -377,7 +374,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Abstract object
 \end{description}
 
-\subsubsection{Administrator Account Management Module (\mref{mAMM})}
+\subsubsection{Administrator Account Management Module (\mref{mAAMM})}
 
 \begin{description}
 \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
@@ -386,7 +383,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Record
 \end{description}
 
-\subsubsection{Patient Account Management Module (\mref{mPAM})}
+\subsubsection{Patient Account Management Module (\mref{mPAMM})}
 
 \begin{description}
 \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
@@ -408,20 +405,20 @@ This section shows traceability matrices: between the modules and the requiremen
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-FR1 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
-FR2 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
-FR3 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
-FR4 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
-FR5 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
-FR6 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mAMM}\\
-FR7 & \mref{mUAM}, \mref{mBM}, \mref{mAMM}\\
-FR8 & \mref{mUAM}, \mref{mPVM}, \mref{mBM}, \mref{mPAM}\\
-FR9 & \mref{mUAM}, \mref{mPVM}, \mref{mBM}, \mref{mPAM}\\
-FR10 & \mref{mPVM}, \mref{mBM}, \mref{mPAM}\\
-FR11 & \mref{mPVM}, \mref{mBM}, \mref{mTM}, \mref{mCM}, \mref{mPAM}\\
-FR12 & \mref{mPVM}, \mref{mBM}, \mref{mDPM}, \mref{mPAM}\\
-FR13 & \mref{mPVM}, \mref{mBM}, \mref{mMPM}, \mref{mPAM}\\
-FR14 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mPAM}\\
+FR1 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR2 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR3 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR4 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR5 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR6 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR7 & \mref{mUAM}, \mref{mBM}, \mref{mAAMM}\\
+FR8 & \mref{mUAM}, \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
+FR9 & \mref{mUAM}, \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
+FR10 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
+FR11 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mTM}, \mref{mCM}, \mref{mPAMM}\\
+FR12 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mDPM}, \mref{mPAMM}\\
+FR13 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mMPM}, \mref{mPAMM}\\
+FR14 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mPAMM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Functional Requirements and Modules}
@@ -437,9 +434,9 @@ FR14 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mPAM}\\
 NFR1 & \mref{mAVM}, \mref{mPVM}\\
 NFR2 & \mref{mAVM}, \mref{mPVM}\\
 NFR3 & \mref{mTM}\\
-NFR4 & \mref{mAMM}, \mref{mPAM}\\
+NFR4 & \mref{mAAMM}, \mref{mPAMM}\\
 NFR5 & All \\
-NFR6 & \mref{mUAM}, \mref{mPAM}\\
+NFR6 & \mref{mUAM}, \mref{mPAMM}\\
 NFR7 & \mref{mPVM}\\
 NFR8 & All \\
 NFR9 & All \\
@@ -457,11 +454,11 @@ NFR9 & All \\
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
 AC1 & \mref{mBM}\\
-AC2 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAMM}\\
-IR1 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAMM}\\
+AC2 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAAMM}\\
+IR1 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAAMM}\\
 IR2 & All \\
 IR3 & \mref{mDPM}, \mref{mMPM}\\
-IR4 & \mref{mAMM}, \mref{mPAM}\\
+IR4 & \mref{mAAMM}, \mref{mPAMM}\\
 IR5 & \mref{mDPM}, \mref{mMPM}\\
 IR6 & \mref{mPVM}, \mref{mCM}\\
 IR7 & \mref{mPVM}, \mref{mTM}\\

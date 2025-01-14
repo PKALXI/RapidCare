@@ -142,15 +142,13 @@ The following table is taken directly from the Module Guide document for this pr
 {Hardware-Hiding} & None \\
 \midrule
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding} & User Authentication Module\\
-& API Module\\
+& Broker Module\\
 & Administrator View Module\\
-& Client View Module\\
-& Diagnosis Data Module\\
-& Medicine Data Module\\
+& Patient View Module\\
+& Administrator Model Module\\
+& Patient Model Module\\
 \midrule
-\multirow{3}{0.3\textwidth}{Software Decision} & App Module\\
-& Report Generating Module\\
-& Transcription Module\\
+\multirow{3}{0.3\textwidth}{Software Decision} & Transcription Module\\
 & Classification Module\\
 & Diagnosis Prediction Module\\
 & Medicine Prediction Module\\
@@ -312,7 +310,7 @@ Provides secure login and session management. It validates user credentials and 
 \newpage
 
 
-\section{MIS of API Module (OAuth)} \label{Module_OAuth}
+\section{MIS of Broker Module } \label{Module_Broker} Pranav
 
 \subsection{Module}
 
@@ -393,10 +391,7 @@ This module facilitates secure authentication and authorization processes. Imple
 Administrator
 
 \subsection{Uses}
-API Module (OAuth)\\
-User Authentication Module\\
-Administrator Account Management Module\\
-Patient Account Management Module\\
+Broker Module \\
 React\\
 Web APIs\\
 
@@ -435,7 +430,7 @@ User has a functional screen and keyboard.
 \begin{itemize}
 \item transition: N/A
 \item output: renders a react component of the administrator view page
-\item exception: N/A RenderError — thrown if the component fails to render.
+\item exception: RenderError — thrown if the component fails to render.
 \end{itemize}
 
 % \wss{A module without environment variables or state variables is unlikely to
@@ -453,7 +448,7 @@ User has a functional screen and keyboard.
 
 \noindent handleAdminAccount(id: string, record: FormData, requestType: string):
 \begin{itemize}
-\item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Administrator Account Management Database.
+\item transition: Sends an API request to the broker Module to process an add, delete, or update operation in the Administrator Database.
 \item output: N/A
 \item exception: InvalidInputError - The input data is incomplete or invalid.  
 
@@ -466,15 +461,13 @@ User has a functional screen and keyboard.
 
 \newpage
 
-\section{MIS of Client View Module} \label{Module}
+\section{MIS of Patient View Module} \label{Patient_View_Module}
 
 \subsection{Module}
-Client
+PatientView
 
 \subsection{Uses}
-API Module (OAuth)\\
-User Authentication Module\\
-Patient Account Management Module\\
+Broker Module \\
 React\\
 Web APIs\\
 
@@ -490,7 +483,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Client & - & React.component & - \\
+Patient & - & React.component & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -510,18 +503,18 @@ User has a functional screen, keyboard, and microphone.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent Client():
+\noindent Patient():
 \begin{itemize}
 \item transition: N/A
-\item output: renders a react component of the client view page
-\item exception: N/A RenderError — thrown if the component fails to render.
+\item output: renders a react component of the patient view page.
+\item exception: RenderError — thrown if the component fails to render.
 \end{itemize}
 
 \subsubsection{Local Functions}
 
 \noindent handlePatientAccount(id: string, record: FormData, requestType: string):
 \begin{itemize}
-\item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Patient Account Management Database.
+\item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Patient Database.
 \item output: N/A
 \item exception: InvalidInputError - The input data is incomplete or invalid.  
 
@@ -940,7 +933,7 @@ There will be no environment variables that this module will interact with.
 Administrator Account Management
 
 \subsection{Uses}
-API Module (OAuth)\\
+Broker Module\\
 
 \subsection{Syntax}
 
@@ -954,9 +947,9 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-addHealthcareProfessional & id:string, value: FormData & - & InputDimError \\
+addHealthcareProfessional & id:string, value: FormData & - & InvalidInputError \\
 deleteHealthcareProfessional & id:string & - & IdNotFound\\
-updateHealthcareProfessional & id:string, value: FormData & - & InputDimError \\
+updateHealthcareProfessional & id:string, value: FormData & - & InvalidInputError \\
 \hline
 \end{tabular}
 \end{center}
@@ -978,7 +971,7 @@ Database containing the account information for healthcare professionals exists.
 \begin{itemize}
 \item transition: Adds a new document with the provided details to the database.
 \item output: N/A
-\item exception: InputDimError - The input data is incomplete or invalid or a duplicate document already exists.
+\item exception: InvalidInputError - The input data is incomplete or invalid or a duplicate document already exists.
 \end{itemize}
 
 \noindent deleteHealthcareProfessional(id:string):
@@ -992,7 +985,7 @@ Database containing the account information for healthcare professionals exists.
 \begin{itemize}
 \item transition: Update document with the provided details in the database.
 \item output: N/A
-\item exception: InputDimError - The input data is incomplete or invalid.
+\item exception: InvalidInputError - The input data is incomplete or invalid.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -1007,7 +1000,7 @@ N/A
 Patient Account Management
 
 \subsection{Uses}
-API Module (OAuth)\\
+Broker Module\\
 
 \subsection{Syntax}
 
@@ -1021,9 +1014,9 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-createPatientRecord & id:string, value: FormData & - & InputDimError \\
+createPatientRecord & id:string, value: FormData & - & InvalidInputError \\
 deletePatientRecord & id:string & - & IdNotFound\\
-updatePatientRecord & id:string, value: FormData & - & InputDimError \\
+updatePatientRecord & id:string, value: FormData & - & InvalidInputError \\
 \hline
 \end{tabular}
 \end{center}
@@ -1045,7 +1038,7 @@ Database containing the account information for the patients exists.
 \begin{itemize}
 \item transition: Adds a new document with the provided details to the database.
 \item output: N/A
-\item exception: InputDimError - The input data is incomplete or invalid or a duplicate document already exists.
+\item exception: InvalidInputError - The input data is incomplete or invalid or a duplicate document already exists.
 \end{itemize}
 
 \noindent deletePatientRecord(id:string):
@@ -1059,151 +1052,7 @@ Database containing the account information for the patients exists.
 \begin{itemize}
 \item transition: Update document with the provided details in the database.
 \item output: N/A
-\item exception: InputDimError - The input data is incomplete or invalid.
-\end{itemize}
-
-\subsubsection{Local Functions}
-
-N/A
-
-\newpage
-
-\section{MIS of Diagnosis Data Module} \label{diag_data}
-
-\subsection{Module}
-DiagnosisData
-
-\subsection{Uses}
-\begin{itemize}
-  \item Database of Diagnosis Prediction Data (features -> labels)
-\end{itemize}
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-- Trained Model
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-addData & id:string, value: FormData & - & InputDimError \\
-deleteData & id:string & - & IdNotFound\\
-updateData & id:string, value: FormData & - & InputDimError \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-dbConnection : Database connection point.
-
-\subsubsection{Environment Variables}
-
-N/A
-
-\subsubsection{Assumptions}
-
-Database containing the training data for the Diagnosis prediction module exists.
-
-\subsubsection{Access Routine Semantics}
-
-\noindent addData(id:string, record: FormData):
-\begin{itemize}
-\item transition: Add record to database.
-\item output: N/A
-\item exception: InputDimError - Request data contained wrong typing or incorrect format attributes.
-\end{itemize}
-
-\noindent deleteData(id:string):
-\begin{itemize}
-\item transition: Delete record from the record with the attitude.
-\item output: N/A
-\item exception: IdNotFound - Provided Id does not exist.
-\end{itemize}
-
-\noindent updateData(id:string, record: FormData):
-\begin{itemize}
-\item transition: Update record in database based on key.
-\item output: N/A
-\item exception: InputDimError - Request data contained wrong typing or incorrect format attributes.
-\end{itemize}
-
-\subsubsection{Local Functions}
-
-N/A
-
-\newpage
-
-\section{MIS of Medicine Data Module} \label{med_data}
-\subsection{Module}
-
-MedData
-
-\subsection{Uses}
-\begin{itemize}
-  \item Database of Medicine Prediction Data (features -> labels)
-\end{itemize}
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-- Trained Model
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-addData & id:string, value: FormData & - &  InputDimError \\
-deleteData & id:string & - & IdNotFound\\
-updateData & id:string, value: FormData & - & InputDimError \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-dbConnection : Database connection point.
-
-\subsubsection{Environment Variables}
-
-N/A
-
-\subsubsection{Assumptions}
-
-Database containing the training data for medicine prediction module exists.
-
-\subsubsection{Access Routine Semantics}
-
-\noindent addData(id:string, record: FormData):
-\begin{itemize}
-\item transition: Add record to database.
-\item output: N/A
-\item exception: InputDimError - Request data contained wrong typing or incorrect format attributes.
-\end{itemize}
-
-\noindent deleteData(id:string):
-\begin{itemize}
-\item transition: Delete record from the record with the attitude.
-\item output: N/A
-\item exception: IdNotFound - Provided Id does not exist.
-\end{itemize}
-
-\noindent updateData(id:string, record: FormData):
-\begin{itemize}
-\item transition: Update record in database based on key.
-\item output: N/A
-\item exception: InputDimError - Request data contained wrong typing or incorrect format attributes.
+\item exception: InvalidInputError - The input data is incomplete or invalid.
 \end{itemize}
 
 \subsubsection{Local Functions}

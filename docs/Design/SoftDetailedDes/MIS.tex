@@ -142,13 +142,13 @@ The following table is taken directly from the Module Guide document for this pr
 {Hardware-Hiding} & None \\
 \midrule
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding} & User Authentication Module\\
-& Broker Module\\
 & Administrator View Module\\
 & Patient View Module\\
-& Administrator Model Module\\
-& Patient Model Module\\
+& Broker Module\\
 \midrule
-\multirow{3}{0.3\textwidth}{Software Decision} & Transcription Module\\
+\multirow{3}{0.3\textwidth}{Software Decision} & Administrator Model Module\\
+& Patient Model Module\\
+& Transcription Module\\
 & Classification Module\\
 & Diagnosis Prediction Module\\
 & Medicine Prediction Module\\
@@ -166,19 +166,15 @@ The following table is taken directly from the Module Guide document for this pr
 \section{MIS of User Authentication Module} \label{Module_UserAuth}
 
 \subsection{Module}
-
-User Authentication
+UserAuthentication
 
 \subsection{Uses}
-
-Provides secure login and session management. It validates user credentials and enforces multi-factor authentication (MFA).
+Auth\\
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-\begin{itemize}
-    \item \texttt{MAX\_LOGIN\_ATTEMPTS}: Maximum allowed login attempts before locking the account.
-\end{itemize}
+N/A
 
 \subsubsection{Exported Access Programs}
 
@@ -187,9 +183,7 @@ Provides secure login and session management. It validates user credentials and 
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\texttt{login} & Username, Password & Session Token & Invalid credentials \\
-\texttt{logout} & Session Token & Boolean & Invalid/expired session \\
-\texttt{resetPassword} & Email Address & Boolean & Invalid email address \\
+Auth & - & React.component &  RenderError\\
 \hline
 \end{tabular}
 \end{center}
@@ -197,49 +191,177 @@ Provides secure login and session management. It validates user credentials and 
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
-\texttt{activeUsers}: Tracks currently logged-in users.
+isUserAdmin: Boolean
 
 \subsubsection{Environment Variables}
-
-\begin{itemize}
-    \item Database for storing user credentials and session data.
-\end{itemize}
+N/A
 
 \subsubsection{Assumptions}
-
-\begin{itemize}
-    \item Passwords follow defined complexity rules.
-\end{itemize}
+N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \texttt{login()}:
+\noindent Auth():
 \begin{itemize}
-    \item \textbf{Transition:} Validates credentials and generates a session token.
-    \item \textbf{Output:} Active session token.
-    \item \textbf{Exception:} Invalid credentials.
-\end{itemize}
-
-\noindent \texttt{resetPassword()}:
-\begin{itemize}
-    \item \textbf{Transition:} Sends a reset link to the provided email.
-    \item \textbf{Output:} Confirmation status.
-    \item \textbf{Exception:} Invalid email address.
+\item transition: Renders the login page on the screen.
+\item output: N/A
+\item exception: RenderError — Thrown if the component fails to render.
 \end{itemize}
 
 \subsubsection{Local Functions}
 
-\texttt{encryptPassword(password: String) -> String}: Encrypts a plain-text password.
+\noindent login():
+\begin{itemize}
+\item transition: Change the state variable 'isUserAdmin' to true if the user is an adminstrator and false if the user is not an adminstrator.
+\item output: N/A
+\item exception: N/A
+\end{itemize}
+
+\noindent ResetPassowrd():
+\begin{itemize}
+\item transition: Sends a reset link to the provided email and rendes the login page.
+\item output: N/A
+\item exception: InvalidInpuError - Thrown if user input a invalid or unregistered email.
+\end{itemize}
 
 \newpage
 
 
+\section{MIS of Administrator View Module} \label{Module_ AdminView}
+
+\subsection{Module}
+Administrator
+
+\subsection{Uses}
+Broker Module \\
+React\\
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{2cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+Administrator & - & React.component &  RenderError\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+isAuthenticated: Boolean
+
+\subsubsection{Environment Variables}
+Screen interface\\
+Keyboard\\
+
+\subsubsection{Assumptions}
+User has a functional screen and keyboard.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent Administrator():
+\begin{itemize}
+\item transition: Renders a react component of the administrator view page.
+\item output: N/A
+\item exception: RenderError — Thrown if the component fails to render.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent handleAdminAccount(id: string, record: FormData, requestType: string):
+\begin{itemize}
+\item transition: Sends an API request to the broker Module to process an add, delete, or update operation in the Administrator Database.
+\item output: N/A
+\item exception: InvalidInputError - The input data is incomplete or invalid. 
+\end{itemize} 
+
+\noindent validateInput(InputField: string):
+\begin{itemize}
+\item transition: N/A
+\item output: Displays a success or error message outlining the action performed.
+\item exception: InvalidInputError - The input data is incomplete or invalid.
+\end{itemize}
+
+\newpage
+
+\section{MIS of Patient View Module} \label{Module_PatientView}
+
+\subsection{Module}
+Patient
+
+\subsection{Uses}
+Broker Module \\
+React\\
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+  \begin{tabular}{p{3cm} p{2cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+Patient & - & React.component & RenderError \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+isAuthenticated: Boolean
+
+\subsubsection{Environment Variables}
+Screen interface\\
+Keyboard\\
+Microphone\\
+
+\subsubsection{Assumptions}
+User has a functional screen, keyboard, and microphone.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent Patient():
+\begin{itemize}
+\item transition: Renders a react component of the patient view page.
+\item output: N/A
+\item exception: RenderError — Thrown if the component fails to render.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent handlePatientAccount(id: string, record: FormData, requestType: string):
+\begin{itemize}
+\item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Patient Database.
+\item output: N/A
+\item exception: InvalidInputError - The input data is incomplete or invalid.  
+\end{itemize}
+
+\noindent validateInput(InputField: string):
+\begin{itemize}
+\item transition: N/A
+\item output: Displays a success/error message outlining the action performed.
+\item exception: InvalidInputError - The input data is incomplete or invalid.
+\end{itemize}
+
+\newpage
+
 \section{MIS of Broker Module } \label{Module_Broker} Pranav
 
 \subsection{Module}
-
-OAuth API Module
+Broker
 
 \subsection{Uses}
 
@@ -308,153 +430,6 @@ This module facilitates secure authentication and authorization processes. Imple
 \texttt{hashSecret(secret: String) -> String}: Hashes the provided client secret for secure storage.
 
 \newpage
-
-
-\section{MIS of Administrator View Module} \label{administrator_view_module}
-
-\subsection{Module}
-Administrator
-
-\subsection{Uses}
-Broker Module \\
-React\\
-Web APIs\\
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-N/A
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-Administrator & - & React.component & - \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-isAuthenticated: Boolean
-
-\subsubsection{Environment Variables}
-Screen interface\\
-Keyboard\\
-
-\subsubsection{Assumptions}
-User has a functional screen and keyboard.
-
-\subsubsection{Access Routine Semantics}
-
-\noindent Administrator():
-\begin{itemize}
-\item transition: N/A
-\item output: renders a react component of the administrator view page
-\item exception: RenderError — thrown if the component fails to render.
-\end{itemize}
-
-% \wss{A module without environment variables or state variables is unlikely to
-%   have a state transition.  In this case a state transition can only occur if
-%   the module is changing the state of another module.}
-
-% \wss{Modules rarely have both a transition and an output.  In most cases you
-%   will have one or the other.}
-
-\subsubsection{Local Functions}
-% \wss{As appropriate} \wss{These functions are for the purpose of specification.
-%   They are not necessarily something that is going to be implemented
-%   explicitly.  Even if they are implemented, they are not exported; they only
-%   have local scope.}
-
-\noindent handleAdminAccount(id: string, record: FormData, requestType: string):
-\begin{itemize}
-\item transition: Sends an API request to the broker Module to process an add, delete, or update operation in the Administrator Database.
-\item output: N/A
-\item exception: InvalidInputError - The input data is incomplete or invalid. 
-\end{itemize} 
-
-\noindent validateInput(InputField: string, integer, etc.):
-\begin{itemize}
-\item transition: N/A
-\item output: Displays a success or error message outlining the action performed.
-\item exception: InvalidInputError - The input data is incomplete or invalid.
-\end{itemize}
-
-\newpage
-
-\section{MIS of Patient View Module} \label{Patient_View_Module}
-
-\subsection{Module}
-PatientView
-
-\subsection{Uses}
-Broker Module \\
-React\\
-Web APIs\\
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-N/A
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-Patient & - & React.component & - \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-isAuthenticated: Boolean
-
-\subsubsection{Environment Variables}
-Screen interface\\
-Keyboard\\
-Microphone\\
-
-\subsubsection{Assumptions}
-User has a functional screen, keyboard, and microphone.
-
-\subsubsection{Access Routine Semantics}
-
-\noindent Patient():
-\begin{itemize}
-\item transition: N/A
-\item output: renders a react component of the patient view page.
-\item exception: RenderError — thrown if the component fails to render.
-\end{itemize}
-
-\subsubsection{Local Functions}
-
-\noindent handlePatientAccount(id: string, record: FormData, requestType: string):
-\begin{itemize}
-\item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Patient Database.
-\item output: N/A
-\item exception: InvalidInputError - The input data is incomplete or invalid.  
-\end{itemize}
-
-\noindent validateInput(InputField: string, integer, etc.):
-\begin{itemize}
-\item transition: N/A
-\item output: Displays a success/error message outlining the action performed.
-\item exception: InvalidInputError - The input data is incomplete or invalid.
-\end{itemize}
-
-\newpage
-~\newpage
-
 
   
 \section{MIS of Transcription Module} \label{trans_mod}
@@ -757,10 +732,10 @@ There will be no environment variables that this module will interact with.
 
 \newpage
 
-\section{MIS of Administrator Account Management Module} \label{Admin_Account_Manag_Module}
+\section{MIS of Administrator Account Management Module} \label{Module_AdminAccount}
 
 \subsection{Module}
-Administrator Account Management
+AdministratorAccountManagement
 
 \subsection{Uses}
 Broker Module\\
@@ -773,7 +748,7 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{4cm} p{4.5cm} p{1cm} p{2.5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -824,10 +799,10 @@ N/A
 
 \newpage
 
-\section{MIS of Patient Account Management Module} \label{Patient_Account_Manag_Module}
+\section{MIS of Patient Account Management Module} \label{Module_PatientAccountManag}
 
 \subsection{Module}
-Patient Account Management
+PatientAccountManagement
 
 \subsection{Uses}
 Broker Module\\
@@ -840,7 +815,7 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{4cm} p{4.5cm} p{1cm} p{2.5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline

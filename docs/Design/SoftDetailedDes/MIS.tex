@@ -169,12 +169,12 @@ The following table is taken directly from the Module Guide document for this pr
 UserAuthentication
 
 \subsection{Uses}
-Auth\\
+Firebase Auth\\
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-N/A
+isAuthenticated: Boolean
 
 \subsubsection{Exported Access Programs}
 
@@ -212,14 +212,14 @@ N/A
 
 \noindent login():
 \begin{itemize}
-\item transition: Change the state variable 'isUserAdmin' to true if the user is an adminstrator and false if the user is not an adminstrator.
+\item transition: Renders adminstrator view page if user is administrator otherwise renders patient view page. 
 \item output: N/A
-\item exception: N/A
+\item exception: InvalidCredentials - Thrown if the user enters invalid credentials.
 \end{itemize}
 
 \noindent ResetPassowrd():
 \begin{itemize}
-\item transition: Sends a reset link to the provided email and rendes the login page.
+\item transition: Sends a reset link to the provided email and renders the login page.
 \item output: N/A
 \item exception: InvalidInpuError - Thrown if user input a invalid or unregistered email.
 \end{itemize}
@@ -234,7 +234,7 @@ Administrator
 
 \subsection{Uses}
 Broker Module \\
-React\\
+ReactJS\\
 
 \subsection{Syntax}
 
@@ -261,9 +261,10 @@ isAuthenticated: Boolean
 \subsubsection{Environment Variables}
 Screen interface\\
 Keyboard\\
+Microphone
 
 \subsubsection{Assumptions}
-User has a functional screen and keyboard.
+User has a functional screen, keyboard, and Microphone.
 
 \subsubsection{Access Routine Semantics}
 
@@ -280,13 +281,13 @@ User has a functional screen and keyboard.
 \begin{itemize}
 \item transition: Sends an API request to the broker Module to process an add, delete, or update operation in the Administrator Database.
 \item output: N/A
-\item exception: InvalidInputError - The input data is incomplete or invalid. 
+\item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
 \end{itemize} 
 
 \noindent validateInput(InputField: string):
 \begin{itemize}
-\item transition: N/A
-\item output: Displays a success or error message outlining the action performed.
+\item transition: Renders a success or error message outlining the action performed.
+\item output: N/A
 \item exception: InvalidInputError - The input data is incomplete or invalid.
 \end{itemize}
 
@@ -299,7 +300,7 @@ Patient
 
 \subsection{Uses}
 Broker Module \\
-React\\
+ReactJS\\
 
 \subsection{Syntax}
 
@@ -346,13 +347,13 @@ User has a functional screen, keyboard, and microphone.
 \begin{itemize}
 \item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Patient Database.
 \item output: N/A
-\item exception: InvalidInputError - The input data is incomplete or invalid.  
+\item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
 \end{itemize}
 
 \noindent validateInput(InputField: string):
 \begin{itemize}
-\item transition: N/A
-\item output: Displays a success/error message outlining the action performed.
+\item transition: Renders a success/error message outlining the action performed.
+\item output: N/A
 \item exception: InvalidInputError - The input data is incomplete or invalid.
 \end{itemize}
 

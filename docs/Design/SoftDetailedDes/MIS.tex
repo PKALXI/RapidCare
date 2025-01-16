@@ -457,7 +457,7 @@ User has a functional screen, keyboard, and microphone.
 
 
   
-\section{MIS of Transcription Module} \label{Transription_Module}
+\section{MIS of Transcription Module} \label{Transcription_Module}
 
 \subsection{Module}
 TranscriptionModule
@@ -479,7 +479,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Transcription & Audio: Bytes & TranscribedText: String & InvalidInputError & \\ 
+Transcription & Audio: bytes & TranscribedText: string & InvalidInputError & \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -504,11 +504,11 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent TranscriptionModulemod(AudioData: Bytes): 
+\noindent TranscriptionModule(AudioData: bytes): 
 \begin{itemize}
   \item transition: N/A
-  \item output: Written text transcribed from the audio stream. 
-  \item exception: InvalidInputError - If the input audio could not be converted to bytes.   
+  \item output: Transcribed text transcribed from the audio bytes. 
+  \item exception: InvalidInputError - If the bytes could not be converted to text.   
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -541,7 +541,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Classification & TranscribedText: String & ClassifiedText: String & - & \\
+Classification & TranscribedText: string & ClassifiedText: string & - & \\
 \hline
 \end{tabular}
 \end{center}
@@ -564,7 +564,7 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ClassifyModule(TranscribedText: String):
+\noindent ClassifyModule(TranscribedText: string):
 \begin{itemize}
 \item transition: N/A
 \item output: Classified text generated for report generation. 

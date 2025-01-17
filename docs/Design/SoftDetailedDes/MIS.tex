@@ -648,7 +648,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Transcription & Audio: bytes & TranscribedText: string & InvalidInputError \\ 
+Transcription & Audio: byte[] & TranscribedText: String & InvalidInputError \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -661,19 +661,15 @@ N/A
 
 \subsubsection{Environment Variables}
 
-\begin{itemize}
-  \item Microphone: It needs to access the microphone so that the conversation between the patient and healthcare professional is recorded.
-\end{itemize}
+N/A
 
 \subsubsection{Assumptions}
 
-\begin{itemize}
-  \item It is assumed that the microphone works correctly in the system.
-\end{itemize}
+N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent trans\_mod(AudioData: Stream)(): 
+\noindent transMod(audioData: byte[]): 
 \begin{itemize}
   \item transition: N/A
   \item output: Transcribed text transcribed from the audio bytes. 
@@ -710,7 +706,7 @@ N/A
   \hline
   \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
   \hline
-  ClassifyMod & Transcribed Text & Classified Text & ClassificationError \\ 
+  Classification & TranscribedText: String & ClassifiedText: String & - & \\
   \hline
   \end{tabular}
   \end{center}
@@ -733,7 +729,7 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ClassifyMod(transcribed\_text: text):
+\noindent ClassifyModule(TranscribedText: String):
 \begin{itemize}
 \item transition: N/A
 \item output: Classified text generated for report generation. 

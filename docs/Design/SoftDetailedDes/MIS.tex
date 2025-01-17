@@ -361,6 +361,7 @@ User has a functional screen, keyboard, and microphone.
 
 \section{MIS of Broker Module } \label{Module_Broker}
 
+
 \subsection{Module}
 Broker
 
@@ -463,15 +464,15 @@ N/A
 
 \newpage
 
-  
-\section{MIS of Transcription Module} \label{trans_mod}
+\section{MIS of Administrator Model Module } \label{Admin_Model_Module}
 
 \subsection{Module}
-TransMod
+
+AdminModel
 
 \subsection{Uses}
 
-This module does not use any other modules. It uses audio data as the input.
+N/A
 
 \subsection{Syntax}
 
@@ -482,14 +483,169 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-  \begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-  \hline
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-  \hline
-  trans\_mod & audio data stream & written transcribed text & UnclearAudio \\ 
-  \hline
-  \end{tabular}
-  \end{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3.5cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+AdminModel & - & - & - & \\ 
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+name: String
+age: int
+location: String
+profession: String
+
+\subsubsection{Environment Variables}
+
+N/A
+
+\subsubsection{Assumptions}
+
+N/A
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \texttt{getter()}: This is the boiler state of this variable where it will get a certain start and return it.
+\begin{itemize}
+    \item \textbf{Transition:} N/A
+    \item \textbf{Output:} The output depends on the data type of the parameter. It returns the current value of the requested data element.
+    \item \textbf{Exception:} N/A
+\end{itemize}
+
+\noindent \texttt{setter()}: This is the boiler state of this variable where it will get a certain start and return it.
+\begin{itemize}
+    \item \textbf{Transition:} Updates the internal state of the data model, either by adding or updating data. This also changes certain state variables.
+    \item \textbf{Output:} N/A
+    \item \textbf{Exception:} N/A
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent init(inputField: String):
+\begin{itemize}
+\item transition: N/A
+\item output: Necessary data structures and connections are made to manage and access data.
+\item exception: N/A
+\end{itemize}
+
+\newpage
+
+\section{MIS of Patient Model Module } \label{Patient_Model_Module}
+
+\subsection{Module}
+
+PatientModule
+
+\subsection{Uses}
+
+N/A
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3.5cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+AdminModel & - & - & - & \\ 
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+patient_name : String
+date_of_birth : date
+patient_age : int
+gender : String
+home_address : String
+email_address : String
+contact_number : String
+past_medical_history : String
+allergies(if any) : String
+family_history : String
+current_medications : String
+medical_record_number : String
+insurance_number : String
+
+\subsubsection{Environment Variables}
+
+N/A
+
+\subsubsection{Assumptions}
+
+N/A
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \texttt{getter()}: This is the boiler state of this variable where it will get a certain start and return it.
+\begin{itemize}
+    \item \textbf{Transition:} N/A
+    \item \textbf{Output:} The output depends on the data type of the parameter. It returns the current value of the requested data element.
+    \item \textbf{Exception:} N/A
+\end{itemize}
+
+\noindent \texttt{setter()}: This is the boiler state of this variable where it will get a certain start and return it.
+\begin{itemize}
+    \item \textbf{Transition:} Updates the internal state of the data model, either by adding or updating data. This also changes certain state variables
+    \item \textbf{Output:} N/A
+    \item \textbf{Exception:} N/A
+\end{itemize}
+
+\noindent init(inputField: String):
+\begin{itemize}
+\item transition: N/A
+\item output: Necessary data structures and connections are made to manage and access data.
+\item exception: N/A
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+N/A
+
+\newpage
+
+  
+\section{MIS of Transcription Module} \label{Transcription_Module}
+
+\subsection{Module}
+TranscriptionModule
+
+\subsection{Uses}
+
+N/A
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+Transcription & Audio: byte[] & TranscribedText: String & InvalidInputError \\ 
+\hline
+\end{tabular}
+\end{center}
 
 \subsection{Semantics}
 
@@ -499,29 +655,19 @@ N/A
 
 \subsubsection{Environment Variables}
 
-\begin{itemize}
-  \item Recording Tool: It needs access to the recording tool so that the conversation between the patient and healthcare professional is recorded.
-\end{itemize}
+N/A
 
 \subsubsection{Assumptions}
 
-\begin{itemize}
-  \item It is assumed that the input audio data is stable and will be provided in streams.
-  \item It is assumed that the medical terminologies used in the conversation is accurate.
-  \item There is no background noise.
-\end{itemize}
+N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent trans\_mod(AudioData: Stream)(): 
+\noindent transMod(audioData: byte[]): 
 \begin{itemize}
-\item transition:
-\begin{itemize}
-  \item Input audio data is provided in continuous streams in real-time.
-  \item The streams are sent to the speech-recognition engine for transcription.
-\end{itemize} 
-\item output: Written text transcribed from the audio stream. 
-\item exception: UnclearAudio - If there is any issue with the audio, for example: low volume or words not clear.  
+  \item transition: N/A
+  \item output: Transcribed text transcribed from the audio bytes. 
+  \item exception: InvalidInputError - If the bytes could not be converted to text. 
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -531,15 +677,15 @@ N/A
 \newpage
 ~\newpage
   
-\section{MIS of Classification Module} \label{Classify} 
+\section{MIS of Classification Module} \label{Classification_Module} 
 
 \subsection{Module}
 
-ClassifyMod
+ClassificationModule
 
 \subsection{Uses}
 
-It uses transcribed text from Transcription Module.
+N/A
 
 \subsection{Syntax}
 
@@ -554,7 +700,7 @@ N/A
   \hline
   \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
   \hline
-  ClassifyMod & Transcribed Text & Classified Text & ClassificationError \\ 
+  Classification & TranscribedText: String & ClassifiedText: String & - & \\
   \hline
   \end{tabular}
   \end{center}
@@ -572,20 +718,16 @@ N/A
 \subsubsection{Assumptions}
 
 \begin{itemize}
-  \item It is assumed that the text is transcribed accurately by the Transcription Module for correct classification.
+  \item It is assumed that the transcribed text is in English language.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ClassifyMod(transcribed\_text: text):
+\noindent ClassifyModule(TranscribedText: String):
 \begin{itemize}
-\item transition:
-\begin{itemize}
-  \item Uses the classification model or rules to categorize the text or extract relevant information.
-  \item Structures the output as classified text containing extracted information.
-\end{itemize} 
+\item transition: N/A
 \item output: Classified text generated for report generation. 
-\item exception: ClassificationError - If the module fails to classify text accurately or encounters an error. 
+\item exception: N/A 
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -899,20 +1041,32 @@ graduate attribute of Problem Analysis and Design.
 \input{../../Reflection.tex}
 
 \begin{enumerate}
-  \item What went well while writing this deliverable? 
-  \item What pain points did you experience during this deliverable, and how
-    did you resolve them?
+  \item What went well while writing this deliverable?
+  This document has let us build more on the semantics and uses of each module by module decomposition. While going through the outline of this document, we were able to decompose semantics into different variables as well as assumptions that each module will have.
+
+  \item What pain points did you experience during this deliverable, and how did you resolve them?
+  Every team project has challenges that must be solved in order to move forward successfully. We had to create a donation plan to gurantee smooth operations. To ensure that all of our plans are in line with the system,
+  we need to plan user-hierarchy diagram that complement our project. Along with this, we also needed to decide how the modules will be decomposed in the best way possible. In order to contribute to the document and evaluate each other’s work as effectively as possible, we also needed to set up a schedule. 
+
   \item Which of your design decisions stemmed from speaking to your client(s)
   or a proxy (e.g. your peers, stakeholders, potential users)? For those that
   were not, why, and where did they come from?
+  After having conversation with our client, we created data model modules for both administrator and patient. In order to create state variables for both administrator and patient profile, our supervisor gave us a run down of the general attributes from which we selected the ones that are relevant to our system. Rest of the decision decisions came up by deciding as a team and were not stemmed from our client.  
+
   \item While creating the design doc, what parts of your other documents (e.g.
   requirements, hazard analysis, etc), it any, needed to be changed, and why?
+  While creating this design document, we had to edit Software Requirement Specification (SRS) document to modify CI/CD implementation strategy from Jankins to GitHub actions. This is because unlike Jankins, GitHub Actions offer excellent scalability and reliability for our CI/CD pipelines. It also offeres some security features such that code scanning and vulnerability alerts. We also updated the Hazard Analysis documentation for modifying the data layer to include a medicine prediction database and diagnosis prediction database for the system to predict treatment based on the symptoms.  
+
   \item What are the limitations of your solution?  Put another way, given
   unlimited resources, what could you do to make the project better? (LO\_ProbSolutions)
+  One of the limitations of this project is that if not trained properly, data model may provide incorrect prediction suggestions. If given unlimited resources, we would invest in some of the experts to prioritize easy interoperability and data exchange through connection with other healthcare systems. 
+
   \item Give a brief overview of other design solutions you considered.  What
   are the benefits and tradeoffs of those other designs compared with the chosen
   design?  From all the potential options, why did you select the documented design?
   (LO\_Explores)
+  An additional design decision that we considered was incorporating a chatbot tool within our existing system that would help the healthcare professional to pull up a patient's information. It's beneficial as it will ease the healthcare professional's work and save time. However, due to time constraints and complexity, this design decision was dropped.  
+
 \end{enumerate}
 
 

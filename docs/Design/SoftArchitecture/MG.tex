@@ -215,14 +215,14 @@ This section provides an overview of the module design. Modules are summarized i
 & \mref{mAMM}\\
 & \mref{mPMM}\\
 & \mref{mBM}\\
+& \mref{mAAMM}\\
+& \mref{mPAMM}\\
 \midrule
 
 \multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mTM}\\
 & \mref{mCM}\\
 & \mref{mDPM}\\
 & \mref{mMPM}\\
-& \mref{mAAMM}\\
-& \mref{mPAMM}\\
 \bottomrule
 
 \end{tabular}
@@ -325,6 +325,24 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Library
 \end{description}
 
+\subsubsection{Administrator Account Management Module (\mref{mAAMM})}
+
+\begin{description}
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks and healthcare professionals.
+\item[Implemented By:]MongoDB, Spring
+\item[Type of Module:]Record
+\end{description}
+
+\subsubsection{Patient Account Management Module (\mref{mPAMM})}
+
+\begin{description}
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to patient records.
+\item[Implemented By:]MongoDB, Spring
+\item[Type of Module:]Record
+\end{description}
+
 
 \subsection{Software Decision Module}
 
@@ -372,24 +390,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Services:] Predicts a set of applicable medicines for a patient based on patient characteristics, symptoms, and past medical history.
 \item[Implemented By:] Python
 \item[Type of Module:] Abstract object
-\end{description}
-
-\subsubsection{Administrator Account Management Module (\mref{mAAMM})}
-
-\begin{description}
-\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks and healthcare professionals.
-\item[Implemented By:]MongoDB, Spring
-\item[Type of Module:]Record
-\end{description}
-
-\subsubsection{Patient Account Management Module (\mref{mPAMM})}
-
-\begin{description}
-\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-\item[Services:]Manages secure storage, retrieval, and updates of data related to patient records.
-\item[Implemented By:]MongoDB, Spring
-\item[Type of Module:]Record
 \end{description}
 
 

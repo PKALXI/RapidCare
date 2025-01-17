@@ -360,21 +360,13 @@ User has a functional screen, keyboard, and microphone.
 \newpage
 
 \section{MIS of Broker Module } \label{Module_Broker}
-\section{MIS of Broker Module } \label{Module_Broker}
+
 
 \subsection{Module}
 Broker
 
 \subsection{Uses}
 
-\begin{itemize}
-  \item Transcription Module
-  \item Classification Module
-  \item Diagnosis Prediction Module
-  \item Medicine Prediction Module
-  \item Administrator Account Management Module
-  \item Patient Account Management Module
-\end{itemize}
 \begin{itemize}
   \item Transcription Module
   \item Classification Module
@@ -472,7 +464,7 @@ N/A
 
 \newpage
 
-\section{MIS of Administrator Model Module } \label{Admin_Model_Module} Gurleen
+\section{MIS of Administrator Model Module } \label{Admin_Model_Module}
 
 \subsection{Module}
 
@@ -504,10 +496,10 @@ AdminModel & - & - & - & \\
 
 \subsubsection{State Variables}
 
-professional_name: string
-professional_age: integer
-Location: string
-Profession: string
+name: String
+age: int
+location: String
+profession: String
 
 \subsubsection{Environment Variables}
 
@@ -535,7 +527,7 @@ N/A
 
 \subsubsection{Local Functions}
 
-\noindent init(inputField: string):
+\noindent init(inputField: String):
 \begin{itemize}
 \item transition: N/A
 \item output: Necessary data structures and connections are made to manage and access data.
@@ -544,7 +536,7 @@ N/A
 
 \newpage
 
-\section{MIS of Patient Model Module } \label{Patient_Model_Module} Gurleen
+\section{MIS of Patient Model Module } \label{Patient_Model_Module}
 
 \subsection{Module}
 
@@ -576,19 +568,19 @@ AdminModel & - & - & - & \\
 
 \subsubsection{State Variables}
 
-patient_name = string
-date_of_birth = date
-patient_age = integer
-gender = string
-home_address = string
-email_address = string
-contact_number = string
-past_medical_history = string
-allergies(if any) = string
-family_history = string
-current_medications = string
-medical_record_number = string
-insurance_number = string
+patient_name : String
+date_of_birth : date
+patient_age : int
+gender : String
+home_address : String
+email_address : String
+contact_number : String
+past_medical_history : String
+allergies(if any) : String
+family_history : String
+current_medications : String
+medical_record_number : String
+insurance_number : String
 
 \subsubsection{Environment Variables}
 
@@ -614,14 +606,16 @@ N/A
     \item \textbf{Exception:} N/A
 \end{itemize}
 
-\subsubsection{Local Functions}
-
-\noindent init(inputField: string):
+\noindent init(inputField: String):
 \begin{itemize}
 \item transition: N/A
 \item output: Necessary data structures and connections are made to manage and access data.
 \item exception: N/A
 \end{itemize}
+
+\subsubsection{Local Functions}
+
+N/A
 
 \newpage
 

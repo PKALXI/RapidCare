@@ -428,12 +428,7 @@ This module facilitates secure authentication and authorization processes. Imple
 
 \subsubsection{Local Functions}
 
-\noindent init(InputField: string):
-\begin{itemize}
-\item transition: N/A
-\item output: Necessary data structures and connections are made to manage and access data.
-\item exception: N/A
-\end{itemize}
+\texttt{hashSecret(secret: String) -> String}: Hashes the provided client secret for secure storage.
 
 \newpage
 
@@ -497,19 +492,24 @@ N/A
 
 \subsubsection{Local Functions}
 
-
+\noindent init(InputField: string):
+\begin{itemize}
+\item transition: N/A
+\item output: Necessary data structures and connections are made to manage and access data.
+\item exception: N/A
+\end{itemize}
 
 \newpage
 
   
-\section{MIS of Transcription Module} \label{Transcription_Module}
+\section{MIS of Transcription Module} \label{trans_mod}
 
 \subsection{Module}
-TranscriptionModule
+TransMod
 
 \subsection{Uses}
 
-N/A
+This module does not use any other modules. It uses audio data as the input.
 
 \subsection{Syntax}
 
@@ -524,7 +524,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Transcription & Audio: bytes & TranscribedText: string & InvalidInputError & \\ 
+trans_mod & audio data stream & written transcribed text & UnclearAudio & \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -538,22 +538,28 @@ N/A
 \subsubsection{Environment Variables}
 
 \begin{itemize}
-  \item Microphone: It needs to access the microphone so that the conversation between the patient and healthcare professional is recorded.
+  \item Recording Tool: It needs access to the recording tool so that the conversation between the patient and healthcare professional is recorded.
 \end{itemize}
 
 \subsubsection{Assumptions}
 
 \begin{itemize}
-  \item It is assumed that the microphone works correctly in the system.
+  \item It is assumed that the input audio data is stable and will be provided in streams.
+  \item It is assumed that the medical terminologies used in the conversation is accurate.
+  \item There is no background noise.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent TranscriptionModule(AudioData: bytes): 
+\noindent trans_mod(AudioData: Stream)(): 
 \begin{itemize}
-  \item transition: N/A
-  \item output: Transcribed text transcribed from the audio bytes. 
-  \item exception: InvalidInputError - If the bytes could not be converted to text.   
+\item transition:
+\begin{itemize}
+  \item Input audio data is provided in continuous streams in real-time.
+  \item The streams are sent to the speech-recognition engine for transcription.
+\end{itemize} 
+\item output: Written text transcribed from the audio stream. 
+\item exception: UnclearAudio - If there is any issue with the audio, for example: low volume or words not clear.  
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -563,15 +569,15 @@ N/A
 \newpage
 ~\newpage
   
-\section{MIS of Classification Module} \label{Classification_Module} 
+\section{MIS of Classification Module} \label{Classify} 
 
 \subsection{Module}
 
-ClassificationModule
+ClassifyMod
 
 \subsection{Uses}
 
-N/A
+It uses transcribed text from Transcription Module.
 
 \subsection{Syntax}
 
@@ -586,7 +592,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Classification & TranscribedText: string & ClassifiedText: string & - & \\
+ClassifyMod & Transcribed Text & Classified Text & ClassificationError & \\
 \hline
 \end{tabular}
 \end{center}
@@ -604,16 +610,20 @@ N/A
 \subsubsection{Assumptions}
 
 \begin{itemize}
-  \item It is assumed that the transcribed text is in English language.
+  \item It is assumed that the text is transcribed accurately by the Transcription Module for correct classification.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ClassifyModule(TranscribedText: string):
+\noindent ClassifyMod(transcribed_text: text)():
 \begin{itemize}
-\item transition: N/A
+\item transition:
+\begin{itemize}
+  \item Uses the classification model or rules to categorize the text or extract relevant information.
+  \item Structures the output as classified text containing extracted information.
+\end{itemize} 
 \item output: Classified text generated for report generation. 
-\item exception: N/A  
+\item exception: ClassificationError - If the module fails to classify text accurately or encounters an error. 
 \end{itemize}
 
 \subsubsection{Local Functions}

@@ -277,14 +277,14 @@ User has a functional screen, keyboard, and Microphone.
 
 \subsubsection{Local Functions}
 
-\noindent handleAdminAccount(id: string, record: FormData, requestType: string):
+\noindent handleAdminAccount(id: String, record: FormData, requestType: String):
 \begin{itemize}
 \item transition: Sends an API request to the broker Module to process an add, delete, or update operation in the Administrator Database.
 \item output: N/A
 \item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
 \end{itemize} 
 
-\noindent validateInput(InputField: string):
+\noindent validateInput(InputField: String):
 \begin{itemize}
 \item transition: Renders a success or error message outlining the action performed.
 \item output: N/A
@@ -343,14 +343,14 @@ User has a functional screen, keyboard, and microphone.
 
 \subsubsection{Local Functions}
 
-\noindent handlePatientAccount(id: string, record: FormData, requestType: string):
+\noindent handlePatientAccount(id: String, record: FormData, requestType: String):
 \begin{itemize}
 \item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Patient Database.
 \item output: N/A
 \item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
 \end{itemize}
 
-\noindent validateInput(InputField: string):
+\noindent validateInput(InputField: String):
 \begin{itemize}
 \item transition: Renders a success/error message outlining the action performed.
 \item output: N/A
@@ -511,18 +511,18 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \texttt{getter()}: This is the boiler state of this variable where it will get a certain start and return it.
+\noindent getter(): This is the boiler state of this variable where it will get a certain start and return it.
 \begin{itemize}
-    \item \textbf{Transition:} N/A
-    \item \textbf{Output:} The output depends on the data type of the parameter. It returns the current value of the requested data element.
-    \item \textbf{Exception:} N/A
+    \item transition: N/A
+    \item output: The output depends on the data type of the parameter. It returns the current value of the requested data element.
+    \item exception: N/A
 \end{itemize}
 
-\noindent \texttt{setter()}: This is the boiler state of this variable where it will get a certain start and return it.
+\noindent setter(): This is the boiler state of this variable where it will get a certain start and return it.
 \begin{itemize}
-    \item \textbf{Transition:} Updates the internal state of the data model, either by adding or updating data. This also changes certain state variables.
-    \item \textbf{Output:} N/A
-    \item \textbf{Exception:} N/A
+    \item transition: Updates the internal state of the data model, either by adding or updating data. This also changes certain state variables.
+    \item output: N/A
+    \item exception: N/A
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -568,19 +568,17 @@ AdminModel & - & - & - & \\
 
 \subsubsection{State Variables}
 
-patient_name : String
-date_of_birth : date
-patient_age : int
+patientName : String
+dateOfBirth : date
+age : int
 gender : String
-home_address : String
-email_address : String
-contact_number : String
-past_medical_history : String
-allergies(if any) : String
-family_history : String
-current_medications : String
-medical_record_number : String
-insurance_number : String
+address : String
+email : String
+contactNumber : String
+allergies : String
+medicalHistory : String
+medications : String
+insuranceInfo : String
 
 \subsubsection{Environment Variables}
 
@@ -592,18 +590,18 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \texttt{getter()}: This is the boiler state of this variable where it will get a certain start and return it.
+\noindent getter(): This is the boiler state of this variable where it will get a certain start and return it.
 \begin{itemize}
-    \item \textbf{Transition:} N/A
-    \item \textbf{Output:} The output depends on the data type of the parameter. It returns the current value of the requested data element.
-    \item \textbf{Exception:} N/A
+    \item transition: N/A
+    \item output: The output depends on the data type of the parameter. It returns the current value of the requested data element.
+    \item exception: N/A
 \end{itemize}
 
-\noindent \texttt{setter()}: This is the boiler state of this variable where it will get a certain start and return it.
+\noindent setter(): This is the boiler state of this variable where it will get a certain start and return it.
 \begin{itemize}
-    \item \textbf{Transition:} Updates the internal state of the data model, either by adding or updating data. This also changes certain state variables
-    \item \textbf{Output:} N/A
-    \item \textbf{Exception:} N/A
+    \item transition: Updates the internal state of the data model, either by adding or updating data. This also changes certain state variables
+    \item output: N/A
+    \item exception: N/A
 \end{itemize}
 
 \noindent init(inputField: String):
@@ -905,9 +903,9 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-addHealthcareProfessional & id:string, value: FormData & - & InvalidInputError \\
-deleteHealthcareProfessional & id:string & - & IdNotFound\\
-updateHealthcareProfessional & id:string, value: FormData & - & InvalidInputError \\
+addHealthcareProfessional & id:String, value: FormData & - & InvalidInputError \\
+deleteHealthcareProfessional & id:String & - & IdNotFound\\
+updateHealthcareProfessional & id:String, value: FormData & - & InvalidInputError \\
 \hline
 \end{tabular}
 \end{center}
@@ -925,21 +923,21 @@ Database containing the account information for healthcare professionals exists.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent addHealthcareProfessional(id:string, record: FormData):
+\noindent addHealthcareProfessional(id:String, record: FormData):
 \begin{itemize}
 \item transition: Adds a new document with the provided details to the database.
 \item output: N/A
 \item exception: InvalidInputError - The input data is incomplete or invalid or a duplicate document already exists.
 \end{itemize}
 
-\noindent deleteHealthcareProfessional(id:string):
+\noindent deleteHealthcareProfessional(id:String):
 \begin{itemize}
 \item transition: Deletes the corresponding document from the database.
 \item output: N/A
 \item exception: IdNotFound - Provided id is invalid or does not exist.
 \end{itemize}
 
-\noindent updateHealthcareProfessional(id:string, record: FormData):
+\noindent updateHealthcareProfessional(id:String, record: FormData):
 \begin{itemize}
 \item transition: Update document with the provided details in the database.
 \item output: N/A
@@ -972,9 +970,9 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-createPatientRecord & id:string, value: FormData & - & InvalidInputError \\
-deletePatientRecord & id:string & - & IdNotFound\\
-updatePatientRecord & id:string, value: FormData & - & InvalidInputError \\
+createPatientRecord & id:String, value: FormData & - & InvalidInputError \\
+deletePatientRecord & id:String & - & IdNotFound\\
+updatePatientRecord & id:String, value: FormData & - & InvalidInputError \\
 \hline
 \end{tabular}
 \end{center}
@@ -992,21 +990,21 @@ Database containing the account information for the patients exists.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent createPatientRecord(id:string, record: FormData):
+\noindent createPatientRecord(id:String, record: FormData):
 \begin{itemize}
 \item transition: Adds a new document with the provided details to the database.
 \item output: N/A
 \item exception: InvalidInputError - The input data is incomplete or invalid or a duplicate document already exists.
 \end{itemize}
 
-\noindent deletePatientRecord(id:string):
+\noindent deletePatientRecord(id:String):
 \begin{itemize}
 \item transition: Deletes the corresponding document from the database.
 \item output: N/A
 \item exception: IdNotFound - Provided id is invalid or does not exist.
 \end{itemize}
 
-\noindent updatePatientRecord(id:string, record: FormData):
+\noindent updatePatientRecord(id:String, record: FormData):
 \begin{itemize}
 \item transition: Update document with the provided details in the database.
 \item output: N/A
@@ -1023,17 +1021,17 @@ N/A
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
 
-\newpage
+% \newpage
 
-\section{Appendix} \label{Appendix}
+% \section{Appendix} \label{Appendix}
 
-\wss{Extra information if required}
+% \wss{Extra information if required}
 
 \newpage{}
 
 \section*{Appendix --- Reflection}
 
-\wss{Not required for CAS 741 projects}
+% \wss{Not required for CAS 741 projects}
 
 The information in this section will be used to evaluate the team members on the
 graduate attribute of Problem Analysis and Design.
@@ -1041,31 +1039,23 @@ graduate attribute of Problem Analysis and Design.
 \input{../../Reflection.tex}
 
 \begin{enumerate}
-  \item What went well while writing this deliverable?
+  \item What went well while writing this deliverable?\\
   This document has let us build more on the semantics and uses of each module by module decomposition. While going through the outline of this document, we were able to decompose semantics into different variables as well as assumptions that each module will have.
 
-  \item What pain points did you experience during this deliverable, and how did you resolve them?
-  Every team project has challenges that must be solved in order to move forward successfully. We had to create a donation plan to gurantee smooth operations. To ensure that all of our plans are in line with the system,
-  we need to plan user-hierarchy diagram that complement our project. Along with this, we also needed to decide how the modules will be decomposed in the best way possible. In order to contribute to the document and evaluate each other’s work as effectively as possible, we also needed to set up a schedule. 
+  \item What pain points did you experience during this deliverable, and how did you resolve them?\\
+  Every team project has challenges that must be solved in order to move forward successfully. We had to create a plan to gurantee smooth operations. To ensure that all of our plans are in line with the system, we need to plan user-hierarchy diagram that complement our project. Along with this, we also needed to decide how the modules will be decomposed in the best way possible. In order to contribute to the document and evaluate each other’s work as effectively as possible, we also needed to set up a schedule. 
 
-  \item Which of your design decisions stemmed from speaking to your client(s)
-  or a proxy (e.g. your peers, stakeholders, potential users)? For those that
-  were not, why, and where did they come from?
+  \item Which of your design decisions stemmed from speaking to your client(s) or a proxy (e.g. your peers, stakeholders, potential users)? For those that were not, why, and where did they come from?\\
   After having conversation with our client, we created data model modules for both administrator and patient. In order to create state variables for both administrator and patient profile, our supervisor gave us a run down of the general attributes from which we selected the ones that are relevant to our system. Rest of the decision decisions came up by deciding as a team and were not stemmed from our client.  
 
-  \item While creating the design doc, what parts of your other documents (e.g.
-  requirements, hazard analysis, etc), it any, needed to be changed, and why?
-  While creating this design document, we had to edit Software Requirement Specification (SRS) document to modify CI/CD implementation strategy from Jankins to GitHub actions. This is because unlike Jankins, GitHub Actions offer excellent scalability and reliability for our CI/CD pipelines. It also offeres some security features such that code scanning and vulnerability alerts. We also updated the Hazard Analysis documentation for modifying the data layer to include a medicine prediction database and diagnosis prediction database for the system to predict treatment based on the symptoms.  
+  \item While creating the design doc, what parts of your other documents (e.g. requirements, hazard analysis, etc), it any, needed to be changed, and why?\\
+  While creating this design document, we had to edit Software Requirement Specification (SRS) document to modify CI/CD implementation strategy from Jankins to GitHub actions. This is because unlike Jenkins, GitHub Actions offer excellent scalability and reliability for our CI/CD pipelines. It also offers some security features such that code scanning and vulnerability alerts. We also updated the Hazard Analysis documentation for modifying the data layer to include a medicine prediction database and diagnosis prediction database for the system to predict treatment based on the symptoms.  
 
-  \item What are the limitations of your solution?  Put another way, given
-  unlimited resources, what could you do to make the project better? (LO\_ProbSolutions)
+  \item What are the limitations of your solution?  Put another way, given unlimited resources, what could you do to make the project better? (LO\_ProbSolutions)\\
   One of the limitations of this project is that if not trained properly, data model may provide incorrect prediction suggestions. If given unlimited resources, we would invest in some of the experts to prioritize easy interoperability and data exchange through connection with other healthcare systems. 
 
-  \item Give a brief overview of other design solutions you considered.  What
-  are the benefits and tradeoffs of those other designs compared with the chosen
-  design?  From all the potential options, why did you select the documented design?
-  (LO\_Explores)
-  An additional design decision that we considered was incorporating a chatbot tool within our existing system that would help the healthcare professional to pull up a patient's information. It's beneficial as it will ease the healthcare professional's work and save time. However, due to time constraints and complexity, this design decision was dropped.  
+  \item Give a brief overview of other design solutions you considered.  What are the benefits and tradeoffs of those other designs compared with the chosen design?  From all the potential options, why did you select the documented design? (LO\_Explores)\\
+  An additional design decision that we considered was incorporating a chatbot tool within our existing system that would help the healthcare professional to pull up a summary of patient's information. It's beneficial as it will ease the healthcare professional's work and save time. However, due to time constraints and complexity, this design decision was dropped.  
 
 \end{enumerate}
 

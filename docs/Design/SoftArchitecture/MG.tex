@@ -49,6 +49,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Jan 9, 2025 & 1.1 & Initial Document\\
+Jan 17,2025 & 1.2 & Revised Document Incorporating Feedback\\
 
 \bottomrule
 \end{tabularx}
@@ -78,6 +79,7 @@ This section records information for easy reference.
   UC & Unlikely Change \\
   JWT & JSON Web Tokens \\
   MFA & Multi-Factor Authentication \\
+  UI & User Interface\\
   \bottomrule
 \end{tabular}\\
 
@@ -268,16 +270,16 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{User Authentication Module (\mref{mUAM})} 
 
 \begin{description}
-\item[Secrets:] The implementation details of the authentication mechanism, including secure storage and validation of user credentials, session management, and MFA logic.
-\item[Services:] Authenticates users to grant access to the system based on credentials.
-\item[Implemented By:] Spring, React
-\item[Type of Module:] Abstract Object
+\item[Secrets:]The implementation details of the authentication mechanism, including secure storage and validation of user credentials, session management, and MFA logic.
+\item[Services:]Authenticates users to grant access to the system based on credentials.
+\item[Implemented By:]Spring, React
+\item[Type of Module:]Abstract Object
 \end{description}
 
 \subsubsection{Administrator View Module (\mref{mAVM})}
 
 \begin{description}
-\item[Secrets:]User interface customization based on the administrative tools and functionality required by healthcare networks.
+\item[Secrets:]UI customization based on the administrative tools and functionality required by healthcare networks.
 \item[Services:]Provide healthcare network adminstrators with tools to onboard, update, and remove thier network on the system. Provide healthcare network adminstrators with tools to add healthcare professionals under a healthcare network to the system.
 \item[Implemented By:]TypeScript, React
 \item[Type of Module:]Abstract Object
@@ -286,43 +288,43 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{Patient View Module (\mref{mPVM})}
 
 \begin{description}
-\item[Secrets:]User interface customization based on the tools and functionality required by healthcare professionals.
+\item[Secrets:]UI customization based on the tools and functionality required by healthcare professionals.
 \item[Services:]Provides healthcare professionals with tools to login, create, update, and delete patient records, provide diagnostic suggestions, and medication suggestions.
 \item[Implemented By:]TypeScript, React
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Adminstrator Model Module (\mref{mAMM})} Gurleen
+\subsubsection{Adminstrator Model Module (\mref{mAMM})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:]
-\item[Type of Module:]
+\item[Secrets:]Represents the healthcare network information information and characteristics as a data structure.
+\item[Services:]Provides a contract of what is stored in the adminstrator account database and displayed on the UI. Any update in healthare network information on the UI can be reflected in the data model and can directly update the corresponding information in the adminstrator account database.
+\item[Implemented By:]TypeScript
+\item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Patient Model Module (\mref{mPMM})} Gurleen
+\subsubsection{Patient Model Module (\mref{mPMM})}
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:]
-\item[Type of Module:]
+\item[Secrets:]Represents the patient information and characteristics as a data structure. 
+\item[Services:]Provides a contract of what is stored in the patient account database and displayed on the UI. Any update in patient information on the UI can be reflected in the data model and can directly update the corresponding information in the patient account database.
+\item[Implemented By:]TypeScript
+\item[Type of Module:]Abstract Object
 \end{description}
 
 \subsubsection{Broker Module (\mref{mBM})}
 
 \begin{description}
-\item[Secrets:] The logic for generating and validating OAuth tokens, handling API request routing, and defining access control policies for secure data sharing.
-\item[Services:] This module provides:
+\item[Secrets:]The logic for generating and validating OAuth tokens, handling API request routing, and defining access control policies for secure data sharing.
+\item[Services:]This module provides:
 \begin{itemize}
     \item OAuth 2.0-based authentication and authorization for external API consumers.
     \item Secure token generation, validation, and renewal.
     \item Routing requests from external systems to the relevant internal modules.
     \item Access control enforcement to protect sensitive data and resources.
 \end{itemize}
-\item[Implemented By:] Spring, OAuth 2.0
-\item[Type of Module:] Library
+\item[Implemented By:]Spring, Firebase Auth
+\item[Type of Module:]Abstract Object
 \end{description}
 
 \subsubsection{Administrator Account Management Module (\mref{mAAMM})}
@@ -347,9 +349,9 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsection{Software Decision Module}
 
 \begin{description}
-\item[Secrets:] The design decision based on mathematical theorems, physical facts, or programming considerations. The secrets of this module are
+\item[Secrets:]The design decision based on mathematical theorems, physical facts, or programming considerations. The secrets of this module are
   \emph{not} described in the SRS.
-\item[Services:] Includes data structure and algorithms used in the system that do not provide direct interaction with the user. 
+\item[Services:]Includes data structure and algorithms used in the system that do not provide direct interaction with the user. 
   % Changes in these modules are more likely to be motivated by a desire to
   % improve performance than by externally imposed changes.
 \item[Implemented By:] --
@@ -359,37 +361,37 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{Transcription Module (\mref{mTM})}
 
 \begin{description}
-\item[Secrets:] The algorithm used to convert audio data into written text.
-\item[Services:] Accurately converts the audio data from the conversation into written text.   
-\item[Implemented By:] Python
-\item[Type of Module:] Library
+\item[Secrets:]The algorithm used to convert audio data into written text.
+\item[Services:]Accurately converts the audio data from the conversation into written text.   
+\item[Implemented By:]Python
+\item[Type of Module:]Library
 \end{description}
 
 \subsubsection{Classification Module (\mref{mCM})}
 
 \begin{description}
-\item[Secrets:] The algorithm used to classify the medical data after the transcription module.
-\item[Services:] Accurately classifies the medical data received from the transcription module into relevant categories.
-\item[Implemented By:] Python
-\item[Type of Module:] Library
+\item[Secrets:]The algorithm used to classify the medical data after the transcription module.
+\item[Services:]Accurately classifies the medical data received from the transcription module into relevant categories.
+\item[Implemented By:]Python
+\item[Type of Module:]Library
 \end{description}
 
 \subsubsection{Diagonsis Prediction Module (\mref{mDPM})}
 
 \begin{description}
-\item[Secrets:] The algorithms used to predict possible diagnoses.
-\item[Services:] Predicts a set of applicable diagnoses for a patient based on patient characteristics, symptoms, and past medical history.
-\item[Implemented By:] Python
-\item[Type of Module:] Abstract Object
+\item[Secrets:]The algorithms used to predict possible diagnoses.
+\item[Services:]Predicts a set of applicable diagnoses for a patient based on patient characteristics, symptoms, and past medical history.
+\item[Implemented By:]Python
+\item[Type of Module:]Abstract Object
 \end{description}
 
 \subsubsection{Medicine Prediction Module (\mref{mMPM})}
 
 \begin{description}
-\item[Secrets:] The algorithms used to give possible medicines applicable.
-\item[Services:] Predicts a set of applicable medicines for a patient based on patient characteristics, symptoms, and past medical history.
-\item[Implemented By:] Python
-\item[Type of Module:] Abstract object
+\item[Secrets:]The algorithms used to give possible medicines applicable.
+\item[Services:]Predicts a set of applicable medicines for a patient based on patient characteristics, symptoms, and past medical history.
+\item[Implemented By:]Python
+\item[Type of Module:]Abstract object
 \end{description}
 
 

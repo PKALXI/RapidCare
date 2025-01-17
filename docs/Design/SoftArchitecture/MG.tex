@@ -295,8 +295,8 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{Adminstrator Model Module (\mref{mAMM})} Gurleen
 
 \begin{description}
-\item[Secrets:] This module requires access to information about different healthcare networks to function correctly.
-\item[Services:] Provides functionality for administrators to manage permissions of different healthcare networks.
+\item[Secrets:] Represents the healthcare professional characteristics as a Data Structure.
+\item[Services:] The UI and database are kept in sync via the data model, which acts as an intermediary. Any changes to healthcare professional's information made through the UI automatically update the database.
 \item[Implemented By:] TypeScript, React
 \item[Type of Module:] Abstract Object
 \end{description}

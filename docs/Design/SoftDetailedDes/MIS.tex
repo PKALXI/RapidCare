@@ -55,8 +55,8 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Jan8 & Rev0 & Added MIS of UI\\
-Date 2 & 1.1 & Notes\\
+Jan 14, 2025 & 1.1 & Initial Document\\
+% Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
 
@@ -94,8 +94,8 @@ Complementary documents include the System Requirement Specifications and Module
 
 \section{Notation}
 
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
+% \wss{You should describe your notation.  You can use what is below as
+%   a starting point.}
 
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
@@ -142,20 +142,18 @@ The following table is taken directly from the Module Guide document for this pr
 {Hardware-Hiding} & None \\
 \midrule
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding} & User Authentication Module\\
-& API Module\\
 & Administrator View Module\\
-& Client View Module\\
-& Diagnosis Data Module\\
-& Medicine Data Module\\
+& Patient View Module\\
+& Administrator Model Module\\
+& Patient Model Module\\
+& Broker Module\\
+& Administrator Account Management Module\\
+& Patient Account Management Module\\
 \midrule
-\multirow{3}{0.3\textwidth}{Software Decision} & App Module\\
-& Report Generating Module\\
-& Transcription Module\\
+\multirow{3}{0.3\textwidth}{Software Decision} & Transcription Module\\
 & Classification Module\\
 & Diagnosis Prediction Module\\
 & Medicine Prediction Module\\
-& Administrator Account Management Module\\
-& Patient Account Management Module\\
 \bottomrule
 \end{tabular}
 \caption{Module Hierarchy}
@@ -165,101 +163,18 @@ The following table is taken directly from the Module Guide document for this pr
 \newpage
 ~\newpage
 
-
-\section{MIS of App Module} \label{Module} Gurleen
-\wss{Use labels for cross-referencing}
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\section{MIS of User Authentication Module} \label{Module_UserAuth}
 
 \subsection{Module}
-
-\wss{Short name for the module}
+UserAuthentication
 
 \subsection{Uses}
-
+Firebase Auth\\
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-\wss{accessProg} & - & - & - \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
-
-\subsubsection{Environment Variables}
-
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
-
-\subsubsection{Assumptions}
-
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
-
-\subsubsection{Access Routine Semantics}
-
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
-
-\subsubsection{Local Functions}
-
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
-
-\newpage
-~\newpage
-
-
-
-  
-\section{MIS of User Authentication Module} \label{Module_UserAuth} Moamen
-
-\subsection{Module}
-
-User Authentication
-
-\subsection{Uses}
-
-Provides secure login and session management. It validates user credentials and enforces multi-factor authentication (MFA).
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-\begin{itemize}
-    \item \texttt{MAX\_LOGIN\_ATTEMPTS}: Maximum allowed login attempts before locking the account.
-\end{itemize}
+isAuthenticated: Boolean
 
 \subsubsection{Exported Access Programs}
 
@@ -268,9 +183,7 @@ Provides secure login and session management. It validates user credentials and 
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\texttt{login} & Username, Password & Session Token & Invalid credentials \\
-\texttt{logout} & Session Token & Boolean & Invalid/expired session \\
-\texttt{resetPassword} & Email Address & Boolean & Invalid email address \\
+Auth & - & React.component &  RenderError\\
 \hline
 \end{tabular}
 \end{center}
@@ -278,54 +191,178 @@ Provides secure login and session management. It validates user credentials and 
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
-\texttt{activeUsers}: Tracks currently logged-in users.
+isUserAdmin: Boolean
 
 \subsubsection{Environment Variables}
-
-\begin{itemize}
-    \item Database for storing user credentials and session data.
-\end{itemize}
+N/A
 
 \subsubsection{Assumptions}
-
-\begin{itemize}
-    \item Passwords follow defined complexity rules.
-\end{itemize}
+N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \texttt{login()}:
+\noindent Auth():
 \begin{itemize}
-    \item \textbf{Transition:} Validates credentials and generates a session token.
-    \item \textbf{Output:} Active session token.
-    \item \textbf{Exception:} Invalid credentials.
-\end{itemize}
-
-\noindent \texttt{resetPassword()}:
-\begin{itemize}
-    \item \textbf{Transition:} Sends a reset link to the provided email.
-    \item \textbf{Output:} Confirmation status.
-    \item \textbf{Exception:} Invalid email address.
+\item transition: Renders the login page on the screen.
+\item output: N/A
+\item exception: RenderError — Thrown if the component fails to render.
 \end{itemize}
 
 \subsubsection{Local Functions}
 
-\texttt{encryptPassword(password: String) -> String}: Encrypts a plain-text password.
+\noindent login():
+\begin{itemize}
+\item transition: Renders adminstrator view page if user is administrator otherwise renders patient view page. 
+\item output: N/A
+\item exception: InvalidCredentials - Thrown if the user enters invalid credentials.
+\end{itemize}
 
+\noindent ResetPassowrd():
+\begin{itemize}
+\item transition: Sends a reset link to the provided email and renders the login page.
+\item output: N/A
+\item exception: InvalidInpuError - Thrown if user input a invalid or unregistered email.
+\end{itemize}
 
 \newpage
-~\newpage
 
 
-
-
-\section{MIS of API Module (OAuth)} \label{Module_OAuth}
-Moamen
+\section{MIS of Administrator View Module} \label{Module_ AdminView}
 
 \subsection{Module}
+Administrator
 
-OAuth API Module
+\subsection{Uses}
+Broker Module \\
+ReactJS\\
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{2cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+Administrator & - & React.component &  RenderError\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+isAuthenticated: Boolean
+
+\subsubsection{Environment Variables}
+Screen interface\\
+Keyboard\\
+Microphone
+
+\subsubsection{Assumptions}
+User has a functional screen, keyboard, and Microphone.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent Administrator():
+\begin{itemize}
+\item transition: Renders a react component of the administrator view page.
+\item output: N/A
+\item exception: RenderError — Thrown if the component fails to render.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent handleAdminAccount(id: string, record: FormData, requestType: string):
+\begin{itemize}
+\item transition: Sends an API request to the broker Module to process an add, delete, or update operation in the Administrator Database.
+\item output: N/A
+\item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
+\end{itemize} 
+
+\noindent validateInput(InputField: string):
+\begin{itemize}
+\item transition: Renders a success or error message outlining the action performed.
+\item output: N/A
+\item exception: InvalidInputError - The input data is incomplete or invalid.
+\end{itemize}
+
+\newpage
+
+\section{MIS of Patient View Module} \label{Module_PatientView}
+
+\subsection{Module}
+Patient
+
+\subsection{Uses}
+Broker Module \\
+ReactJS\\
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+  \begin{tabular}{p{3cm} p{2cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+Patient & - & React.component & RenderError \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+isAuthenticated: Boolean
+
+\subsubsection{Environment Variables}
+Screen interface\\
+Keyboard\\
+Microphone\\
+
+\subsubsection{Assumptions}
+User has a functional screen, keyboard, and microphone.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent Patient():
+\begin{itemize}
+\item transition: Renders a react component of the patient view page.
+\item output: N/A
+\item exception: RenderError — Thrown if the component fails to render.
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent handlePatientAccount(id: string, record: FormData, requestType: string):
+\begin{itemize}
+\item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Patient Database.
+\item output: N/A
+\item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
+\end{itemize}
+
+\noindent validateInput(InputField: string):
+\begin{itemize}
+\item transition: Renders a success/error message outlining the action performed.
+\item output: N/A
+\item exception: InvalidInputError - The input data is incomplete or invalid.
+\end{itemize}
+
+\newpage
+
+\section{MIS of Broker Module } \label{Module_Broker} Pranav
+
+\subsection{Module}
+Broker
 
 \subsection{Uses}
 
@@ -394,26 +431,21 @@ This module facilitates secure authentication and authorization processes. Imple
 \texttt{hashSecret(secret: String) -> String}: Hashes the provided client secret for secure storage.
 
 \newpage
-~\newpage
 
-
-
-
-
-
-\section{MIS of Administrator View Module} \label{administrator_view_module} Inreet
+  
+\section{MIS of Transcription Module} \label{trans_mod}
 
 \subsection{Module}
-Administrator
+TransMod
 
 \subsection{Uses}
-API Module (OAuth)\\
-User Authentication Module\\
-Account Management\\
+
+This module does not use any other modules. It uses audio data as the input.
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+
 N/A
 
 \subsubsection{Exported Access Programs}
@@ -423,7 +455,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Administrator & - & React.component & - \\
+trans_mod & audio data stream & written transcribed text & UnclearAudio & \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -432,65 +464,57 @@ Administrator & - & React.component & - \\
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+N/A
 
 \subsubsection{Environment Variables}
-Screen interface\\
-Keyboard\\
+
+\begin{itemize}
+  \item Recording Tool: It needs access to the recording tool so that the conversation between the patient and healthcare professional is recorded.
+\end{itemize}
 
 \subsubsection{Assumptions}
-User has a functional screen and keyboard.
+
+\begin{itemize}
+  \item It is assumed that the input audio data is stable and will be provided in streams.
+  \item It is assumed that the medical terminologies used in the conversation is accurate.
+  \item There is no background noise.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent trans_mod(AudioData: Stream)(): 
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition:
+\begin{itemize}
+  \item Input audio data is provided in continuous streams in real-time.
+  \item The streams are sent to the speech-recognition engine for transcription.
+\end{itemize} 
+\item output: Written text transcribed from the audio stream. 
+\item exception: UnclearAudio - If there is any issue with the audio, for example: low volume or words not clear.  
 \end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+N/A
 
 \newpage
 ~\newpage
-
-
-
-
-
-
-
-\section{MIS of Client View Module} \label{Module} Inreet
-\wss{Use labels for cross-referencing}
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+  
+\section{MIS of Classification Module} \label{Classify} 
 
 \subsection{Module}
 
-\wss{Short name for the module}
+ClassifyMod
 
 \subsection{Uses}
 
+It uses transcribed text from Transcription Module.
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+
+N/A
 
 \subsubsection{Exported Access Programs}
 
@@ -499,7 +523,7 @@ User has a functional screen and keyboard.
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+ClassifyMod & Transcribed Text & Classified Text & ClassificationError & \\
 \hline
 \end{tabular}
 \end{center}
@@ -508,286 +532,36 @@ User has a functional screen and keyboard.
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+N/A
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+N/A
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+  \item It is assumed that the text is transcribed accurately by the Transcription Module for correct classification.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent ClassifyMod(transcribed_text: text)():
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition:
+\begin{itemize}
+  \item Uses the classification model or rules to categorize the text or extract relevant information.
+  \item Structures the output as classified text containing extracted information.
+\end{itemize} 
+\item output: Classified text generated for report generation. 
+\item exception: ClassificationError - If the module fails to classify text accurately or encounters an error. 
 \end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
+N/A
 
 \newpage
-~\newpage
-  
-
-
-
-
-
-
-  
-\section{MIS of Report Generating Module} \label{Module} Gurleen
-\wss{Use labels for cross-referencing}
-
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
-
-\subsection{Module}
-
-\wss{Short name for the module}
-
-\subsection{Uses}
-
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-\wss{accessProg} & - & - & - \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
-
-\subsubsection{Environment Variables}
-
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
-
-\subsubsection{Assumptions}
-
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
-
-\subsubsection{Access Routine Semantics}
-
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
-
-\subsubsection{Local Functions}
-
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
-
-\newpage
-~\newpage
-
-
-
-
-  
-\section{MIS of Transcription Module} \label{Module} Gurleen
-\wss{Use labels for cross-referencing}
-
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
-
-\subsection{Module}
-
-\wss{Short name for the module}
-
-\subsection{Uses}
-
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-\wss{accessProg} & - & - & - \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
-
-\subsubsection{Environment Variables}
-
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
-
-\subsubsection{Assumptions}
-
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
-
-\subsubsection{Access Routine Semantics}
-
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
-
-\subsubsection{Local Functions}
-
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
-
-\newpage
-~\newpage
-  
-\section{MIS of Classification Module} \label{Module} Gurleen
-\wss{Use labels for cross-referencing}
-
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
-
-\subsection{Module}
-
-\wss{Short name for the module}
-
-\subsection{Uses}
-
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-\wss{accessProg} & - & - & - \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
-
-\subsubsection{Environment Variables}
-
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
-
-\subsubsection{Assumptions}
-
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
-
-\subsubsection{Access Routine Semantics}
-
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
-
-\subsubsection{Local Functions}
-
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
-
-\newpage
-~\newpage
- 
 
 \section{MIS of Diagnosis Prediction Module} \label{diag_pred_mod}
 
@@ -854,17 +628,14 @@ There will be no environment variables that this module will interact with.
 
 \subsubsection{Access Routine Semantics}
 
-
 \noindent diagnosePatient(request : FormData):
 \begin{itemize}
-\item transition: preprocess the request body (FormData) which contain the inputs as specified above using the preprocess local function. 
+\item transition: Preprocess the request body (FormData) which contain the inputs as specified above using the preprocess local function. 
 \item output: Returns the predicted diagnosis for the patient.
 \item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
 
-
 \subsubsection{Local Functions}
-
 
 \noindent preProcessData(pastHistory: String, symptoms: String, user -> \{age, weight\}):
 \begin{itemize}
@@ -873,9 +644,7 @@ There will be no environment variables that this module will interact with.
 \item exception: InputDimError - The expected arguments were not received or were in the wrong format.
 \end{itemize}
 
-
 \newpage
-~\newpage
   
 \section{MIS of Medicine Prediction Module} \label{med_pred_mod}
 
@@ -927,7 +696,6 @@ Flask Application (Python) & Symptoms, Past medical History, User characteristic
 
 \subsubsection{State Variables}
 
-
 \begin{itemize}
   \item model: Tensorflow model
   % \item modelPipeline : Abstract Object
@@ -947,15 +715,12 @@ There will be no environment variables that this module will interact with.
 
 \subsubsection{Access Routine Semantics}
 
-
-
 \noindent medicatePatient(request : FormData):
 \begin{itemize}
 \item transition: preprocess the request body (FormData) which contain the inputs as specified above using the preprocess local function. 
 \item output: Returns the predicted medicine for the patient.
 \item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
-
 
 \subsubsection{Local Functions}
 
@@ -966,37 +731,31 @@ There will be no environment variables that this module will interact with.
 \item exception: InputDimError - The expected arguments were not received or were in the wrong format.
 \end{itemize}
 
-
 \newpage
-~\newpage
- 
 
-\section{MIS of Administrator Account Management Module} \label{Module} Inreet
-\wss{Use labels for cross-referencing}
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\section{MIS of Administrator Account Management Module} \label{Module_AdminAccount}
 
 \subsection{Module}
-
-\wss{Short name for the module}
+AdministratorAccountManagement
 
 \subsection{Uses}
-
+Broker Module\\
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+N/A
 
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{4cm} p{4.5cm} p{1cm} p{2.5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+addHealthcareProfessional & id:string, value: FormData & - & InvalidInputError \\
+deleteHealthcareProfessional & id:string & - & IdNotFound\\
+updateHealthcareProfessional & id:string, value: FormData & - & InvalidInputError \\
 \hline
 \end{tabular}
 \end{center}
@@ -1004,231 +763,66 @@ There will be no environment variables that this module will interact with.
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
-
-\subsubsection{Environment Variables}
-
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
-
-\subsubsection{Assumptions}
-
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
-
-\subsubsection{Access Routine Semantics}
-
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
-
-\subsubsection{Local Functions}
-
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
-
-\newpage
-~\newpage
-
-
-\section{MIS of Patient Account Management Module} \label{Module} Inreet
-\wss{Use labels for cross-referencing}
-
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
-
-\subsection{Module}
-
-\wss{Short name for the module}
-
-\subsection{Uses}
-
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-\wss{accessProg} & - & - & - \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
-
-\subsubsection{Environment Variables}
-
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
-
-\subsubsection{Assumptions}
-
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
-
-\subsubsection{Access Routine Semantics}
-
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
-
-\subsubsection{Local Functions}
-
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
-
-\newpage
-~\newpage
-
-
-
-\section{MIS of Diagnosis Data Module} \label{diag_data} Pranav
-
-\subsection{Module}
-
-DiagnosisData
-
-\subsection{Uses}
-\begin{itemize}
-  \item Database of Diagnosis Prediction Data (features -> labels)
-\end{itemize}
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-- Trained Model
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-addData & id:string, value: FormData & - & InputDimError \\
-deleteData & id:string & - & IdNotFound\\
-updateData & id:string, value: FormData & - & InputDimError \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
 dbConnection : Database connection point.
 
 \subsubsection{Environment Variables}
-
 N/A
 
 \subsubsection{Assumptions}
-
-Database containing the training data for the Diagnosis prediction module exists/
+Database containing the account information for healthcare professionals exists.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent addData(id:string, record: FormData):
+\noindent addHealthcareProfessional(id:string, record: FormData):
 \begin{itemize}
-\item transition: Add record to database.
+\item transition: Adds a new document with the provided details to the database.
 \item output: N/A
-\item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
+\item exception: InvalidInputError - The input data is incomplete or invalid or a duplicate document already exists.
 \end{itemize}
 
-\noindent deleteData(id:string):
+\noindent deleteHealthcareProfessional(id:string):
 \begin{itemize}
-\item transition: Delete record from the record with the attitude.
+\item transition: Deletes the corresponding document from the database.
 \item output: N/A
-\item exception: IdNotFound - Provided Id does not exist.
+\item exception: IdNotFound - Provided id is invalid or does not exist.
 \end{itemize}
 
-\noindent updateData(id:string, record: FormData):
+\noindent updateHealthcareProfessional(id:string, record: FormData):
 \begin{itemize}
-\item transition: Update record in database based on key.
+\item transition: Update document with the provided details in the database.
 \item output: N/A
-\item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
+\item exception: InvalidInputError - The input data is incomplete or invalid.
 \end{itemize}
-
-
 
 \subsubsection{Local Functions}
 
 N/A
 
 \newpage
-~\newpage
 
+\section{MIS of Patient Account Management Module} \label{Module_PatientAccountManag}
 
-
-
-\section{MIS of Medicine Data Module} \label{med_data} Pranav
 \subsection{Module}
-
-MedData
+PatientAccountManagement
 
 \subsection{Uses}
-\begin{itemize}
-  \item Database of Medicine Prediction Data (features -> labels)
-\end{itemize}
+Broker Module\\
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-- Trained Model
+N/A
 
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{4cm} p{4.5cm} p{1cm} p{2.5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-addData & id:string, value: FormData & - &  InputDimError \\
-deleteData & id:string & - & IdNotFound\\
-updateData & id:string, value: FormData & - & InputDimError \\
+createPatientRecord & id:string, value: FormData & - & InvalidInputError \\
+deletePatientRecord & id:string & - & IdNotFound\\
+updatePatientRecord & id:string, value: FormData & - & InvalidInputError \\
 \hline
 \end{tabular}
 \end{center}
@@ -1236,49 +830,42 @@ updateData & id:string, value: FormData & - & InputDimError \\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
 dbConnection : Database connection point.
 
 \subsubsection{Environment Variables}
-
 N/A
 
 \subsubsection{Assumptions}
-
-Database containing the training data for medicine prediction module exists.
+Database containing the account information for the patients exists.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent addData(id:string, record: FormData):
+\noindent createPatientRecord(id:string, record: FormData):
 \begin{itemize}
-\item transition: Add record to database.
+\item transition: Adds a new document with the provided details to the database.
 \item output: N/A
-\item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
+\item exception: InvalidInputError - The input data is incomplete or invalid or a duplicate document already exists.
 \end{itemize}
 
-\noindent deleteData(id:string):
+\noindent deletePatientRecord(id:string):
 \begin{itemize}
-\item transition: Delete record from the record with the attitude.
+\item transition: Deletes the corresponding document from the database.
 \item output: N/A
-\item exception: IdNotFound - Provided Id does not exist.
+\item exception: IdNotFound - Provided id is invalid or does not exist.
 \end{itemize}
 
-\noindent updateData(id:string, record: FormData):
+\noindent updatePatientRecord(id:string, record: FormData):
 \begin{itemize}
-\item transition: Update record in database based on key.
+\item transition: Update document with the provided details in the database.
 \item output: N/A
-\item exception: InputDimError-Request data contained wrong typing or incorrect format attributes.
+\item exception: InvalidInputError - The input data is incomplete or invalid.
 \end{itemize}
-
-
 
 \subsubsection{Local Functions}
 
 N/A
 
-
 \newpage
-~\newpage
 
 
 \bibliographystyle {plainnat}

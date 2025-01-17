@@ -76,6 +76,8 @@ This section records information for easy reference.
   SRS & Software Requirements Specification\\
   \progname & Explanation of program name\\
   UC & Unlikely Change \\
+  JWT & JSON Web Tokens \\
+  MFA & Multi-Factor Authentication \\
   \bottomrule
 \end{tabular}\\
 
@@ -184,20 +186,18 @@ decisions will be changed.
 This section provides an overview of the module design. Modules are summarized in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed below, which are leaves in the hierarchy tree, are the modules that will actually be implemented.
 
 \begin{description}
-  \item [\refstepcounter{mnum} \mthemnum \label{mAM}:] App Module
   \item [\refstepcounter{mnum} \mthemnum \label{mUAM}:] User Authentication Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAPIM}:] API Module
   \item [\refstepcounter{mnum} \mthemnum \label{mAVM}:] Administrator View Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mCVM}:] Client View Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mRGM}:] Report Generating Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mPVM}:] Patient View Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Model Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mPMM}:] Patient Model Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mBM}:] Broker Module
   \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
   \item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Classification Module
   \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
   \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Account Management Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mPAM}:] Patient Account Management Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mDDM}:] Diagnosis Data Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mMDM}:] Medicine Data Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAAMM}:] Administrator Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mPAMM}:] Patient Account Management Module
 
 \end{description}
 
@@ -210,21 +210,19 @@ This section provides an overview of the module design. Modules are summarized i
 {Hardware-Hiding Module} & None \\
 \midrule
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & \mref{mUAM}\\
-& \mref{mAPIM}\\
 & \mref{mAVM}\\
-& \mref{mCVM}\\
-& \mref{mDDM}\\
-& \mref{mMDM}\\
+& \mref{mPVM}\\
+& \mref{mAMM}\\
+& \mref{mPMM}\\
+& \mref{mBM}\\
+& \mref{mAAMM}\\
+& \mref{mPAMM}\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mAM}\\
-& \mref{mRGM}\\
-& \mref{mTM}\\
+\multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mTM}\\
 & \mref{mCM}\\
 & \mref{mDPM}\\
 & \mref{mMPM}\\
-& \mref{mAMM}\\
-& \mref{mPAM}\\
 \bottomrule
 
 \end{tabular}
@@ -267,23 +265,13 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{User Authentication Module (\mref{mUAM})} Moamen
+\subsubsection{User Authentication Module (\mref{mUAM})} 
 
 \begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  
-\end{description}
-
-\subsubsection{API Module (\mref{mAPIM})} Moamen
-
-\begin{description}
-\item[Secrets:]
-\item[Services:]
-\item[Implemented By:] []
-\item[Type of Module:] []
+\item[Secrets:] The implementation details of the authentication mechanism, including secure storage and validation of user credentials, session management, and MFA logic.
+\item[Services:] Authenticates users to grant access to the system based on credentials.
+\item[Implemented By:] Spring, React
+\item[Type of Module:] Abstract Object
 \end{description}
 
 \subsubsection{Administrator View Module (\mref{mAVM})}
@@ -295,7 +283,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Client View Module (\mref{mCVM})}
+\subsubsection{Patient View Module (\mref{mPVM})}
 
 \begin{description}
 \item[Secrets:]User interface customization based on the tools and functionality required by healthcare professionals.
@@ -304,22 +292,55 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Diagnosis Data Module (\mref{mDDM})}
+\subsubsection{Adminstrator Model Module (\mref{mAMM})} Gurleen
 
 \begin{description}
-  \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-  \item[Services:]Manages secure storage, retrieval, and updates of data related to diagnosis records. The ultimate purpose for this is to provide training data for the ciagnosis prediction module.
-  \item[Implemented By:]MongoDB, Spring
-  \item[Type of Module:]Record
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
 \end{description}
 
-\subsubsection{Medicine Data Module (\mref{mMDM})}
+\subsubsection{Patient Model Module (\mref{mPMM})} Gurleen
 
 \begin{description}
-  \item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-  \item[Services:]Manages secure storage, retrieval, and updates of data related to drug records. The ultimate purpose for this is to provide training data for the medicine prediction module.
-  \item[Implemented By:]MongoDB, Spring
-  \item[Type of Module:]Record
+\item[Secrets:]
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Broker Module (\mref{mBM})}
+
+\begin{description}
+\item[Secrets:] The logic for generating and validating OAuth tokens, handling API request routing, and defining access control policies for secure data sharing.
+\item[Services:] This module provides:
+\begin{itemize}
+    \item OAuth 2.0-based authentication and authorization for external API consumers.
+    \item Secure token generation, validation, and renewal.
+    \item Routing requests from external systems to the relevant internal modules.
+    \item Access control enforcement to protect sensitive data and resources.
+\end{itemize}
+\item[Implemented By:] Spring, OAuth 2.0
+\item[Type of Module:] Library
+\end{description}
+
+\subsubsection{Administrator Account Management Module (\mref{mAAMM})}
+
+\begin{description}
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks and healthcare professionals.
+\item[Implemented By:]MongoDB, Spring
+\item[Type of Module:]Record
+\end{description}
+
+\subsubsection{Patient Account Management Module (\mref{mPAMM})}
+
+\begin{description}
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to patient records.
+\item[Implemented By:]MongoDB, Spring
+\item[Type of Module:]Record
 \end{description}
 
 
@@ -334,24 +355,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Implemented By:] --
 \end{description}
 
-
-\subsubsection{App Module (\mref{mAM})}
-
-\begin{description}
-\item[Secrets:] The algorithm used to control and coordinate the flow of data between different modules.
-\item[Services:] Facilitates communication between different independent modules and manages the state of the application.
-\item[Implemented By:] React
-\item[Type of Module:] Abstract Object
-\end{description}
-
-\subsubsection{Report Generation Module (\mref{mRGM})}
-
-\begin{description}
-\item[Secrets:] The algorithm to generate accurate reports based on the transcribed data from the conversation.
-\item[Services:] Extracts the important aspects of medical data and compiled into the report.
-\item[Implemented By:] Python
-\item[Type of Module:] Library
-\end{description}
 
 \subsubsection{Transcription Module (\mref{mTM})}
 
@@ -389,24 +392,6 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:] Abstract object
 \end{description}
 
-\subsubsection{Administrator Account Management Module (\mref{mAMM})}
-
-\begin{description}
-\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks and healthcare professionals.
-\item[Implemented By:]MongoDB, Spring
-\item[Type of Module:]Record
-\end{description}
-
-\subsubsection{Patient Account Management Module (\mref{mPAM})}
-
-\begin{description}
-\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-\item[Services:]Manages secure storage, retrieval, and updates of data related to patient records.
-\item[Implemented By:]MongoDB, Spring
-\item[Type of Module:]Record
-\end{description}
-
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -420,20 +405,20 @@ This section shows traceability matrices: between the modules and the requiremen
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-FR1 & \mref{mAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR2 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR3 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR4 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR5 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR6 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-FR7 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAMM}\\
-FR8 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
-FR9 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
-FR10 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mPAM}\\
-FR11 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mTM}, \mref{mCM}, \mref{mPAM}\\
-FR12 & \mref{mAM},\mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mDPM}, \mref{mPAM}, \mref{mDDM}\\
-FR13 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mRGM}, \mref{mMPM}, \mref{mPAM}, \mref{mMDM}\\
-FR14 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mPAM}\\
+FR1 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR2 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR3 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR4 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR5 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR6 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR7 & \mref{mUAM}, \mref{mBM}, \mref{mAAMM}\\
+FR8 & \mref{mUAM}, \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
+FR9 & \mref{mUAM}, \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
+FR10 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
+FR11 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mTM}, \mref{mCM}, \mref{mPAMM}\\
+FR12 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mDPM}, \mref{mPAMM}\\
+FR13 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mMPM}, \mref{mPAMM}\\
+FR14 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mPAMM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Functional Requirements and Modules}
@@ -446,13 +431,13 @@ FR14 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mPAM}\\
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-NFR1 & \mref{mAM}, \mref{mAVM}, \mref{mCVM}\\
-NFR2 & \mref{mAM}, \mref{mAVM}, \mref{mCVM}\\
-NFR3 & \mref{mAM}, \mref{mTM}\\
-NFR4 & \mref{mAM}, \mref{mAMM}, \mref{mPAM}, \mref{mDDM}, \mref{mMDM}\\
+NFR1 & \mref{mAVM}, \mref{mPVM}\\
+NFR2 & \mref{mAVM}, \mref{mPVM}\\
+NFR3 & \mref{mTM}\\
+NFR4 & \mref{mAAMM}, \mref{mPAMM}\\
 NFR5 & All \\
-NFR6 & \mref{mAM}, \mref{mUAM}, \mref{mPAM}\\
-NFR7 & \mref{mAM}, \mref{mCVM}\\
+NFR6 & \mref{mUAM}, \mref{mPAMM}\\
+NFR7 & \mref{mPVM}\\
 NFR8 & All \\
 NFR9 & All \\
 \bottomrule
@@ -468,15 +453,15 @@ NFR9 & All \\
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-AC1 & \mref{mAPIM}\\
-AC2 & \mref{mAM}, \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
-IR1 & \mref{mUAM}, \mref{mAPIM}, \mref{mAVM}, \mref{mAMM}\\
+AC1 & \mref{mBM}\\
+AC2 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAAMM}\\
+IR1 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAAMM}\\
 IR2 & All \\
 IR3 & \mref{mDPM}, \mref{mMPM}\\
-IR4 & \mref{mAMM}, \mref{mPAM}\\
+IR4 & \mref{mAAMM}, \mref{mPAMM}\\
 IR5 & \mref{mDPM}, \mref{mMPM}\\
-IR6 & \mref{mRGM}, \mref{mCM}\\
-IR7 & \mref{mRGM}, \mref{mTM}\\
+IR6 & \mref{mPVM}, \mref{mCM}\\
+IR7 & \mref{mPVM}, \mref{mTM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Safety and Security Requirements and Modules}
@@ -489,10 +474,10 @@ IR7 & \mref{mRGM}, \mref{mTM}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acLogin} & \mref{mAM}, \mref{mUAM}\\
+\acref{acLogin} & \mref{mUAM}\\
 \acref{acTransSpeed} & \mref{mTM}\\
 \acref{acPredModules} & \mref{mDPM}, \mref{mMPM}\\
-\acref{acRealTime} & \mref{mAM}, \mref{mAPIM}, \mref{mCVM}, \mref{mTM}, \mref{mcM}\\
+\acref{acRealTime} & \mref{mBM}, \mref{mPVM}, \mref{mTM}, \mref{mCM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -530,10 +515,59 @@ arrows in the diagram typically correspond to the presence of import statement.}
 
 %\section*{References}
 
-\section{User Interfaces}
+\section{User Interfaces} \label{sec:UserInterfaces}
 
-\wss{Design of user interface for software and hardware.  Attach an appendix if
-needed. Drawings, Sketches, Figma}
+The user interfaces for the system are designed to provide an intuitive and efficient user experience for all stakeholders, including administrators and healthcare professionals. Below are the key interfaces:
+
+\subsection{Administrator Interface}
+\begin{description}
+    \item[Purpose:] Enable administrators to manage healthcare networks, onboard professionals, and maintain system configurations.
+    
+    \item[Key Features:] The following are the primary features designed to enhance system functionality and usability:
+    \begin{itemize}
+        \item Dashboard with system metrics (e.g., active users, reports generated).
+        \item Tools for adding, updating, and removing healthcare professionals and networks.
+        \item Secure authentication and role-based access.
+    \end{itemize}
+    
+    \item[Visual Design:] Includes a responsive layout with menus for navigation and data tables for record management.
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{admin.png}}
+    \caption{Administrator Interface Example}
+    \label{fig:admin-interface}
+\end{figure}
+
+\subsection{Healthcare Professional Interface}
+\begin{description}
+    \item[Purpose:] Facilitate healthcare professionals in managing patient records and accessing diagnostic tools.
+    
+    \item[Key Features:] The following are the primary features designed to enhance system functionality and usability:
+    \begin{itemize}
+        \item Login and authentication screens.
+        \item Forms for adding, updating, and deleting patient records.
+        \item Sections for generating diagnostic reports and viewing predictions for diagnosis and medications.
+        \item Quick access to transcription and classification results.
+    \end{itemize}
+    
+    \item[Visual Design:] Includes a sidebar navigation menu and form inputs optimized for rapid data entry.
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{healthcare_1.png}} 
+    \caption{Healthcare Professional Interface - Patient Record Form}
+    \label{fig:healthcare-interface-1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{healthcare_2.png}} 
+    \caption{Healthcare Professional Interface - Patient Record Form - Continued}
+    \label{fig:healthcare-interface-2}
+\end{figure}
 
 \section{Design of Communication Protocols}
 
@@ -544,7 +578,60 @@ The one use case where HTTP communication will not be used is for the transcript
 
 \section{Timeline}
 
-
+\begin{itemize}
+  \item Week of Jan. 19th -- Rev0 Demonstration:
+    \begin{itemize}
+      \item Transcription optimization (Gurleen, Pranav)
+      \item Text Classification Service Review (Moamen)
+      \item Setup Socket communication through API and Transcription Service (Pranav)
+      \item Containerize application + Setup deployment environment (Pranav)
+      \item Build out login page, dedication classify text UI (Inreet)
+    \end{itemize}
+  \item Week of Jan. 26th
+    \begin{itemize}
+      \item Setup ML Training Pipeline (Pranav)
+      \item Employee management + Patient Management Views (Inreet, Gurleen)
+      \item Data Layer setup (Moamen)
+    \end{itemize}
+  \item Week of Feb. 2nd
+    \begin{itemize}
+      \item Rev0 Demonstration
+      \item Complete final optimizations and refinements (All)
+      \item Worker onboarding FR
+    \end{itemize}
+  \item Week of Feb. 9th
+    \begin{itemize}
+      \item Supervisor acceptance meeting + resolve supervisor reviews (All)
+    \end{itemize}
+  \item Week of Feb. 16th
+    \begin{itemize}
+      \item VnV Report Completion
+      \item Testing introduce testing suites as per VnV.
+    \end{itemize}
+  \item Week of Feb. 23rd
+    \begin{itemize}
+      \item VnV Report Completion
+    \end{itemize}
+  \item Week of Mar. 2nd
+    \begin{itemize}
+      \item VnV Report Submission
+    \end{itemize}
+  \item Week of Mar. 9th
+    \begin{itemize}
+      \item Complete outlying tickets converse with supervisor on additional functionality.
+      \item Suggestion model retraining capabilities.
+    \end{itemize}
+  \item Week of Mar. 16th
+    \begin{itemize}
+      \item Diagonistic suggestions and Medication suggestions
+      \item Usable API for other networks to send patient charts.
+      \item Presentation preparation
+    \end{itemize}
+  \item Week of Mar. 23rd
+    \begin{itemize}
+      \item Presentation preparation finishing
+    \end{itemize}
+\end{itemize}
 
 \bibliographystyle {plainnat}
 \bibliography{../../../refs/References}

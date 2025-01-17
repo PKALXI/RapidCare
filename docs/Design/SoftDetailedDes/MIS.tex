@@ -502,14 +502,14 @@ N/A
 \newpage
 
   
-\section{MIS of Transcription Module} \label{trans_mod}
+\section{MIS of Transcription Module} \label{Transcription_Module}
 
 \subsection{Module}
-TransMod
+TranscriptionModule
 
 \subsection{Uses}
 
-This module does not use any other modules. It uses audio data as the input.
+N/A
 
 \subsection{Syntax}
 
@@ -524,7 +524,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-trans_mod & audio data stream & written transcribed text & UnclearAudio & \\ 
+Transcription & Audio: bytes & TranscribedText: string & InvalidInputError \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -538,28 +538,22 @@ N/A
 \subsubsection{Environment Variables}
 
 \begin{itemize}
-  \item Recording Tool: It needs access to the recording tool so that the conversation between the patient and healthcare professional is recorded.
+  \item Microphone: It needs to access the microphone so that the conversation between the patient and healthcare professional is recorded.
 \end{itemize}
 
 \subsubsection{Assumptions}
 
 \begin{itemize}
-  \item It is assumed that the input audio data is stable and will be provided in streams.
-  \item It is assumed that the medical terminologies used in the conversation is accurate.
-  \item There is no background noise.
+  \item It is assumed that the microphone works correctly in the system.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent trans_mod(AudioData: Stream)(): 
+\noindent TranscriptionModule(AudioData: bytes):
 \begin{itemize}
-\item transition:
-\begin{itemize}
-  \item Input audio data is provided in continuous streams in real-time.
-  \item The streams are sent to the speech-recognition engine for transcription.
-\end{itemize} 
-\item output: Written text transcribed from the audio stream. 
-\item exception: UnclearAudio - If there is any issue with the audio, for example: low volume or words not clear.  
+  \item transition: N/A
+  \item output: Transcribed text transcribed from the audio bytes. 
+  \item exception: InvalidInputError - If the bytes could not be converted to text. 
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -569,15 +563,15 @@ N/A
 \newpage
 ~\newpage
   
-\section{MIS of Classification Module} \label{Classify} 
+\section{MIS of Classification Module} \label{Classification_Module} 
 
 \subsection{Module}
 
-ClassifyMod
+ClassificationModule
 
 \subsection{Uses}
 
-It uses transcribed text from Transcription Module.
+N/A
 
 \subsection{Syntax}
 
@@ -592,7 +586,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-ClassifyMod & Transcribed Text & Classified Text & ClassificationError & \\
+Classification & TranscribedText: string & ClassifiedText: string & - & \\
 \hline
 \end{tabular}
 \end{center}
@@ -610,20 +604,16 @@ N/A
 \subsubsection{Assumptions}
 
 \begin{itemize}
-  \item It is assumed that the text is transcribed accurately by the Transcription Module for correct classification.
+  \item It is assumed that the transcribed text is in English language.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ClassifyMod(transcribed_text: text)():
+\noindent ClassifyModule(TranscribedText: string):
 \begin{itemize}
-\item transition:
-\begin{itemize}
-  \item Uses the classification model or rules to categorize the text or extract relevant information.
-  \item Structures the output as classified text containing extracted information.
-\end{itemize} 
+\item transition: N/A
 \item output: Classified text generated for report generation. 
-\item exception: ClassificationError - If the module fails to classify text accurately or encounters an error. 
+\item exception: N/A 
 \end{itemize}
 
 \subsubsection{Local Functions}

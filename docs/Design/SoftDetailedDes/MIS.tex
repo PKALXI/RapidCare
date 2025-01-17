@@ -359,7 +359,7 @@ User has a functional screen, keyboard, and microphone.
 
 \newpage
 
-\section{MIS of Broker Module } \label{Module_Broker} Pranav
+\section{MIS of Broker Module } \label{Module_Broker}
 
 \subsection{Module}
 Broker
@@ -372,6 +372,7 @@ Broker
   \item Diagnosis Prediction Module
   \item Medicine Prediction Module
   \item Administrator Account Management Module
+  \item Patient Account Management Module
 \end{itemize}
 
 \subsection{Syntax}
@@ -390,7 +391,7 @@ N/A
 \texttt{transcribeText} & request : FormData & transcribedText : String & FailedResponseError \\
 \texttt{classifyText} & request : FormData & classifiedText : map  & FailedResponseError \\
 \texttt{predictDiagnosis} & request : FormData & applicableDiagnosis : String & FailedResponseError \\
-\texttt{transcribeText} & request : FormData & applicableMedicine : String & FailedResponseError \\
+\texttt{predictedMedicine} & request : FormData & applicableMedicine : String & FailedResponseError \\
 \hline
 \end{tabular}
 \end{center}
@@ -601,22 +602,12 @@ DiagnosisPred
 
 \subsection{Uses}
 \begin{itemize}
-  \item Report Generation Module. Specific inputs for exported access programs:
-    \begin{itemize}
-      \item Past medical history : text
-      \item Symptoms : text
-      \item User characteristics :
-        \begin{itemize}
-          \item Age : integer
-          \item Weight : integer
-        \end{itemize}
-    \end{itemize}
+  \item Report Generation Module
   \item Preprocessing Module
   \item Tensorflow
   \item Scikit-Learn
   \item Flask
   \item Flask-CORS
-  \item Diagnostic Database (for training the model) [\ref{diag_data}]
 \end{itemize}
 
 \subsection{Syntax}
@@ -661,7 +652,7 @@ There will be no environment variables that this module will interact with.
 \noindent diagnosePatient(request : FormData):
 \begin{itemize}
 \item transition: N/A
-\item output: Returns the predicted diagnosis for the patient based on preprocessed input given by \texttt{preProcessData}. FormData is expected to contain the contents of the report generating module as seen in the ``Uses'' sections.
+\item output: Returns the predicted diagnosis for the patient based on preprocessed input given by \texttt{preProcessData}. FormData is expected to contain the key-value format of (past medical history:String, symptoms:String, user characteristics including age:int and weightLint, and physician confirmed diagnosis:String)
 \item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
 
@@ -685,23 +676,12 @@ MedPred
 
 \subsection{Uses}
 \begin{itemize}
-  \item Report Generation Module. Specific inputs for exported access programs:
-    \begin{itemize}
-      \item Past medical history : text
-      \item Symptoms : text
-      \item User characteristics :
-        \begin{itemize}
-          \item Age : integer
-          \item Weight : integer
-        \end{itemize}
-      \item Physician confirmed diagnosis.
-    \end{itemize}
+  \item Report Generation Module    
   \item Preprocessing Module
   \item Tensorflow
   \item Flask
   \item Flask-CORS
   \item Scikit-Learn
-  \item Medicine Database (for training the model) [\ref{med_data}]
 
 \end{itemize}
 
@@ -748,7 +728,7 @@ There will be no environment variables that this module will interact with.
 \noindent medicatePatient(request : FormData):
 \begin{itemize}
 \item transition: N/A
-\item output: preprocess the request body (FormData) which contain the inputs as specified above (from the ``Uses'' in report generating module) using the preprocess local function then Return the predicted medicine for the patient.
+\item output: preprocess the request body (FormData) which contains the has the key-value format of (past medical history:String, symptoms:String, user characteristics including age:int and weightLint, and physician confirmed diagnosis:String)
 \item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
 

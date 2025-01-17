@@ -360,12 +360,21 @@ User has a functional screen, keyboard, and microphone.
 \newpage
 
 \section{MIS of Broker Module } \label{Module_Broker}
+\section{MIS of Broker Module } \label{Module_Broker}
 
 \subsection{Module}
 Broker
 
 \subsection{Uses}
 
+\begin{itemize}
+  \item Transcription Module
+  \item Classification Module
+  \item Diagnosis Prediction Module
+  \item Medicine Prediction Module
+  \item Administrator Account Management Module
+  \item Patient Account Management Module
+\end{itemize}
 \begin{itemize}
   \item Transcription Module
   \item Classification Module
@@ -664,7 +673,7 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent trans_mod(AudioData: Stream)(): 
+\noindent trans\_mod(AudioData: Stream)(): 
 \begin{itemize}
   \item transition: N/A
   \item output: Transcribed text transcribed from the audio bytes. 
@@ -697,14 +706,14 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-ClassifyMod & Transcribed Text & Classified Text & ClassificationError & \\
-\hline
-\end{tabular}
-\end{center}
+  \begin{tabular}{p{2.5cm} p{4cm} p{4cm} p{3cm}}  % Adjusted last column width
+  \hline
+  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+  \hline
+  ClassifyMod & Transcribed Text & Classified Text & ClassificationError \\ 
+  \hline
+  \end{tabular}
+  \end{center}
 
 \subsection{Semantics}
 
@@ -724,7 +733,7 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ClassifyMod(transcribed_text: text)():
+\noindent ClassifyMod(transcribed\_text: text):
 \begin{itemize}
 \item transition: N/A
 \item output: Classified text generated for report generation. 

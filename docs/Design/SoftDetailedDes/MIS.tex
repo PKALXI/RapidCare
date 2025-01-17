@@ -366,15 +366,18 @@ Broker
 
 \subsection{Uses}
 
-This module facilitates secure authentication and authorization processes. Implements the OAuth 2.0 protocol to manage user authentication, issue access tokens, and validate token requests for secure resource access.
+\begin{itemize}
+  \item Transcription Module
+  \item Classification Module
+  \item Diagnosis Prediction Module
+  \item Medicine Prediction Module
+  \item Administrator Account Management Module
+\end{itemize}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-\begin{itemize}
-    \item \texttt{TOKEN\_EXPIRY}: Defines the duration of token validity (e.g., 3600 seconds).
-    \item \texttt{AUTH\_URL}: URL endpoint for authorization.
-\end{itemize}
+N/A
 
 \subsubsection{Exported Access Programs}
 
@@ -383,9 +386,11 @@ This module facilitates secure authentication and authorization processes. Imple
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\texttt{authorize} & Client ID, Scope & Authorization Code & Invalid credentials \\
-\texttt{getToken} & Auth Code, Client Secret & Access Token & Expired/invalid code \\
-\texttt{validateToken} & Access Token & Boolean & Expired/invalid token \\
+\texttt{getToken} & - & Token : String & InvalidTokenError \\
+\texttt{transcribeText} & request : FormData & transcribedText : String & FailedResponseError \\
+\texttt{classifyText} & request : FormData & classifiedText : map  & FailedResponseError \\
+\texttt{predictDiagnosis} & request : FormData & applicableDiagnosis : String & FailedResponseError \\
+\texttt{transcribeText} & request : FormData & applicableMedicine : String & FailedResponseError \\
 \hline
 \end{tabular}
 \end{center}
@@ -394,41 +399,66 @@ This module facilitates secure authentication and authorization processes. Imple
 
 \subsubsection{State Variables}
 
-\texttt{activeTokens}: Stores active access tokens and their metadata.
+\begin{itemize}
+  \item secretKey : String 
+\end{itemize}
 
 \subsubsection{Environment Variables}
 
-\begin{itemize}
-    \item Requires a stable database connection for token storage.
-    \item Relies on network connectivity for OAuth communications.
-\end{itemize}
+N/A
 
 \subsubsection{Assumptions}
 
 \begin{itemize}
-    \item The external client configurations align with OAuth 2.0 standards.
-    \item Tokens are used within their defined expiry period.
+  \item Requires a stable database connection.
+  \item All end points in distributed systems are up.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \texttt{authorize()}:
+\noindent getToken()-> String:
 \begin{itemize}
-    \item \textbf{Transition:} Generates an authorization code upon successful client validation.
-    \item \textbf{Output:} Authorization code.
-    \item \textbf{Exception:} Invalid client credentials.
+    \item \textbf{Transition:} N/A
+    \item \textbf{Output:} Issues an access token with encoded with the \texttt{secretKey}
+    \item \textbf{Exception:} InvalidTokenError : Invalid or expired authorization code.
 \end{itemize}
 
-\noindent \texttt{getToken()}:
+\noindent transcribeText(request : FormData)-> String:
 \begin{itemize}
-    \item \textbf{Transition:} Issues an access token and stores it in \texttt{activeTokens}.
-    \item \textbf{Output:} Access token.
-    \item \textbf{Exception:} Invalid or expired authorization code.
+    \item \textbf{Transition:} N/A
+    \item \textbf{Output:} Check if request header has valid token with \texttt{authorize}, then return live transcription of audio bytes in the request.body.
+    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
+\end{itemize}
+
+\noindent classifyText(request : FormData) -> map:
+\begin{itemize}
+    \item \textbf{Transition:} N/A
+    \item \textbf{Output:} Check if request header has valid token with \texttt{authorize}, then classify the request.text into the fields given in request.chart which represents the medical chart data in FormData form. Return map of text classified. 
+    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
+\end{itemize}
+
+\noindent predictDiagnosis(request : FormData) -> String:
+\begin{itemize}
+    \item \textbf{Transition:} N/A
+    \item \textbf{Output:} Check if request header has valid token with \texttt{authorize}, then provide stream of diagnosis suggestions based on request.chart which represents the medical chart data in FormData form.
+    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
+\end{itemize}
+
+\noindent predictMedicine(request : FormData)-> String:
+\begin{itemize}
+    \item \textbf{Transition:} N/A
+    \item \textbf{Output:} Check if request header has valid token with \texttt{authorize}, then provide stream of medicine suggestions based on request.chart which represents the medical chart data in FormData form.
+    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
 \end{itemize}
 
 \subsubsection{Local Functions}
 
-\texttt{hashSecret(secret: String) -> String}: Hashes the provided client secret for secure storage.
+\noindent authorize(header : String) -> boolean:
+\begin{itemize}
+    \item \textbf{Transition:} N/A
+    \item \textbf{Output:} This is a header function to make sure the request is authorized, here this function returns whether the request is authorized.
+    \item \textbf{Exception:} Invalid client credentials.
+\end{itemize}
 
 \newpage
 
@@ -451,14 +481,14 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-trans_mod & audio data stream & written transcribed text & UnclearAudio & \\ 
-\hline
-\end{tabular}
-\end{center}
+  \begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+  \hline
+  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+  \hline
+  trans\_mod & audio data stream & written transcribed text & UnclearAudio \\ 
+  \hline
+  \end{tabular}
+  \end{center}
 
 \subsection{Semantics}
 
@@ -482,7 +512,7 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent trans_mod(AudioData: Stream)(): 
+\noindent trans\_mod(AudioData: Stream)(): 
 \begin{itemize}
 \item transition:
 \begin{itemize}
@@ -519,14 +549,14 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-ClassifyMod & Transcribed Text & Classified Text & ClassificationError & \\
-\hline
-\end{tabular}
-\end{center}
+  \begin{tabular}{p{2.5cm} p{4cm} p{4cm} p{3cm}}  % Adjusted last column width
+  \hline
+  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+  \hline
+  ClassifyMod & Transcribed Text & Classified Text & ClassificationError \\ 
+  \hline
+  \end{tabular}
+  \end{center}
 
 \subsection{Semantics}
 
@@ -546,7 +576,7 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ClassifyMod(transcribed_text: text)():
+\noindent ClassifyMod(transcribed\_text: text):
 \begin{itemize}
 \item transition:
 \begin{itemize}
@@ -601,7 +631,7 @@ The exported constants for this module would a prediction of the possible diagno
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Flask Application (Python) & Symptoms, Past medical History, User characteristics & Prediction of possible Diagnosis & InputDimError \\
+diagnosePatient & request:FormData & Prediction of possible Diagnosis : String & InputDimError \\
 \hline
 \end{tabular}
 \end{center}
@@ -630,8 +660,8 @@ There will be no environment variables that this module will interact with.
 
 \noindent diagnosePatient(request : FormData):
 \begin{itemize}
-\item transition: Preprocess the request body (FormData) which contain the inputs as specified above using the preprocess local function. 
-\item output: Returns the predicted diagnosis for the patient.
+\item transition: N/A
+\item output: Returns the predicted diagnosis for the patient based on preprocessed input given by \texttt{preProcessData}. FormData is expected to contain the contents of the report generating module as seen in the ``Uses'' sections.
 \item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
 
@@ -639,8 +669,8 @@ There will be no environment variables that this module will interact with.
 
 \noindent preProcessData(pastHistory: String, symptoms: String, user -> \{age, weight\}):
 \begin{itemize}
-\item transition: Preprocess the text using TF-ID and normalize the continuous inputs.
-\item output: Return the preprocessed data.
+\item transition: N/A
+\item output: Preprocess the text using TF-ID and normalize the continuous inputs and return the preprocessed data.
 \item exception: InputDimError - The expected arguments were not received or were in the wrong format.
 \end{itemize}
 
@@ -687,7 +717,7 @@ The exported constants for this module would be a prediction of the possible med
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Flask Application (Python) & Symptoms, Past medical History, User characteristics, Diagnosis & Prediction of possible Medicine & InputDimError \\
+medicatePatient & request : FormData & Prediction of possible Medicine : String & InputDimError \\
 \hline
 \end{tabular}
 \end{center}
@@ -717,8 +747,8 @@ There will be no environment variables that this module will interact with.
 
 \noindent medicatePatient(request : FormData):
 \begin{itemize}
-\item transition: preprocess the request body (FormData) which contain the inputs as specified above using the preprocess local function. 
-\item output: Returns the predicted medicine for the patient.
+\item transition: N/A
+\item output: preprocess the request body (FormData) which contain the inputs as specified above (from the ``Uses'' in report generating module) using the preprocess local function then Return the predicted medicine for the patient.
 \item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
 
@@ -726,8 +756,8 @@ There will be no environment variables that this module will interact with.
 
 \noindent preProcessData(diagnosis: String, pastHistory: String, symptoms: String, user -> \{age, weight\}):
 \begin{itemize}
-\item transition: Preprocess the text using TF-ID and normalize the continuous inputs, finally the diagnosis will be encoded using a LabelEncoder.
-\item output: Return the preprocessed data.
+\item transition: N/A
+\item output: Preprocess the text using TF-ID and normalize the continuous inputs, finally the diagnosis will be encoded using a LabelEncoder then return the preprocessed data.
 \item exception: InputDimError - The expected arguments were not received or were in the wrong format.
 \end{itemize}
 

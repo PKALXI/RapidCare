@@ -464,7 +464,10 @@ AdminModel & - & - & - & \\
 
 \subsubsection{State Variables}
 
-N/A
+professional_name: string
+professional_age: integer
+Location: string
+Profession: string
 
 \subsubsection{Environment Variables}
 
@@ -476,23 +479,23 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \texttt{getter()}:
+\noindent \texttt{getter()}: This is the boiler state of this variable where it will get a certain start and return it.
 \begin{itemize}
     \item \textbf{Transition:} N/A
-    \item \textbf{Output:} The output depends on the data type of the parameter.
+    \item \textbf{Output:} The output depends on the data type of the parameter. It returns the current value of the requested data element.
     \item \textbf{Exception:} N/A
 \end{itemize}
 
-\noindent \texttt{setter()}:
+\noindent \texttt{setter()}: This is the boiler state of this variable where it will get a certain start and return it.
 \begin{itemize}
-    \item \textbf{Transition:} Updates the internal state of the data model, either by adding or updating data.
+    \item \textbf{Transition:} Updates the internal state of the data model, either by adding or updating data. This also changes certain state variables.
     \item \textbf{Output:} N/A
     \item \textbf{Exception:} N/A
 \end{itemize}
 
 \subsubsection{Local Functions}
 
-\noindent init(InputField: string):
+\noindent init(inputField: string):
 \begin{itemize}
 \item transition: N/A
 \item output: Necessary data structures and connections are made to manage and access data.
@@ -533,7 +536,19 @@ AdminModel & - & - & - & \\
 
 \subsubsection{State Variables}
 
-N/A
+patient_name = string
+date_of_birth = date
+patient_age = integer
+gender = string
+home_address = string
+email_address = string
+contact_number = string
+past_medical_history = string
+allergies(if any) = string
+family_history = string
+current_medications = string
+medical_record_number = string
+insurance_number = string
 
 \subsubsection{Environment Variables}
 
@@ -545,23 +560,23 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \texttt{getter()}:
+\noindent \texttt{getter()}: This is the boiler state of this variable where it will get a certain start and return it.
 \begin{itemize}
     \item \textbf{Transition:} N/A
-    \item \textbf{Output:} The output depends on the data type of the parameter.
+    \item \textbf{Output:} The output depends on the data type of the parameter. It returns the current value of the requested data element.
     \item \textbf{Exception:} N/A
 \end{itemize}
 
-\noindent \texttt{setter()}:
+\noindent \texttt{setter()}: This is the boiler state of this variable where it will get a certain start and return it.
 \begin{itemize}
-    \item \textbf{Transition:} Updates the internal state of the data model, either by adding or updating data.
+    \item \textbf{Transition:} Updates the internal state of the data model, either by adding or updating data. This also changes certain state variables
     \item \textbf{Output:} N/A
     \item \textbf{Exception:} N/A
 \end{itemize}
 
 \subsubsection{Local Functions}
 
-\noindent init(InputField: string):
+\noindent init(inputField: string):
 \begin{itemize}
 \item transition: N/A
 \item output: Necessary data structures and connections are made to manage and access data.

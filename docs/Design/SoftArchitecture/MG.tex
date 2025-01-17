@@ -251,7 +251,7 @@ Modules are decomposed according to the principle of ``information hiding'' prop
 
 Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{--}) is shown, this means that the module is not a leaf and will not have to be implemented.
 
-\subsection{Hardware Hiding Modules (\mref{mHH})}
+\subsection{Hardware Hiding Modules}
 
 \begin{description}
 \item[Secrets:]The data structure and algorithm used to implement the virtual hardware.
@@ -499,14 +499,14 @@ the modules. It can be seen that the graph is a directed acyclic graph
 system, and modules in the higher level of the hierarchy are essentially simpler
 because they use modules from the lower levels.
 
-\wss{The uses relation is not a data flow diagram.  In the code there will often
-be an import statement in module A when it directly uses module B.  Module B
-provides the services that module A needs.  The code for module A needs to be
-able to see these services (hence the import statement).  Since the uses
-relation is transitive, there is a use relation without an import, but the
-arrows in the diagram typically correspond to the presence of import statement.}
+% \wss{The uses relation is not a data flow diagram.  In the code there will often
+% be an import statement in module A when it directly uses module B.  Module B
+% provides the services that module A needs.  The code for module A needs to be
+% able to see these services (hence the import statement).  Since the uses
+% relation is transitive, there is a use relation without an import, but the
+% arrows in the diagram typically correspond to the presence of import statement.}
 
-\wss{If module A uses module B, the arrow is directed from A to B.}
+% \wss{If module A uses module B, the arrow is directed from A to B.}
 
 \begin{figure}[H]
 \centering
@@ -519,57 +519,92 @@ arrows in the diagram typically correspond to the presence of import statement.}
 
 \section{User Interfaces} \label{sec:UserInterfaces}
 
-The user interfaces for the system are designed to provide an intuitive and efficient user experience for all stakeholders, including administrators and healthcare professionals. Below are the key interfaces:
+The user interfaces for the system are designed to provide an intuitive and efficient user experience for all users, including administrators and healthcare professionals. Below are the key interfaces:
 
-\subsection{Administrator Interface}
+
+\subsection{Login Interface}
 \begin{description}
-    \item[Purpose:] Enable administrators to manage healthcare networks, onboard professionals, and maintain system configurations.
-    
-    \item[Key Features:] The following are the primary features designed to enhance system functionality and usability:
-    \begin{itemize}
-        \item Dashboard with system metrics (e.g., active users, reports generated).
-        \item Tools for adding, updating, and removing healthcare professionals and networks.
-        \item Secure authentication and role-based access.
-    \end{itemize}
-    
-    \item[Visual Design:] Includes a responsive layout with menus for navigation and data tables for record management.
+    \item[Purpose:]Enable users to Login to the system.
+   
+    \item[Visual Design:]Include input boxes to enter login credentials and signin and signup button to login or create an account respectively.
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{SignIn.jpg}}
+    \caption{Login Interface}
+    \label{fig:admin-interface}
+\end{figure}
+
+\newpage{}
+
+
+\subsection{Administrator Dashboard Interface}
+\begin{description}
+    \item[Purpose:]Enable administrators to manage healthcare network information, view metrics, and manage healthcare professionals.
+   
+    \item[Visual Design:]Include a navigation bar with options to manage healthcare network, add healthcare professional, reports, and settings. Different menus with an overview of heathcare network metrics.
 \end{description}
 
 \begin{figure}[h!]
     \centering
     \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{admin.png}}
-    \caption{Administrator Interface Example}
+    \caption{Administrator Dashboard Interface}
     \label{fig:admin-interface}
 \end{figure}
 
-\subsection{Healthcare Professional Interface}
+\newpage{}
+
+\subsection{Healthcare Professional Dashboard Interface}
 \begin{description}
-    \item[Purpose:] Facilitate healthcare professionals in managing patient records and accessing diagnostic tools.
+    \item[Purpose:]Enable healthcare professionals to view metrics, managing patient records, and upcoming appointments.
+
+    \item[Visual Design:]Include a navigation bar with options to view appointments, patient records, notifications, and account information. Different menus for with an overview of patient metrics and upcoming appointments.
     
-    \item[Key Features:] The following are the primary features designed to enhance system functionality and usability:
-    \begin{itemize}
-        \item Login and authentication screens.
-        \item Forms for adding, updating, and deleting patient records.
-        \item Sections for generating diagnostic reports and viewing predictions for diagnosis and medications.
-        \item Quick access to transcription and classification results.
-    \end{itemize}
-    
-    \item[Visual Design:] Includes a sidebar navigation menu and form inputs optimized for rapid data entry.
 \end{description}
 
 \begin{figure}[h!]
     \centering
-    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{healthcare_1.png}} 
-    \caption{Healthcare Professional Interface - Patient Record Form}
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{PatientDashboard.jpg}} 
+    \caption{Healthcare Professional Dashboard Interface}
     \label{fig:healthcare-interface-1}
 \end{figure}
 
+\newpage{}
+
+
+\subsection{Patient Profile Interface}
+\begin{description}
+    \item[Purpose:]Enable healthcare professionals to a view and edit patient record.
+
+    \item[Visual Design:]Include a breif overview of the profile and options to edit and close profile. Include a side bar to navigate quickly to frequently used options such as adding a SOAP note, view lab reports etc. Include a navigation bar with options to view profile information, medical history, consultation notes, appointment history, and documents.
+    
+\end{description}
+
 \begin{figure}[h!]
     \centering
-    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{healthcare_2.png}} 
-    \caption{Healthcare Professional Interface - Patient Record Form - Continued}
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{PatientProfileView.jpg}} 
+    \caption{Patient Profile Interface}
     \label{fig:healthcare-interface-2}
 \end{figure}
+
+\newpage{}
+
+\subsection{SOAP Note Interface}
+\begin{description}
+    \item[Purpose:]Enable healthcare professionals add a SOAP note during a consultation and add it to patient profile.
+
+    \item[Visual Design:]Include different fields to add subjective assessment, objective assessment, and assessment summary. Provide different button to start recording, stop recording, edit note to edit note manually by typing, save note, and back to profile.
+    
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth,height=6cm]{SOAPView.jpg}} 
+    \caption{SOAP Note Interface}
+    \label{fig:healthcare-interface-3}
+\end{figure}
+
 
 \section{Design of Communication Protocols}
 

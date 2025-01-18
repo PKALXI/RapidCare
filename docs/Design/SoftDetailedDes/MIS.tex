@@ -56,7 +56,8 @@ urlcolor=cyan          % color of external links
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Jan 14, 2025 & 1.1 & Initial Document\\
-% Date 2 & 1.1 & Notes\\
+Jan 17,2025 & 1.2 & Revised Document Incorporating Feedback\\
+
 \bottomrule
 \end{tabularx}
 
@@ -104,7 +105,9 @@ with the addition that template modules have been adapted from
 multiple assignment statement and conditional rules follow the form $(c_1
 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$.
 
-The following table summarizes the primitive data types used by \progname. 
+\subsection{Primitive Data Types}
+
+The following table summarizes the primitive data types used by \projname. 
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
@@ -114,20 +117,35 @@ The following table summarizes the primitive data types used by \progname.
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
 character & char & a single symbol or digit\\
-integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
-natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
+integer & int & a number without a fractional component in (-$\infty$, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
+boolean & boolean & value of true or false \\
 \bottomrule
 \end{tabular} 
 \end{center}
 
 \noindent
-The specification of \progname \ uses some derived data types: sequences, strings, and
-tuples. Sequences are lists filled with elements of the same data type. Strings
+The specification of \projname \ uses some derived data types: sequences, strings, and
+tuples, maps. Sequences are lists filled with elements of the same data type. Strings
 are sequences of characters. Tuples contain a list of values, potentially of
-different types. In addition, \progname \ uses functions, which
+different types. Maps contain key-value pairs. In addition, \projname \ uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
+
+\subsection{Imported Data Types}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\noindent 
+\begin{tabular}{l l p{7.5cm}} 
+\toprule 
+\textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
+\midrule
+FormData & FormData & A built-in browser API object used to construct a set of key/value pairs representing form fields and their values for HTTP requests. The keys and values are arbitrary to the use case.\\
+TensorFlow Sequential Model & tf.sequential & A deep learning model architecture from TensorFlow that allows layers to be stacked sequentially\\
+\bottomrule
+\end{tabular} 
+\end{center}
 
 \section{Module Decomposition}
 
@@ -174,7 +192,7 @@ Firebase Auth\\
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-isAuthenticated: Boolean
+isAuthenticated: boolean
 
 \subsubsection{Exported Access Programs}
 
@@ -191,7 +209,7 @@ Auth & - & React.component &  RenderError\\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-isUserAdmin: Boolean
+isUserAdmin: boolean
 
 \subsubsection{Environment Variables}
 N/A
@@ -233,7 +251,7 @@ N/A
 Administrator
 
 \subsection{Uses}
-Broker Module \\
+\hyperref[Module_Broker]{Broker Module} \\
 ReactJS\\
 
 \subsection{Syntax}
@@ -256,7 +274,7 @@ Administrator & - & React.component &  RenderError\\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-isAuthenticated: Boolean
+isAuthenticated: boolean
 
 \subsubsection{Environment Variables}
 Screen interface\\
@@ -299,7 +317,7 @@ User has a functional screen, keyboard, and Microphone.
 Patient
 
 \subsection{Uses}
-Broker Module \\
+\hyperref[Module_Broker]{Broker Module} \\
 ReactJS\\
 
 \subsection{Syntax}
@@ -322,7 +340,7 @@ Patient & - & React.component & RenderError \\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-isAuthenticated: Boolean
+isAuthenticated: boolean
 
 \subsubsection{Environment Variables}
 Screen interface\\
@@ -368,12 +386,12 @@ Broker
 \subsection{Uses}
 
 \begin{itemize}
-  \item Transcription Module
-  \item Classification Module
-  \item Diagnosis Prediction Module
-  \item Medicine Prediction Module
-  \item Administrator Account Management Module
-  \item Patient Account Management Module
+  \item \hyperref[Transcription_Module]{Transcription Module}
+  \item \hyperref[Classification_Module]{Classification Module}
+  \item \hyperref[diag_pred_mod]{Diagnosis Prediction Module}
+  \item \hyperref[med_pred_mod]{Medicine Prediction Module}
+  \item \hyperref[Module_AdminAccount]{Administrator Account Management Module}
+  \item \hyperref[Module_PatientAccountManag]{Patient Account Management Module}
 \end{itemize}
 
 \subsection{Syntax}
@@ -487,7 +505,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-AdminModel & - & - & - & \\ 
+AdminModel & - & - & - \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -559,7 +577,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-AdminModel & - & - & - & \\ 
+PatientModel & - & - & - \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -698,7 +716,7 @@ N/A
   \hline
   \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
   \hline
-  Classification & TranscribedText: String & ClassifiedText: String & - & \\
+  Classification & TranscribedText: String & ClassifiedText: String & - \\
   \hline
   \end{tabular}
   \end{center}
@@ -742,8 +760,6 @@ DiagnosisPred
 
 \subsection{Uses}
 \begin{itemize}
-  \item Report Generation Module
-  \item Preprocessing Module
   \item Tensorflow
   \item Scikit-Learn
   \item Flask
@@ -753,7 +769,7 @@ DiagnosisPred
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-The exported constants for this module would a prediction of the possible diagnosis.
+predictedDiagnosis : String \\
 
 \subsubsection{Exported Access Programs}
 
@@ -772,7 +788,7 @@ diagnosePatient & request:FormData & Prediction of possible Diagnosis : String &
 \subsubsection{State Variables}
 
 \begin{itemize}
-  \item model: Tensorflow model
+  \item model: tf.sequential
   % \item modelPipline : Abstract Object
 \end{itemize}
 
@@ -816,8 +832,6 @@ MedPred
 
 \subsection{Uses}
 \begin{itemize}
-  \item Report Generation Module    
-  \item Preprocessing Module
   \item Tensorflow
   \item Flask
   \item Flask-CORS
@@ -828,7 +842,7 @@ MedPred
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-The exported constants for this module would be a prediction of the possible medicine to treat the diagnosis.
+possibleMedicine : String\\
 
 \subsubsection{Exported Access Programs}
 
@@ -847,7 +861,7 @@ medicatePatient & request : FormData & Prediction of possible Medicine : String 
 \subsubsection{State Variables}
 
 \begin{itemize}
-  \item model: Tensorflow model
+  \item model: tf.sequential
   % \item modelPipeline : Abstract Object
 \end{itemize}
 
@@ -889,8 +903,7 @@ N/A
 AdministratorAccountManagement
 
 \subsection{Uses}
-Broker Module\\
-
+N/A
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
@@ -956,7 +969,7 @@ N/A
 PatientAccountManagement
 
 \subsection{Uses}
-Broker Module\\
+N/A
 
 \subsection{Syntax}
 

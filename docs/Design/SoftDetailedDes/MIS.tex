@@ -56,7 +56,8 @@ urlcolor=cyan          % color of external links
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Jan 14, 2025 & 1.1 & Initial Document\\
-% Date 2 & 1.1 & Notes\\
+Jan 17,2025 & 1.2 & Revised Document Incorporating Feedback\\
+
 \bottomrule
 \end{tabularx}
 
@@ -104,7 +105,9 @@ with the addition that template modules have been adapted from
 multiple assignment statement and conditional rules follow the form $(c_1
 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$.
 
-The following table summarizes the primitive data types used by \progname. 
+\subsection{Primitive Data Types}
+
+The following table summarizes the primitive data types used by \projname. 
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
@@ -114,20 +117,35 @@ The following table summarizes the primitive data types used by \progname.
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
 character & char & a single symbol or digit\\
-integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
-natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
+integer & int & a number without a fractional component in (-$\infty$, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
+boolean & boolean & value of true or false \\
 \bottomrule
 \end{tabular} 
 \end{center}
 
 \noindent
-The specification of \progname \ uses some derived data types: sequences, strings, and
-tuples. Sequences are lists filled with elements of the same data type. Strings
+The specification of \projname \ uses some derived data types: sequences, strings, and
+tuples, maps. Sequences are lists filled with elements of the same data type. Strings
 are sequences of characters. Tuples contain a list of values, potentially of
-different types. In addition, \progname \ uses functions, which
+different types. Maps contain key-value pairs. In addition, \projname \ uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
+
+\subsection{Imported Data Types}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\noindent 
+\begin{tabular}{l l p{7.5cm}} 
+\toprule 
+\textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
+\midrule
+FormData & FormData & A built-in browser API object used to construct a set of key/value pairs representing form fields and their values for HTTP requests. The keys and values are arbitrary to the use case.\\
+TensorFlow Sequential Model & tf.sequential & A deep learning model architecture from TensorFlow that allows layers to be stacked sequentially\\
+\bottomrule
+\end{tabular} 
+\end{center}
 
 \section{Module Decomposition}
 
@@ -174,7 +192,7 @@ Firebase Auth\\
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-isAuthenticated: Boolean
+isAuthenticated : boolean
 
 \subsubsection{Exported Access Programs}
 
@@ -191,7 +209,7 @@ Auth & - & React.component &  RenderError\\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-isUserAdmin: Boolean
+isUserAdmin : boolean
 
 \subsubsection{Environment Variables}
 N/A
@@ -221,7 +239,7 @@ N/A
 \begin{itemize}
 \item transition: Sends a reset link to the provided email and renders the login page.
 \item output: N/A
-\item exception: InvalidInpuError - Thrown if user input a invalid or unregistered email.
+\item exception: InvalidInpuError - Thrown if user input is invalid or unregistered email.
 \end{itemize}
 
 \newpage
@@ -233,7 +251,7 @@ N/A
 Administrator
 
 \subsection{Uses}
-Broker Module \\
+\hyperref[Module_Broker]{Broker Module} \\
 ReactJS\\
 
 \subsection{Syntax}
@@ -256,7 +274,7 @@ Administrator & - & React.component &  RenderError\\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-isAuthenticated: Boolean
+isAuthenticated : boolean
 
 \subsubsection{Environment Variables}
 Screen interface\\
@@ -264,7 +282,7 @@ Keyboard\\
 Microphone
 
 \subsubsection{Assumptions}
-User has a functional screen, keyboard, and Microphone.
+User has a functional screen, keyboard, and microphone.
 
 \subsubsection{Access Routine Semantics}
 
@@ -279,7 +297,7 @@ User has a functional screen, keyboard, and Microphone.
 
 \noindent handleAdminAccount(id: String, record: FormData, requestType: String):
 \begin{itemize}
-\item transition: Sends an API request to the broker Module to process an add, delete, or update operation in the Administrator Database.
+\item transition: Sends an API request to the Broker Module to process an add, delete, or update operation in the Administrator Database.
 \item output: N/A
 \item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
 \end{itemize} 
@@ -299,7 +317,7 @@ User has a functional screen, keyboard, and Microphone.
 Patient
 
 \subsection{Uses}
-Broker Module \\
+\hyperref[Module_Broker]{Broker Module} \\
 ReactJS\\
 
 \subsection{Syntax}
@@ -322,7 +340,7 @@ Patient & - & React.component & RenderError \\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-isAuthenticated: Boolean
+isAuthenticated : boolean
 
 \subsubsection{Environment Variables}
 Screen interface\\
@@ -368,12 +386,12 @@ Broker
 \subsection{Uses}
 
 \begin{itemize}
-  \item Transcription Module
-  \item Classification Module
-  \item Diagnosis Prediction Module
-  \item Medicine Prediction Module
-  \item Administrator Account Management Module
-  \item Patient Account Management Module
+  \item \hyperref[Transcription_Module]{Transcription Module}
+  \item \hyperref[Classification_Module]{Classification Module}
+  \item \hyperref[diag_pred_mod]{Diagnosis Prediction Module}
+  \item \hyperref[med_pred_mod]{Medicine Prediction Module}
+  \item \hyperref[Module_AdminAccount]{Administrator Account Management Module}
+  \item \hyperref[Module_PatientAccountManag]{Patient Account Management Module}
 \end{itemize}
 
 \subsection{Syntax}
@@ -418,35 +436,36 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent getToken()-> String:
+\noindent getToken():
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} Issues an access token with encoded with the \texttt{secretKey}
     \item \textbf{Exception:} InvalidTokenError : Invalid or expired authorization code.
 \end{itemize}
 
-\noindent transcribeText(request : FormData)-> String:
+\noindent transcribeText(request : FormData):
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} Check if request header has valid token with \texttt{authorize}, then return live transcription of audio bytes in the request.body.
     \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
 \end{itemize}
 
-\noindent classifyText(request : FormData) -> map:
+\noindent classifyText(request : FormData):
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} Check if request header has valid token with \texttt{authorize}, then classify the request.text into the fields given in request.chart which represents the medical chart data in FormData form. Return map of text classified. 
     \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
 \end{itemize}
 
-\noindent predictDiagnosis(request : FormData) -> String:
+\noindent predictDiagnosis(request : FormData):
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} Check if request header has valid token with \texttt{authorize}, then provide stream of diagnosis suggestions based on request.chart which represents the medical chart data in FormData form.
     \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
 \end{itemize}
 
-\noindent predictMedicine(request : FormData)-> String:
+
+\noindent predictMedicine(request : FormData):
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} Check if request header has valid token with \texttt{authorize}, then provide stream of medicine suggestions based on request.chart which represents the medical chart data in FormData form.
@@ -455,7 +474,7 @@ N/A
 
 \subsubsection{Local Functions}
 
-\noindent authorize(header : String) -> boolean:
+\noindent authorize(header : String):
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} This is a header function to make sure the request is authorized, here this function returns whether the request is authorized.
@@ -487,7 +506,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-AdminModel & - & - & - & \\ 
+AdminModel & - & - & - \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -496,10 +515,12 @@ AdminModel & - & - & - & \\
 
 \subsubsection{State Variables}
 
-name: String
-age: int
-location: String
-profession: String
+\begin{itemize}
+    \item name : String
+    \item age : int
+    \item location : String
+    \item profession : String
+\end{itemize}
 
 \subsubsection{Environment Variables}
 
@@ -559,7 +580,7 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-AdminModel & - & - & - & \\ 
+PatientModel & - & - & - \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -568,17 +589,19 @@ AdminModel & - & - & - & \\
 
 \subsubsection{State Variables}
 
-patientName : String
-dateOfBirth : date
-age : int
-gender : String
-address : String
-email : String
-contactNumber : String
-allergies : String
-medicalHistory : String
-medications : String
-insuranceInfo : String
+\begin{itemize}
+    \item patientName : String
+    \item dateOfBirth : date
+    \item age : int
+    \item gender : String
+    \item address : String
+    \item email : String
+    \item contactNumber : String
+    \item allergies : String
+    \item medicalHistory : String
+    \item medications : String
+    \item insuranceInfo : String
+\end{itemize}
 
 \subsubsection{Environment Variables}
 
@@ -698,7 +721,7 @@ N/A
   \hline
   \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
   \hline
-  Classification & TranscribedText: String & ClassifiedText: String & - & \\
+  Classification & TranscribedText: String & ClassifiedText: String & - \\
   \hline
   \end{tabular}
   \end{center}
@@ -716,17 +739,25 @@ N/A
 \subsubsection{Assumptions}
 
 \begin{itemize}
-  \item It is assumed that the transcribed text is in English language.
+  \item It is assumed that the transcribed text is in English language. Let $T$ be the complete transcribed text ($T = (w_1, w_2, \ldots, w_n)$ where $n$ is a natural number). Let $E$ be the set of all valid English words. Therefore: $(\forall w \in T \cdot (w \in E))$
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ClassifyModule(TranscribedText: String):
+\noindent classifyModule(TranscribedText: String):
+
 \begin{itemize}
 \item transition: N/A
-\item output: Classified text generated for report generation. 
+\item output: 
+  \begin{itemize}
+    \item Let $C$ be the set of all possible classified texts. $C = (c_1, c_2, \ldots, c_n)$ where $n$ is a natural number
+    \item Let $T$ be the set of all possible transcribed texts. $T = (t_1, t_2, \ldots, t_n)$ where $n$ is a natural number
+    \item Then classifyModule returns a classification ``$c$'' for a transcribed text ``$t$'' such that it fulfills the relation $R$ where $R \subseteq T \times C$, where $(t, c) \in R$.
+  \end{itemize}
 \item exception: N/A 
 \end{itemize}
+
+
 
 \subsubsection{Local Functions}
 
@@ -742,8 +773,6 @@ DiagnosisPred
 
 \subsection{Uses}
 \begin{itemize}
-  \item Report Generation Module
-  \item Preprocessing Module
   \item Tensorflow
   \item Scikit-Learn
   \item Flask
@@ -753,7 +782,7 @@ DiagnosisPred
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-The exported constants for this module would a prediction of the possible diagnosis.
+predictedDiagnosis : String \\
 
 \subsubsection{Exported Access Programs}
 
@@ -772,7 +801,7 @@ diagnosePatient & request:FormData & Prediction of possible Diagnosis : String &
 \subsubsection{State Variables}
 
 \begin{itemize}
-  \item model: Tensorflow model
+  \item model : tf.sequential
   % \item modelPipline : Abstract Object
 \end{itemize}
 
@@ -783,8 +812,8 @@ N/A
 \subsubsection{Assumptions}
 
 \begin{itemize}
-  \item Patients are not making up symptoms and all input features are accurate.
-  % \item Training pipeline for the model is setup
+  \item Patients are not making up any items in the patient chart and all input features are accurate.
+
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
@@ -792,16 +821,18 @@ N/A
 \noindent diagnosePatient(request : FormData):
 \begin{itemize}
 \item transition: N/A
-\item output: Returns the predicted diagnosis for the patient based on preprocessed input given by \texttt{preProcessData}. FormData is expected to contain the key-value format of (past medical history:String, symptoms:String, user characteristics including age:int and weightLint, and physician confirmed diagnosis:String)
+\item output: Returns the predicted diagnosis for the patient based on preprocessed input given by \texttt{preProcessData}. FormData is expected to contain the key-value format of (past medical history:String, symptoms:String, user characteristics including age:int and weight : int, and physician confirmed diagnosis:String)
 \item exception: InputDimError - The expected request body items were not received or were in the wrong format.
 \end{itemize}
 
+
+
 \subsubsection{Local Functions}
 
-\noindent preProcessData(pastHistory: String, symptoms: String, user -> \{age, weight\}):
+\noindent preProcessData(pastHistory: String, symptoms: String, user):
 \begin{itemize}
 \item transition: N/A
-\item output: Preprocess the text using TF-ID and normalize the continuous inputs and return the preprocessed data.
+\item output: Preprocess the text using ``Bag of Words'' (A String preprocessing technique) and normalize (scaling) the continuous inputs and return the preprocessed data as a map.
 \item exception: InputDimError - The expected arguments were not received or were in the wrong format.
 \end{itemize}
 
@@ -816,8 +847,6 @@ MedPred
 
 \subsection{Uses}
 \begin{itemize}
-  \item Report Generation Module    
-  \item Preprocessing Module
   \item Tensorflow
   \item Flask
   \item Flask-CORS
@@ -828,7 +857,7 @@ MedPred
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-The exported constants for this module would be a prediction of the possible medicine to treat the diagnosis.
+possibleMedicine : String\\
 
 \subsubsection{Exported Access Programs}
 
@@ -847,7 +876,7 @@ medicatePatient & request : FormData & Prediction of possible Medicine : String 
 \subsubsection{State Variables}
 
 \begin{itemize}
-  \item model: Tensorflow model
+  \item model : tf.sequential
   % \item modelPipeline : Abstract Object
 \end{itemize}
 
@@ -859,7 +888,7 @@ N/A
 
 
 \begin{itemize}
-  \item All input features are accurate.
+  \item Patients are not making up any items in the patient chart and all input features are accurate.
   % \item Training pipeline for the model is setup
 \end{itemize}
 
@@ -874,10 +903,10 @@ N/A
 
 \subsubsection{Local Functions}
 
-\noindent preProcessData(diagnosis: String, pastHistory: String, symptoms: String, user -> \{age, weight\}):
+\noindent preProcessData(diagnosis: String, pastHistory: String, symptoms: String, user):
 \begin{itemize}
 \item transition: N/A
-\item output: Preprocess the text using TF-ID and normalize the continuous inputs, finally the diagnosis will be encoded using a LabelEncoder then return the preprocessed data.
+\item output: Preprocess the text using ``Bag of Words'' (A String preprocessing technique) and normalize (scaling) the continuous inputs, finally the diagnosis will be encoded using a LabelEncoder then return the preprocessed data as a map.
 \item exception: InputDimError - The expected arguments were not received or were in the wrong format.
 \end{itemize}
 
@@ -889,8 +918,7 @@ N/A
 AdministratorAccountManagement
 
 \subsection{Uses}
-Broker Module\\
-
+N/A
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
@@ -956,7 +984,7 @@ N/A
 PatientAccountManagement
 
 \subsection{Uses}
-Broker Module\\
+N/A
 
 \subsection{Syntax}
 

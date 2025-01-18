@@ -315,15 +315,14 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{Broker Module (\mref{mBM})}
 
 \begin{description}
-\item[Secrets:]The logic for generating and validating OAuth tokens, handling API request routing, and defining access control policies for secure data sharing.
+\item[Secrets:]The logic for generating and validating OAuth tokens, handling service interaction, as well as handling communication protocols.
 \item[Services:]This module provides:
 \begin{itemize}
-    \item OAuth 2.0-based authentication and authorization for external API consumers.
-    \item Secure token generation, validation, and renewal.
-    \item Routing requests from external systems to the relevant internal modules.
-    \item Access control enforcement to protect sensitive data and resources.
+    \item OAuth 2.0-based request authentication and authorization for all requests.
+    \item Secure token generation, validation, and renewal. 
+    \item Routing requests between services to fulfill use cases.
 \end{itemize}
-\item[Implemented By:]Spring, Firebase Auth
+\item[Implemented By:]Spring, OAuth
 \item[Type of Module:]Abstract Object
 \end{description}
 

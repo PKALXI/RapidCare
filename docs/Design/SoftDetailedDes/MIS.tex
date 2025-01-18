@@ -65,7 +65,9 @@ Jan 17,2025 & 1.2 & Revised Document Incorporating Feedback\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document}
+See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document}\\
+\\
+
 
 \begin{tabularx}{\textwidth}{p{2cm}X}
   \toprule
@@ -179,7 +181,6 @@ The following table is taken directly from the Module Guide document for this pr
 \end{table}
 
 \newpage
-~\newpage
 
 \section{MIS of User Authentication Module} \label{Module_UserAuth}
 
@@ -295,14 +296,14 @@ User has a functional screen, keyboard, and microphone.
 
 \subsubsection{Local Functions}
 
-\noindent handleAdminAccount(id: String, record: FormData, requestType: String):
+\noindent handleAdminAccount(id : String, record : FormData, requestType : String):
 \begin{itemize}
 \item transition: Sends an API request to the Broker Module to process an add, delete, or update operation in the Administrator Database.
 \item output: N/A
 \item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
 \end{itemize} 
 
-\noindent validateInput(InputField: String):
+\noindent validateInput(InputField : String):
 \begin{itemize}
 \item transition: Renders a success or error message outlining the action performed.
 \item output: N/A
@@ -361,14 +362,14 @@ User has a functional screen, keyboard, and microphone.
 
 \subsubsection{Local Functions}
 
-\noindent handlePatientAccount(id: String, record: FormData, requestType: String):
+\noindent handlePatientAccount(id : String, record : FormData, requestType : String):
 \begin{itemize}
 \item transition: Sends an API request to the API Module to process an add, delete, or update operation in the Patient Database.
 \item output: N/A
 \item exception: InvalidInputError - Thrown if the formData is missing a field or is invalid.
 \end{itemize}
 
-\noindent validateInput(InputField: String):
+\noindent validateInput(InputField : String):
 \begin{itemize}
 \item transition: Renders a success/error message outlining the action performed.
 \item output: N/A
@@ -402,11 +403,11 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3.5cm}}
+\begin{tabular}{p{4cm} p{3cm} p{4cm} p{3.5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\texttt{getToken} & - & Token : String & InvalidTokenError \\
+\texttt{getToken} & - & token : String & InvalidTokenError \\
 \texttt{transcribeText} & request : FormData & transcribedText : String & FailedResponseError \\
 \texttt{classifyText} & request : FormData & classifiedText : map  & FailedResponseError \\
 \texttt{predictDiagnosis} & request : FormData & applicableDiagnosis : String & FailedResponseError \\
@@ -627,7 +628,7 @@ N/A
     \item exception: N/A
 \end{itemize}
 
-\noindent init(inputField: String):
+\noindent init(inputField : String):
 \begin{itemize}
 \item transition: N/A
 \item output: Necessary data structures and connections are made to manage and access data.
@@ -659,11 +660,11 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-Transcription & Audio: byte[] & TranscribedText: String & InvalidInputError \\ 
+Transcription & audioData : byte[] & transcribedText : String & InvalidInputError \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -684,7 +685,7 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent transMod(audioData: byte[]): 
+\noindent transMod(audioData : byte[]): 
 \begin{itemize}
   \item transition: N/A
   \item output: Transcribed text transcribed from the audio bytes. 
@@ -695,7 +696,6 @@ N/A
 
 N/A
 
-\newpage
 ~\newpage
   
 \section{MIS of Classification Module} \label{Classification_Module} 
@@ -721,7 +721,7 @@ N/A
   \hline
   \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
   \hline
-  Classification & TranscribedText: String & ClassifiedText: String & - \\
+  Classification & transcribedText : String & classifiedText : String & - \\
   \hline
   \end{tabular}
   \end{center}
@@ -744,7 +744,7 @@ N/A
 
 \subsubsection{Access Routine Semantics}
 
-\noindent classifyModule(TranscribedText: String):
+\noindent classifyModule(transcribedText : String):
 
 \begin{itemize}
 \item transition: N/A
@@ -787,11 +787,11 @@ predictedDiagnosis : String \\
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-diagnosePatient & request:FormData & Prediction of possible Diagnosis : String & InputDimError \\
+diagnosePatient & request : FormData & Prediction of possible Diagnosis : String & InputDimError \\
 \hline
 \end{tabular}
 \end{center}
@@ -829,7 +829,7 @@ N/A
 
 \subsubsection{Local Functions}
 
-\noindent preProcessData(pastHistory: String, symptoms: String, user):
+\noindent preProcessData(pastHistory : String, symptoms : String, user):
 \begin{itemize}
 \item transition: N/A
 \item output: Preprocess the text using ``Bag of Words'' (A String preprocessing technique) and normalize (scaling) the continuous inputs and return the preprocessed data as a map.
@@ -862,7 +862,7 @@ possibleMedicine : String\\
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -903,7 +903,7 @@ N/A
 
 \subsubsection{Local Functions}
 
-\noindent preProcessData(diagnosis: String, pastHistory: String, symptoms: String, user):
+\noindent preProcessData(diagnosis : String, pastHistory : String, symptoms : String, user):
 \begin{itemize}
 \item transition: N/A
 \item output: Preprocess the text using ``Bag of Words'' (A String preprocessing technique) and normalize (scaling) the continuous inputs, finally the diagnosis will be encoded using a LabelEncoder then return the preprocessed data as a map.
@@ -927,13 +927,13 @@ N/A
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{4cm} p{4.5cm} p{1cm} p{2.5cm}}
+\begin{tabular}{p{3.5cm} p{4cm} p{1cm} p{2.5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-addHealthcareProfessional & id:String, value: FormData & - & InvalidInputError \\
-deleteHealthcareProfessional & id:String & - & IdNotFound\\
-updateHealthcareProfessional & id:String, value: FormData & - & InvalidInputError \\
+addHealthProf & id : String, value : FormData & - & InvalidInputError \\
+deleteHealthProf & id : String & - & IdNotFound\\
+updateHealthProf & id : String, value : FormData & - & InvalidInputError \\
 \hline
 \end{tabular}
 \end{center}
@@ -951,21 +951,21 @@ Database containing the account information for healthcare professionals exists.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent addHealthcareProfessional(id:String, record: FormData):
+\noindent addHealthProf(id : String, record : FormData):
 \begin{itemize}
 \item transition: Adds a new document with the provided details to the database.
 \item output: N/A
 \item exception: InvalidInputError - The input data is incomplete or invalid or a duplicate document already exists.
 \end{itemize}
 
-\noindent deleteHealthcareProfessional(id:String):
+\noindent deleteHealthProf(id : String):
 \begin{itemize}
 \item transition: Deletes the corresponding document from the database.
 \item output: N/A
 \item exception: IdNotFound - Provided id is invalid or does not exist.
 \end{itemize}
 
-\noindent updateHealthcareProfessional(id:String, record: FormData):
+\noindent updateHealthProf(id : String, record : FormData):
 \begin{itemize}
 \item transition: Update document with the provided details in the database.
 \item output: N/A
@@ -998,9 +998,9 @@ N/A
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-createPatientRecord & id:String, value: FormData & - & InvalidInputError \\
-deletePatientRecord & id:String & - & IdNotFound\\
-updatePatientRecord & id:String, value: FormData & - & InvalidInputError \\
+createPatientRecord & id : String, value : FormData & - & InvalidInputError \\
+deletePatientRecord & id : String & - & IdNotFound\\
+updatePatientRecord & id : String, value : FormData & - & InvalidInputError \\
 \hline
 \end{tabular}
 \end{center}
@@ -1018,21 +1018,21 @@ Database containing the account information for the patients exists.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent createPatientRecord(id:String, record: FormData):
+\noindent createPatientRecord(id : String, record : FormData):
 \begin{itemize}
 \item transition: Adds a new document with the provided details to the database.
 \item output: N/A
 \item exception: InvalidInputError - The input data is incomplete or invalid or a duplicate document already exists.
 \end{itemize}
 
-\noindent deletePatientRecord(id:String):
+\noindent deletePatientRecord(id : String):
 \begin{itemize}
 \item transition: Deletes the corresponding document from the database.
 \item output: N/A
 \item exception: IdNotFound - Provided id is invalid or does not exist.
 \end{itemize}
 
-\noindent updatePatientRecord(id:String, record: FormData):
+\noindent updatePatientRecord(id : String, record : FormData):
 \begin{itemize}
 \item transition: Update document with the provided details in the database.
 \item output: N/A

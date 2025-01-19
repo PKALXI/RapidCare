@@ -210,9 +210,9 @@ Through both of these processes we will be able to ensure that the plan covers a
 The implementation verification plan is really a lot of static review this is include code walkthroughs and code inspections in conjunction with static analyzers. The plan will be as follows:
 
 \begin{enumerate}
-  \item Static analysis will be present at the CI/CD pipeline level essentially whenever code is committed or a pull request is created. This will help catch code errors or style violations.
-  \item Next, the team will do a high level code walkthrough to catch any high level logic errors.
-  \item Finally, in any critical sections or features we will do a thorough code inspection where we will go through a detailed checklist to ensure the implementation is verified.
+  \item Static analysis will be present at the CI/CD pipeline level, utilizing tools like \href{https://github.com/super-linter/super-linter}{Super-Linter} in our GitHub Actions sequence, to catch code errors or style violations whenever code is committed or a pull request is created, this will also expedite the code review process as we can have a level of checking to catch errors.
+  \item Next, the team will conduct a high-level code walkthrough to identify any high-level logic errors.
+  \item Finally, in any critical sections or features, we will perform a thorough code inspection, using a detailed checklist to ensure the implementation is verified.
 \end{enumerate}
 
 This strategy will be implemented in section \ref{section:4}.
@@ -924,7 +924,7 @@ How test will be performed: Tester will send a sample patient profile from one d
 
     \item{test-IR3-1}  \label{test-IR3-1} %Validation of confidence score
     
-    Type: Functional, Static, Automated
+    Type: Functional, Dynamic, Automated
     
     Initial State: The prediction model is ready for to predict medication and diagnosis.
     

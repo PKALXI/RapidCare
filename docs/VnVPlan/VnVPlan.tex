@@ -211,8 +211,13 @@ The implementation verification plan is really a lot of static review this is in
 
 \begin{enumerate}
   \item Static analysis will be present at the CI/CD pipeline level, utilizing tools like \href{https://github.com/super-linter/super-linter}{Super-Linter} in our GitHub Actions sequence, to catch code errors or style violations whenever code is committed or a pull request is created, this will also expedite the code review process as we can have a level of checking to catch errors.
-  \item Next, the team will conduct a high-level code walkthrough to identify any high-level logic errors.
-  \item Finally, in any critical sections or features, we will perform a thorough code inspection, using a detailed checklist to ensure the implementation is verified.
+  \item Next, the team will conduct a high-level code walkthrough to identify any high-level logic errors. This will also verify the service interaction flows to ensure the desired business logic is fulfilled.
+  \item Finally, in any critical sections or features, we will perform a thorough code inspection, using the following checklist to ensure the implementation is verified:
+    \begin{itemize}
+      \item Functionality aligns with requirements
+      \item Error handling is implemented correctly
+      \item Code is modular, maintainable and extendable
+    \end{itemize}
 \end{enumerate}
 
 This strategy will be implemented in section \ref{section:4}.

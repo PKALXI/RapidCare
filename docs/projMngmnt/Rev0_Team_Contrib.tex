@@ -24,7 +24,35 @@ Demo.  The time period of interest is the time between the POC demo and the Rev
 
 \section{Demo Plans}
 
-\wss{What will you be demonstrating}
+% \wss{What will you be demonstrating}
+Our project is a system which intends to speed up the documentation process for healthcare systems through audio transcription and automated report generation.\\
+
+The following list of risks were identified as a part of our Development Plan:
+\begin{itemize}
+  \item \textbf{Speech Input} -- A hospital or a clinic can be a loud place, in the event audio input is taken we need to ensure that it is clean and clear. This would mean essentially blocking outside noise. 
+  \item \textbf{Pre-Trained Models} -- To manipulate and use both inputs above we need to create a model to be accurate and provide accuracy when filling in charts. 
+  \item \textbf{Data Privacy} -- This application will hold a lot of patient data so creating a store that is secure and making sure standard data security practice is applied is a must.
+  \item \textbf{User Acceptance} -- This will require further elicitation with our supervisor. This would help us to gather data on what critical needs of healthcare professionals such that critical features are present. 
+\end{itemize}
+
+
+In the Rev 0 demonstration, we intend to demonstrate how we would address all the risks identified above. We would demonstrate the core functionality of the system which is the system's ability to log in the users and being able to access as an administrator and a healthcare professional. Along with that, healthcare professionals will be able to create a new patient profile using audio transcription. The module will take speech as input and convert that into text and then classify it to populate the a patient medical chart using pre trained models. Based on the symptoms, the system will provide diagonistic and medication predictions. The frontend and backend will be connected securely through an API Broker module to ensure secure transfer of data. To mitigate the user acceptance risk, we will demonstrate our Rev 0 demo to our supervisor who is a healthcare professional, to gain insights about the critical user needs. We aim to be able to identify that the charts should be filled in with an optimal amount of accuracy. The classified data should be displayed into the charts in real-time which we intend to demonstrate in our demo. \\
+
+Below is the list of component that will be demonstrated in the Rev 0 demo:
+\begin{itemize}
+  \item \textbf{User Authentication Module}: This will allow the users to login to the system using their credentials.
+  \item \textbf{Administrator View Module}: This will provide healthcare network adminstrators with tools to onboard, update and remove their network on the system. 
+  \item \textbf{Patient View Module}: This will provide healthcare professinals with tools to login, create, update, and delete patient records, provide diagnostic suggestions, and medication suggestions. 
+  \item \textbf{Administrator Model Module}: This will provide a contract of what is stored in the adminstrator account database and displayed on the UI.
+  \item \textbf{Patient Model Module}: This will provide a contract of what is stored in the patient account database and displayed on the UI.
+  \item \textbf{Broker Module}: This will provide OAuth 2.0-based request authentication and authorization for all requests. Along with this, it will provide secure token generation, validation, and renewal as well as routing requests between services to fulfill use cases.
+  \item \textbf{Administrator Account Management Module}: This will manage secure storage, retrieval, and update data related to healthcare networks and healthcare professionals.
+  \item \textbf{Patient Account Management Module}: This will manage secure storage, retrieval, and update data related to patient records.
+  \item \textbf{Transcription Module}: This will accurately convert the audio data from the conversation into written text.
+  \item \textbf{Classification Module}: This will accurately classify the medical data received from the transcription module into relevant categories.
+  \item \textbf{Diagnosis Prediction Module}: This will predict a set of applicable diagnoses for a patient based on patient characteristics, symptoms, and past medical history.
+  \item \textbf{Medicine Prediction Module}: This will predict a set of applicable medicines for a patient based on patient characteristics, symptoms, and past medical history based on the diagnosis.
+\end{itemize}
 
 \section{Team Meeting Attendance}
 

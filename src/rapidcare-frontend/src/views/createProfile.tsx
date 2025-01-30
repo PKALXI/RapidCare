@@ -122,9 +122,36 @@ const CreateProfile = () => {
                             <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Medications:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <div className="w-3.4">
+                              <div className="flex items-center mb-4"> <p className='mr-4'><strong>Date:</strong></p>
+                                <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                              </div>
+                              <div className="flex items-center mb-4"> <p className='mr-4'><strong>Medication:</strong></p>
+                                <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                              </div>
+                              <div className="flex items-center mb-4"> <p className='mr-4'><strong>Dosage:</strong></p>
+                                <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                              </div>
+                              <div className="flex items-center mb-4"> <p className='mr-4'><strong>Status:</strong></p>
+                                <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                              </div>
+                            </div>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Allergies (if applicable):</strong></p>
+                            <div className="w-3.4">
+                              <div className="flex items-center mb-4"> <p className='mr-4'><strong>Date:</strong></p>
+                                <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                              </div>
+                              <div className="flex items-center mb-4"> <p className='mr-4'><strong>Substance:</strong></p>
+                                <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                              </div>
+                              <div className="flex items-center mb-4"> <p className='mr-4'><strong>Symptom:</strong></p>
+                                <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                              </div>
+                              <div className="flex items-center mb-4"> <p className='mr-4'><strong>Status:</strong></p>
+                                <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                              </div>
+                            </div>
                             <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Physical examination:</strong></p>

@@ -24,14 +24,43 @@ Demo.  The time period of interest is the time between the POC demo and the Rev
 
 \section{Demo Plans}
 
-\wss{What will you be demonstrating}
+% \wss{What will you be demonstrating}
+Our project is a system which intends to speed up the documentation process for healthcare systems through audio transcription and automated report generation.\\
+
+The following list of risks were identified as a part of our Development Plan:
+\begin{itemize}
+  \item \textbf{Speech Input} -- A hospital or a clinic can be a loud place, in the event audio input is taken we need to ensure that it is clean and clear. This would mean essentially blocking outside noise. 
+  \item \textbf{Pre-Trained Models} -- To manipulate and use both inputs above we need to create a model to be accurate and provide accuracy when filling in charts. 
+  \item \textbf{Data Privacy} -- This application will hold a lot of patient data so creating a store that is secure and making sure standard data security practice is applied is a must.
+  \item \textbf{User Acceptance} -- This will require further elicitation with our supervisor. This would help us to gather data on what critical needs of healthcare professionals such that critical features are present. 
+\end{itemize}
+
+
+In the Rev 0 demonstration, we intend to demonstrate how we would address all the risks identified above. We would demonstrate the core functionality of the system which is the system's ability to log in the users and being able to access as an administrator and a healthcare professional. Along with that, healthcare professionals will be able to create a new patient profile using audio transcription. The module will take speech as input and convert that into text and then classify it to populate the a patient medical chart using pre trained models. Based on the symptoms, the system will provide diagonistic and medication predictions. The frontend and backend will be connected securely through an API Broker module to ensure secure transfer of data. To mitigate the user acceptance risk, we will demonstrate our Rev 0 demo to our supervisor who is a healthcare professional, to gain insights about the critical user needs. We aim to be able to identify that the charts should be filled in with an optimal amount of accuracy. The classified data should be displayed into the charts in real-time which we intend to demonstrate in our demo. \\
+
+Below is the list of component that will be demonstrated in the Rev 0 demo:
+\begin{itemize}
+  \item \textbf{User Authentication Module}: This will allow the users to login to the system using their credentials.
+  \item \textbf{Administrator View Module}: This will provide healthcare network adminstrators with tools to onboard, update and remove their network on the system. 
+  \item \textbf{Patient View Module}: This will provide healthcare professinals with tools to login, create, update, and delete patient records, provide diagnostic suggestions, and medication suggestions. 
+  \item \textbf{Administrator Model Module}: This will provide a contract of what is stored in the adminstrator account database and displayed on the UI.
+  \item \textbf{Patient Model Module}: This will provide a contract of what is stored in the patient account database and displayed on the UI.
+  \item \textbf{Broker Module}: This will provide OAuth 2.0-based request authentication and authorization for all requests. Along with this, it will provide secure token generation, validation, and renewal as well as routing requests between services to fulfill use cases.
+  \item \textbf{Administrator Account Management Module}: This will manage secure storage, retrieval, and update data related to healthcare networks and healthcare professionals.
+  \item \textbf{Patient Account Management Module}: This will manage secure storage, retrieval, and update data related to patient records.
+  \item \textbf{Transcription Module}: This will accurately convert the audio data from the conversation into written text.
+  \item \textbf{Classification Module}: This will accurately classify the medical data received from the transcription module into relevant categories.
+  \item \textbf{Diagnosis Prediction Module}: This will predict a set of applicable diagnoses for a patient based on patient characteristics, symptoms, and past medical history.
+  \item \textbf{Medicine Prediction Module}: This will predict a set of applicable medicines for a patient based on patient characteristics, symptoms, and past medical history based on the diagnosis.
+\end{itemize}
+
 
 \section{Team Meeting Attendance}
 
-\wss{For each team member how many team meetings have they attended over the
-time period of interest.  This number should be determined from the meeting
-issues in the team's repo.  The first entry in the table should be the total
-number of team meetings held by the team.}
+% \wss{For each team member how many team meetings have they attended over the
+% time period of interest.  This number should be determined from the meeting
+% issues in the team's repo.  The first entry in the table should be the total
+% number of team meetings held by the team.}
 
 \begin{table}[H]
 \centering
@@ -39,26 +68,25 @@ number of team meetings held by the team.}
 \toprule
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
-Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+Total & 10\\
+Gurleen Rahi & 10 \\
+Inreet Kaur & 10 \\
+Moamen Ahmed & 9 \\
+Pranav Kalsi & 10 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\wss{If needed, an explanation for the counts can be provided here.}
+% \wss{If needed, an explanation for the counts can be provided here.}
 
 \section{Supervisor/Stakeholder Meeting Attendance}
 
-\wss{For each team member how many supervisor/stakeholder team meetings have
-they attended over the time period of interest.  This number should be determined
-from the supervisor meeting issues in the team's repo.  The first entry in the
-table should be the total number of supervisor and team meetings held by the
-team.  If there is no supervisor, there will usually be meetings with
-stakeholders (potential users) that can serve a similar purpose.}
+% \wss{For each team member how many supervisor/stakeholder team meetings have
+% they attended over the time period of interest.  This number should be determined
+% from the supervisor meeting issues in the team's repo.  The first entry in the
+% table should be the total number of supervisor and team meetings held by the
+% team.  If there is no supervisor, there will usually be meetings with
+% stakeholders (potential users) that can serve a similar purpose.}
 
 \begin{table}[H]
 \centering
@@ -66,24 +94,25 @@ stakeholders (potential users) that can serve a similar purpose.}
 \toprule
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
-Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+Total &3 \\
+Gurleen Rahi & 3\\
+Inreet Kaur & 2\\
+Moamen Ahmed & 2\\
+Pranav Kalsi & 2\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\wss{If needed, an explanation for the counts can be provided here.}
+% \wss{If needed, an explanation for the counts can be provided here.}
+We have been in touch with our supervisor through email. We have sent all our documents including SRS, hazard analysis, and validation and verification plan to gain feedback on our plans and learn more about the literature. Additionally, we have set up a meeting to demonstrate our Rev 0 system demonstration to our supervisor and improve our system before the Rev 0 demonstration. 
+
 
 \section{Lecture Attendance}
 
-\wss{For each team member how many lectures have they attended over the time
-period of interest.  This number should be determined from the lecture issues in
-the team's repo.  The first entry in the table should be the total number of
-lectures since the beginning of the term.}
+% \wss{For each team member how many lectures have they attended over the time
+% period of interest.  This number should be determined from the lecture issues in
+% the team's repo.  The first entry in the table should be the total number of
+% lectures since the beginning of the term.}
 
 \begin{table}[H]
 \centering
@@ -91,22 +120,21 @@ lectures since the beginning of the term.}
 \toprule
 \textbf{Student} & \textbf{Lectures}\\
 \midrule
-Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+Total & 13\\
+Gurleen Rahi & 9\\ 
+Inreet Kaur & 10\\
+Moamen Ahmed & 8\\
+Pranav Kalsi & 11\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\wss{If needed, an explanation for the lecture attendance can be provided here.}
+% \wss{If needed, an explanation for the lecture attendance can be provided here.}
 
 \section{TA Document Discussion Attendance}
 
-\wss{For each team member how many of the informal document discussion meetings
-with the TA were attended over the time period of interest.}
+% \wss{For each team member how many of the informal document discussion meetings
+% with the TA were attended over the time period of interest.}
 
 \begin{table}[H]
 \centering
@@ -114,24 +142,23 @@ with the TA were attended over the time period of interest.}
 \toprule
 \textbf{Student} & \textbf{Lectures}\\
 \midrule
-Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+Total & 4\\
+Gurleen Rahi & 4\\
+Inreet Kaur & 4\\
+Moamen Ahmed & 4\\
+Pranav Kalsi & 4\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\wss{If needed, an explanation for the attendance can be provided here.}
+% \wss{If needed, an explanation for the attendance can be provided here.}
 
 \section{Commits}
 
-\wss{For each team member how many commits to the main branch have been made
-over the time period of interest.  The total is the total number of commits for
-the entire team since the beginning of the term.  The percentage is the
-percentage of the total commits made by each team member.}
+% \wss{For each team member how many commits to the main branch have been made
+% over the time period of interest.  The total is the total number of commits for
+% the entire team since the beginning of the term.  The percentage is the
+% percentage of the total commits made by each team member.}
 
 \begin{table}[H]
 \centering
@@ -139,26 +166,25 @@ percentage of the total commits made by each team member.}
 \toprule
 \textbf{Student} & \textbf{Commits} & \textbf{Percent}\\
 \midrule
-Total & Num & 100\% \\
-Name 1 & Num & \% \\
-Name 2 & Num & \% \\
-Name 3 & Num & \% \\
-Name 4 & Num & \% \\
-Name 5 & Num & \% \\
+Total & 338 & 100\% \\
+Gurleen Rahi & 102 & 30.18\% \\
+Inreet Kaur & 96 & 28.4\% \\
+Moamen Ahmed & 25 & 7.40\% \\
+Pranav Kalsi & 115 & 34.02\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\wss{If needed, an explanation for the counts can be provided here.  For
-instance, if a team member has more commits to unmerged branches, these numbers
-can be provided here.  If multiple people contribute to a commit, git allows for
-multi-author commits.}
+% \wss{If needed, an explanation for the counts can be provided here.  For
+% instance, if a team member has more commits to unmerged branches, these numbers
+% can be provided here.  If multiple people contribute to a commit, git allows for
+% multi-author commits.}
 
 \section{Issue Tracker}
 
-\wss{For each team member how many issues have they authored (including open and
-closed issues (O+C)) and how many have they been assigned (only counting closed
-issues (C only)) over the time period of interest.}
+% \wss{For each team member how many issues have they authored (including open and
+% closed issues (O+C)) and how many have they been assigned (only counting closed
+% issues (C only)) over the time period of interest.}
 
 \begin{table}[H]
 \centering
@@ -166,22 +192,18 @@ issues (C only)) over the time period of interest.}
 \toprule
 \textbf{Student} & \textbf{Authored (O+C)} & \textbf{Assigned (C only)}\\
 \midrule
-Name 1 & Num & Num \\
-Name 2 & Num & Num \\
-Name 3 & Num & Num \\
-Name 4 & Num & Num \\
-Name 5 & Num & Num \\
+Gurleen Rahi & 43 & 53\\
+Inreet Kaur & 44 & 59\\
+Moamen Ahmed & 14 & 43\\
+Pranav Kalsi & 35 & 61\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\wss{If needed, an explanation for the counts can be provided here.}
+% \wss{If needed, an explanation for the counts can be provided here.}
 
 \section{CICD}
 
-\wss{Say how CICD is used in your project}
-
-\wss{If your team has additional metrics of productivity, please feel free to
-add them to this report.}
+Our CICD strategy is using super-linter to lint our code. A perk of super-linter is that it provides feedback relating to coding standards that were outlined in the development plan. Through this, we will be able to automate and streamline the integration process. Additionally, developers will get continuous and immediate feedback on the code such that they will be able to iterate in an agile fashion.
 
 \end{document}

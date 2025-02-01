@@ -29,64 +29,76 @@ const SoapView: React.FC = () => {
           <div> 
             <h3 className='font-bold'>Subjective Assessment</h3>
             <div className='mt-5'>
-              <label className="block mb-1 font-medium">Symptoms</label>
+              <label className="block mb-1 font-medium">Symptoms:</label>
+              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
+            </div>
+            <div className='mt-5'>
+              <label className="block mb-1 font-medium">History of present illness:</label>
+              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
+            </div>
+            <div className='mt-5'>
+              <label className="block mb-1 font-medium">Current medications:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className="block mb-1 font-medium">Allergies</label>
+              <label className="block mb-1 font-medium">Allergies:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className="block mb-1 font-medium">Medications (if applicable)</label>
+              <label className="block mb-1 font-medium">Past medical history:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className="block mb-1 font-medium">Past Medical History</label>
+              <label className="block mb-1 font-medium">Family history:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className="block mb-1 font-medium">Last meal</label>
+              <label className="block mb-1 font-medium">Last meal:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
           </div>
           <div>
             <h3 className='font-bold'>Objective Assessment</h3>
             <div className='mt-5'>
-              <label className='block mb-1 font-medium'>Breathing</label>
+              <label className='block mb-1 font-medium'>Breathing:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Circulation</label>
+              <label className='block mb-1 font-medium'>Circulation:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Skin Type</label>
+              <label className='block mb-1 font-medium'>Skin type:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Head-to-Toe check</label>
+              <label className='block mb-1 font-medium'>Head-to-Toe check:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Level of Consciousness</label>
+              <label className='block mb-1 font-medium'>Level of consciousness:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
           </div>
           <div>
             <h3 className='font-bold'>Assessment Summary</h3>
             <div className='mt-5'>
-              <label className='block mb-1 font-medium'>Situation arising as a result of previous problem</label>
+              <label className='block mb-1 font-medium'>Situation arising as a result of previous problem:</label>
               <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
             </div>
           </div>
           <div>
             <h3 className='font-bold'>Plan</h3>
             <div className='mt-5'>
-              <label className='block mb-1 font-medium'>Care</label>
+              <label className='block mb-1 font-medium'>Care:</label>
+              <textarea className='w-full border p-2 rounded' placeholder="Type Here.."></textarea>
+            </div>
+            <div className='mt-5'>
+              <label className='block mb-1 font-medium'>Medications needed:</label>
               <textarea className='w-full border p-2 rounded' placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Monitor Health</label>
+              <label className='block mb-1 font-medium'>Monitor health:</label>
               <textarea className='w-full border p-2 rounded' placeholder="Type Here.."></textarea>
             </div>
             <div className='mt-2'>

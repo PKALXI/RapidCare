@@ -1,9 +1,9 @@
 import React from "react";
-import Footer from "./components/footer";
-import Navbar from "./components/navBar";
+import Footer from "../components/Footer";
+import Navbar from "../components/NavBar";
 import { useSelector } from 'react-redux';
-import { RootState } from "../redux/store";
-
+import { RootState } from "../../redux/store";
+import { Card, CardContent, Typography, Button, Container } from "@mui/material";
 
 
 const HpDashboard = () => {
@@ -40,27 +40,24 @@ const HpDashboard = () => {
 
 
                     <div className="bg-white md:col-span-1 rounded-lg shadow-lg p-6 ">
-                        <h3 className="text-2xl font-bold mb-4 ml-6">Upcoming Appointments</h3>
-                        <ul className="space-y-4 ml-6 mr-6">
-                            {consultations?.map((consultation, index) => (
-                                <li
-                                    key={index}
-                                    className="flex items-center justify-between p-4 bg-gray-100 rounded-lg shadow-sm">
-                                    <div className="flex items-center ml-6">
-                                        <div>
-                                            <p className="font-semibold">{consultation.patientName}</p>
-                                            <p className="text-gray-600">{consultation.date}</p>
-                                        </div>
-                                    </div>
-                                    <div className="text-right mr-6">
-                                        <p className="font-semibold">{consultation.time}</p>
-                                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 mt-2 rounded">
-                                            View Patient Record
-                                        </button>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
+                        <Typography variant="h5" gutterBottom>
+                            Upcoming Appointments
+                        </Typography>
+                        {consultations?.map((consultation, index) => (
+                        <Card key={index} className="mb-4 p-2">
+                            <CardContent className="flex justify-between items-center">
+                                <div>
+                                    <Typography variant="h6">{consultation.patientName}</Typography>
+                                    <Typography variant="body2" color="text.secondary">{consultation.date}</Typography>
+                                </div>
+
+                                <div className="text-right">
+                                    <Typography variant="body1">{consultation.time}</Typography>
+                                    <Button variant="contained" color="primary">View Details</Button>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -69,15 +66,5 @@ const HpDashboard = () => {
         </div>
     );
 };
-
-// const mapStateToProps = (state: AppState) => {
-//     console.log(state);
-//     return {
-//         healthcareProfessional: state.login.healthcareProfessional,
-//         dashboardMetrics: state.login.healthcareProfessional?.dashboardMetrics,
-//         consultations: state.login.healthcareProfessional?.consultations,
-//     };
-
-// };
 
 export default (HpDashboard);

@@ -1,11 +1,11 @@
 export interface AppState {
     isUserAdmin: boolean;
     isAuthenticated: boolean;
-    healthNetworkAdmin: HealthNetworkAdminState | null;
-    healthcareProfessional: HealthcareProfessionalState | null;
+    healthNetworkAdmin: IHealthNetworkAdminState | null;
+    healthcareProfessional: IHealthcareProfessionalState | null;
 }
 
-export interface HealthNetworkAdminState {
+export interface IHealthNetworkAdminState {
     id: string;
     name: string;
     email: string;
@@ -14,19 +14,19 @@ export interface HealthNetworkAdminState {
         totalPatients: number;
         newPatients: number;
         totalHospitals: number;
-        hospitals: Hospital[];
+        hospitals: IHospital[];
     }
 }
 
-export interface Hospital {
+export interface IHospital {
     id: string;
     name: string;
     address: string;
-    healthcareProfessionals?: HealthcareProfessional[];
-    patients?: Patient[];
+    healthcareProfessionals?: IHealthcareProfessional[];
+    patients?: IPatient[];
 }
 
-export interface HealthcareProfessional {
+export interface IHealthcareProfessional {
     id: string;
     name: string;
     email: string;
@@ -35,7 +35,7 @@ export interface HealthcareProfessional {
     department: string;
 }
 
-export interface HealthcareProfessionalState {
+export interface IHealthcareProfessionalState {
     id: string;
     name: string;
     email: string;
@@ -47,84 +47,96 @@ export interface HealthcareProfessionalState {
         newPatientsThisMonth: number;
         totalPatients: number;
     };
-    patients?: Patient[];
-    consultations?: Consultation[];
+    patients: IPatient[];
+    consultations?: IConsultation[];
 }
 
 
-export interface Consultation {
+export interface IConsultation {
     patientName: string;
     photo?: string;
     date: string;
     time: string;
 }
 
-export interface Patient {
+export interface IPatient {
     id: string;
-    profileInformation?: {
-        demographics?: {
-            name: string;
-            gender: string;
-            dateOfBirth: string;
-            age: number;
-            weight: number;
-            height: number;
-            maritalStatus: string;
-        };
+    profileInformation?: IProfileInfo;
+    medicalHistory?: IMedicalHistory;
+    consultationNotes?: ISoapNote[];
+    documents?: IDocument[];
+}
 
-        insuranceInformation?: {
-            memberID: string;
-            policyNumber: string;
-            provider: string;
-        };
-
-        contactInformation?: {
-            email: string;
-            phone: string;
-            address: string;
-        };
-        emergencyContact?: {
-            name: string;
-            relationship: string;
-            number: string;
-            address: string;
-        };
+export interface IProfileInfo {
+    demographics?: IDemographics;
+    insuranceInformation?: {
+        memberID: string;
+        policyNumber: string;
+        provider: string;
     };
 
-    medicalHistory?: MedicalHistory;
-    consultationNotes?: SoapNote[];
-    documents?: {
-        documentId: string;
-        image: string;
-    }[];
+    contactInformation?: {
+        email: string;
+        phone: string;
+        address: string;
+    };
+
+    emergencyContact?: {
+        name: string;
+        relationship: string;
+        phone: string;
+        address: string;
+    };
+};
+export interface IDemographics{
+    name: string;
+    gender: string;
+    dateOfBirth: string;
+    age: number;
+    weight: number;
+    height: number;
+    maritalStatus: string;
+    healthcardNumber?: string;
+    occupation?: string
+};
+
+export interface IMedicalHistory {
+    allergies?: IAllergy[];
+    prescriptions?: IPrescription[]
 }
 
-export interface MedicalHistory {
-    allergies?: {
-        date: string;
-        substance: string;
-        sympton: string;
-        status: string;
-    }[];
-    medications?: {
-        date: string;
-        medication: string;
-        dosage: string;
-        status: string;
-    }[];
-    appointments?: {
-        date: string;
-        reason: string;
-        practioner: string;
-        notes: string;
-    }[];
+export interface IAllergy {
+    date: string;
+    substance: string;
+    symptoms: string;
+    status: string;
+}
+export interface IPrescription {
+    date: string;
+    medication: string;
+    dosage: string;
+    status: string;
+}
+export interface IAppointment {
+    date: string;
+    reason: string;
+    practioner: string;
+    notes: string;
 }
 
+export interface IDocument {
+    documentId: string;
+    name: string;
+    type: string;
+    url: string;
+}
 
-export interface SoapNote {
+export interface ISoapNote {
     id: string;
     date: string;
-    subjectiveAssesment?: {
+    practioner: string;
+    reasonForVisit: string;
+    subjectiveAssesment: {
         symptoms?: string;
         allergies?: string;
         medications?: string;
@@ -132,7 +144,7 @@ export interface SoapNote {
         lastMeal?: string;
 
     };
-    objectiveAssessment?: {
+    objectiveAssessment: {
         breathing?: string;
         circulation?: string;
         skinType?: string;

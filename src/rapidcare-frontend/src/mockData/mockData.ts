@@ -43,7 +43,7 @@ export function generateHealthcareProfessionalMockData(): AppState {
                         emergencyContact: {
                             name: "John Johnson",
                             relationship: "Husband",
-                            number: "555-8765",
+                            phone: "555-8765",
                             address: "123 Elm Street, Springfield",
                         },
                     },
@@ -52,33 +52,120 @@ export function generateHealthcareProfessionalMockData(): AppState {
                             {
                                 date: "2023-01-10",
                                 substance: "Peanuts",
-                                sympton: "Hives and swelling",
+                                symptoms: "Hives and swelling",
                                 status: "Active",
                             },
+                            {
+                                date: "2023-01-10",
+                                substance: "Peanuts",
+                                symptoms: "Hives and swelling",
+                                status: "Active",
+                            },
+                            {
+                                date: "2023-01-10",
+                                substance: "Peanuts",
+                                symptoms: "Hives and swelling",
+                                status: "Active",
+                            }
+                            
                         ],
-                        medications: [
+                        prescriptions: [
                             {
                                 date: "2023-05-12",
                                 medication: "Aspirin",
                                 dosage: "100mg daily",
                                 status: "Ongoing",
                             },
-                        ],
-                        appointments: [
                             {
-                                date: "2023-10-15",
-                                reason: "Routine Checkup",
-                                practioner: "Dr. Jane Smith",
-                                notes: "Patient is in good health. Continue medication as prescribed.",
-                            },
+                                date: "2023-05-12",
+                                medication: "Aspirin",
+                                dosage: "100mg daily",
+                                status: "Ongoing",
+                            }
                         ],
                     },
-                    consultationNotes: [],
+                    consultationNotes: [
+                        {
+                            id: "1",
+                            date: "2024-01-15",
+                            practioner: "Dr. Emily Carter",
+                            reasonForVisit: "Routine Checkup",
+                            subjectiveAssesment: {
+                                symptoms: "None",
+                                allergies: "N/A",
+                                medications: "Multivitamins",
+                                medicalHistory: "No prior conditions",
+                                lastMeal: "Breakfast",
+                            },
+                            objectiveAssessment: {
+                                breathing: "Normal",
+                                circulation: "Stable",
+                                skinType: "Healthy",
+                                headToToeCheck: "No abnormalities",
+                                levelOfConsciousness: "Alert",
+                            },
+                            summary: "Patient is in good health.",
+                            plan: "Continue regular exercise and healthy diet.",
+                        },
+                        {
+                            id: "2",
+                            date: "2024-02-10",
+                            practioner: "Dr. Alex Smith",
+                            reasonForVisit: "Back Pain",
+                            subjectiveAssesment: {
+                                symptoms: "Lower back pain",
+                                allergies: "None",
+                                medications: "Ibuprofen",
+                                medicalHistory: "No chronic issues",
+                                lastMeal: "Lunch",
+                            },
+                            objectiveAssessment: {
+                                breathing: "Normal",
+                                circulation: "Stable",
+                                skinType: "Normal",
+                                headToToeCheck: "Mild tenderness in lower back",
+                                levelOfConsciousness: "Alert",
+                            },
+                            summary: "Likely muscular strain.",
+                            plan: "Prescribed pain relievers, recommended physiotherapy.",
+                        },
+                        {
+                            id: "3",
+                            date: "2024-03-05",
+                            practioner: "Dr. Sophia Lee",
+                            reasonForVisit: "Allergy Symptoms",
+                            subjectiveAssesment: {
+                                symptoms: "Runny nose, sneezing",
+                            
+                                
+                                medicalHistory: "Mild seasonal allergies Mild seasonal allergies Mild seasonal allergies Mild seasonal allergies Mild seasonal allergies Mild seasonal allergiesMild seasonal allergies Mild seasonal allergiesMild seasonal allergies",
+                                lastMeal: "Dinner",
+                            },
+                            objectiveAssessment: {
+                                breathing: "Slight congestion",
+                                circulation: "Stable",
+                                skinType: "No rashes",
+                                headToToeCheck: "Mild nasal congestion",
+                                levelOfConsciousness: "Alert",
+                            },
+                            summary: "Seasonal allergies affecting patient.",
+                            plan: "Increase antihistamines, avoid exposure to dust.",
+                        },
+                    ],
                     documents: [
                         {
-                            documentId: "doc1",
-                            image: "document1.jpg",
+                            documentId: "1738391167785",
+                            name: "A1.pdf",
+                            type:"application/pdf",
+                            url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
                         },
+                        {
+                            documentId: "1738391167785",
+                            name: "A1.pdf",
+                            type:"application/pdf",
+                            url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
+                        },
+                        
                     ],
                 },
                 {
@@ -106,7 +193,7 @@ export function generateHealthcareProfessionalMockData(): AppState {
                         emergencyContact: {
                             name: "Alice Williams",
                             relationship: "Sister",
-                            number: "555-6789",
+                            phone: "555-6789",
                             address: "789 Pine Road, Shelbyville",
                         },
                     },
@@ -115,11 +202,11 @@ export function generateHealthcareProfessionalMockData(): AppState {
                             {
                                 date: "2022-11-05",
                                 substance: "Penicillin",
-                                sympton: "Rash",
+                                symptoms: "Rash",
                                 status: "Resolved",
                             },
                         ],
-                        medications: [
+                        prescriptions: [
                             {
                                 date: "2023-03-22",
                                 medication: "Metformin",
@@ -127,21 +214,26 @@ export function generateHealthcareProfessionalMockData(): AppState {
                                 status: "Ongoing",
                             },
                         ],
-                        appointments: [
-                            {
-                                date: "2023-09-10",
-                                reason: "Follow-up",
-                                practioner: "Dr. Jane Smith",
-                                notes: "Blood sugar levels improving. Continue prescribed treatment.",
-                            },
-                        ],
                     },
                     consultationNotes: [],
                     documents: [
                         {
-                            documentId: "doc2",
-                            image: "document2.jpg",
+                            documentId: "1738391167785",
+                            name: "A1.pdf",
+                            type:"application/pdf",
+                            url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
+                        },{
+                            documentId: "1738391167785",
+                            name: "A1.pdf",
+                            type:"application/pdf",
+                            url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
                         },
+                        {
+                            documentId: "1738391167785",
+                            name: "A1.pdf",
+                            type:"application/pdf",
+                            url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
+                        }
                     ],
                 },
             ],

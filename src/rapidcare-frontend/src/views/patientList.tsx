@@ -1,6 +1,6 @@
 import React from "react";
-import Footer from "./components/footer";
-import Navbar from "./components/navBar";
+import Footer from "./components/Footer";
+import Navbar from "./components/NavBar";
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { RootState } from "../redux/store";

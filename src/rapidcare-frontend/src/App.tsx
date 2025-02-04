@@ -5,12 +5,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 
 import Login from './views/login';
-import AdminDashboard from './views/adminDashboard';
-import HpDashboard from './views/hpDashboard';
-import PatientList from './views/patientList';
-import AppointmentsList from './views/appointmentList';
-import AccountSettings from './views/account';
-import CreateProfile from './views/createProfile';
+import PatientProfile from './views/HealthcareProfessional/PatientProfile';
+import AdminDashboard from './views/Admin/AdminDashboard';
+import AppointmentsList from './views/HealthcareProfessional/AppointmentList';
+import AccountSettings from './views/HealthcareProfessional/Account';
+import HpDashboard from './views/HealthcareProfessional/HpDashboard';
+import PatientList from './views/HealthcareProfessional/PatientList';
 
 const App: React.FC = () => {
   const { isAuthenticated, isUserAdmin } = useSelector((state: RootState) => state.app);
@@ -28,8 +28,7 @@ const App: React.FC = () => {
             <Route path="/patients" element={<PatientList />} />
             <Route path="/appointments" element={<AppointmentsList />} />
             <Route path="/account" element={<AccountSettings />} />
-            <Route path="/createProfile" element={<CreateProfile />} />
-
+            <Route path="/patient/:patientId" element={<PatientProfile />} />
           </>
         )}
 

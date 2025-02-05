@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
@@ -12,6 +12,7 @@ import AccountSettings from './views/HealthcareProfessional/Account';
 import HpDashboard from './views/HealthcareProfessional/HpDashboard';
 import PatientList from './views/HealthcareProfessional/PatientList';
 import CreateProfile from './views/createProfile';
+import SoapView from './views/SoapView';
 
 const App: React.FC = () => {
   const { isAuthenticated, isUserAdmin } = useSelector((state: RootState) => state.app);
@@ -32,6 +33,7 @@ const App: React.FC = () => {
             <Route path="/patient/:patientId" element={<PatientProfile />} />
             <Route path="/patient/:patientId" element={<PatientProfile />} />
             <Route path="/createProfile" element={<CreateProfile />} />
+            <Route path="/SoapView" element={<SoapView />} />
           </>
         )}
 

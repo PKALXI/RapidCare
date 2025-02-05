@@ -46,7 +46,7 @@ const PatientList = () => {
                 ))}
 
                 <div className="flex justify-center mt-6">
-                <Button variant="contained" color="primary" onClick={() => navigate('/createProfile')}>Add New Patient Record</Button>
+                    <Button variant="contained" color="primary" onClick={() => navigate('/createProfile')}>Add New Patient Record</Button>
                 </div>
             </Container>
             <Footer />

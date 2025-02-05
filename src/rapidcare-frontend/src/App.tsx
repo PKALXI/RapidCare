@@ -13,6 +13,7 @@ import HpDashboard from './views/HealthcareProfessional/HpDashboard';
 import PatientList from './views/HealthcareProfessional/PatientList';
 import CreateProfile from './views/createProfile';
 import SoapView from './views/SoapView';
+import { createProfileProps } from "./helpers/types";
 
 const App: React.FC = () => {
   const { isAuthenticated, isUserAdmin } = useSelector((state: RootState) => state.app);
@@ -30,7 +31,6 @@ const App: React.FC = () => {
             <Route path="/patients" element={<PatientList />} />
             <Route path="/appointments" element={<AppointmentsList />} />
             <Route path="/account" element={<AccountSettings />} />
-            <Route path="/patient/:patientId" element={<PatientProfile />} />
             <Route path="/patient/:patientId" element={<PatientProfile />} />
             <Route path="/createProfile" element={<CreateProfile />} />
             <Route path="/SoapView" element={<SoapView />} />

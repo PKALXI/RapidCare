@@ -3,19 +3,15 @@ import { useDispatch } from 'react-redux';
 import { addSoapNote } from "../redux/appActions";
 import {IPatient, IProfileInfo, IAllergy, IPrescription} from "../models/model";
 import MedicalHistory from './HealthcareProfessional/MedicalHistory';
+import { createProfileProps  } from "../helpers/types";
 
 
-interface createProfileProps {
-  patient: IPatient
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  patientId: string;
-  profileInformation: IProfileInfo;
-  allergies: IAllergy;
-  prescriptions: IPrescription;
-}
-
-const CreateProfile: React.FC<createProfileProps> = ({ patient, profileInformation, allergies, prescriptions }) => {
+const CreateProfile: React.FC<createProfileProps> = ({
+  patient,
+  profileInformation,
+  allergies,
+  prescriptions,
+}) => {
 
     const [formData, setFormData] = useState<IProfileInfo>(profileInformation);
     const [allergy, setAllergies] = useState<IAllergy>(allergies);

@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { IPatient, IProfileInfo, IAllergy } from "../../models/model";
+import { IPatient, IProfileInfo, IAllergy, IPrescription } from "../../models/model";
 import { Card, CardContent, CardHeader, Grid, Button, Typography, Box} from "@mui/material";
 import DataRow from '../components/DataRow';
 import EditProfileInfo from "./ProfileInformationEdit";
 
+
 interface ProfileInformationProps {
-  patient: IPatient;
+  patient: IPatient
+    open: boolean;
+    setOpen: (open: boolean) => void;
+    patientId: string;
+    profileInformation: IProfileInfo;
+    allergies: IAllergy;
+    prescriptions: IPrescription;
 }
 
 const ProfileInformation: React.FC<ProfileInformationProps> = ({ patient }) => {

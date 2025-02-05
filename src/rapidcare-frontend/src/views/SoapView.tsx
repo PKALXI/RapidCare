@@ -33,9 +33,6 @@ const SoapView: React.FC = () => {
       setOpen(false);
     }
 
-    
-
-
     return (    
         <div className="col-span-2 m-10"> 
          <div className="bg-gray-50 p-6 rounded shadow"> 

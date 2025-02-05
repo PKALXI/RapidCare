@@ -20,7 +20,7 @@ const App: React.FC = () => {
       <Routes>
         {!isAuthenticated && <Route path="/" element={<Login />} />}
 
-        {isAuthenticated && isUserAdmin && <Route path="/home" element={<AdminDashboard />} />}
+        {isAuthenticated && isUserAdmin && <Route path="/home" element={<HpDashboard />} />}
 
         {isAuthenticated && !isUserAdmin && (
           <>

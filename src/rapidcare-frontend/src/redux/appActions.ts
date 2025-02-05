@@ -5,6 +5,7 @@ export const RESET_STATE = "RESET_STATE";
 export const UPDATE_PATIENT_PROFILEINFO = "UPDATE_PATIENT_PROFILEINFO";
 export const DELETE_PATIENT = "DELETE_PATIENT"
 export const ADD_DOCUMENT = "ADD_DOCUMENT"
+export const ADD_SOAP_NOTE = "ADD_SOAP_NOTE"
 
 export const resetState = () => ({
     type: RESET_STATE,
@@ -31,6 +32,11 @@ export const updatePatientProfileInfo = (patientId: string, profileInformation: 
         patientId,
         profileInformation
     },
+})
+
+export const addSoapNote = (patient: IPatient) => ({
+    type: ADD_SOAP_NOTE,
+    payload: patient, 
 })
 
 export const deletePatient = (patientId: string) => ({

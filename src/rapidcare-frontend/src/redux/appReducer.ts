@@ -1,5 +1,5 @@
 import { AppState } from '../models/model';
-import { ADD_DOCUMENT, DELETE_PATIENT, RESET_STATE, SET_INITIAL_STATE, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
+import { ADD_DOCUMENT, DELETE_PATIENT, RESET_STATE, SET_INITIAL_STATE, UPDATE_PATIENT_PROFILEINFO, ADD_SOAP_NOTE } from '../redux/appActions';
 
 
 const initialState: AppState = {
@@ -45,9 +45,6 @@ const appReducer = (state = initialState, action: any): AppState => {
             return state;
         }
 
-
-        
-
         case DELETE_PATIENT: {
             if (state.healthcareProfessional?.patients) {
                 return {
@@ -80,6 +77,22 @@ const appReducer = (state = initialState, action: any): AppState => {
                     healthcareProfessional: {
                         ...state.healthcareProfessional,
                         patients: updatedPatients,
+                    },
+                };
+            }
+            return state;
+        }
+
+        case ADD_SOAP_NOTE: {
+            if (state.healthcareProfessional?.patients) {
+                return {
+                    ...state,
+                    healthcareProfessional: {
+                        ...state.healthcareProfessional,
+                        patients: [
+                            ...state.healthcareProfessional.patients,
+                            action.payload.newPatient, // Appending the new patient
+                        ],
                     },
                 };
             }

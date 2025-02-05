@@ -1,10 +1,52 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { addSoapNote } from "../redux/appActions";
+import {IPatient, IProfileInfo, IAllergy, IPrescription} from "../models/model";
+import MedicalHistory from './HealthcareProfessional/MedicalHistory';
 
-const CreateProfile = () => {
+
+interface createProfileProps {
+  patient: IPatient
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  patientId: string;
+  profileInformation: IProfileInfo;
+  allergies: IAllergy;
+  prescriptions: IPrescription;
+}
+
+const CreateProfile: React.FC<createProfileProps> = ({ patient, profileInformation, allergies, prescriptions }) => {
+
+    const [formData, setFormData] = useState<IProfileInfo>(profileInformation);
+    const [allergy, setAllergies] = useState<IAllergy>(allergies);
+    const [prescription, setPrescriptions] = useState<IPrescription>(prescriptions);
+    const [errors, setErrors] = useState({});
+    const [open, setOpen] = useState(false);
+    const dispatch = useDispatch();
+    
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = event.target;
+      setFormData({...formData, [name]: value });
+    };
 
     const handleButtonClick = (action: string) => {
       console.log(`${action} button clicked`);
     };
+
+    const handleClose = () => {
+      console.log("handleClose triggered");
+      setErrors({});
+      console.log("Errors reset:", errors);
+      setOpen(false);
+    }
+
+    const handleSave = () => {
+      setErrors({});
+
+       
+      dispatch(addSoapNote(patient));
+      setOpen(false);
+    }
 
     return (
         <div className="flex flex-col md:flex-row h-full">
@@ -23,31 +65,85 @@ const CreateProfile = () => {
                     <div className="grid grid-cols-2 gap-4">
                     <div className="w-3/4">
                       <div className="flex items-center mb-4"> <p className='mr-4'><strong>Name:</strong></p>
-                        <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                          className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                          placeholder="Enter Name.." 
+                          name="name" 
+                          value={formData.demographics?.name}
+                          onChange={handleInputChange}>
+                        </textarea>
                       </div>
                       <div className="flex items-center mb-4"> <p className='mr-4 w-60'><strong>Healthcard number:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                            className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                            placeholder="Enter Healthcard.." 
+                            name="healthcard" 
+                            value={formData.demographics?.healthcardNumber}
+                            onChange={handleInputChange}>
+                        </textarea>
                       </div>
                       <div className="flex items-center mb-4"> <p className='mr-4'><strong>Age:</strong></p>
-                        <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                              className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                              placeholder="Enter Age.." 
+                              name="age" 
+                              value={formData.demographics?.age}
+                              onChange={handleInputChange}>
+                        </textarea>
                       </div>
                       <div className="flex items-center mb-4"> <p className='mr-4'><strong>Weight:</strong></p>
-                        <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                              className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                              placeholder="Enter Weight.." 
+                              name="weight" 
+                              value={formData.demographics?.weight}
+                              onChange={handleInputChange}>
+                        </textarea>
                       </div>
                       <div className="flex items-center mb-4"> <p className='mr-4'><strong>Gender:</strong></p>
-                        <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                              className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                              placeholder="Enter Gender.." 
+                              name="gender" 
+                              value={formData.demographics?.gender}
+                              onChange={handleInputChange}>
+                        </textarea>
                       </div>
                       <div className="flex items-center mb-4"> <p className='mr-4'><strong>Height:</strong></p>
-                        <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                              className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                              placeholder="Enter Height.." 
+                              name="height" 
+                              value={formData.demographics?.height}
+                              onChange={handleInputChange}>
+                        </textarea>
                       </div>
                       <div className="flex items-center mb-4"> <p className='mr-4 w-48'><strong>Date of Birth:</strong></p>
-                        <textarea className="w-80 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                              className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                              placeholder="Enter DOB.." 
+                              name="DOB" 
+                              value={formData.demographics?.dateOfBirth}
+                              onChange={handleInputChange}>
+                        </textarea>
                       </div>
                       <div className="flex items-center mb-4"> <p className='mr-4 w-48'><strong>Marital Status:</strong></p>
-                        <textarea className="w-80 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                              className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                              placeholder="Enter Marital Status.." 
+                              name="maritalstatus" 
+                              value={formData.demographics?.maritalStatus}
+                              onChange={handleInputChange}>
+                        </textarea>
                       </div>
                       <div className="flex items-center mb-4"> <p className='mr-4 w-48'><strong>Occupation:</strong></p>
-                        <textarea className="w-80 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                        <textarea 
+                              className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                              placeholder="Enter Occupation.." 
+                              name="occupation" 
+                              value={formData.demographics?.occupation}
+                              onChange={handleInputChange}>
+                        </textarea>
                       </div>
                     </div>
                   </div>
@@ -59,13 +155,31 @@ const CreateProfile = () => {
                         <h2 className="text-xl font-bold mb-3">Insurance Information</h2>
                         <div className="w-3/4">
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Member ID:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                placeholder="Enter memberID.." 
+                                name="memberID" 
+                                value={formData.insuranceInformation?.memberID}
+                                onChange={handleInputChange}>
+                          </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Policy number:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                  className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                  placeholder="Enter Policy.." 
+                                  name="policyNumber" 
+                                  value={formData.insuranceInformation?.policyNumber}
+                                  onChange={handleInputChange}>
+                            </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Provider:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                  className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                  placeholder="Enter Provider.." 
+                                  name="provider" 
+                                  value={formData.insuranceInformation?.provider}
+                                  onChange={handleInputChange}>
+                            </textarea>
                           </div>
                         </div>
                     </div>
@@ -76,13 +190,31 @@ const CreateProfile = () => {
                         <h2 className="text-xl font-bold mb-4">Contact Information</h2>
                         <div className="w-3/4">
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Email:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                    className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                    placeholder="Emter Email.." 
+                                    name="email" 
+                                    value={formData.contactInformation?.email}
+                                    onChange={handleInputChange}>
+                              </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Contact number:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                      className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                      placeholder="Enter Contact.." 
+                                      name="contact" 
+                                      value={formData.contactInformation?.phone}
+                                      onChange={handleInputChange}>
+                                </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Address:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                      className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                      placeholder="Enter Address.." 
+                                      name="address" 
+                                      value={formData.contactInformation?.address}
+                                      onChange={handleInputChange}>
+                                </textarea>
                           </div>
                         </div>
                     </div>
@@ -93,16 +225,40 @@ const CreateProfile = () => {
                         <h2 className="text-xl font-bold mb-4">Emergency Contact Information</h2>
                         <div className="w-3/4">
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Name:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                  className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                  placeholder="Enter Emergency Contact.." 
+                                  name="name" 
+                                  value={formData.emergencyContact?.name}
+                                  onChange={handleInputChange}>
+                            </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Relationship:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                    className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                    placeholder="Enter Relationship.." 
+                                    name="relationship" 
+                                    value={formData.emergencyContact?.relationship}
+                                    onChange={handleInputChange}>
+                              </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Contact number:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                    className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                    placeholder="Enter Contact.." 
+                                    name="contact" 
+                                    value={formData.emergencyContact?.phone}
+                                    onChange={handleInputChange}>
+                              </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Address:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                    className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                    placeholder="Enter Address.." 
+                                    name="address" 
+                                    value={formData.emergencyContact?.address}
+                                    onChange={handleInputChange}>
+                              </textarea>
                           </div>
                         </div>
                     </div>
@@ -113,36 +269,84 @@ const CreateProfile = () => {
                         <h2 className="text-xl font-bold mb-4">Allergies</h2>
                         <div className="w-3/4">
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Date:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                              className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                              placeholder="Enter Date.." 
+                              name="date" 
+                              value={allergy.date} 
+                              onChange={handleInputChange}>
+                          </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Substance:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                placeholder="Enter Substance.." 
+                                name="substance" 
+                                value={allergy.substance} 
+                                onChange={handleInputChange}>
+                            </textarea>
                           </div>
-                          <div className="flex items-center mb-4"> <p className='mr-4'><strong>Symptom(s):</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                          <div className="flex items-center mb-4"> <p className='mr-4'><strong>Symptoms:</strong></p>
+                            <textarea 
+                                className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                placeholder="Enter Symptoms.." 
+                                name="symptoms" 
+                                value={allergy.symptoms} 
+                                onChange={handleInputChange}>
+                            </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Status:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                placeholder="Enter status.." 
+                                name="status" 
+                                value={allergy.status} 
+                                onChange={handleInputChange}>
+                            </textarea>
                           </div>
                         </div>
                     </div>
 
-                    {/*Medications*/}
+                    {/*Prescriptions*/}
 
                     <div className="bg-white shadow rounded p-6">
-                        <h2 className="text-xl font-bold mb-4">Medications</h2>
+                        <h2 className="text-xl font-bold mb-4">Prescription</h2>
                         <div className="w-3/4">
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Date:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                placeholder="Enter date.." 
+                                name="date" 
+                                value={prescription.date} 
+                                onChange={handleInputChange}>
+                              </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Medication:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                placeholder="Enter medication.." 
+                                name="medication" 
+                                value={prescription.medication} 
+                                onChange={handleInputChange}>
+                              </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Dosage:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                placeholder="Enter dosage.." 
+                                name="dosage" 
+                                value={prescription.dosage} 
+                                onChange={handleInputChange}>
+                            </textarea>
                           </div>
                           <div className="flex items-center mb-4"> <p className='mr-4'><strong>Status:</strong></p>
-                            <textarea className="w-60 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                            <textarea 
+                                className="w-60 h-12 border p-2 rounded overflow-hidden" 
+                                placeholder="Enter status.." 
+                                name="status" 
+                                value={prescription.status} 
+                                onChange={handleInputChange}>
+                              </textarea>
                           </div>
                         </div>
                     </div>

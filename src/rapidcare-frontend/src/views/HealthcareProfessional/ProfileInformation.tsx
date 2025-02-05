@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IPatient, IProfileInfo } from "../../models/model";
+import { IPatient, IProfileInfo, IAllergy } from "../../models/model";
 import { Card, CardContent, CardHeader, Grid, Button, Typography, Box} from "@mui/material";
 import DataRow from '../components/DataRow';
 import EditProfileInfo from "./ProfileInformationEdit";

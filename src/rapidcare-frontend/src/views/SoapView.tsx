@@ -1,16 +1,52 @@
-import React from 'react';
-//import { IClassifiedData, ILabResult } from '../models/poc';
-
+import React, {useState} from 'react';
+import { addSoapNote } from "../redux/appActions";
+import {IPatient} from "../models/model";
+import { useDispatch } from 'react-redux';
 
 
 const SoapView: React.FC = () => {
+
+  const [isRecording, setIsRecording] = useState(false);
+
+  const handleRecording = () => {
+        setIsRecording(prevState => !prevState);
+    };
+
+    const [formData, setFormData] = useState({});
+    const [errors, setErrors] = useState({});
+    const [open, setOpen] = useState(false);
+    const dispatch = useDispatch();
+    
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const {name, value} = event.target;
+      setFormData({...formData, [name]: value});
+    }
+
+    const handleButtonClick = (action: string) => {
+      console.log(`${action} button clicked`);
+    };
+
+    const handleClose = () => {
+      console.log("handleClose triggered");
+      setErrors({});
+      console.log("Errors reset:", errors);
+      setOpen(false);
+    }
+
+    
+
 
     return (    
         <div className="col-span-2 m-10"> 
          <div className="bg-gray-50 p-6 rounded shadow"> 
           <div className="flex justify-between mb-6">
             <div className="flex items-start mt-10 ml-0"> 
-              <button className="bg-green-500 text-white px-4 py-2 rounded w-48">Start Recording</button>
+            <button 
+                            className={`px-4 py-2 rounded w-48 ${isRecording ? 'bg-red-500' : 'bg-green-500'} text-white`} 
+                            onClick={handleRecording}
+                        >
+                            {isRecording ? 'Stop Recording' : 'Start Recording'}
+              </button>
             </div>
             <div className="flex flex-col items-center space-x-10"> 
             <h2 className="absolute top-1/2 left-1/2 transform -translate-x-[150%] -translate-y-[400%] font-bold text-lg">SOAP Note</h2>
@@ -117,4 +153,3 @@ const SoapView: React.FC = () => {
     );
 };
 export default SoapView
-

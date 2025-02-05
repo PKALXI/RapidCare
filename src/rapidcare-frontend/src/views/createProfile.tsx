@@ -46,10 +46,10 @@ const CreateProfile: React.FC<createProfileProps> = ({
 
     return (
         <div className="flex flex-col md:flex-row h-full">
-            <div className="w-full md:w-3/4 p-6">
+             <div className="w-full md:w-3/4 p-6 overflow-y-auto h-screen">
               <div className="flex justify-between items-center mb-6">
                   <h1 className="text-2xl font-bold">Create a new Patient Profile</h1>
-                  <div className="space-x-2">
+                  <div className="space-x-2 sticky top-0 bg-white z-10 p-2 shadow-md">
                         <button className="bg-blue-500 text-right px-4 py-2 rounded" onClick={() => handleButtonClick('Edit Profile')}>Edit Profile</button>
                         <button className="bg-green-500 text-right px-4 py-2 rounded" onClick={() => handleButtonClick('Close Profile')}>Close Profile</button>
                   </div>
@@ -376,7 +376,7 @@ const CreateProfile: React.FC<createProfileProps> = ({
                         </div>
                     </div>
                     <div className="flex justify-between items-center mb-6">
-                      <div className="space-x-2">
+                    <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg flex justify-center space-x-4">
                             <button className="bg-red-500 text-center px-4 py-2 rounded" onClick={() => handleButtonClick('Save Profile')}>Save Profile</button>
                       </div>
                     </div>

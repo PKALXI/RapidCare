@@ -40,8 +40,7 @@ const SoapView: React.FC<SoapNotesProps> = ({ patient }) => {
     
     const handleSave = () => {
           setErrors({});
-    
-            
+               
           dispatch(addSoapNote(patient));
           setOpen(false);
         }
@@ -59,32 +58,34 @@ const SoapView: React.FC<SoapNotesProps> = ({ patient }) => {
         <div className="col-span-2 m-10"> 
          <div className="bg-gray-50 p-6 rounded shadow"> 
           <div className="flex justify-between mb-6">
-            <div className="flex items-start mt-10 ml-0"> 
-            <button 
-                            className={`px-4 py-2 rounded w-48 ${isRecording ? 'bg-red-500' : 'bg-green-500'} text-white`} 
-                            onClick={handleRecording}
-                        >
-                            {isRecording ? 'Stop Recording' : 'Start Recording'}
+            <div className="bg-gray-50 p-6 rounded shadow flex justify-between sticky top-0 z-10"> 
+              <button 
+                className={`px-4 py-2 rounded w-48 ${isRecording ? 'bg-red-500' : 'bg-green-500'} text-white`} 
+                onClick={handleRecording}
+            >
+                {isRecording ? 'Stop Recording' : 'Start Recording'}
               </button>
             </div>
-            <div className="flex flex-col items-center space-x-10"> 
-            <h2 className="absolute top-1/2 left-1/2 transform -translate-x-[150%] -translate-y-[400%] font-bold text-lg">SOAP Note</h2>
-              <div className="w-3/4">
-                <div className="flex items-center mb-4"> <p className='mr-4'><strong>Practitioner:</strong></p>
-                  <textarea className="w-96 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
-                </div>
-                <div className="flex items-center mb-4"> <p className='mr-4'><strong>Date:</strong></p>
-                  <textarea className="w-96 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
-                </div>
-              </div>
-            </div> 
+            <div className="sticky top-0 bg-gray-50 z-10 p-4 shadow-md">
+              <div className="flex flex-col items-center space-x-10"> 
+                <h2 className="absolute top-1/2 left-1/2 transform -translate-x-[150%] -translate-y-[400%] font-bold text-lg">SOAP Note</h2>
+                  <div className="w-3/4">
+                    <div className="flex items-center mb-4"> <p className='mr-4'><strong>Practitioner:</strong></p>
+                      <textarea className="w-96 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                    </div>
+                    <div className="flex items-center mb-4"> <p className='mr-4'><strong>Date:</strong></p>
+                      <textarea className="w-96 h-12 border p-2 rounded overflow-hidden" placeholder="Type Here.."></textarea>
+                    </div>
+                  </div>
+              </div> 
           </div>
         </div>
+      </div>
 
         <Modal open={openNote} onClose={handleCloseNote}>
                         <Box className= "w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[85vh] overflow-y-auto">
                         {selectedNote && (
-                        <div className="space-y-2 p-2">
+                        <div className="max-h-[60vh] overflow-y-auto p-4">
                           <Card>
                               <CardContent>
                                   <Typography variant="h6" gutterBottom>Subjective Assessment</Typography>
@@ -279,7 +280,7 @@ const SoapView: React.FC<SoapNotesProps> = ({ patient }) => {
                           </Box>
                         </Modal>
 
-          <div className="flex justify-between mt-6">
+            <div className="sticky bottom-0 bg-white p-4 shadow-md flex justify-between">
               <button className="bg-green-500 text-white px-4 py-2 rounded">Edit Note</button>
               <button className="bg-red-500 text-center px-4 py-2 rounded" onClick={() => handleButtonClick('Save Note')}>Save Note</button>
           </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, Typography, Modal, Box, IconButton, Button, Grid } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 interface AddSoapNoteProps {
   open: boolean;
@@ -9,6 +10,14 @@ interface AddSoapNoteProps {
 }
 
 const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) => {
+
+    const navigate = useNavigate();
+
+    const handleNewSoapNote = () => {
+        navigate(`/SoapView/}`);
+        setOpen(false); 
+      };
+
 
     return (
         <div>
@@ -20,13 +29,9 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
                             <CloseIcon />
                         </IconButton>
                     </div>
-                  
-
-
-
-
-
-                    
+                    <Button variant="contained" color="primary" onClick={handleNewSoapNote}>
+            New Soap Note
+                    </Button>                   
                 </Box>
             </Modal>
         </div>

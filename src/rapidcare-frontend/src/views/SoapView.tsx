@@ -1,12 +1,23 @@
 import React, {useState} from 'react';
 import { addSoapNote } from "../redux/appActions";
-import {IPatient} from "../models/model";
+import {IPatient, ISoapNote} from "../models/model";
 import { useDispatch } from 'react-redux';
+import { Card, CardContent, CardHeader, Typography, Modal, Box, IconButton, Button, Grid } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { TextField } from '@mui/material';
 
 
-const SoapView: React.FC = () => {
+interface SoapNotesProps {
+  patient: IPatient;
+}
+
+const SoapView: React.FC<SoapNotesProps> = ({ patient }) => {
 
   const [isRecording, setIsRecording] = useState(false);
+  const consultationNotes = patient.consultationNotes || [];
+  const [selectedNote, setSelectedNote] = useState<ISoapNote | null>(null);
+  const [openNote, setOpenNote] = useState(false); 
+  const [openSoapNote, setOpenSoapNote] = useState(false);
 
   const handleRecording = () => {
         setIsRecording(prevState => !prevState);
@@ -17,21 +28,32 @@ const SoapView: React.FC = () => {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const {name, value} = event.target;
-      setFormData({...formData, [name]: value});
-    }
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+          const { name, value } = event.target;
+          setFormData({...formData, [name]: value });
+    };
+
+    const handleOpenNote = (note: ISoapNote) => {
+            setSelectedNote(note);
+            setOpenNote(true);
+        };
+    
+    const handleSave = () => {
+          setErrors({});
+    
+            
+          dispatch(addSoapNote(patient));
+          setOpen(false);
+        }
+
+    const handleCloseNote = () => {
+      setOpenNote(false);
+      setSelectedNote(null);
+  };
 
     const handleButtonClick = (action: string) => {
       console.log(`${action} button clicked`);
     };
-
-    const handleClose = () => {
-      console.log("handleClose triggered");
-      setErrors({});
-      console.log("Errors reset:", errors);
-      setOpen(false);
-    }
 
     return (    
         <div className="col-span-2 m-10"> 
@@ -58,95 +80,210 @@ const SoapView: React.FC = () => {
             </div> 
           </div>
         </div>
-        <div className="space-y-4 mt-10">
-          <div> 
-            <h3 className='font-bold'>Subjective Assessment</h3>
-            <div className='mt-5'>
-              <label className="block mb-1 font-medium">Symptoms:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-5'>
-              <label className="block mb-1 font-medium">History of present illness:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-5'>
-              <label className="block mb-1 font-medium">Current medications:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className="block mb-1 font-medium">Allergies:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className="block mb-1 font-medium">Past medical history:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className="block mb-1 font-medium">Family history:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className="block mb-1 font-medium">Last meal:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-          </div>
-          <div>
-            <h3 className='font-bold'>Objective Assessment</h3>
-            <div className='mt-5'>
-              <label className='block mb-1 font-medium'>Breathing:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Circulation:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Skin type:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Head-to-Toe check:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Level of consciousness:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-          </div>
-          <div>
-            <h3 className='font-bold'>Assessment Summary</h3>
-            <div className='mt-5'>
-              <label className='block mb-1 font-medium'>Situation arising as a result of previous problem:</label>
-              <textarea className="w-full border p-2 rounded" placeholder="Type Here.."></textarea>
-            </div>
-          </div>
-          <div>
-            <h3 className='font-bold'>Plan</h3>
-            <div className='mt-5'>
-              <label className='block mb-1 font-medium'>Care:</label>
-              <textarea className='w-full border p-2 rounded' placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-5'>
-              <label className='block mb-1 font-medium'>Medications needed:</label>
-              <textarea className='w-full border p-2 rounded' placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className='block mb-1 font-medium'>Monitor health:</label>
-              <textarea className='w-full border p-2 rounded' placeholder="Type Here.."></textarea>
-            </div>
-            <div className='mt-2'>
-              <label className='block mb-1 font-medium'>What are the do's and donts for the patient?</label>
-              <textarea className='w-full border p-2 rounded' placeholder="Type Here.."></textarea>
-            </div>
-          </div>
+
+        <Modal open={openNote} onClose={handleCloseNote}>
+                        <Box className= "w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[85vh] overflow-y-auto">
+                        {selectedNote && (
+                        <div className="space-y-2 p-2">
+                          <Card>
+                              <CardContent>
+                                  <Typography variant="h6" gutterBottom>Subjective Assessment</Typography>
+                                  <Grid container spacing={2}>
+                                      <Grid item xs={4} md={3}><Typography variant="body2">Symptoms:</Typography></Grid>
+                                      <Grid item xs={8} md={9}>
+                                        <TextField
+                                          fullWidth
+                                          multiline
+                                          rows={2}
+                                          variant="outlined"
+                                          placeholder="Enter symptoms.."
+                                          name="symptoms"
+                                          onChange={handleInputChange}
+                                          value={selectedNote.subjectiveAssesment.symptoms}
+                                        />
+                                      </Grid>
+
+                                      <Grid item xs={4} md={3}><Typography variant="body2">Allergies:</Typography></Grid>
+                                      <Grid item xs={8} md={9}>
+                                        <TextField
+                                          fullWidth
+                                          multiline
+                                          rows={2}
+                                          variant="outlined"
+                                          placeholder="Enter allergies.."
+                                          name="allergies"
+                                          onChange={handleInputChange}
+                                          value={selectedNote.subjectiveAssesment.allergies}
+                                        />
+                                      </Grid>
+                                      <Grid item xs={4} md={3}><Typography variant="body2">Medications:</Typography></Grid>
+                                      <Grid item xs={8} md={9}>
+                                        <TextField
+                                          fullWidth
+                                          multiline
+                                          rows={2}
+                                          variant="outlined"
+                                          placeholder="Enter medications.."
+                                          name="medications"
+                                          onChange={handleInputChange}
+                                          value={selectedNote.subjectiveAssesment.medications}
+                                        />
+                                      </Grid>
+                                      <Grid item xs={4} md={3}><Typography variant="body2" >Medical History:</Typography></Grid>
+                                      <Grid item xs={8} md={9}>
+                                        <TextField
+                                          fullWidth
+                                          multiline
+                                          rows={2}
+                                          variant="outlined"
+                                          placeholder="Enter medical history.."
+                                          name="medical history"
+                                          onChange={handleInputChange}
+                                          value={selectedNote.subjectiveAssesment.medicalHistory}
+                                        />
+                                      </Grid>
+
+                                      <Grid item xs={4} md={3}><Typography variant="body2">Last Meal:</Typography></Grid>
+                                      <Grid item xs={8} md={9}>
+                                        <TextField
+                                          fullWidth
+                                          multiline
+                                          rows={2}
+                                          variant="outlined"
+                                          placeholder="Enter last meal.."
+                                          name="last meal"
+                                          onChange={handleInputChange}
+                                          value={selectedNote.subjectiveAssesment.lastMeal}
+                                        />
+                                      </Grid>
+                                        </Grid>
+                                    </CardContent>
+                                </Card>
+
+                                <Card>
+                                  <CardContent>
+                                      <Typography variant="h6" gutterBottom>Objective Assessment</Typography>
+                                      <Grid container spacing={2}>
+                                          <Grid item xs={4} md={3}><Typography variant="body2">Breathing:</Typography></Grid>
+                                          <Grid item xs={8} md={9}>
+                                            <TextField
+                                              fullWidth
+                                              multiline
+                                              rows={2}
+                                              variant="outlined"
+                                              placeholder="Enter breathing.."
+                                              name="breathing"
+                                              onChange={handleInputChange}
+                                              value={selectedNote.objectiveAssessment.breathing}
+                                            />
+                                          </Grid>
+
+                                          <Grid item xs={4} md={3}><Typography variant="body2">Circulation:</Typography></Grid>
+                                          <Grid item xs={8} md={9}>
+                                            <TextField
+                                              fullWidth
+                                              multiline
+                                              rows={2}
+                                              variant="outlined"
+                                              placeholder="Enter circulation.."
+                                              name="circulation"
+                                              onChange={handleInputChange}
+                                              value={selectedNote.objectiveAssessment.circulation}
+                                            />
+                                          </Grid>
+                                          <Grid item xs={4} md={3}><Typography variant="body2">Skin type:</Typography></Grid>
+                                          <Grid item xs={8} md={9}>
+                                            <TextField
+                                              fullWidth
+                                              multiline
+                                              rows={2}
+                                              variant="outlined"
+                                              placeholder="Enter skin type.."
+                                              name="skin type"
+                                              onChange={handleInputChange}
+                                              value={selectedNote.objectiveAssessment.skinType}
+                                            />
+                                          </Grid>
+                                          <Grid item xs={4} md={3}><Typography variant="body2" >Head-to-Toe check:</Typography></Grid>
+                                          <Grid item xs={8} md={9}>
+                                            <TextField
+                                              fullWidth
+                                              multiline
+                                              rows={2}
+                                              variant="outlined"
+                                              placeholder="Enter head-to-toe check.."
+                                              name="head-to-toe check"
+                                              onChange={handleInputChange}
+                                              value={selectedNote.objectiveAssessment.headToToeCheck}
+                                            />
+                                          </Grid>
+
+                                          <Grid item xs={4} md={3}><Typography variant="body2">Level of consciousness:</Typography></Grid>
+                                          <Grid item xs={8} md={9}>
+                                            <TextField
+                                              fullWidth
+                                              multiline
+                                              rows={2}
+                                              variant="outlined"
+                                              placeholder="Enter consciousness.."
+                                              name="consciousness"
+                                              onChange={handleInputChange}
+                                              value={selectedNote.objectiveAssessment.levelOfConsciousness}
+                                            />
+                                          </Grid>
+                                            </Grid>
+                                        </CardContent>
+                                </Card>
+
+                                <Card>
+                                  <CardContent>
+                                      <Typography variant="h6" gutterBottom>Assessment Summary</Typography>
+                                      <Grid container spacing={2}>
+                                          <Grid item xs={8} md={9}>
+                                            <TextField
+                                              fullWidth
+                                              multiline
+                                              rows={2}
+                                              variant="outlined"
+                                              placeholder="Enter Summary.."
+                                              name="summary"
+                                              onChange={handleInputChange}
+                                              value={selectedNote.summary}
+                                            />
+                                          </Grid>
+                                        </Grid>
+                                      </CardContent>
+                                    </Card>
+
+                                    <Card>
+                                  <CardContent>
+                                      <Typography variant="h6" gutterBottom>Plan</Typography>
+                                      <Grid container spacing={2}>
+                                          <Grid item xs={8} md={9}>
+                                            <TextField
+                                              fullWidth
+                                              multiline
+                                              rows={2}
+                                              variant="outlined"
+                                              placeholder="Enter plan.."
+                                              name="plan"
+                                              onChange={handleInputChange}
+                                              value={selectedNote.plan}
+                                            />
+                                          </Grid>
+                                        </Grid>
+                                      </CardContent>
+                                    </Card>
+                            </div>
+                        )}
+                          </Box>
+                        </Modal>
 
           <div className="flex justify-between mt-6">
               <button className="bg-green-500 text-white px-4 py-2 rounded">Edit Note</button>
-              <button className="bg-green-500 text-white px-4 py-2 rounded">Save Note</button>
-              <button className="bg-green-500 text-white px-4 py-2 rounded">Back to profile</button>
+              <button className="bg-red-500 text-center px-4 py-2 rounded" onClick={() => handleButtonClick('Save Note')}>Save Note</button>
           </div>
-        </div>
-      </div>     
+        </div>     
     );
 };
 export default SoapView

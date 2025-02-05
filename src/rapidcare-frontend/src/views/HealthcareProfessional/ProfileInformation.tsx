@@ -7,12 +7,6 @@ import EditProfileInfo from "./ProfileInformationEdit";
 
 interface ProfileInformationProps {
   patient: IPatient
-    open: boolean;
-    setOpen: (open: boolean) => void;
-    patientId: string;
-    profileInformation: IProfileInfo;
-    allergies: IAllergy;
-    prescriptions: IPrescription;
 }
 
 const ProfileInformation: React.FC<ProfileInformationProps> = ({ patient }) => {

@@ -3,7 +3,7 @@ import { IPatient, ISoapNote } from "../../models/model";
 import { Card, CardContent, CardHeader, Typography, Modal, Box, IconButton, Button, Grid } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddSoapNote from "./AddSoapNote";
-import { useNavigate } from "react-router-dom";
+
 
 interface ConsultationNotesProps {
     patient: IPatient;
@@ -14,12 +14,12 @@ const ConsultationNotes: React.FC<ConsultationNotesProps> = ({ patient }) => {
     const [selectedNote, setSelectedNote] = useState<ISoapNote | null>(null);
     const [openNote, setOpenNote] = useState(false); 
     const [openSoapNote, setOpenSoapNote] = useState(false); 
-    const navigate = useNavigate();
+   
 
     
     const handleAddNew = () => {
         setOpenSoapNote(true);
-        navigate("/SoapView");
+
     };
 
     const handleOpenNote = (note: ISoapNote) => {

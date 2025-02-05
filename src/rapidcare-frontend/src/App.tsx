@@ -32,8 +32,6 @@ const App: React.FC = () => {
             <Route path="/appointments" element={<AppointmentsList />} />
             <Route path="/account" element={<AccountSettings />} />
             <Route path="/patient/:patientId" element={<PatientProfile />} />
-            <Route path="/createProfile" element={<CreateProfile />} />
-            <Route path="/SoapView" element={<SoapView />} />
           </>
         )}
 

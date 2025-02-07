@@ -17,9 +17,10 @@ const Login: React.FC = () => {
 
     // Validate admin email structure
     const validateAdminEmail = (email: string): boolean => {
-        return email.startsWith('admin') && email.endsWith('@rapidcare.ca');
+        const adminEmailRegex = /^admin\d{3}@rapidcare\.ca$/;
+        return adminEmailRegex.test(email);
     };
-
+    
     // Handle form submission
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

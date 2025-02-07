@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, InputBase, Button } from "@mui/material";
 import { Search } from "@mui/icons-material";

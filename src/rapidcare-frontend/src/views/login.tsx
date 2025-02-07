@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { setLoginState } from '../redux/appActions';
 import { useNavigate } from 'react-router-dom';
-import { generateHealthcareProfessionalMockData, genrateSignupStateData } from '../mockData/mockData';
-import { mapHealthcareProfessionalData } from '../helpers/helper';
-
+import { genrateSignupStateData } from '../mockData/mockData';
+//import { mapHealthcareProfessionalData } from '../helpers/helper';
+//import { generateHealthcareProfessionalMockData } from '../mockData/mockData';
 
 const Login = () => {
     const dispatch = useDispatch();

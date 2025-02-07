@@ -1,4 +1,4 @@
-import { IHealthcareProfessionalState, IHealthNetworkAdminState } from "../models/model";
+import { IHealthcareProfessionalState } from "../models/model";
 
 export const validateField = (field: string, value: string | number | boolean): string => {
     let errorMessage = '';

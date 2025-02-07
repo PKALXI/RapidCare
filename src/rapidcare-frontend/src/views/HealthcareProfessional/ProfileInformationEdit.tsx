@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Dialog, Typography, IconButton, Grid, Card, CardHeader, CardContent, TextField, Modal, Box } from "@mui/material";
+import { Button, Dialog, Typography, IconButton, Grid, Card, CardHeader, CardContent, TextField, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { IProfileInfo } from "../../models/model";
 import { useDispatch } from "react-redux";

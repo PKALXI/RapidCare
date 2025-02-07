@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { Button, Card, CardContent, Typography, List, ListItem, ListItemText, Grid } from "@mui/material";
+import { Button, Card, CardContent, Typography, List, ListItem, ListItemText, Grid, Box } from "@mui/material";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { useSelector } from "react-redux";
@@ -7,7 +6,7 @@ import { RootState } from "../../redux/store";
 import { setOnboardingStatus } from "../../redux/appActions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { BarChart } from '@mui/x-charts/BarChart';
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const AdminDashboard = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin)
@@ -28,34 +27,41 @@ const AdminDashboard = () => {
                 <div className="flex-grow p-6 pb-16">
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6} md={6}>
-                        <Card className="mb-4 p-2">
+                            <Card className="mb-4 p-2">
                             <CardContent>
-                            {/* <BarChart
-                            xAxis={[{ scaleType: 'band', data: ['Patient visits this week'] }]}
-                            series={[{ data: [150, 200, 500, 400, 800, 2000, 1895] } ]}
-                            width={500}
-                            height={300}
-                            /> */}
-                                <div className=" bg-gradient-to-r from-blue-200 to-blue-400 text-black rounded-lg shadow-sm p-6">
-                                    <div className="flex mt-6 ml-6 mb-4">
-                                        <div className="rounded-lg bg-blue-100 p-6 mr-12">
-                                            <h4 className="text-lg font-bold">New Patients This Month</h4>
-                                            <div className="p-4">
-                                                <p className="text-2xl font-bold">{dashboardMetrics?.totalHospitals}</p>
-                                            </div>
-                                        </div>
-                                        <div className="rounded-lg bg-blue-100 p-6">
-                                            <h4 className="text-lg font-bold">Total Patients</h4>
-                                            <div className="p-4">
-                                                <p className="text-2xl font-bold">{dashboardMetrics?.totalEmployees}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </CardContent>
-                            </Card> 
-                        </Grid>
+                                <Typography variant="h5" gutterBottom>
+                                Metrics
+                                </Typography>
+                                <Box className="grid grid-cols-2 gap-6 mx-4">
+                                    <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
+                                        <Typography variant="h6" className="text-gray-700">
+                                        <strong>Total Hospitals</strong>
+                                        </Typography>
+                                        <Typography variant="h5" className="text-blue-700">
+                                        {dashboardMetrics?.totalHospitals || 5}
+                                        </Typography>       
+                                    </Box>
 
+                                    <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
+                                        <Typography variant="h6" className="text-gray-700">
+                                        <strong>Total Employees</strong>
+                                        </Typography>
+                                        <Typography variant="h5" className="text-blue-700">
+                                        {dashboardMetrics?.totalEmployees || 5}
+                                        </Typography>       
+                                    </Box>
+                                </Box>
+                                <Box className="flex justify-center my-4 mx-4 bg-gray-50 rounded-lg shadow-md">
+                                    <BarChart
+                                        xAxis={[{scaleType: 'band', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], label: 'Patient visits this week',}]}
+                                        series={[{data: [150, 200, 500, 400, 800, 2000, 1895],label: 'Visits',},]}
+                                        width={500}
+                                        height={300}
+                                    />
+                                    </Box>
+                            </CardContent>
+                            </Card>
+                        </Grid>
                         <Grid item xs={12} sm={6} md={6}>
                             <Card className="mb-4 p-2">
                                 <CardContent>

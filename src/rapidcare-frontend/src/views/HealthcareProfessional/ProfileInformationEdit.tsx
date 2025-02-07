@@ -19,15 +19,9 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     const handleChange = (section: keyof IProfileInfo, field: string, value: string | number) => {
+        setFormData((prev) => ({...prev,[section]: {...prev[section],[field]: value,},}));
         const errorMessage = validateField(field, value);
         setErrors((prev) => ({ ...prev, [`${section}-${field}`]: errorMessage }));
-        setFormData((prev) => ({
-            ...prev,
-            [section]: {
-                ...prev[section],
-                [field]: value,
-            },
-        }));
     };
     
     const handleClose = () => {

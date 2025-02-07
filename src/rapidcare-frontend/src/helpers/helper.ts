@@ -1,6 +1,6 @@
 import { IHealthcareProfessionalState, IHealthNetworkAdminState } from "../models/model";
 
-export const validateField = (field: string, value: string | number): string => {
+export const validateField = (field: string, value: string | number | boolean): string => {
     let errorMessage = '';
 
     switch (field) {
@@ -87,44 +87,45 @@ export const mapHealthcareProfessionalData = (data: any): IHealthcareProfessiona
     })) : []
 });
 
-export const mapHealthNetworkAdminData = (data: any): IHealthNetworkAdminState => ({
-    id: data.id,
-    name: data.name,
-    email: data.email,
-    healthcareNetwork: {
-        name: data.healthcareNetwork.name,
-        totalPatients: Number(data.healthcareNetwork.totalPatients) || 0,
-        newPatients: Number(data.healthcareNetwork.newPatients) || 0,
-        totalHospitals: Number(data.healthcareNetwork.totalHospitals) || 0,
-        hospitals: data.healthcareNetwork.hospitals ? data.healthcareNetwork.hospitals.map((hospital: any) => ({
-            id: hospital.id,
-            name: hospital.name,
-            address: hospital.address,
-            healthcareProfessionals: hospital.healthcareProfessionals ? hospital.healthcareProfessionals.map((prof: any) => ({
-                id: prof.id,
-                name: prof.name,
-                email: prof.email,
-                phone: prof.phone,
-                hospital: prof.hospital,
-                department: prof.department
-            })) : undefined,
-            patients: hospital.patients ? hospital.patients.map((patient: any) => ({
-                id: patient.id,
-                profileInformation: patient.profileInformation ? {
-                    demographics: patient.profileInformation.demographics ? {
-                        ...patient.profileInformation.demographics,
-                        age: Number(patient.profileInformation.demographics.age) || null,
-                        weight: Number(patient.profileInformation.demographics.weight) || null,
-                        height: Number(patient.profileInformation.demographics.height) || null
-                    } : undefined,
-                    insuranceInformation: patient.profileInformation.insuranceInformation || undefined,
-                    contactInformation: patient.profileInformation.contactInformation || undefined,
-                    emergencyContact: patient.profileInformation.emergencyContact || undefined
-                } : undefined,
-                medicalHistory: patient.medicalHistory || undefined,
-                consultationNotes: patient.consultationNotes || undefined,
-                documents: patient.documents || undefined
-            })) : undefined
-        })) : []
-    }
-});
+//need to update according to new model
+// export const mapHealthNetworkAdminData = (data: any): IHealthNetworkAdminState => ({
+//     id: data.id,
+//     name: data.name,
+//     email: data.email,
+//     healthcareNetwork: {
+//         name: data.healthcareNetwork.name,
+//         totalPatients: Number(data.healthcareNetwork.totalPatients) || 0,
+//         newPatients: Number(data.healthcareNetwork.newPatients) || 0,
+//         totalHospitals: Number(data.healthcareNetwork.totalHospitals) || 0,
+//         hospitals: data.healthcareNetwork.hospitals ? data.healthcareNetwork.hospitals.map((hospital: any) => ({
+//             id: hospital.id,
+//             name: hospital.name,
+//             address: hospital.address,
+//             healthcareProfessionals: hospital.healthcareProfessionals ? hospital.healthcareProfessionals.map((prof: any) => ({
+//                 id: prof.id,
+//                 name: prof.name,
+//                 email: prof.email,
+//                 phone: prof.phone,
+//                 hospital: prof.hospital,
+//                 department: prof.department
+//             })) : undefined,
+//             patients: hospital.patients ? hospital.patients.map((patient: any) => ({
+//                 id: patient.id,
+//                 profileInformation: patient.profileInformation ? {
+//                     demographics: patient.profileInformation.demographics ? {
+//                         ...patient.profileInformation.demographics,
+//                         age: Number(patient.profileInformation.demographics.age) || null,
+//                         weight: Number(patient.profileInformation.demographics.weight) || null,
+//                         height: Number(patient.profileInformation.demographics.height) || null
+//                     } : undefined,
+//                     insuranceInformation: patient.profileInformation.insuranceInformation || undefined,
+//                     contactInformation: patient.profileInformation.contactInformation || undefined,
+//                     emergencyContact: patient.profileInformation.emergencyContact || undefined
+//                 } : undefined,
+//                 medicalHistory: patient.medicalHistory || undefined,
+//                 consultationNotes: patient.consultationNotes || undefined,
+//                 documents: patient.documents || undefined
+//             })) : undefined
+//         })) : []
+//     }
+// });

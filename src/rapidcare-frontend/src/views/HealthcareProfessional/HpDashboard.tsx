@@ -67,4 +67,4 @@ const HpDashboard = () => {
     );
 };
 
-export default (HpDashboard);
+export default HpDashboard;

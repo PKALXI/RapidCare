@@ -6,33 +6,54 @@ export interface AppState {
 }
 
 export interface IHealthNetworkAdminState {
-    id: string;
-    name: string;
-    email: string;
-    healthcareNetwork: {
-        name: string;
-        totalPatients: number;
-        newPatients: number;
-        totalHospitals: number;
-        hospitals: IHospital[];
+    user: {
+        id: string;
+        name: string; 
+        email: string;
     }
+    isOnboardingComplete: boolean;
+    networkInfo?: INetworkInfo;
+    dashboardMetrics?: {
+        totalEmployees: number;
+        totalHospitals: number;
+    }
+    hospitals?: IHospital[];
+    healthcareProfessionals?: IHealthcareProfessional[];
+    patients?: IPatient[];
+}
+
+export interface INetworkInfo {
+    networkName: string;
+    typeOfNetwork: "Public" | "Private" | "Non-Profit";
+    mainContact: string;
+    email: string;
+    phone: string;
+    website: string;
+    address: string;
+    //regionsCovered: string[];
+    //services: string[];
+    //affiliatedInsuranceProviders: string[];
 }
 
 export interface IHospital {
     id: string;
     name: string;
     address: string;
-    healthcareProfessionals?: IHealthcareProfessional[];
-    patients?: IPatient[];
+    email: string;
+    phone: string;
+    bedCapacity?: number;
+    operatingHours?: string;
 }
 
 export interface IHealthcareProfessional {
     id: string;
     name: string;
-    email: string;
-    phone: string;
+    role: string;
     hospital: string;
     department: string;
+    email: string;
+    phone: string;
+    employmentStatus: string;   
 }
 
 export interface IHealthcareProfessionalState {

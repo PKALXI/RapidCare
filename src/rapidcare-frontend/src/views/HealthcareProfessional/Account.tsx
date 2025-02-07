@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { resetState } from "../../redux/appActions";
-import { Card, CardContent, Typography, Button } from "@mui/material";
+import { Card, CardContent, Typography, Button, Container } from "@mui/material";
 
 const AccountSettings = () => {
     const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional);
@@ -20,7 +20,7 @@ const AccountSettings = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />
-            <div className="flex-grow pt-6 px-48">
+            <Container className="flex-grow pt-6 pb-16">
                 <Typography variant="h5" gutterBottom>
                     Account Settings
                 </Typography>
@@ -53,7 +53,7 @@ const AccountSettings = () => {
                         </div>
                     </CardContent>
                 </Card>
-            </div>
+            </Container>
             <Footer />
         </div>
     );

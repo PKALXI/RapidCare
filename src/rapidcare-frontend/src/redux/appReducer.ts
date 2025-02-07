@@ -1,5 +1,5 @@
 import { AppState } from '../models/model';
-import { ADD_DOCUMENT, DELETE_PATIENT, RESET_STATE, SET_INITIAL_STATE, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
+import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_EMPLOYEE, DELETE_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_INITIAL_STATE, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
 
 
 const initialState: AppState = {
@@ -11,6 +11,7 @@ const initialState: AppState = {
 };
 
 const appReducer = (state = initialState, action: any): AppState => {
+
     switch (action.type) {
 
         case SET_INITIAL_STATE:
@@ -24,7 +25,6 @@ const appReducer = (state = initialState, action: any): AppState => {
 
         case RESET_STATE:
             return initialState;
-
 
         case UPDATE_PATIENT_PROFILEINFO: {
             if (state.healthcareProfessional?.patients) {
@@ -45,18 +45,16 @@ const appReducer = (state = initialState, action: any): AppState => {
             return state;
         }
 
-
-        
-
         case DELETE_PATIENT: {
             if (state.healthcareProfessional?.patients) {
                 return {
                     ...state,
                     healthcareProfessional: {
-                    ...state.healthcareProfessional,
-                    patients: state.healthcareProfessional.patients.filter(
-                        (patient) => patient.id !== action.payload
-                    ),},
+                        ...state.healthcareProfessional,
+                        patients: state.healthcareProfessional.patients.filter(
+                            (patient) => patient.id !== action.payload
+                        ),
+                    },
                 };
             }
             return state;
@@ -66,7 +64,7 @@ const appReducer = (state = initialState, action: any): AppState => {
             if (state.healthcareProfessional?.patients) {
                 const updatedPatients = state.healthcareProfessional.patients.map(patient => {
                     if (patient.id === action.payload.patientId) {
-                        const updatedDocuments = patient.documents ? [...patient.documents, action.payload.document ] : [action.payload.document ];
+                        const updatedDocuments = patient.documents ? [...patient.documents, action.payload.document] : [action.payload.document];
                         return {
                             ...patient,
                             documents: updatedDocuments
@@ -74,7 +72,6 @@ const appReducer = (state = initialState, action: any): AppState => {
                     }
                     return patient;
                 });
-        
                 return {
                     ...state,
                     healthcareProfessional: {
@@ -86,9 +83,126 @@ const appReducer = (state = initialState, action: any): AppState => {
             return state;
         }
 
-        default: 
+        case SET_ONBOARDING_STATUS:
+            return {
+                ...state,
+                healthNetworkAdmin: state.healthNetworkAdmin
+                    ? { ...state.healthNetworkAdmin, isOnboardingComplete: action.payload }
+                    : null,
+            };
+
+
+        case SAVE_NETWORK_INFO:
+            return {
+                ...state,
+                healthNetworkAdmin: state.healthNetworkAdmin
+                    ? { ...state.healthNetworkAdmin, networkInfo: action.payload }
+                    : null,
+            };
+
+            case ADD_HOSPITAL: {
+                if (state.healthNetworkAdmin) {
+                    const updatedHospitals = state.healthNetworkAdmin.hospitals
+                    ? [...state.healthNetworkAdmin.hospitals, action.payload]
+                    : [action.payload]; 
+    
+                    return {
+                        ...state,
+                        healthNetworkAdmin: {
+                            ...state.healthNetworkAdmin,
+                            hospitals: updatedHospitals, 
+                        },
+                    };
+                }
+                return state;  
+            }
+
+            case UPDATE_HOSPITAL: {
+                if (state.healthNetworkAdmin) {
+                    const updatedHospitals = state.healthNetworkAdmin.hospitals?.map(hospital =>
+                        hospital.id === action.payload.id ? action.payload : hospital
+                    );
+                    return {
+                        ...state,
+                        healthNetworkAdmin: { 
+                            ...state.healthNetworkAdmin, 
+                            hospitals: updatedHospitals 
+                        },
+                    };
+                }
+                return state;
+            }
+
+            case ADD_EMPLOYEE: {
+                if (state.healthNetworkAdmin) {
+                    const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals
+                    ? [...state.healthNetworkAdmin.healthcareProfessionals, action.payload]
+                    : [action.payload]; 
+    
+                    return {
+                        ...state,
+                        healthNetworkAdmin: {
+                            ...state.healthNetworkAdmin,
+                            healthcareProfessionals: updatedEmployees, 
+                        },
+                    };
+                }
+                return state;  
+            }
+
+            case UPDATE_EMPLOYEE: {
+                if (state.healthNetworkAdmin) {
+                    const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals?.map(employee =>
+                        employee.id === action.payload.id ? action.payload : employee
+                    );
+                    return {
+                        ...state,
+                        healthNetworkAdmin: { 
+                            ...state.healthNetworkAdmin, 
+                            healthcareProfessionals: updatedEmployees 
+                        },
+                    };
+                }
+                return state;
+            }
+
+            case DELETE_HOSPITAL: {
+                if (state.healthNetworkAdmin) {
+                    const updatedHospitals = state.healthNetworkAdmin.hospitals?.filter(hospital =>
+                        //change to id
+                        hospital.name !== action.payload.name
+                    );
+                    return {
+                        ...state,
+                        healthNetworkAdmin: { 
+                            ...state.healthNetworkAdmin, 
+                            hospitals: updatedHospitals 
+                        },
+                    };
+                }
+                return state;
+            }
+
+            case DELETE_EMPLOYEE: {
+                if (state.healthNetworkAdmin) {
+                    const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals?.filter(employee =>
+                        //change to id
+                        employee.name !== action.payload.name
+                    );
+                    return {
+                        ...state,
+                        healthNetworkAdmin: { 
+                            ...state.healthNetworkAdmin, 
+                            healthcareProfessionals: updatedEmployees 
+                        },
+                    };
+                }
+                return state;
+            }
+
+        default:
             return state;
-        
+
     }
 };
 

@@ -12,7 +12,7 @@ const AppointmentsList = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />
-            <Container className="flex-grow p-6">
+            <Container className="flex-grow p-6 pb-16">
                 <Typography variant="h5" gutterBottom>
                     Upcoming Appointments
                 </Typography>
@@ -24,7 +24,6 @@ const AppointmentsList = () => {
                                 <Typography variant="h6">{consultation.patientName}</Typography>
                                 <Typography variant="body2" color="text.secondary">{consultation.date}</Typography>
                             </div>
-
                             <div className="text-right">
                                 <Typography variant="body1">{consultation.time}</Typography>
                                 <Button variant="contained" color="primary">View Details</Button>

@@ -1,5 +1,5 @@
 import { AppState } from '../models/model';
-import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_INITIAL_STATE, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
+import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_EMPLOYEE, DELETE_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_INITIAL_STATE, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
 
 
 const initialState: AppState = {
@@ -154,6 +154,40 @@ const appReducer = (state = initialState, action: any): AppState => {
                 if (state.healthNetworkAdmin) {
                     const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals?.map(employee =>
                         employee.id === action.payload.id ? action.payload : employee
+                    );
+                    return {
+                        ...state,
+                        healthNetworkAdmin: { 
+                            ...state.healthNetworkAdmin, 
+                            healthcareProfessionals: updatedEmployees 
+                        },
+                    };
+                }
+                return state;
+            }
+
+            case DELETE_HOSPITAL: {
+                if (state.healthNetworkAdmin) {
+                    const updatedHospitals = state.healthNetworkAdmin.hospitals?.filter(hospital =>
+                        //change to id
+                        hospital.name !== action.payload.name
+                    );
+                    return {
+                        ...state,
+                        healthNetworkAdmin: { 
+                            ...state.healthNetworkAdmin, 
+                            hospitals: updatedHospitals 
+                        },
+                    };
+                }
+                return state;
+            }
+
+            case DELETE_EMPLOYEE: {
+                if (state.healthNetworkAdmin) {
+                    const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals?.filter(employee =>
+                        //change to id
+                        employee.name !== action.payload.name
                     );
                     return {
                         ...state,

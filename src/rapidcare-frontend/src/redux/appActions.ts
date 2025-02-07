@@ -1,5 +1,4 @@
-import { truncate } from "node:fs/promises";
-import { IHealthcareProfessionalState, IHealthNetworkAdminState, IPatient, IProfileInfo, IDocument, AppState, INetworkInfo, IHospital, IHealthcareProfessional } from "../models/model";
+import { IHealthcareProfessionalState, IHealthNetworkAdminState, IProfileInfo, IDocument, INetworkInfo, IHospital, IHealthcareProfessional } from "../models/model";
 
 export const SET_INITIAL_STATE = "SET_INITIAL_STATE";
 export const RESET_STATE = "RESET_STATE";
@@ -12,6 +11,8 @@ export const ADD_HOSPITAL = "ADD_HOSPITAL";
 export const UPDATE_HOSPITAL = "UPDATE_HOSPITAL";
 export const ADD_EMPLOYEE = "ADD_EMPLOYEE";
 export const UPDATE_EMPLOYEE = "UPDATE_EMPLOYEE";
+export const DELETE_HOSPITAL = "DELETE_HOSPITAL";
+export const DELETE_EMPLOYEE = "DELETE_EMPLOYEE";
 
 export const resetState = () => ({
     type: RESET_STATE,
@@ -81,6 +82,16 @@ export const addEmployee = (employee: IHealthcareProfessional) => ({
 export const updateEmployee = (updatedEmployee: IHealthcareProfessional) => ({
     type: UPDATE_EMPLOYEE,
     payload: updatedEmployee,
+});
+
+export const deleteHospital = (hospital: IHospital) => ({
+    type: DELETE_HOSPITAL,
+    payload: hospital,
+});
+
+export const deleteEmployee = (employee: IHealthcareProfessional) => ({
+    type: DELETE_EMPLOYEE,
+    payload: employee,
 });
 
 

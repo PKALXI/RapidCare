@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
-
 import Login from './views/login';
 import PatientProfile from './views/HealthcareProfessional/PatientProfile';
 import AdminDashboard from './views/Admin/AdminDashboard';
@@ -11,6 +10,9 @@ import AppointmentsList from './views/HealthcareProfessional/AppointmentList';
 import AccountSettings from './views/HealthcareProfessional/Account';
 import HpDashboard from './views/HealthcareProfessional/HpDashboard';
 import PatientList from './views/HealthcareProfessional/PatientList';
+import AdminAccount from './views/Admin/AdminAccount';
+import EmployeeList from './views/Admin/EmployeeList';
+import HospitalList from './views/Admin/HospitalList';
 
 const App: React.FC = () => {
   const { isAuthenticated, isUserAdmin } = useSelector((state: RootState) => state.app);
@@ -19,8 +21,14 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         {!isAuthenticated && <Route path="/" element={<Login />} />}
-
-        {isAuthenticated && isUserAdmin && <Route path="/home" element={<AdminDashboard />} />}
+        {isAuthenticated && isUserAdmin && (
+          <>
+            <Route path="/home" element={<AdminDashboard />} />
+            <Route path="/hospitals" element={<HospitalList />} />
+            <Route path="/employees" element={<EmployeeList />} />
+            <Route path="/account" element={<AdminAccount />} />
+          </>
+        )}
 
         {isAuthenticated && !isUserAdmin && (
           <>

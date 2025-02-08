@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, Typography, Button, Grid, Container } from "@mui/material";
+import { Card, CardContent, Typography, Button, Grid, Container, Modal, Box } from "@mui/material";
+import { IPatient } from "../../models/model";
+import {patientCollection } from "../../firebaseControllers/DatabaseOps";
+import AddPatient from "./AddMyPatient";
+import { onSnapshot } from "firebase/firestore";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const PatientList = () => {
     const navigate = useNavigate();
-    const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional);
-    const patients = healthcareProfessional?.patients;
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    // const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional);
+    // const patients = healthcareProfessional?.patients;
+    const [patients, setPatients] = useState<IPatient[]>([]);
+
+    const closeModal = () =>{
+        setOpen(false);
+    }
+
+    //https://firebase.google.com/docs/firestore/query-data/listen
+    const unsub = onSnapshot(patientCollection, (querySnapshot) => {
+        const patientList: IPatient[] = querySnapshot.docs.map((doc) => doc.data());
+        setPatients(patientList);
+    });
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -43,10 +63,20 @@ const PatientList = () => {
                     </Card>
                 ))}
 
-                <div className="flex justify-center mt-6">
-                    <Button variant="contained" color="primary">Add New Patient Record</Button>
-                </div>
+            <div className="flex justify-center my-6">
+                <Button variant="contained" color="primary" onClick={handleOpen}>
+                    <AddCircleIcon/>
+                    ADD PATIENT
+                </Button>
+                <Modal open={open} onClose={handleClose}>
+                    <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
+                        <AddPatient closeModal={closeModal}/>
+                    </Box>
+                </Modal>
+            </div>
+                
             </Container>
+
             <Footer />
         </div>
     );

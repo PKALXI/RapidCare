@@ -2,8 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Button, Box, Typography, Avatar, Divider, Tabs,  Tab, Grid } from "@mui/material";
-import { useState } from "react";
-import { deletePatient } from "../../redux/appActions";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -13,25 +12,39 @@ import ConsultationNotes from "./ConsultationNotes";
 import Documents from "./Documents";
 import DataRow from "../components/DataRow";
 import PersonIcon from '@mui/icons-material/Person';
+import { deletePatient, emptyPatient, getPatient } from "../../firebaseControllers/DatabaseOps";
+import { IPatient } from "../../models/model";
 
 const PatientProfile = () => {
     const { patientId } = useParams<{ patientId: string }>();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional);
-    const patient = healthcareProfessional?.patients?.find((p) => p.id === patientId);
+    // const patient = healthcareProfessional?.patients?.find((p) => p.id === patientId);
+    const [patient, setPatient] = useState<IPatient>(emptyPatient);
     const [activeTab, setActiveTab] = useState("Profile Information");
 
-    if (!patient) {
-        return <div>Patient not found</div>;
-    }
+    useEffect(() => {
+        const fetchPatient = async () => {
+            if (patientId) {
+                const patientData = await getPatient(patientId);
+                if (patientData) {
+                    setPatient(patientData);
+                }else{
+                    alert('NOTHING')
+                }
+            }
+        };
+        fetchPatient();
+    }, [patientId]);
 
     const handleCloseProfile = () => {
         navigate("/patients");
     };
 
     const handleDeleteProfile = () => {
-        dispatch(deletePatient(patient.id));
+        // dispatch(deletePatient(patient.id));
+        deletePatient(patient);
         navigate("/patients");
     };
 

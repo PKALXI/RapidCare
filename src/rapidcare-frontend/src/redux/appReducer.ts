@@ -1,18 +1,15 @@
 import { AppState } from '../models/model';
 import { ADD_DOCUMENT, DELETE_PATIENT, RESET_STATE, SET_INITIAL_STATE, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
 
-
 const initialState: AppState = {
     isUserAdmin: false,
     isAuthenticated: false,
     healthNetworkAdmin: null,
     healthcareProfessional: null
-
 };
 
 const appReducer = (state = initialState, action: any): AppState => {
     switch (action.type) {
-
         case SET_INITIAL_STATE:
             return {
                 ...state,

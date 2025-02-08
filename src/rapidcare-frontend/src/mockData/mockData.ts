@@ -172,7 +172,7 @@ export function generateHealthcareProfessionalMockData(): AppState {
                     id: "12346",
                     profileInformation: {
                         demographics: {
-                            name: "Virat Kohli",
+                            name: "Pranav Kohli",
                             gender: "Male",
                             dateOfBirth: "1970-07-22",
                             age: 36,

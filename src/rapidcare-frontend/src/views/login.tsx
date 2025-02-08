@@ -23,7 +23,7 @@ const Login = () => {
         //to test admin dashboard
         const mockData = genrateSignupStateData();
         if (mockData.isAuthenticated) {
-            dispatch(setLoginState(true, true, mockData.healthNetworkAdmin, null));
+            dispatch(setLoginState(false, true, mockData.healthNetworkAdmin, null));
             navigate("/home");
         }
     };

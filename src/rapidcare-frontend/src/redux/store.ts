@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import appReducer from './appReducer';
-
+import { generateHealthcareProfessionalMockData } from '../mockData/mockData';
 
 const store = configureStore({
     reducer: {

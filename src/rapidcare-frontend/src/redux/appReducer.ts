@@ -1,12 +1,16 @@
+import { generateHealthcareProfessionalMockData } from '../mockData/mockData';
 import { AppState } from '../models/model';
 import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_EMPLOYEE, DELETE_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_INITIAL_STATE, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
 
-const initialState: AppState = {
-    isUserAdmin: false,
-    isAuthenticated: false,
-    healthNetworkAdmin: null,
-    healthcareProfessional: null
-};
+// const initialState: AppState = {
+//     isUserAdmin: false,
+//     isAuthenticated: false,
+//     healthNetworkAdmin: null,
+//     healthcareProfessional: null
+// };
+
+//MOCK DATA CALL TO BE REMOVED
+const initialState = generateHealthcareProfessionalMockData();
 
 const appReducer = (state = initialState, action: any): AppState => {
 

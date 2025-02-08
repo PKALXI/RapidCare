@@ -26,4 +26,27 @@ const patientConverter: FirestoreDataConverter<IPatient> = {
   }
 };
 
-export { patientConverter };
+const hcpConverter: FirestoreDataConverter<IPatient> = {
+  toFirestore: (data: IPatient) => {
+    return {
+      ...data,
+      profileInformation: data.profileInformation || {}, 
+      medicalHistory: data.medicalHistory || {}, 
+      consultationNotes: data.consultationNotes || [],
+      documents: data.documents || [],
+    };
+  },
+
+  fromFirestore: (snap: QueryDocumentSnapshot): IPatient => {
+    const data = snap.data();
+    return {
+      id: snap.id,
+      profileInformation: data.profileInformation || null,
+      medicalHistory: data.medicalHistory || null,
+      consultationNotes: data.consultationNotes || [],
+      documents: data.documents || [],
+    } as IPatient;
+  }
+};
+
+export { patientConverter, hcpConverter };

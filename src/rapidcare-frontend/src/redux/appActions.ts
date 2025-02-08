@@ -19,8 +19,8 @@ export const resetState = () => ({
 });
 
 export const setLoginState = (
-    isAuthenticated: boolean,
     isUserAdmin: boolean,
+    isAuthenticated: boolean,
     healthNetworkAdmin: IHealthNetworkAdminState | null,
     healthcareProfessional: IHealthcareProfessionalState | null
 ) => ({

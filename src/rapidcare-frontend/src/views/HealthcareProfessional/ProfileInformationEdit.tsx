@@ -5,9 +5,8 @@ import { IPatient, IProfileInfo } from "../../models/model";
 import { useDispatch } from "react-redux";
 import { updatePatientProfileInfo } from "../../redux/appActions";
 import { validateField } from "../../helpers/helper";
-import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
+import { v4 as uuidv4 } from "uuid";
 import { emptyPatient, getPatient, updatePatient } from "../../firebaseControllers/DatabaseOps";
-
 
 interface EditProfileInfoProps {
     open: boolean;

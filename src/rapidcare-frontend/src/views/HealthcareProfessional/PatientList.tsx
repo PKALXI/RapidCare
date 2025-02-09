@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, Typography, Button, Grid, Container, Modal, Box } from "@mui/material";
 import { IPatient } from "../../models/model";
@@ -10,7 +8,6 @@ import {patientCollection } from "../../firebaseControllers/DatabaseOps";
 import AddPatient from "./AddMyPatient";
 import { onSnapshot } from "firebase/firestore";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import SoapView from "../SoapView";
 
 const PatientList = () => {
     const navigate = useNavigate();

@@ -122,27 +122,11 @@ export interface IDemographics{
 };
 
 export interface IMedicalHistory {
-    allergies?: IAllergy[];
-    prescriptions?: IPrescription[]
-}
-
-export interface IAllergy {
-    date: string;
-    substance: string;
-    symptoms: string;
-    status: string;
-}
-export interface IPrescription {
-    date: string;
-    medication: string;
-    dosage: string;
-    status: string;
-}
-export interface IAppointment {
-    date: string;
-    reason: string;
-    practioner: string;
-    notes: string;
+    medicalHistory?: string;
+    familyHistory?: string; 
+    allergies?: string;
+    medications?: string;
+    
 }
 
 export interface IDocument {
@@ -156,23 +140,25 @@ export interface ISoapNote {
     id: string;
     date: string;
     practioner: string;
-    reasonForVisit: string;
-    subjectiveAssesment: {
+    subjective: {
+        reason: string;
+        hpi: string;
+        medicalHistory?: string;
         symptoms?: string;
         allergies?: string;
-        medications?: string;
-        medicalHistory?: string;
-        lastMeal?: string;
-
+        currentMedications?: string;
     };
-    objectiveAssessment: {
-        breathing?: string;
-        circulation?: string;
-        skinType?: string;
-        headToToeCheck?: string;
-        levelOfConsciousness?: string;
-
+    objective: {
+        vitals: string;
+        physicalExam: string;
+        laboratoryData: string;
+        imagingResults: string;
+        otherData: string;
     };
-    summary?: string;
-    plan?: string;
+    assessment: {
+        problems: string;
+        diagnosis: string;
+    }
+    plan: string;
+    followUp: string;
 }

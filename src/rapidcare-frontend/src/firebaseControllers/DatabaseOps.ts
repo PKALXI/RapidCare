@@ -54,7 +54,12 @@ export const emptyPatient: IPatient = {
             email: ""
         }
     },
-    medicalHistory: {},
+    medicalHistory: {
+        medicalHistory: "",
+        familyHistory: "",
+        allergies: "",
+        medications: "",
+    },
     consultationNotes: [],
     documents: []
 };

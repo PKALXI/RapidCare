@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IPatient, IProfileInfo } from "../../models/model";
 import { Card, CardContent, CardHeader, Grid, Button, Typography, Box} from "@mui/material";
 import DataRow from '../components/DataRow';
 import EditProfileInfo from "./ProfileInformationEdit";
+import { emptyPatient, getPatient, patientCollection } from "../../firebaseControllers/DatabaseOps";
+import { onSnapshot, query, where } from "firebase/firestore";
 
 interface ProfileInformationProps {
-  patient: IPatient;
+  patientId: string;
 }
 
-const ProfileInformation: React.FC<ProfileInformationProps> = ({ patient }) => {
+const ProfileInformation: React.FC<ProfileInformationProps> = ({ patientId }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+
+  const [patient, setPatient] = useState(emptyPatient);
+  const q = query(patientCollection, where("id", "==", patientId));
+
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        setPatient(doc.data())
+    });
+  });
 
   return (
     <div className= "pb-32">

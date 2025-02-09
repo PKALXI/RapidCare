@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Dialog, Typography, IconButton, Grid, Card, CardHeader, CardContent, TextField, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { IProfileInfo } from "../../models/model";
+import { IPatient, IProfileInfo } from "../../models/model";
 import { useDispatch } from "react-redux";
 import { updatePatientProfileInfo } from "../../redux/appActions";
 import { validateField } from "../../helpers/helper";
+import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
+import { emptyPatient, getPatient, updatePatient } from "../../firebaseControllers/DatabaseOps";
+
 
 interface EditProfileInfoProps {
     open: boolean;
@@ -15,17 +18,116 @@ interface EditProfileInfoProps {
 
 const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patientId, profileInformation }) => {
     const dispatch = useDispatch();
-    const [formData, setFormData] = useState<IProfileInfo>(profileInformation);
+
+    const [patient, setPatient] = useState(emptyPatient);
+
+    /* 
+        CURRENTLY EACH FIELD IS POPULATED WITH NOTHING...The image of DB doc is pulled and edited can be optimized
+        TODO: INREET IMPLEMENT MODAL
+    */
+
+    const [formData, setFormData] = useState({
+        demographics: {
+            name: patient.profileInformation?.demographics?.name || "",
+            gender: patient.profileInformation?.demographics?.gender || "",
+            age: patient.profileInformation?.demographics?.age || 0,
+            dateOfBirth: patient.profileInformation?.demographics?.dateOfBirth || "",
+            healthcardNumber: patient.profileInformation?.demographics?.healthcardNumber || "",
+            weight: patient.profileInformation?.demographics?.weight || "",
+            height: patient.profileInformation?.demographics?.height || "",
+            maritalStatus: patient.profileInformation?.demographics?.maritalStatus || "",
+            occupation: patient.profileInformation?.demographics?.occupation || ""
+        },
+        contactInformation: {
+            email: patient.profileInformation?.contactInformation?.email || "",
+            phone: patient.profileInformation?.contactInformation?.phone || "",
+            address: patient.profileInformation?.contactInformation?.address || ""
+        },
+        insuranceInformation: {
+            memberID: patient.profileInformation?.insuranceInformation?.memberID || "",
+            policyNumber: patient.profileInformation?.insuranceInformation?.policyNumber || "",
+            provider: patient.profileInformation?.insuranceInformation?.provider || ""
+        },
+        emergencyContact: {
+            name: patient.profileInformation?.emergencyContact?.name || "",
+            relationship: patient.profileInformation?.emergencyContact?.relationship || "",
+            phone: patient.profileInformation?.emergencyContact?.phone || "",
+            address: patient.profileInformation?.emergencyContact?.address || ""
+        }
+    });
+
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    useEffect(() => {
+        const fetchPatient = async () => {
+            if (patientId) {
+              const patientData = await getPatient(patientId);
+              if (patientData) {
+                setPatient(patientData);
+              }
+            }
+          };
+          fetchPatient();
+        setFormData({
+            demographics: {
+                name: patient.profileInformation?.demographics?.name || "",
+                gender: patient.profileInformation?.demographics?.gender || "",
+                age: patient.profileInformation?.demographics?.age || 0,
+                dateOfBirth: patient.profileInformation?.demographics?.dateOfBirth || "",
+                healthcardNumber: patient.profileInformation?.demographics?.healthcardNumber || "",
+                weight: patient.profileInformation?.demographics?.weight || "",
+                height: patient.profileInformation?.demographics?.height || "",
+                maritalStatus: patient.profileInformation?.demographics?.maritalStatus || "",
+                occupation: patient.profileInformation?.demographics?.occupation || ""
+            },
+            contactInformation: {
+                email: patient.profileInformation?.contactInformation?.email || "",
+                phone: patient.profileInformation?.contactInformation?.phone || "",
+                address: patient.profileInformation?.contactInformation?.address || ""
+            },
+            insuranceInformation: {
+                memberID: patient.profileInformation?.insuranceInformation?.memberID || "",
+                policyNumber: patient.profileInformation?.insuranceInformation?.policyNumber || "",
+                provider: patient.profileInformation?.insuranceInformation?.provider || ""
+            },
+            emergencyContact: {
+                name: patient.profileInformation?.emergencyContact?.name || "",
+                relationship: patient.profileInformation?.emergencyContact?.relationship || "",
+                phone: patient.profileInformation?.emergencyContact?.phone || "",
+                address: patient.profileInformation?.emergencyContact?.address || ""
+            }
+        });
+    }, []);
+
 
     const handleChange = (section: keyof IProfileInfo, field: string, value: string | number) => {
         setFormData((prev) => ({...prev,[section]: {...prev[section],[field]: value,},}));
         const errorMessage = validateField(field, value);
         setErrors((prev) => ({ ...prev, [`${section}-${field}`]: errorMessage }));
     };
+
+    const updateEntry = () => {
+        const newPatient: IPatient = {
+            ...patient,
+            profileInformation: {
+              ...patient.profileInformation,
+              demographics: {
+                ...patient.profileInformation?.demographics,
+                ...formData.demographics,
+                weight: Number(formData.demographics.weight),
+                height: Number(formData.demographics.height)
+              },
+              contactInformation: formData.contactInformation,
+              insuranceInformation: formData.insuranceInformation,
+              emergencyContact: formData.emergencyContact
+            }
+        };
+
+        updatePatient(newPatient);
+    }
     
     const handleClose = () => {
-        setFormData(profileInformation);
+        // setFormData(profileInformation);
         setErrors({});
         setOpen(false);
     };
@@ -36,7 +138,7 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
         }
         //Backend update
 
-        dispatch(updatePatientProfileInfo(patientId, formData));
+        // dispatch(updatePatientProfileInfo(patientId, formData));
         setOpen(false);
     };
 
@@ -57,7 +159,7 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
                                     <Grid item xs={6} className="space-y-4">
                                         <TextField 
                                             label="Name"
-                                            value={formData.demographics?.name}
+                                            value={formData.demographics.name}
                                             onChange={(e) => handleChange('demographics', 'name', e.target.value)}  
                                         />
                                         <TextField
@@ -217,7 +319,7 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
             </Grid>
 
             <div className="flex justify-center my-4">
-                <Button variant="contained" color="primary" onClick={handleSave}>Save</Button>
+                <Button variant="contained" color="primary" onClick={updateEntry}>Save</Button>
             </div>  
         </Dialog>
     );

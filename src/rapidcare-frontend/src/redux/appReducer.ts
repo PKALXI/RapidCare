@@ -18,8 +18,8 @@ const appReducer = (state = initialState, action: any): AppState => {
         case SET_INITIAL_STATE:
             return {
                 ...state,
-                isAuthenticated: action.payload.isAuthenticated,
                 isUserAdmin: action.payload.isUserAdmin,
+                isAuthenticated: action.payload.isAuthenticated,
                 healthNetworkAdmin: action.payload.healthNetworkAdmin,
                 healthcareProfessional: action.payload.healthcareProfessional,
             };

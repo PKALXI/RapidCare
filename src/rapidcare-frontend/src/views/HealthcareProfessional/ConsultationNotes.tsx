@@ -42,7 +42,7 @@ const ConsultationNotes: React.FC<ConsultationNotesProps> = ({ patient }) => {
                     <Card  className="cursor-pointer" onClick={() => handleOpenNote(note)}>
                         <CardHeader title={note.date} />
                         <CardContent>
-                            <Typography variant="subtitle1">Reason: {note.reasonForVisit}</Typography>
+                            <Typography variant="subtitle1">Reason: {note.subjective.reason}</Typography>
                                 <Typography variant="subtitle2" color="text.secondary">Practitioner: {note.practioner}</Typography>
                             </CardContent>
                         </Card>
@@ -64,64 +64,78 @@ const ConsultationNotes: React.FC<ConsultationNotesProps> = ({ patient }) => {
                             <div className="flex justify-between">
                                 <Typography variant="body1"><strong>Date:</strong> {selectedNote.date}</Typography>
                                 <Typography variant="body1"><strong>Practitioner:</strong> {selectedNote.practioner}</Typography>
-                                <Typography variant="body1"><strong>Reason for Visit:</strong> {selectedNote.reasonForVisit}</Typography>
                             </div>
                             
                             <Card>
                                 <CardContent>
-                                    <Typography variant="h6" gutterBottom>Subjective Assessment</Typography>
+                                    <Typography variant="h6" gutterBottom>Subjective</Typography>
                                     <Grid container spacing={2}>
-                                        <Grid item xs={4} md={3}><Typography variant="body2">Symptoms:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjectiveAssesment.symptoms || "N/A"}</Typography></Grid>
+                                        <Grid item xs={4} md={3}><Typography variant="body2">Reason for visit</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjective.reason || "N/A"}</Typography></Grid>
 
-                                        <Grid item xs={4} md={3}><Typography variant="body2">Allergies:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjectiveAssesment.allergies || "N/A"}</Typography></Grid>
+                                        <Grid item xs={4} md={3}><Typography variant="body2">History of presenting illness</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjective.hpi || "N/A"}</Typography></Grid>
 
-                                        <Grid item xs={4} md={3}><Typography variant="body2">Medications:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjectiveAssesment.medications || "N/A"}</Typography></Grid>
-
-                                        <Grid item xs={4} md={3}><Typography variant="body2" >Medical History:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjectiveAssesment.medicalHistory || "N/A"}</Typography></Grid>
-
-                                        <Grid item xs={4} md={3}><Typography variant="body2">Last Meal:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjectiveAssesment.lastMeal || "N/A"}</Typography></Grid>
-                                    </Grid>
-                                </CardContent>
-                            </Card>
-                            
-                            <Card>
-                                <CardContent>
-                                    <Typography variant="h6" gutterBottom>Objective Assessment</Typography>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={4} md={3}><Typography variant="body2" >Breathing:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objectiveAssessment.breathing || "N/A"}</Typography></Grid>
-
-                                        <Grid item xs={4} md={3}><Typography variant="body2" >Circulation:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objectiveAssessment.circulation || "N/A"}</Typography></Grid>
-
-                                        <Grid item xs={4} md={3}><Typography variant="body2" >Skin Type:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objectiveAssessment.skinType || "N/A"}</Typography></Grid>
-
-                                        <Grid item xs={4} md={3}><Typography variant="body2" >Head-to-Toe Check:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objectiveAssessment.headToToeCheck || "N/A"}</Typography></Grid>
+                                        <Grid item xs={4} md={3}><Typography variant="body2" >Past medical history</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjective.medicalHistory || "N/A"}</Typography></Grid>
                                         
-                                        <Grid item xs={4} md={3}><Typography variant="body2">Level of Consciousness:</Typography></Grid>
-                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objectiveAssessment.levelOfConsciousness || "N/A"}</Typography></Grid>
+                                        <Grid item xs={4} md={3}><Typography variant="body2">Review of systems</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjective.symptoms || "N/A"}</Typography></Grid>
+
+                                        <Grid item xs={4} md={3}><Typography variant="body2">Allergies</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjective.allergies || "N/A"}</Typography></Grid>
+                                    
+                                        <Grid item xs={4} md={3}><Typography variant="body2">Current Medications</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.subjective.currentMedications || "N/A"}</Typography></Grid>
+                                     
+                                        </Grid>
+                                </CardContent>
+                            </Card>
+                            
+                            <Card>
+                                <CardContent>
+                                    <Typography variant="h6" gutterBottom>Objective</Typography>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={4} md={3}><Typography variant="body2" >Vital signs</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objective.vitals || "N/A"}</Typography></Grid>
+
+                                        <Grid item xs={4} md={3}><Typography variant="body2" >Physical Exam</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objective.physicalExam || "N/A"}</Typography></Grid>
+
+                                        <Grid item xs={4} md={3}><Typography variant="body2" >Laboratory Data</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objective.laboratoryData || "N/A"}</Typography></Grid>
+
+                                        <Grid item xs={4} md={3}><Typography variant="body2" >Imaging Results</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objective.imagingResults || "N/A"}</Typography></Grid>
+                                        
+                                        <Grid item xs={4} md={3}><Typography variant="body2">Other Data</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.objective.otherData || "N/A"}</Typography></Grid>
                                     </Grid>
                                 </CardContent>
                             </Card>
                             <Card>
                                 <CardContent>
-                                    <Typography variant="h6" gutterBottom>Assessment Summary</Typography>
-                                    <Typography variant="body2">{selectedNote.summary || "N/A"}</Typography>
+                                    <Typography variant="h6" gutterBottom>Assessment</Typography>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={4} md={3}><Typography variant="body2" >Problems Identified</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.assessment.problems || "N/A"}</Typography></Grid>
+
+                                        <Grid item xs={4} md={3}><Typography variant="body2" >Diagnosis</Typography></Grid>
+                                        <Grid item xs={8} md={9}><Typography variant="body2">{selectedNote.assessment.diagnosis || "N/A"}</Typography></Grid>
+
+                                    </Grid>
                                 </CardContent>
                             </Card>
-
-                            
                             <Card>
                                 <CardContent>
                                     <Typography variant="h6" gutterBottom>Plan</Typography>
                                     <Typography variant="body2">{selectedNote.plan || "N/A"}</Typography>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardContent>
+                                    <Typography variant="h6" gutterBottom>Follow-up</Typography>
+                                    <Typography variant="body2">{selectedNote.followUp || "N/A"}</Typography>
                                 </CardContent>
                             </Card>  
                         </div>

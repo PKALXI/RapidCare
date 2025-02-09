@@ -26,8 +26,8 @@ export const setLoginState = (
 ) => ({
     type: SET_INITIAL_STATE,
     payload: {
-        isAuthenticated,
         isUserAdmin,
+        isAuthenticated,
         healthNetworkAdmin,
         healthcareProfessional
     },

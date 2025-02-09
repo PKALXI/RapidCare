@@ -10,6 +10,7 @@ import {patientCollection } from "../../firebaseControllers/DatabaseOps";
 import AddPatient from "./AddMyPatient";
 import { onSnapshot } from "firebase/firestore";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SoapView from "../SoapView";
 
 const PatientList = () => {
     const navigate = useNavigate();

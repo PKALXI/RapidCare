@@ -12,8 +12,9 @@ import ConsultationNotes from "./ConsultationNotes";
 import Documents from "./Documents";
 import DataRow from "../components/DataRow";
 import PersonIcon from '@mui/icons-material/Person';
-import { deletePatient, emptyPatient, getPatient } from "../../firebaseControllers/DatabaseOps";
+import { deletePatient, emptyPatient, getPatient, patientCollection } from "../../firebaseControllers/DatabaseOps";
 import { IPatient } from "../../models/model";
+import { onSnapshot, query, where } from "firebase/firestore";
 
 const PatientProfile = () => {
     const { patientId } = useParams<{ patientId: string }>();
@@ -24,19 +25,27 @@ const PatientProfile = () => {
     const [patient, setPatient] = useState<IPatient>(emptyPatient);
     const [activeTab, setActiveTab] = useState("Profile Information");
 
-    useEffect(() => {
-        const fetchPatient = async () => {
-            if (patientId) {
-                const patientData = await getPatient(patientId);
-                if (patientData) {
-                    setPatient(patientData);
-                }else{
-                    alert('NOTHING')
-                }
-            }
-        };
-        fetchPatient();
-    }, [patientId]);
+    const q = query(patientCollection, where("id", "==", patientId));
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            setPatient(doc.data())
+        });
+    });
+
+    // useEffect(() => {
+    //     const fetchPatient = async () => {
+    //         if (patientId) {
+    //             const patientData = await getPatient(patientId);
+    //             if (patientData) {
+    //                 setPatient(patientData);
+    //             }else{
+    //                 alert('NOTHING')
+    //             }
+    //         }
+    //     };
+    //     fetchPatient();
+    // }, [patientId]);
 
     const handleCloseProfile = () => {
         navigate("/patients");
@@ -99,7 +108,7 @@ const PatientProfile = () => {
                     </Box>
 
                     <Box className="w-3/4 p-4 overflow-auto max-h-[calc(100vh-150px)]">
-                        {activeTab === "Profile Information" && <ProfileInformation patient={patient} />}
+                        {activeTab === "Profile Information" && <ProfileInformation patientId={patient.id} />}
                         {activeTab === "Medical History" && <MedicalHistory patient={patient} />}
                         {activeTab === "Consultation Notes" && <ConsultationNotes patient={patient} />}
                         {activeTab === "Documents" && <Documents patient={patient} />}

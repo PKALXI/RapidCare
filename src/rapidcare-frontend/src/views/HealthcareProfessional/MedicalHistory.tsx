@@ -8,7 +8,7 @@ interface MedicalHistoryProps {
 
 const MedicalHistory: React.FC<MedicalHistoryProps> = ({ patient }) => {
     const allergies = patient.medicalHistory?.allergies;
-    const prescriptions = patient.medicalHistory?.prescriptions;
+    // const prescriptions = patient.medicalHistory?.prescriptions;
 
     return (
         <div className= "pb-32">

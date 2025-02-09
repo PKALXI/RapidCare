@@ -27,8 +27,9 @@ const getPatient = async(id : string) => {
     return null;
 }
 
-const updatePatient = (patient : IPatient) => {
-    //TODO
+const updatePatient = async(patient : IPatient) => {
+    const docRef = doc(patientCollection, patient.id);
+    await setDoc(docRef, patient);
 }
 
 const deletePatient = async(patient : IPatient) => {

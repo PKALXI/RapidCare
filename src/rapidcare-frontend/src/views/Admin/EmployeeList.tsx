@@ -12,10 +12,9 @@ import { addEmployee, updateEmployee, deleteEmployee } from "../../redux/appActi
 const EmployeeList = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
     const hospitals = healthNetworkAdmin?.hospitals || [];
-    const employees = healthNetworkAdmin?.healthcareProfessionals || [];
-
+   
     const initialFormData: IHealthcareProfessional = {
-        id: "",
+        id: "", //add unique id
         name: "",
         role: "",
         hospital: "",
@@ -102,7 +101,8 @@ const EmployeeList = () => {
                     >
                         <option value="">All Hospitals</option>
                         {hospitals.map((hospital) => (
-                            <option key={hospital.id} value={hospital.name}>
+                            // value should be hospital.id
+                            <option key={hospital.id} value={hospital.name}> 
                                 {hospital.name}
                             </option>
                         ))}
@@ -117,25 +117,29 @@ const EmployeeList = () => {
                         <Grid item xs={12} sm={2}><Typography fontWeight="bold">Actions</Typography></Grid>
                     </Grid>
                 </Card>
-                {employees.filter(emp => !selectedHospital || emp.hospital === selectedHospital).map((employee) => (
-                    <Card key={employee.id} className="mb-4 p-2">
-                        <CardContent>
+                {hospitals
+                    //should be hospital.id = selectedHospital
+                    .filter(hospital => !selectedHospital || hospital.name === selectedHospital)
+                    .flatMap((hospital => hospital.healthcareProfessionals?.map((employee) => (
+                        <Card key={employee.id} className="mb-4 p-2">
+                            <CardContent>
                             <Grid container spacing={2} className="text-center">
                                 <Grid item xs={12} sm={3}><Typography>{employee.name}</Typography></Grid>
                                 <Grid item xs={12} sm={2}><Typography>{employee.role}</Typography></Grid>
-                                <Grid item xs={12} sm={3}><Typography>{employee.hospital}</Typography></Grid>
+                                <Grid item xs={12} sm={3}><Typography>{hospital.name}</Typography></Grid>
                                 <Grid item xs={12} sm={2}><Typography>{employee.phone}</Typography></Grid>
                                 <Grid item xs={6} sm={1}>
-                                    <Button variant="contained" color="primary" onClick={() => handleEdit(employee)}>Edit</Button>
+                                <Button variant="contained" color="primary" onClick={() => handleEdit(employee)}>Edit</Button>
                                 </Grid>
                                 <Grid item xs={6} sm={1}>
-                                    <Button variant="contained" color="error" onClick={() => handleDelete(employee)}>Delete</Button>
+                                <Button variant="contained" color="error" onClick={() => handleDelete(employee)}>Delete</Button>
                                 </Grid>
                             </Grid>
-                        </CardContent>
-                    </Card>
-                ))}
-                <div className="flex justify-center mt-6">
+                            </CardContent>
+                        </Card>
+                        ))
+                    ))}
+                    <div className="flex justify-center mt-6">
                     <Button variant="contained" color="primary" onClick={handleAdd}>Add New Employee</Button>
                 </div>
             </Container>
@@ -170,6 +174,7 @@ const EmployeeList = () => {
                             >
                                 <option value="Select">Select Hospital</option>
                                 {hospitals.map(hospital => (
+                                    //value should be hospital.id
                                     <option key={hospital.id} value={hospital.name}>{hospital.name}</option>
                                 ))}
                             </TextField>

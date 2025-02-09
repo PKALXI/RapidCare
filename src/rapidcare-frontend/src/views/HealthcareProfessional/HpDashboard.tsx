@@ -16,7 +16,7 @@ const HpDashboard = () => {
         <div className="min-h-screen flex flex-col">
             <Navbar />
             <div className="flex-grow p-6 bg-gray-100">
-                <h2 className="text-3xl font-semibold mb-6 ml-4">Hello {healthcareProfessional?.name}!</h2>
+                <h2 className="text-3xl font-semibold mb-6 ml-4">Hello {healthcareProfessional?.user.name}!</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className=" bg-gradient-to-r from-blue-200 to-blue-400 text-black rounded-lg shadow-sm p-6">

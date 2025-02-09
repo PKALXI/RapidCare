@@ -8,7 +8,7 @@ import { resetState } from "../../redux/appActions";
 import { Card, CardContent, Typography, Button, Container } from "@mui/material";
 
 const AccountSettings = () => {
-    const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional);
+    const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional?.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

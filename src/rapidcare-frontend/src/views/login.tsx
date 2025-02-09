@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { setLoginState } from '../redux/appActions';
 import { useNavigate } from 'react-router-dom';
-import { genrateSignupStateData } from '../mockData/mockData';
+import { generateSignupStateData } from '../mockData/mockData';
 //import { mapHealthcareProfessionalData } from '../helpers/helper';
 //import { generateHealthcareProfessionalMockData } from '../mockData/mockData';
 
@@ -16,14 +16,14 @@ const Login = () => {
         // const mockData = generateHealthcareProfessionalMockData();
         // if (mockData.isAuthenticated) {
         //     const mappedHealthcareProfessional = mapHealthcareProfessionalData(mockData.healthcareProfessional);
-        //     dispatch(setLoginState(true, mockData.isUserAdmin, mockData.healthNetworkAdmin, mappedHealthcareProfessional));
+        //     dispatch(setLoginState(mockData.isUserAdmin, true, mockData.healthNetworkAdmin, mappedHealthcareProfessional));
         //     navigate('/home');
         // }
 
         //to test admin dashboard
-        const mockData = genrateSignupStateData();
+        const mockData = generateSignupStateData();
         if (mockData.isAuthenticated) {
-            dispatch(setLoginState(false, true, mockData.healthNetworkAdmin, null));
+            dispatch(setLoginState(true, false, mockData.healthNetworkAdmin, null));
             navigate("/home");
         }
     };

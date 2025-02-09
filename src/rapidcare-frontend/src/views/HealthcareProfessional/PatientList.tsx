@@ -69,9 +69,9 @@ const PatientList = () => {
                     ADD PATIENT
                 </Button>
                 <Modal open={open} onClose={handleClose}>
-                    <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
+                    
                         <AddPatient closeModal={closeModal}/>
-                    </Box>
+                    
                 </Modal>
             </div>
                 

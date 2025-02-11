@@ -43,20 +43,20 @@ export const validateField = (field: string, value: string | number | boolean): 
         default:
             break;
     }
-
     return errorMessage;
 };
 
-
-
-
 export const mapHealthcareProfessionalData = (data: any): IHealthcareProfessionalState => ({
-    id: data.id,
-    name: data.name,
-    email: data.email,
-    phone: data.phone,
-    hospital: data.hospital,
-    department: data.department,
+    user: {
+        id: data.user.id,
+        name: data.user.name,
+        role: data.user.role,
+        hospital: data.user.hospital,
+        department: data.user.department,
+        email: data.user.email,
+        phone: data.user.phone,
+        employmentStatus: data.user.employmentStatus
+    },
     dashboardMetrics: data.dashboardMetrics ? {
         scheduledVisitsToday: Number(data.dashboardMetrics.scheduledVisitsToday) || 0,
         newPatientsThisMonth: Number(data.dashboardMetrics.newPatientsThisMonth) || 0,

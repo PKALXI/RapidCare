@@ -30,9 +30,6 @@ export interface INetworkInfo {
     phone: string;
     website: string;
     address: string;
-    //regionsCovered: string[];
-    //services: string[];
-    //affiliatedInsuranceProviders: string[];
 }
 
 export interface IHospital {
@@ -57,12 +54,7 @@ export interface IHealthcareProfessional {
 }
 
 export interface IHealthcareProfessionalState {
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-    hospital: string;
-    department: string;
+    user: IHealthcareProfessional
     dashboardMetrics?: {
         scheduledVisitsToday: number;
         newPatientsThisMonth: number;
@@ -71,7 +63,6 @@ export interface IHealthcareProfessionalState {
     patients: IPatient[];
     consultations?: IConsultation[];
 }
-
 
 export interface IConsultation {
     patientName: string;
@@ -95,13 +86,11 @@ export interface IProfileInfo {
         policyNumber: string;
         provider: string;
     };
-
     contactInformation?: {
         email: string;
         phone: string;
         address: string;
     };
-
     emergencyContact?: {
         name: string;
         relationship: string;
@@ -109,6 +98,7 @@ export interface IProfileInfo {
         address: string;
     };
 };
+
 export interface IDemographics{
     name: string;
     gender: string;
@@ -125,8 +115,7 @@ export interface IMedicalHistory {
     medicalHistory?: string;
     familyHistory?: string; 
     allergies?: string;
-    medications?: string;
-    
+    medications?: string;   
 }
 
 export interface IDocument {

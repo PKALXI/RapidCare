@@ -8,13 +8,24 @@ import { useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import { IHospital } from "../../models/model";
 import { validateField } from "../../helpers/helper";
-import { addHospital, updateHospital, deleteHospital } from "../../redux/appActions";
+import { onSnapshot } from "firebase/firestore";
+import { addHospital, deleteHospital, hospitalCollection } from "../../firebaseControllers/DatabaseOps";
+import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
+
 
 
 const HospitalList = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
-    const hospitals = healthNetworkAdmin?.hospitals;
+    // const hospitals = healthNetworkAdmin?.hospitals;
 
+    const [hospitals, setHospitals] = useState<IHospital[]>([]);
+
+    //https://firebase.google.com/docs/firestore/query-data/listen
+    const unsub = onSnapshot(hospitalCollection, (querySnapshot) => {
+        const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
+        setHospitals(hospitalList);
+    });
+    
     const initialFormData: IHospital = {
         id: "",
         name: "",
@@ -40,21 +51,42 @@ const HospitalList = () => {
     };
 
     const handleDelete = (hospital: IHospital) => {
-
+        console.log(hospital.id);
         //backend update
-        dispatch(deleteHospital(hospital)); 
+        deleteHospital(hospital);
     };
 
     const handleSave = () => {
         if (Object.values(errors).some(error => error)) {return;}
 
-        // backend update
-        if (isEditing) { 
-            dispatch(updateHospital(formData)); 
-        } else {
-            dispatch(addHospital(formData));
+        if(isEditing){
+            const newHospital: IHospital = {
+                id: formData.id,
+                name: formData.name,
+                address: formData.address,
+                email: formData.email,
+                phone: formData.phone,
+                bedCapacity: formData.bedCapacity,
+                operatingHours: formData.operatingHours,
+            };
+    
+            addHospital(newHospital);
+
+        }else{
+            const newHospital: IHospital = {
+                id: uuidv4(),
+                name: formData.name,
+                address: formData.address,
+                email: formData.email,
+                phone: formData.phone,
+                bedCapacity: formData.bedCapacity,
+                operatingHours: formData.operatingHours,
+            };
+
+            addHospital(newHospital);
         }
-        handleCloseModal();        
+
+        handleCloseModal();    
     }
 
     const handleAdd = () => {

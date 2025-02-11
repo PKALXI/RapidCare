@@ -2,7 +2,7 @@ import { AppState } from "../models/model";
 
 export const generateHealthcareProfessionalMockData = (): AppState => ({
     isAuthenticated: true,
-    isUserAdmin: false,
+    isUserAdmin: true,
     healthNetworkAdmin: null,
     healthcareProfessional: {
         id: "hp123",

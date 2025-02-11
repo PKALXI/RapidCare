@@ -100,6 +100,29 @@ const EmployeeList = () => {
                 employmentStatus: formData.employmentStatus
             };
 
+            fetch('http://127.0.0.1:5000/create_user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    id: newHCP.id,
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('User created successfully:', data);
+            })
+            .catch(error => {
+                console.error('Error creating user:', error);
+            });
+
             addHealthCareProfessional(newHCP);
         }       
 
@@ -114,6 +137,29 @@ const EmployeeList = () => {
         //backend update here
         //change to only pass id once firestore is setup for this same in action and reducer, for now using name
         deleteHealthCareProfessional(employee);
+
+        fetch('http://127.0.0.1:5000/create_user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: employee.email,
+                id: employee.id,
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('User created successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error creating user:', error);
+        });
     };
 
 

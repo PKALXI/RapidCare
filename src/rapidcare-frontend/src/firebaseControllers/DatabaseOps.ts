@@ -1,18 +1,32 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { IHealthcareProfessional, IHospital, IPatient } from "../models/model";
-import { healthcareProfessionalConverter, hospitalConverter, patientConverter } from "../firebaseControllers/converters";
+import { IHealthcareProfessional, IHospital, INetworkInfo, IPatient } from "../models/model";
+import { healthcareProfessionalConverter, hospitalConverter, networkInfoConverter, patientConverter } from "../firebaseControllers/converters";
 
 const PATIENT_COLLECTION = "patients";
 const HEALTHCARE_PROFESSIONAL_COLLECTION = "healthcare_professional";
 const HOSPITAL_COLLECTION = "hospitals";
+const ADMIN_COLLECTION = "admin";
 
 //https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
 //TODO: Add hcp collection
 const patientCollection = collection(db, PATIENT_COLLECTION).withConverter(patientConverter);
 const hospitalCollection = collection(db, HOSPITAL_COLLECTION).withConverter(hospitalConverter);
 const healthcareProfessionalCollection = collection(db, HEALTHCARE_PROFESSIONAL_COLLECTION).withConverter(healthcareProfessionalConverter);
+const networkInfoCollection = collection(db, ADMIN_COLLECTION).withConverter(networkInfoConverter);
+
 //https://firebase.google.com/docs/firestore/manage-data/add-data
+const addAdmin = async(admin : INetworkInfo) => {
+    const docRef = doc(networkInfoCollection, admin.id);
+    await setDoc(docRef, admin);
+}
+
+const deleteAdmin= async(healthCareProfessional : IHealthcareProfessional) => {
+    const docRef = doc(networkInfoCollection, healthCareProfessional.id);
+    await deleteDoc(docRef);
+}
+
+
 const addHealthCareProfessional = async (healthCareProfessional: IHealthcareProfessional) => {
     const docRef = doc(healthcareProfessionalCollection, healthCareProfessional.id);
     await setDoc(docRef, healthCareProfessional);
@@ -86,4 +100,4 @@ export const emptyPatient: IPatient = {
     documents: []
 };
 
-export {addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection, patientCollection, deleteHospital, addHospital, getPatient, addPatient, updatePatient, deletePatient };
+export {networkInfoCollection, addAdmin, deleteAdmin, addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection, patientCollection, deleteHospital, addHospital, getPatient, addPatient, updatePatient, deletePatient };

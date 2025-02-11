@@ -15,6 +15,7 @@ const AdminAccount = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
     const [openModal, setOpenModal] = useState(false);
     const [formData, setNetworkInfo] = useState<INetworkInfo>(healthNetworkAdmin?.networkInfo || {
+        id : '',
         networkName: '',
         typeOfNetwork: 'Public',
         mainContact: '',

@@ -114,6 +114,10 @@ const AddPatient = ({closeModal}: {closeModal: () => void}) => {
       age--;
     }
 
+    if (age < 0) {
+      return 0;
+    }
+    
     return age;
   }
 

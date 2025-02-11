@@ -19,7 +19,7 @@ const addHealthCareProfessional = async (healthCareProfessional: IHealthcareProf
 };
 
 const deleteHealthCareProfessional = async(healthCareProfessional : IHealthcareProfessional) => {
-    const docRef = doc(hospitalCollection, healthCareProfessional.id);
+    const docRef = doc(healthcareProfessionalCollection, healthCareProfessional.id);
     await deleteDoc(docRef);
 }
 

@@ -1,5 +1,5 @@
 import { QueryDocumentSnapshot, FirestoreDataConverter } from "firebase/firestore";
-import { IHealthcareProfessional, IHospital, IPatient } from "../models/model";
+import { IHealthcareProfessional, IHospital, INetworkInfo, IPatient } from "../models/model";
 
 //https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
 //Adapted to fit interfaces
@@ -82,4 +82,32 @@ const healthcareProfessionalConverter: FirestoreDataConverter<IHealthcareProfess
   }
 };
 
-export { healthcareProfessionalConverter, patientConverter, hospitalConverter };
+const networkInfoConverter: FirestoreDataConverter<INetworkInfo> = {
+  toFirestore: (data: INetworkInfo) => {
+    return {
+      networkName: data.networkName || "",
+      typeOfNetwork: data.typeOfNetwork || "Public",
+      mainContact: data.mainContact || "",
+      email: data.email || "",
+      phone: data.phone || "",
+      website: data.website || "",
+      address: data.address || ""
+    };
+  },
+
+  fromFirestore: (snap: QueryDocumentSnapshot): INetworkInfo => {
+    const data = snap.data();
+    return {
+      networkName: data.networkName || "",
+      typeOfNetwork: data.typeOfNetwork || "Public",
+      mainContact: data.mainContact || "",
+      email: data.email || "",
+      phone: data.phone || "",
+      website: data.website || "",
+      address: data.address || ""
+    } as INetworkInfo;
+  }
+};
+
+
+export {networkInfoConverter, healthcareProfessionalConverter, patientConverter, hospitalConverter };

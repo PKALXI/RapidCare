@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 import { IPatient, IDocument, IPrescription } from "../../models/model";
 import { Card, CardContent, Typography, Modal, Box, IconButton, Button, Grid, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -13,23 +14,12 @@ interface PrescriptionsProps {
 const Documents: React.FC<PrescriptionsProps> = ({ patient }) => {
 
     const initialFormData: IPrescription = {
-            doctorName: "",
-            practioner: "",
-            date: "",
-            type: "",
-            url: "",
-            prescriptedMedication: {
-                medication: "",
-                dosage: "",
-                duration: "",
-                qty: 0,
-            }
+            plan: "",
         };
-
     const [formData, setSelectedNote] = useState<IPrescription>(initialFormData);
     const dispatch = useDispatch();
-    const prescriptions = patient.prescriptions || [];
-    const [selectedPrescription, setSelectedPrescription] = useState<IPrescription | null>(null);
+    const [form, setSelectedPrescription] = useState<IPrescription | null>(null);
+    const componentRef = useRef<HTMLDivElement>(null)
     const [openUploadModal, setOpenUploadModal] = useState(false);
     const [openViewModal, setOpenViewModal] = useState(false); 
     
@@ -42,9 +32,10 @@ const Documents: React.FC<PrescriptionsProps> = ({ patient }) => {
             setSelectedPrescription({ ...formData, [name]: value });
         };
 
-
-    //Need to change
-
+    const handlePrint = useReactToPrint({
+        documentTitle: "Prescription_PDF",
+        onAfterPrint: () => console.log("Printed successfully!"),
+    });
 
     const handleOpenPrescription = (prescriptions: IPrescription) => {
         setSelectedPrescription(prescriptions);
@@ -59,59 +50,50 @@ const Documents: React.FC<PrescriptionsProps> = ({ patient }) => {
     return (
         <div>
             <div className="flex justify-between">
-                <Typography variant="h5" gutterBottom>Prescriptions</Typography>
+                <Typography variant="h5" gutterBottom>Prescription</Typography>
                 <Button variant="contained" color="primary" onClick={handleAddNew}>Add new</Button>
             </div>
 
             <Modal open={openViewModal} onClose={handleCloseModal}>
                 <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
-                    <div className="p-2 flex justify-between items-center">
-                        <Typography variant="h6">New Prescription{selectedPrescription?.practioner}</Typography>
+                    <div className="p-2 flex justify-between items-center">          
                         <IconButton onClick={handleCloseModal}>
                             <CloseIcon />
                         </IconButton>
                     </div>
-                    <Card className="p-2">
-                        <CardContent>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6}>
-                                    <TextField 
-                                        name="Doctor's Name"
-                                        label="Doctor's Name" 
-                                        fullWidth
-                                        value={formData.doctorName}
-                                        onChange={handleChange}
-                                        type="doctorName"
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField 
-                                        name="practioner"
-                                        label="Practitioner" 
-                                        fullWidth
-                                        value={formData.practioner}
-                                        onChange={handleChange}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </CardContent>
-                    </Card>
-                    
-                </Box>
-            </Modal>
-
-            
-            <Modal open={openUploadModal} onClose={() => setOpenUploadModal(false)}>
-                <Box className="w-1/3 mx-auto mt-64 bg-white p-4 rounded relative">
-                    <div className="p-4 flex justify-between items-center">
-                        <Typography variant="h6">Upload New Document</Typography>
-                        <IconButton onClick={() => setOpenUploadModal(false)}>
-                            <CloseIcon />
-                        </IconButton>
+                    <div ref={componentRef}>
+                        <Card className="p-2">
+                            <CardContent>
+                                <TextField
+                                    name="plan"
+                                    label="Plan"
+                                    fullWidth
+                                    multiline
+                                    rows={6}
+                                    value={formData.plan}
+                                    onChange={handleChange}
+                                    variant="outlined"
+                                />
+                            </CardContent>
+                        </Card>
                     </div>
                     
+                    <Box className="flex justify-between px-16 sticky bottom-0">
+                        <Button variant="contained" color="primary">Save</Button>
+                        <Button 
+              variant="contained" 
+              color="primary" 
+              onClick={() => {
+                handlePrint(); 
+              }}
+            >
+              Export as pdf
+            </Button> 
+                    </Box>  
                 </Box>
             </Modal>
+            
+            
         </div>
     );
 };

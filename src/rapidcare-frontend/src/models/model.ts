@@ -127,17 +127,8 @@ export interface IDocument {
 }
 
 export interface IPrescription {
-    doctorName: string;
-    practioner: string
-    date: string;
-    type: string;
-    url: string;
-    prescriptedMedication: {
-        medication: string;
-        dosage: string;
-        duration: string;
-        qty: number;
-    }
+    plan: string,
+
 }
 
 export interface ISoapNote {

@@ -13,8 +13,21 @@ import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
 
 const EmployeeList = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
-    const hospitals = healthNetworkAdmin?.hospitals || [];
-    const employees = healthNetworkAdmin?.healthcareProfessionals || [];
+    const [hospitals, setHospitals] = useState<IHospital[]>([]);
+    const [employees, setEmployees] = useState<IHealthcareProfessional[]>([]);
+
+    const initialHospitalFormData: IHospital = {
+        id: "",
+        name: "",
+        address: "",
+        email: "",
+        phone: "",
+        bedCapacity: 0,
+        operatingHours: "",
+    };
+    // const hospitals = healthNetworkAdmin?.hospitals || [];
+    // const employees = healthNetworkAdmin?.healthcareProfessionals || [];
+
 
     const initialFormData: IHealthcareProfessional = {
         id: "",

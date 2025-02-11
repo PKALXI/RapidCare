@@ -18,6 +18,8 @@ export interface IHealthNetworkAdminState {
         totalHospitals: number;
     }
     hospitals?: IHospital[];
+    healthcareProfessionals?: IHealthcareProfessional[];
+    patients?: IPatient[];
 }
 
 export interface INetworkInfo {
@@ -38,8 +40,6 @@ export interface IHospital {
     phone: string;
     bedCapacity?: number;
     operatingHours?: string;
-    healthcareProfessionals?: IHealthcareProfessional[];
-    patients?: IPatient[];
 }
 
 export interface IHealthcareProfessional {
@@ -64,7 +64,6 @@ export interface IHealthcareProfessionalState {
     consultations?: IConsultation[];
 }
 
-
 export interface IConsultation {
     patientName: string;
     photo?: string;
@@ -87,13 +86,11 @@ export interface IProfileInfo {
         policyNumber: string;
         provider: string;
     };
-
     contactInformation?: {
         email: string;
         phone: string;
         address: string;
     };
-
     emergencyContact?: {
         name: string;
         relationship: string;
@@ -101,6 +98,7 @@ export interface IProfileInfo {
         address: string;
     };
 };
+
 export interface IDemographics{
     name: string;
     gender: string;
@@ -117,8 +115,7 @@ export interface IMedicalHistory {
     medicalHistory?: string;
     familyHistory?: string; 
     allergies?: string;
-    medications?: string;
-    
+    medications?: string;   
 }
 
 export interface IDocument {

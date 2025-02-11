@@ -43,12 +43,8 @@ export const validateField = (field: string, value: string | number | boolean): 
         default:
             break;
     }
-
     return errorMessage;
 };
-
-
-
 
 export const mapHealthcareProfessionalData = (data: any): IHealthcareProfessionalState => ({
     user: {

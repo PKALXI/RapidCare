@@ -63,40 +63,42 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
               const patientData = await getPatient(patientId);
               if (patientData) {
                 setPatient(patientData);
+                
+                setFormData({
+                    demographics: {
+                        name: patientData.profileInformation?.demographics?.name || "",
+                        gender: patientData.profileInformation?.demographics?.gender || "",
+                        age: patientData.profileInformation?.demographics?.age || 0,
+                        dateOfBirth: patientData.profileInformation?.demographics?.dateOfBirth || "",
+                        healthcardNumber: patientData.profileInformation?.demographics?.healthcardNumber || "",
+                        weight: patientData.profileInformation?.demographics?.weight || "",
+                        height: patientData.profileInformation?.demographics?.height || "",
+                        maritalStatus: patientData.profileInformation?.demographics?.maritalStatus || "",
+                        occupation: patientData.profileInformation?.demographics?.occupation || ""
+                    },
+                    contactInformation: {
+                        email: patientData.profileInformation?.contactInformation?.email || "",
+                        phone: patientData.profileInformation?.contactInformation?.phone || "",
+                        address: patientData.profileInformation?.contactInformation?.address || ""
+                    },
+                    insuranceInformation: {
+                        memberID: patientData.profileInformation?.insuranceInformation?.memberID || "",
+                        policyNumber: patientData.profileInformation?.insuranceInformation?.policyNumber || "",
+                        provider: patientData.profileInformation?.insuranceInformation?.provider || ""
+                    },
+                    emergencyContact: {
+                        name: patientData.profileInformation?.emergencyContact?.name || "",
+                        relationship: patientData.profileInformation?.emergencyContact?.relationship || "",
+                        phone: patientData.profileInformation?.emergencyContact?.phone || "",
+                        address: patientData.profileInformation?.emergencyContact?.address || ""
+                    }
+                });
               }
             }
           };
           fetchPatient();
-        setFormData({
-            demographics: {
-                name: patient.profileInformation?.demographics?.name || "",
-                gender: patient.profileInformation?.demographics?.gender || "",
-                age: patient.profileInformation?.demographics?.age || 0,
-                dateOfBirth: patient.profileInformation?.demographics?.dateOfBirth || "",
-                healthcardNumber: patient.profileInformation?.demographics?.healthcardNumber || "",
-                weight: patient.profileInformation?.demographics?.weight || "",
-                height: patient.profileInformation?.demographics?.height || "",
-                maritalStatus: patient.profileInformation?.demographics?.maritalStatus || "",
-                occupation: patient.profileInformation?.demographics?.occupation || ""
-            },
-            contactInformation: {
-                email: patient.profileInformation?.contactInformation?.email || "",
-                phone: patient.profileInformation?.contactInformation?.phone || "",
-                address: patient.profileInformation?.contactInformation?.address || ""
-            },
-            insuranceInformation: {
-                memberID: patient.profileInformation?.insuranceInformation?.memberID || "",
-                policyNumber: patient.profileInformation?.insuranceInformation?.policyNumber || "",
-                provider: patient.profileInformation?.insuranceInformation?.provider || ""
-            },
-            emergencyContact: {
-                name: patient.profileInformation?.emergencyContact?.name || "",
-                relationship: patient.profileInformation?.emergencyContact?.relationship || "",
-                phone: patient.profileInformation?.emergencyContact?.phone || "",
-                address: patient.profileInformation?.emergencyContact?.address || ""
-            }
-        });
-    }, []);
+        
+    }, [patientId]);
 
 
     const handleChange = (section: keyof IProfileInfo, field: string, value: string | number) => {

@@ -5,16 +5,19 @@ import Navbar from "../components/NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import CloseIcon from "@mui/icons-material/Close";
-import { IHealthcareProfessional } from "../../models/model";
+import { IHealthcareProfessional, IHospital } from "../../models/model";
 import { validateField } from "../../helpers/helper";
-import { addEmployee, updateEmployee, deleteEmployee } from "../../redux/appActions";
+import { onSnapshot } from "firebase/firestore";
+import { addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection } from "../../firebaseControllers/DatabaseOps";
+import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
 
 const EmployeeList = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
     const hospitals = healthNetworkAdmin?.hospitals || [];
-   
+    const employees = healthNetworkAdmin?.healthcareProfessionals || [];
+
     const initialFormData: IHealthcareProfessional = {
-        id: "", //add unique id
+        id: "",
         name: "",
         role: "",
         hospital: "",
@@ -31,6 +34,21 @@ const EmployeeList = () => {
     const dispatch = useDispatch();
     const [selectedHospital, setSelectedHospital] = useState<string>("");
 
+    //https://firebase.google.com/docs/firestore/query-data/listen
+    const unsub = onSnapshot(hospitalCollection, (querySnapshot) => {
+        const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
+        setHospitals(hospitalList);
+    });
+
+    const unsubHCP = onSnapshot(healthcareProfessionalCollection, (querySnapshot) => {
+        const employeeList: IHealthcareProfessional[] = querySnapshot.docs.map((doc) => doc.data());
+        const filteredEmployees = selectedHospital !== "" 
+            ? employeeList.filter((employee) => employee.hospital === selectedHospital) 
+            : employeeList;
+        setEmployees(filteredEmployees);
+    });
+
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setEmployeeInfo({ ...formData, [name]: value });
@@ -43,12 +61,35 @@ const EmployeeList = () => {
     const handleSave = () => {
         if (Object.values(errors).some(error => error)) { return; }
         
-        //backend updates here
-        if (isEditing) {
-            dispatch(updateEmployee(formData));
-        } else {
-            dispatch(addEmployee(formData));
-        }
+        if(isEditing){
+            const newHCP: IHealthcareProfessional = {
+                id: formData.id,
+                name: formData.name,
+                role: formData.role,
+                hospital: formData.hospital,
+                department: formData.department,
+                email: formData.email,
+                phone: formData.phone,
+                employmentStatus: formData.employmentStatus
+            };
+    
+            addHealthCareProfessional(newHCP);
+
+        }else{
+            const newHCP: IHealthcareProfessional = {
+                id: uuidv4(),
+                name: formData.name,
+                role: formData.role,
+                hospital: formData.hospital,
+                department: formData.department,
+                email: formData.email,
+                phone: formData.phone,
+                employmentStatus: formData.employmentStatus
+            };
+
+            addHealthCareProfessional(newHCP);
+        }       
+
         handleCloseModal();
     };
 
@@ -59,7 +100,7 @@ const EmployeeList = () => {
     const handleDelete = (employee: IHealthcareProfessional) => {
         //backend update here
         //change to only pass id once firestore is setup for this same in action and reducer, for now using name
-        dispatch(deleteEmployee(employee)); 
+        deleteHealthCareProfessional(employee);
     };
 
 
@@ -101,8 +142,7 @@ const EmployeeList = () => {
                     >
                         <option value="">All Hospitals</option>
                         {hospitals.map((hospital) => (
-                            // value should be hospital.id
-                            <option key={hospital.id} value={hospital.name}> 
+                            <option key={hospital.id} value={hospital.name}>
                                 {hospital.name}
                             </option>
                         ))}
@@ -117,29 +157,25 @@ const EmployeeList = () => {
                         <Grid item xs={12} sm={2}><Typography fontWeight="bold">Actions</Typography></Grid>
                     </Grid>
                 </Card>
-                {hospitals
-                    //should be hospital.id = selectedHospital
-                    .filter(hospital => !selectedHospital || hospital.name === selectedHospital)
-                    .flatMap((hospital => hospital.healthcareProfessionals?.map((employee) => (
-                        <Card key={employee.id} className="mb-4 p-2">
-                            <CardContent>
+                {employees.filter(emp => !selectedHospital || emp.hospital === selectedHospital).map((employee) => (
+                    <Card key={employee.id} className="mb-4 p-2">
+                        <CardContent>
                             <Grid container spacing={2} className="text-center">
                                 <Grid item xs={12} sm={3}><Typography>{employee.name}</Typography></Grid>
                                 <Grid item xs={12} sm={2}><Typography>{employee.role}</Typography></Grid>
-                                <Grid item xs={12} sm={3}><Typography>{hospital.name}</Typography></Grid>
+                                <Grid item xs={12} sm={3}><Typography>{employee.hospital}</Typography></Grid>
                                 <Grid item xs={12} sm={2}><Typography>{employee.phone}</Typography></Grid>
                                 <Grid item xs={6} sm={1}>
-                                <Button variant="contained" color="primary" onClick={() => handleEdit(employee)}>Edit</Button>
+                                    <Button variant="contained" color="primary" onClick={() => handleEdit(employee)}>Edit</Button>
                                 </Grid>
                                 <Grid item xs={6} sm={1}>
-                                <Button variant="contained" color="error" onClick={() => handleDelete(employee)}>Delete</Button>
+                                    <Button variant="contained" color="error" onClick={() => handleDelete(employee)}>Delete</Button>
                                 </Grid>
                             </Grid>
-                            </CardContent>
-                        </Card>
-                        ))
-                    ))}
-                    <div className="flex justify-center mt-6">
+                        </CardContent>
+                    </Card>
+                ))}
+                <div className="flex justify-center mt-6">
                     <Button variant="contained" color="primary" onClick={handleAdd}>Add New Employee</Button>
                 </div>
             </Container>
@@ -174,7 +210,6 @@ const EmployeeList = () => {
                             >
                                 <option value="Select">Select Hospital</option>
                                 {hospitals.map(hospital => (
-                                    //value should be hospital.id
                                     <option key={hospital.id} value={hospital.name}>{hospital.name}</option>
                                 ))}
                             </TextField>

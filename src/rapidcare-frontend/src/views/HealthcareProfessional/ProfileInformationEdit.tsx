@@ -98,7 +98,7 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
           };
           fetchPatient();
         
-    }, []);
+    }, [patientId]);
 
 
     const handleChange = (section: keyof IProfileInfo, field: string, value: string | number) => {

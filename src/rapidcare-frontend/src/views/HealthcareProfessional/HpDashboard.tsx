@@ -3,7 +3,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { useSelector } from 'react-redux';
 import { RootState } from "../../redux/store";
-import { Card, CardContent, Typography, Button } from "@mui/material";
+import { Card, CardContent, Typography, Button, Box, Grid } from "@mui/material";
+import { BarChart } from '@mui/x-charts/BarChart';
 
 
 const HpDashboard = () => {
@@ -15,51 +16,70 @@ const HpDashboard = () => {
 
         <div className="min-h-screen flex flex-col">
             <Navbar />
-            <div className="flex-grow p-6 bg-gray-100">
+            <div className="flex-grow p-6 pb-16">
                 <h2 className="text-3xl font-semibold mb-6 ml-4">Hello {healthcareProfessional?.user.name}!</h2>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6} md={6}>
+                        <Card className="mb-4 p-2">
+                        <CardContent>
+                            {/* <Typography variant="h5" gutterBottom>
+                            Metrics
+                            </Typography> */}
+                            <Box className="grid grid-cols-2 gap-6 mx-4">
+                                <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
+                                    <Typography variant="h6" className="text-gray-700">
+                                        <strong>Total Hospitals</strong>
+                                    </Typography>
+                                    <Typography variant="h5" className="text-blue-700">
+                                        {dashboardMetrics?.scheduledVisitsToday || 5}
+                                    </Typography>       
+                                </Box>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className=" bg-gradient-to-r from-blue-200 to-blue-400 text-black rounded-lg shadow-sm p-6">
-                        <h3 className="text-2xl mb-4 ml-6">Scheduled Visits for Today</h3>
-                        <p className="text-6xl font-bold mb-4 ml-6">{dashboardMetrics?.scheduledVisitsToday}</p>
-                        <div className="flex mt-6 ml-6 mb-4">
-                            <div className="rounded-lg bg-blue-100 p-6 mr-12">
-                                <h4 className="text-lg font-bold">New Patients This Month</h4>
-                                <div className="p-4">
-                                    <p className="text-2xl font-bold">{dashboardMetrics?.newPatientsThisMonth}</p>
-                                </div>
-                            </div>
-                            <div className="rounded-lg bg-blue-100 p-6">
-                                <h4 className="text-lg font-bold">Total Patients</h4>
-                                <div className="p-4">
-                                    <p className="text-2xl font-bold">{dashboardMetrics?.totalPatients}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div className="bg-white md:col-span-1 rounded-lg shadow-lg p-6 ">
-                        <Typography variant="h5" gutterBottom>
-                            Upcoming Appointments
-                        </Typography>
-                        {consultations?.map((consultation, index) => (
-                        <Card key={index} className="mb-4 p-2">
-                            <CardContent className="flex justify-between items-center">
-                                <div>
-                                    <Typography variant="h6">{consultation.patientName}</Typography>
-                                    <Typography variant="body2" color="text.secondary">{consultation.date}</Typography>
-                                </div>
-
-                                <div className="text-right">
-                                    <Typography variant="body1">{consultation.time}</Typography>
-                                    <Button variant="contained" color="primary">View Details</Button>
-                                </div>
-                            </CardContent>
+                                <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
+                                    <Typography variant="h6" className="text-gray-700">
+                                        <strong>Total Employees</strong>
+                                    </Typography>
+                                    <Typography variant="h5" className="text-blue-700">
+                                        {dashboardMetrics?.newPatientsThisMonth || 5}
+                                    </Typography>       
+                                </Box>
+                            </Box>
+                            <Box className="flex justify-center my-4 mx-4 bg-gray-50 rounded-lg shadow-md">
+                                <BarChart
+                                    xAxis={[{scaleType: 'band', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], label: 'Patient visits this week',}]}
+                                    series={[{data: [150, 200, 500, 400, 800, 2000, 1895],label: 'Visits',},]}
+                                    width={500}
+                                    height={300}
+                                />
+                            </Box>
+                        </CardContent>
                         </Card>
-                        ))}
-                    </div>
-                </div>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={6}>
+                            <Card className="mb-4 p-2">
+                                <CardContent>
+                                    <Typography variant="h5" gutterBottom>
+                                        Upcoming Appointments
+                                    </Typography>
+                                    {consultations?.map((consultation, index) => (
+                                    <Card key={index} className="mb-4 p-2">
+                                        <CardContent className="flex justify-between items-center">
+                                            <div>
+                                                <Typography variant="h6">{consultation.patientName}</Typography>
+                                                <Typography variant="body2" color="text.secondary">{consultation.date}</Typography>
+                                            </div>
+
+                                            <div className="text-right">
+                                                <Typography variant="body1">{consultation.time}</Typography>
+                                                <Button variant="contained" color="primary">View Details</Button>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                    ))}
+                                </CardContent>
+                            </Card> 
+                    </Grid>
+                </Grid>
             </div>
 
             <Footer />

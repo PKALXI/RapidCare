@@ -5,14 +5,29 @@ import Navbar from "../components/NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import CloseIcon from "@mui/icons-material/Close";
-import { IHealthcareProfessional } from "../../models/model";
+import { IHealthcareProfessional, IHospital } from "../../models/model";
 import { validateField } from "../../helpers/helper";
-import { addEmployee, updateEmployee, deleteEmployee } from "../../redux/appActions";
+import { onSnapshot } from "firebase/firestore";
+import { addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection } from "../../firebaseControllers/DatabaseOps";
+import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
 
 const EmployeeList = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
-    const hospitals = healthNetworkAdmin?.hospitals || [];
-    const employees = healthNetworkAdmin?.healthcareProfessionals || [];
+    const [hospitals, setHospitals] = useState<IHospital[]>([]);
+    const [employees, setEmployees] = useState<IHealthcareProfessional[]>([]);
+
+    const initialHospitalFormData: IHospital = {
+        id: "",
+        name: "",
+        address: "",
+        email: "",
+        phone: "",
+        bedCapacity: 0,
+        operatingHours: "",
+    };
+    // const hospitals = healthNetworkAdmin?.hospitals || [];
+    // const employees = healthNetworkAdmin?.healthcareProfessionals || [];
+
 
     const initialFormData: IHealthcareProfessional = {
         id: "",
@@ -32,6 +47,21 @@ const EmployeeList = () => {
     const dispatch = useDispatch();
     const [selectedHospital, setSelectedHospital] = useState<string>("");
 
+    //https://firebase.google.com/docs/firestore/query-data/listen
+    const unsub = onSnapshot(hospitalCollection, (querySnapshot) => {
+        const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
+        setHospitals(hospitalList);
+    });
+
+    const unsubHCP = onSnapshot(healthcareProfessionalCollection, (querySnapshot) => {
+        const employeeList: IHealthcareProfessional[] = querySnapshot.docs.map((doc) => doc.data());
+        const filteredEmployees = selectedHospital !== "" 
+            ? employeeList.filter((employee) => employee.hospital === selectedHospital) 
+            : employeeList;
+        setEmployees(filteredEmployees);
+    });
+
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setEmployeeInfo({ ...formData, [name]: value });
@@ -44,12 +74,35 @@ const EmployeeList = () => {
     const handleSave = () => {
         if (Object.values(errors).some(error => error)) { return; }
         
-        //backend updates here
-        if (isEditing) {
-            dispatch(updateEmployee(formData));
-        } else {
-            dispatch(addEmployee(formData));
-        }
+        if(isEditing){
+            const newHCP: IHealthcareProfessional = {
+                id: formData.id,
+                name: formData.name,
+                role: formData.role,
+                hospital: formData.hospital,
+                department: formData.department,
+                email: formData.email,
+                phone: formData.phone,
+                employmentStatus: formData.employmentStatus
+            };
+    
+            addHealthCareProfessional(newHCP);
+
+        }else{
+            const newHCP: IHealthcareProfessional = {
+                id: uuidv4(),
+                name: formData.name,
+                role: formData.role,
+                hospital: formData.hospital,
+                department: formData.department,
+                email: formData.email,
+                phone: formData.phone,
+                employmentStatus: formData.employmentStatus
+            };
+
+            addHealthCareProfessional(newHCP);
+        }       
+
         handleCloseModal();
     };
 
@@ -60,7 +113,7 @@ const EmployeeList = () => {
     const handleDelete = (employee: IHealthcareProfessional) => {
         //backend update here
         //change to only pass id once firestore is setup for this same in action and reducer, for now using name
-        dispatch(deleteEmployee(employee)); 
+        deleteHealthCareProfessional(employee);
     };
 
 

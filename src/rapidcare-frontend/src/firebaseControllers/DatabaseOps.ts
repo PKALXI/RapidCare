@@ -1,17 +1,38 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { IPatient } from "../models/model";
-import { hcpConverter, patientConverter } from "../firebaseControllers/converters";
+import { IHealthcareProfessional, IHospital, IPatient } from "../models/model";
+import { healthcareProfessionalConverter, hospitalConverter, patientConverter } from "../firebaseControllers/converters";
 
 const PATIENT_COLLECTION = "patients";
 const HEALTHCARE_PROFESSIONAL_COLLECTION = "healthcare_professional";
+const HOSPITAL_COLLECTION = "hospitals";
 
 //https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
 //TODO: Add hcp collection
 const patientCollection = collection(db, PATIENT_COLLECTION).withConverter(patientConverter);
-const employeeCollection = collection(db, HEALTHCARE_PROFESSIONAL_COLLECTION).withConverter(hcpConverter);
-
+const hospitalCollection = collection(db, HOSPITAL_COLLECTION).withConverter(hospitalConverter);
+const healthcareProfessionalCollection = collection(db, HEALTHCARE_PROFESSIONAL_COLLECTION).withConverter(healthcareProfessionalConverter);
 //https://firebase.google.com/docs/firestore/manage-data/add-data
+const addHealthCareProfessional = async (healthCareProfessional: IHealthcareProfessional) => {
+    const docRef = doc(healthcareProfessionalCollection, healthCareProfessional.id);
+    await setDoc(docRef, healthCareProfessional);
+};
+
+const deleteHealthCareProfessional = async(healthCareProfessional : IHealthcareProfessional) => {
+    const docRef = doc(healthcareProfessionalCollection, healthCareProfessional.id);
+    await deleteDoc(docRef);
+}
+
+const addHospital = async (hospital: IHospital) => {
+    const docRef = doc(hospitalCollection, hospital.id);
+    await setDoc(docRef, hospital);
+};
+
+const deleteHospital = async(hospital : IHospital) => {
+    const docRef = doc(hospitalCollection, hospital.id);
+    await deleteDoc(docRef);
+}
+
 const addPatient = async (patient: IPatient) => {
     const docRef = doc(patientCollection, patient.id);
     await setDoc(docRef, patient);
@@ -65,4 +86,4 @@ export const emptyPatient: IPatient = {
     documents: []
 };
 
-export {patientCollection, getPatient, addPatient, updatePatient, deletePatient };
+export {addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection, patientCollection, deleteHospital, addHospital, getPatient, addPatient, updatePatient, deletePatient };

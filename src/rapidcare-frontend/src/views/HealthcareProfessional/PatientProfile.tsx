@@ -27,11 +27,20 @@ const PatientProfile = () => {
 
     const q = query(patientCollection, where("id", "==", patientId));
 
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            setPatient(doc.data())
+    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //         setPatient(doc.data())
+    //     });
+    // });
+
+    useEffect(() => {
+        const q = query(patientCollection, where("id", "==", patientId));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setPatient(doc.data())
+            });
         });
-    });
+    }, [patientId]);
 
     // useEffect(() => {
     //     const fetchPatient = async () => {
@@ -48,6 +57,9 @@ const PatientProfile = () => {
     // }, [patientId]);
 
     const handleCloseProfile = () => {
+        // unsubscribe();
+        // console.log('called!');
+        // navigate("/patients");
         navigate("/patients");
     };
 

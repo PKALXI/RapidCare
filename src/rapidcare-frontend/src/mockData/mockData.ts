@@ -5,12 +5,16 @@ export const generateHealthcareProfessionalMockData = (): AppState => ({
     isUserAdmin: true,
     healthNetworkAdmin: null,
     healthcareProfessional: {
-        id: "hp123",
-        name: "Dr. Jane Smith",
-        email: "janesmith@hospital.com",
-        phone: "555-1234",
-        hospital: "City General Hospital",
-        department: "Cardiology",
+        user:{
+            id: "hp123",
+            name: "Dr. Jane Smith",
+            role: "Doctor",
+            hospital: "City General Hospital",
+            department: "Cardiology",
+            email: "janesmith@hospital.com",
+            phone: "555-1234",
+            employmentStatus: "Active"
+        },
         dashboardMetrics: {
             scheduledVisitsToday: 5,
             newPatientsThisMonth: 20,
@@ -132,7 +136,7 @@ export const generateHealthcareProfessionalMockData = (): AppState => ({
 });
 
 
-export const genrateSignupStateData = () => ({
+export const generateSignupStateData = () => ({
     isUserAdmin: true,
     isAuthenticated: true,
     healthNetworkAdmin: {

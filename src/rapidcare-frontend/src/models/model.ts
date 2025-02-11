@@ -72,6 +72,7 @@ export interface IConsultation {
 }
 
 export interface IPatient {
+    prescriptions: IPrescription[];
     id: string;
     profileInformation?: IProfileInfo;
     medicalHistory?: IMedicalHistory;
@@ -123,6 +124,20 @@ export interface IDocument {
     name: string;
     type: string;
     url: string;
+}
+
+export interface IPrescription {
+    doctorName: string;
+    practioner: string
+    date: string;
+    type: string;
+    url: string;
+    prescriptedMedication: {
+        medication: string;
+        dosage: string;
+        duration: string;
+        qty: number;
+    }
 }
 
 export interface ISoapNote {

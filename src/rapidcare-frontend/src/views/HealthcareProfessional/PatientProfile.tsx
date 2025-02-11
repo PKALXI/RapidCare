@@ -10,6 +10,7 @@ import MedicalHistory from "./MedicalHistory";
 import ProfileInformation from "./ProfileInformation";
 import ConsultationNotes from "./ConsultationNotes";
 import Documents from "./Documents";
+import Prescriptions from "./Prescriptions";
 import DataRow from "../components/DataRow";
 import PersonIcon from '@mui/icons-material/Person';
 import { deletePatient, emptyPatient, getPatient, patientCollection } from "../../firebaseControllers/DatabaseOps";
@@ -116,6 +117,7 @@ const PatientProfile = () => {
                             <Tab label="Medical History" value="Medical History" />
                             <Tab label="Consultation Notes" value="Consultation Notes" />
                             <Tab label="Documents" value="Documents" />
+                            <Tab label="Prescriptions" value="Prescriptions" />
                         </Tabs>
                     </Box>
 
@@ -124,6 +126,8 @@ const PatientProfile = () => {
                         {activeTab === "Medical History" && <MedicalHistory patient={patient} />}
                         {activeTab === "Consultation Notes" && <ConsultationNotes patient={patient} />}
                         {activeTab === "Documents" && <Documents patient={patient} />}
+                        {activeTab === "Prescriptions" && <Prescriptions patient={patient} />}
+                       
                     </Box>
                 </Box>
             </Box>

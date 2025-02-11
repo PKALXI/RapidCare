@@ -6,7 +6,7 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { setLoginState } from '../redux/appActions';
-import './styles.css';
+//import './styles.css';
 import { auth, db } from '../firebase';
 
 const Login: React.FC = () => {

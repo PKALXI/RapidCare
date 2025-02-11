@@ -1,6 +1,6 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { IHealthcareProfessional, IHospital, IPatient } from "../models/model";
+import { IHealthcareProfessional, IHospital, IPatient, IPrescription } from "../models/model";
 import { healthcareProfessionalConverter, hospitalConverter, patientConverter } from "../firebaseControllers/converters";
 
 const PATIENT_COLLECTION = "patients";
@@ -83,7 +83,8 @@ export const emptyPatient: IPatient = {
         medications: "",
     },
     consultationNotes: [],
-    documents: []
+    documents: [],
+    prescriptions: []
 };
 
 export {addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection, patientCollection, deleteHospital, addHospital, getPatient, addPatient, updatePatient, deletePatient };

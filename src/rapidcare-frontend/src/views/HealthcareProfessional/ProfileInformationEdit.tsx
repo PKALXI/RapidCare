@@ -63,8 +63,6 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
               const patientData = await getPatient(patientId);
               if (patientData) {
                 setPatient(patientData);
-
-                console.log(patientData);
                 
                 setFormData({
                     demographics: {
@@ -100,7 +98,7 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
           };
           fetchPatient();
         
-    });
+    }, [patientId]);
 
 
     const handleChange = (section: keyof IProfileInfo, field: string, value: string | number) => {

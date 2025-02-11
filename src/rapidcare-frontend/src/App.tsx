@@ -13,6 +13,7 @@ import PatientList from './views/HealthcareProfessional/PatientList';
 import AdminAccount from './views/Admin/AdminAccount';
 import EmployeeList from './views/Admin/EmployeeList';
 import HospitalList from './views/Admin/HospitalList';
+import Signup from './views/Signup';
 
 const App: React.FC = () => {
   const { isAuthenticated, isUserAdmin } = useSelector((state: RootState) => state.app);
@@ -21,6 +22,8 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         {!isAuthenticated && <Route path="/" element={<Login />} />}
+        {!isAuthenticated && <Route path="/signup" element={<Signup />} />}
+        
         {isAuthenticated && isUserAdmin && (
           <>
             <Route path="/home" element={<AdminDashboard />} />

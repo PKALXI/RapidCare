@@ -23,6 +23,7 @@ export interface IHealthNetworkAdminState {
 }
 
 export interface INetworkInfo {
+    id : string,
     networkName: string;
     typeOfNetwork: "Public" | "Private" | "Non-Profit";
     mainContact: string;

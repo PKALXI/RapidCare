@@ -18,7 +18,9 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
     const initialFormData: IPrescription = {
             plan: "",
         };
-    const [formData, setSelectedNote] = useState<IPrescription>(initialFormData);
+    const [formData, setSelectedNote] = useState({
+        plan:"",
+    });
     const dispatch = useDispatch();
     const [form, setSelectedPrescription] = useState<IPrescription | null>(null);
     const componentRef = useRef<HTMLDivElement>(null)
@@ -28,11 +30,9 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
     const handleAddNew = () => {
         setOpenViewModal(true);
     };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const { name, value } = e.target;
-            setSelectedPrescription({ ...formData, [name]: value });
-        };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setSelectedNote((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
 
         const generatePdf = async () => {
             try {
@@ -112,12 +112,12 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
                     <Box className="flex justify-between px-16 sticky bottom-0">
                         <Button variant="contained" color="primary">Save</Button>
                         <Button 
-              variant="contained" 
-              color="primary" 
-              onClick={(generatePdf)}
-            >
-              Export as pdf
-            </Button> 
+                            variant="contained" 
+                            color="primary" 
+                            onClick={(generatePdf)}
+                            >
+                            Export as pdf
+                            </Button> 
                     </Box>  
                 </Box>
             </Modal>

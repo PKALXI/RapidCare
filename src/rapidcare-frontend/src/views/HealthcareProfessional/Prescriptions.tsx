@@ -1,17 +1,19 @@
 import React, { useState, useRef } from "react";
-import { useReactToPrint } from "react-to-print";
+//import { useReactToPrint } from "react-to-print";
 import { IPatient, IDocument, IPrescription } from "../../models/model";
 import { Card, CardContent, Typography, Modal, Box, IconButton, Button, Grid, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import { addDocument } from "../../redux/appActions";
 import { doc } from "firebase/firestore";
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'; // Import pdf-lib
+import { saveAs } from 'file-saver';
 
 interface PrescriptionsProps {
     patient: IPatient;
 }
 
-const Documents: React.FC<PrescriptionsProps> = ({ patient }) => {
+const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
 
     const initialFormData: IPrescription = {
             plan: "",
@@ -32,10 +34,39 @@ const Documents: React.FC<PrescriptionsProps> = ({ patient }) => {
             setSelectedPrescription({ ...formData, [name]: value });
         };
 
-    const handlePrint = useReactToPrint({
-        documentTitle: "Prescription_PDF",
-        onAfterPrint: () => console.log("Printed successfully!"),
-    });
+        const generatePdf = async () => {
+            try {
+                const pdfDoc = await PDFDocument.create();
+                const page = pdfDoc.addPage();
+                const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    
+                const prescriptionText = formData.plan;
+    
+                page.setFont(font);
+                const fontSize = 12;
+                const lines = prescriptionText.split('\n');
+                let yPos = 700;
+    
+                for (const line of lines) {
+                  page.drawText(line, {
+                    x: 50,
+                    y: yPos,
+                    font,
+                    size: fontSize,
+                    color: rgb(0, 0, 0),
+                  });
+                  yPos -= fontSize + 5;
+                }
+    
+                const pdfBytes = await pdfDoc.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        
+                saveAs(blob, 'prescription.pdf');
+    
+            } catch (error) {
+                console.error("Error generating PDF:", error);
+            }
+        }
 
     const handleOpenPrescription = (prescriptions: IPrescription) => {
         setSelectedPrescription(prescriptions);
@@ -83,9 +114,7 @@ const Documents: React.FC<PrescriptionsProps> = ({ patient }) => {
                         <Button 
               variant="contained" 
               color="primary" 
-              onClick={() => {
-                handlePrint(); 
-              }}
+              onClick={(generatePdf)}
             >
               Export as pdf
             </Button> 
@@ -98,4 +127,4 @@ const Documents: React.FC<PrescriptionsProps> = ({ patient }) => {
     );
 };
 
-export default Documents;
+export default Prescription

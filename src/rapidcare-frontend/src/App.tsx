@@ -21,6 +21,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         {!isAuthenticated && <Route path="/" element={<Login />} />}
+        
         {isAuthenticated && isUserAdmin && (
           <>
             <Route path="/home" element={<AdminDashboard />} />

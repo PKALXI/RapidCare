@@ -28,7 +28,7 @@ const HpDashboard = () => {
                             <Box className="grid grid-cols-2 gap-6 mx-4">
                                 <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
                                     <Typography variant="h6" className="text-gray-700">
-                                        <strong>Total Hospitals</strong>
+                                        <strong>Scheduled Visits</strong>
                                     </Typography>
                                     <Typography variant="h5" className="text-blue-700">
                                         {dashboardMetrics?.scheduledVisitsToday || 5}
@@ -37,7 +37,7 @@ const HpDashboard = () => {
 
                                 <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
                                     <Typography variant="h6" className="text-gray-700">
-                                        <strong>Total Employees</strong>
+                                        <strong>Total Patients</strong>
                                     </Typography>
                                     <Typography variant="h5" className="text-blue-700">
                                         {dashboardMetrics?.newPatientsThisMonth || 5}

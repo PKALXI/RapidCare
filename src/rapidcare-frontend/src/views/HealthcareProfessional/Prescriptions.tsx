@@ -82,6 +82,7 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
             const blob = new Blob([pdfBytes], { type: 'application/pdf' });
     
             saveAs(blob, `prescription_${patientName}.pdf`);
+            setOpenViewModal(false);
         } catch (error) {
             console.error("Error generating PDF:", error);
         }

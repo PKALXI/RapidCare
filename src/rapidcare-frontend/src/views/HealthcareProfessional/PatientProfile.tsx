@@ -16,6 +16,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { deletePatient, emptyPatient, getPatient, patientCollection } from "../../firebaseControllers/DatabaseOps";
 import { IPatient } from "../../models/model";
 import { onSnapshot, query, where } from "firebase/firestore";
+import Referrals from "./Referrals";
 
 const PatientProfile = () => {
     const { patientId } = useParams<{ patientId: string }>();
@@ -116,8 +117,9 @@ const PatientProfile = () => {
                             <Tab label="Profile Information" value="Profile Information" />
                             <Tab label="Medical History" value="Medical History" />
                             <Tab label="Consultation Notes" value="Consultation Notes" />
-                            <Tab label="Documents" value="Documents" />
+                            <Tab label="Lab Reports" value="Documents" />
                             <Tab label="Prescriptions" value="Prescriptions" />
+                            <Tab label="Referrals" value="Referrals" />
                         </Tabs>
                     </Box>
 
@@ -127,7 +129,7 @@ const PatientProfile = () => {
                         {activeTab === "Consultation Notes" && <ConsultationNotes patient={patient} />}
                         {activeTab === "Documents" && <Documents patient={patient} />}
                         {activeTab === "Prescriptions" && <Prescriptions patient={patient} />}
-                       
+                        {activeTab === "Referrals" && <Referrals patient={patient} />}
                     </Box>
                 </Box>
             </Box>

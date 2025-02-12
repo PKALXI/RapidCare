@@ -97,7 +97,8 @@ export const emptyPatient: IPatient = {
         medications: "",
     },
     consultationNotes: [],
-    documents: []
+    documents: [],
+    prescriptions: []
 };
 
 export {networkInfoCollection, addAdmin, deleteAdmin, addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection, patientCollection, deleteHospital, addHospital, getPatient, addPatient, updatePatient, deletePatient };

@@ -93,7 +93,8 @@ const AddPatient = ({closeModal}: {closeModal: () => void}) => {
         plan: formData.plan,
         followUp: formData.followUp
     }], 
-      documents: [], 
+      documents: [],
+      prescriptions: [] 
     };
 
     addPatient(newPatient);

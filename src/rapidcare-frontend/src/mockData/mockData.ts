@@ -22,8 +22,8 @@ export const mockConsultations = [
     ];
 
 export const generateHealthcareProfessionalMockData = (): AppState => ({
-    isAuthenticated: false,
-    isUserAdmin: true,
+    isAuthenticated: true,
+    isUserAdmin: false,
     healthNetworkAdmin: null,
     healthcareProfessional: {
         user:{
@@ -77,17 +77,17 @@ export const generateHealthcareProfessionalMockData = (): AppState => ({
                     {
                         documentId: "1738391167785",
                         name: "A1.pdf",
-                        type:"application/pdf",
-                        url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
+                        type: "application/pdf",
+                        url: "blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
                     },
                     {
                         documentId: "1738391167785",
                         name: "A1.pdf",
-                        type:"application/pdf",
-                        url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
+                        type: "application/pdf",
+                        url: "blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
                     },
-                    
                 ],
+                prescriptions: []
             },
             {
                 id: "12346",
@@ -124,21 +124,22 @@ export const generateHealthcareProfessionalMockData = (): AppState => ({
                     {
                         documentId: "1738391167785",
                         name: "A1.pdf",
-                        type:"application/pdf",
-                        url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
-                    },{
+                        type: "application/pdf",
+                        url: "blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
+                    }, {
                         documentId: "1738391167785",
                         name: "A1.pdf",
-                        type:"application/pdf",
-                        url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
+                        type: "application/pdf",
+                        url: "blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
                     },
                     {
                         documentId: "1738391167785",
                         name: "A1.pdf",
-                        type:"application/pdf",
-                        url:"blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
+                        type: "application/pdf",
+                        url: "blob:http://localhost:3000/87d57e46-1356-44a5-9315-eb9dfde6ae13"
                     }
                 ],
+                prescriptions: []
             },
         ],
         consultations: [

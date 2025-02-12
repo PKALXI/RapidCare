@@ -98,7 +98,8 @@ export const emptyPatient: IPatient = {
     },
     consultationNotes: [],
     documents: [],
-    prescriptions: []
+    prescriptions: [],
+    referrals: [],
 };
 
 export {networkInfoCollection, addAdmin, deleteAdmin, addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection, patientCollection, deleteHospital, addHospital, getPatient, addPatient, updatePatient, deletePatient };

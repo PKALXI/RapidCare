@@ -47,7 +47,7 @@ export default function Signup() {
         // Mock API call
         const mockData = generateSignupStateData();
         if (mockData.isAuthenticated) {
-            dispatch(setLoginState(true, true, mockData.healthNetworkAdmin, null));
+            dispatch(setLoginState(true, true));
             navigate("/home");
         }
     };

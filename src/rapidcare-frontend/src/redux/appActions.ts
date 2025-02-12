@@ -1,6 +1,7 @@
 import { IHealthcareProfessionalState, IHealthNetworkAdminState, IProfileInfo, IDocument, INetworkInfo, IHospital, IHealthcareProfessional } from "../models/model";
 
-export const SET_INITIAL_STATE = "SET_INITIAL_STATE";
+export const SET_LOGIN_STATE = "SET_LOGIN_STATE";
+export const SET_USER_DATA = "SET_USER_DATA";
 export const RESET_STATE = "RESET_STATE";
 export const UPDATE_PATIENT_PROFILEINFO = "UPDATE_PATIENT_PROFILEINFO";
 export const DELETE_PATIENT = "DELETE_PATIENT";
@@ -21,16 +22,18 @@ export const resetState = () => ({
 export const setLoginState = (
     isUserAdmin: boolean,
     isAuthenticated: boolean,
-    healthNetworkAdmin: IHealthNetworkAdminState | null,
-    healthcareProfessional: IHealthcareProfessionalState | null
 ) => ({
-    type: SET_INITIAL_STATE,
+    type: SET_LOGIN_STATE,
     payload: {
         isUserAdmin,
         isAuthenticated,
-        healthNetworkAdmin,
-        healthcareProfessional
     },
+});
+
+export const setUserData = (user: IHealthcareProfessional) => ({
+    type: SET_USER_DATA,
+    payload: user
+
 });
 
 export const updatePatientProfileInfo = (patientId: string, profileInformation: IProfileInfo) => ({

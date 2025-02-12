@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { setLoginState } from '../redux/appActions';
+import { setLoginState, setUserData } from '../redux/appActions';
 import { auth, db } from '../firebase';
 import { INetworkInfo } from '../models/model'; // Import the INetworkInfo interface
 import { addAdmin, healthcareProfessionalCollection, networkInfoCollection } from '../firebaseControllers/DatabaseOps';
 import { doc, getDoc } from 'firebase/firestore';
-import { filler } from '../mockData/mockData';
 
 const Login: React.FC = () => {
     const [isSignUp, setIsSignUp] = useState(false);
@@ -67,26 +66,15 @@ const Login: React.FC = () => {
 
                 if (docSnap.exists()) {
                     console.log("Document exists:", docSnap.data());
-                    dispatch(
-                        setLoginState(
-                            true,
-                            true,
-                            null,
-                            null
-                        )
-                    );
+                    dispatch(setLoginState(true,true));
                 } 
                 
                 if (d2Snap.exists()){
                     console.log('Called');
-                    dispatch(
-                        setLoginState(
-                            false,
-                            true,
-                            null,
-                            filler
-                        )
-                    );
+                    // const userData = d2Snap.data();
+                    // console.log(userData);
+                    dispatch(setLoginState(false,true));
+                    dispatch(setUserData(d2Snap.data()));
                 }
 
                 // const userDoc = await getDoc(doc(db, 'users', user.uid));

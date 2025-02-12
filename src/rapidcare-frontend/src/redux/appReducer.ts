@@ -1,6 +1,7 @@
 import { generateHealthcareProfessionalMockData } from '../mockData/mockData';
 import { AppState } from '../models/model';
-import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_EMPLOYEE, DELETE_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_INITIAL_STATE, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
+import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_EMPLOYEE, DELETE_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_LOGIN_STATE, SET_USER_DATA, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
+import { mockConsultations, mockDashboardMetrics } from '../mockData/mockData';
 
 const initialState: AppState = {
     isUserAdmin: false,
@@ -9,19 +10,27 @@ const initialState: AppState = {
     healthcareProfessional: null
 };
 
-//MOCK DATA CALL TO BE REMOVED
-// const initialState = generateHealthcareProfessionalMockData();
+
 
 const appReducer = (state = initialState, action: any): AppState => {
 
     switch (action.type) {
-        case SET_INITIAL_STATE:
+        case SET_LOGIN_STATE:
             return {
                 ...state,
                 isUserAdmin: action.payload.isUserAdmin,
                 isAuthenticated: action.payload.isAuthenticated,
-                healthNetworkAdmin: action.payload.healthNetworkAdmin,
-                healthcareProfessional: action.payload.healthcareProfessional,
+            };
+
+        case SET_USER_DATA:
+            return {
+                ...state, 
+                healthcareProfessional: {
+                    user: action.payload, 
+                    dashboardMetrics: mockDashboardMetrics,
+                    patients: [], 
+                    consultations: mockConsultations,
+                }
             };
 
         case RESET_STATE:

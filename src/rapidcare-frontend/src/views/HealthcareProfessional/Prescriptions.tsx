@@ -19,6 +19,7 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
             plan: "",
         };
     const [formData, setSelectedNote] = useState({
+        name: patient.profileInformation?.demographics?.name,
         plan:"",
     });
     const dispatch = useDispatch();
@@ -34,39 +35,59 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
         setSelectedNote((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-        const generatePdf = async () => {
-            try {
-                const pdfDoc = await PDFDocument.create();
-                const page = pdfDoc.addPage();
-                const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const generatePdf = async () => {
+        try {
+            const pdfDoc = await PDFDocument.create();
+            const page = pdfDoc.addPage([600, 800]); // Set page size
+            const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     
-                const prescriptionText = formData.plan;
+            // Dynamically set the patient's name
+            const patientName = formData.name || "Unknown Patient"; 
+            const title = `Prescription for ${patientName}`;
+            const prescriptionText = formData.plan;
+            
+            const fontSizeTitle = 20;
+            const fontSizeContent = 12;
     
-                page.setFont(font);
-                const fontSize = 12;
-                const lines = prescriptionText.split('\n');
-                let yPos = 700;
+            // Calculate title width and position it at center
+            const textWidth = font.widthOfTextAtSize(title, fontSizeTitle);
+            const xCenter = (600 - textWidth) / 2;
+            
+            // Draw title
+            page.drawText(title, {
+                x: xCenter,
+                y: 750,
+                font,
+                size: fontSizeTitle,
+                color: rgb(0, 0, 0),
+            });
     
-                for (const line of lines) {
-                  page.drawText(line, {
+            // Draw prescription content
+            const contentFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+            const lines = prescriptionText.split('\n');
+            let yPos = 700; // Start below the title
+    
+            for (const line of lines) {
+                page.drawText(line, {
                     x: 50,
                     y: yPos,
-                    font,
-                    size: fontSize,
+                    font: contentFont,
+                    size: fontSizeContent,
                     color: rgb(0, 0, 0),
-                  });
-                  yPos -= fontSize + 5;
-                }
-    
-                const pdfBytes = await pdfDoc.save();
-                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-        
-                saveAs(blob, 'prescription.pdf');
-    
-            } catch (error) {
-                console.error("Error generating PDF:", error);
+                });
+                yPos -= fontSizeContent + 5;
             }
+    
+            const pdfBytes = await pdfDoc.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    
+            saveAs(blob, `prescription_${patientName}.pdf`);
+        } catch (error) {
+            console.error("Error generating PDF:", error);
         }
+    };
+    
+    
 
     const handleOpenPrescription = (prescriptions: IPrescription) => {
         setSelectedPrescription(prescriptions);

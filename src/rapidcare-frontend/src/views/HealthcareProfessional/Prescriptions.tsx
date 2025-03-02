@@ -142,8 +142,7 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
                     </Box>  
                 </Box>
             </Modal>
-            
-            
+                       
         </div>
     );
 };

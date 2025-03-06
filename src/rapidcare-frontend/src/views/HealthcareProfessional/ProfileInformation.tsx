@@ -17,11 +17,14 @@ const ProfileInformation: React.FC<ProfileInformationProps> = ({ patientId }) =>
   const [patient, setPatient] = useState(emptyPatient);
   const q = query(patientCollection, where("id", "==", patientId));
 
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        setPatient(doc.data())
+  useEffect(() => {
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            setPatient(doc.data())
+        });
     });
-  });
+    return () => unsubscribe(); // Cleanup function to unsubscribe when component unmounts
+  }, []);
 
   return (
     <div className= "pb-32">

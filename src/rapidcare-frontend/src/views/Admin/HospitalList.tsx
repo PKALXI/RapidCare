@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, CardContent, Typography, IconButton, Modal, Box, Grid, TextField, Container } from "@mui/material";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
@@ -21,11 +21,14 @@ const HospitalList = () => {
     const [hospitals, setHospitals] = useState<IHospital[]>([]);
 
     //https://firebase.google.com/docs/firestore/query-data/listen
-    const unsub = onSnapshot(hospitalCollection, (querySnapshot) => {
-        const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
-        setHospitals(hospitalList);
-    });
-    
+    useEffect(() => {
+        const unsub = onSnapshot(hospitalCollection, (querySnapshot) => {
+            const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
+            setHospitals(hospitalList);
+        });
+      return () => unsub();
+    }, []);
+
     const initialFormData: IHospital = {
         id: "",
         name: "",
@@ -36,7 +39,7 @@ const HospitalList = () => {
         operatingHours: "",
     };
     const [formData, setHospitalInfo] = useState<IHospital>(initialFormData);
-    const [isEditing, setEditingHospital] = useState(false); 
+    const [isEditing, setEditingHospital] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [openModal, setOpenModal] = useState(false);
     const dispatch = useDispatch();
@@ -101,7 +104,7 @@ const HospitalList = () => {
 
     const handleCloseModal = () => {
         setHospitalInfo(initialFormData);
-        setEditingHospital(false); 
+        setEditingHospital(false);
         setOpenModal(false);
         setErrors({});
     };
@@ -109,20 +112,20 @@ const HospitalList = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />
-                <Container className="flex-grow pt-6 pb-16">
-                    <Typography variant="h5" gutterBottom>
-                        Hospitals
-                    </Typography>
-                    <Card className="mb-4 p-2">
-                        <Grid container spacing={2} className="text-center">
-                            <Grid item xs={12} sm={2} md={2}><Typography fontWeight="bold">Name</Typography></Grid>
-                            <Grid item xs={12} sm={3} md={3}><Typography fontWeight="bold">Address</Typography></Grid>
-                            <Grid item xs={12} sm={3} md={3}><Typography fontWeight="bold">Email</Typography></Grid>
-                            <Grid item xs={12} sm={2} md={2}><Typography fontWeight="bold">Phone</Typography></Grid>
-                            <Grid item xs={12} sm={2} md={2}><Typography fontWeight="bold">Actions</Typography></Grid>
-                        </Grid>
-                    </Card>
-                    {hospitals?.map((hospital) => (
+            <Container className="flex-grow pt-6 pb-16">
+                <Typography variant="h5" gutterBottom>
+                    Hospitals
+                </Typography>
+                <Card className="mb-4 p-2">
+                    <Grid container spacing={2} className="text-center">
+                        <Grid item xs={12} sm={2} md={2}><Typography fontWeight="bold">Name</Typography></Grid>
+                        <Grid item xs={12} sm={3} md={3}><Typography fontWeight="bold">Address</Typography></Grid>
+                        <Grid item xs={12} sm={3} md={3}><Typography fontWeight="bold">Email</Typography></Grid>
+                        <Grid item xs={12} sm={2} md={2}><Typography fontWeight="bold">Phone</Typography></Grid>
+                        <Grid item xs={12} sm={2} md={2}><Typography fontWeight="bold">Actions</Typography></Grid>
+                    </Grid>
+                </Card>
+                {hospitals?.map((hospital) => (
                     <Card key={hospital.id} className="mb-4 p-2">
                         <CardContent>
                             <Grid container spacing={2} className="text-center">
@@ -139,22 +142,22 @@ const HospitalList = () => {
                             </Grid>
                         </CardContent>
                     </Card>
-                    ))}
-                    <div className="flex justify-center mt-6">
-                        <Button variant="contained" color="primary" onClick={handleAdd}>Add New Hospital</Button>
-                    </div>
-                </Container>
+                ))}
+                <div className="flex justify-center mt-6">
+                    <Button variant="contained" color="primary" onClick={handleAdd}>Add New Hospital</Button>
+                </div>
+            </Container>
 
-                <Modal open={openModal} onClose={handleCloseModal}>
-                    <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
-                        <div className="p-2 flex justify-between items-center">
-                            <Typography variant="h6"> {isEditing ? "Edit Hospital" : "Add New Hospital"}</Typography>
-                            <IconButton onClick={handleCloseModal}>
-                                <CloseIcon />
-                            </IconButton>
-                        </div>
-                        <Grid container spacing={2} className="mb-4">
-                            <Grid item xs={12} sm={6}>
+            <Modal open={openModal} onClose={handleCloseModal}>
+                <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
+                    <div className="p-2 flex justify-between items-center">
+                        <Typography variant="h6"> {isEditing ? "Edit Hospital" : "Add New Hospital"}</Typography>
+                        <IconButton onClick={handleCloseModal}>
+                            <CloseIcon />
+                        </IconButton>
+                    </div>
+                    <Grid container spacing={2} className="mb-4">
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 label="Hospital Name"
@@ -162,8 +165,8 @@ const HospitalList = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                             />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 label="Address"
@@ -171,8 +174,8 @@ const HospitalList = () => {
                                 value={formData.address}
                                 onChange={handleChange}
                             />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 label="Email"
@@ -180,10 +183,10 @@ const HospitalList = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 error={!!errors.email}
-                                helperText={errors.email} 
+                                helperText={errors.email}
                             />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 label="Phone"
@@ -193,8 +196,8 @@ const HospitalList = () => {
                                 error={!!errors.phone}
                                 helperText={errors.phone}
                             />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 label="Bed Capacity"
@@ -203,8 +206,8 @@ const HospitalList = () => {
                                 value={formData.bedCapacity}
                                 onChange={handleChange}
                             />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
                                 label="Operating Hours"
@@ -212,16 +215,16 @@ const HospitalList = () => {
                                 value={formData.operatingHours}
                                 onChange={handleChange}
                             />
-                            </Grid>
                         </Grid>
-                        <div className="flex justify-center my-4">
-                            <Button variant="contained" color="primary" onClick={handleSave}>
-                                Save
-                            </Button>
-                        </div>
-                    </Box>
-                </Modal>
-                
+                    </Grid>
+                    <div className="flex justify-center my-4">
+                        <Button variant="contained" color="primary" onClick={handleSave}>
+                            Save
+                        </Button>
+                    </div>
+                </Box>
+            </Modal>
+
             <Footer />
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Card, CardContent, Typography, Box, IconButton, Button, Grid, TextField,  MenuItem} from "@mui/material";
+import { Card, CardContent, Typography, Box, IconButton, Button, Grid, TextField, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
 import { IPatient } from "../../models/model";
 import { addPatient } from "../../firebaseControllers/DatabaseOps";
@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import CloseIcon from "@mui/icons-material/Close";
 
 
-const AddPatient = ({closeModal}: {closeModal: () => void}) => {
+const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
   const [formData, setFormData] = useState({
     name: "",
     gender: "",
@@ -15,23 +15,23 @@ const AddPatient = ({closeModal}: {closeModal: () => void}) => {
     phone: "",
     address: "",
     maritalStatus: "",
-    occupation: "", 
+    occupation: "",
     date: "",
     practioner: "",
     reason: "",
-    hpi:  "",
+    hpi: "",
     medicalHistory: "",
-    symptoms:  "",
-    allergies:  "",
-    currentMedications:  "",
-    vitals:  "",
-    physicalExam:  "",
-    laboratoryData:  "",
-    imagingResults:  "",
-    otherData:  "",
-    problems:  "",
-    diagnosis:  "",
-    plan:  "",
+    symptoms: "",
+    allergies: "",
+    currentMedications: "",
+    vitals: "",
+    physicalExam: "",
+    laboratoryData: "",
+    imagingResults: "",
+    otherData: "",
+    problems: "",
+    diagnosis: "",
+    plan: "",
     followUp: ""
   });
 
@@ -43,7 +43,7 @@ const AddPatient = ({closeModal}: {closeModal: () => void}) => {
     e.preventDefault();
 
     const newPatient: IPatient = {
-      id: uuidv4(), 
+      id: uuidv4(),
       profileInformation: {
         demographics: {
           name: formData.name,
@@ -53,12 +53,12 @@ const AddPatient = ({closeModal}: {closeModal: () => void}) => {
           weight: 0,
           height: 0,
           maritalStatus: formData.maritalStatus,
-          occupation: formData.address, 
+          occupation: formData.address,
         },
         contactInformation: {
-          email: "", 
+          email: "",
           phone: formData.phone,
-          address: formData.address, 
+          address: formData.address,
         }
       },
       medicalHistory: {
@@ -66,35 +66,35 @@ const AddPatient = ({closeModal}: {closeModal: () => void}) => {
         familyHistory: "",
         allergies: formData.allergies,
         medications: formData.currentMedications,
-      }, 
+      },
       consultationNotes: [{
-        id:  "", //Kalsi look into this
-        date:  formData.date,
-        practioner:  formData.practioner,
+        id: "", //Kalsi look into this
+        date: formData.date,
+        practioner: formData.practioner,
         subjective: {
-            reason: formData.reason,
-            hpi:  formData.hpi,
-            medicalHistory: formData.medicalHistory,
-            symptoms:  formData.symptoms,
-            allergies:  formData.allergies,
-            currentMedications:  formData.currentMedications,
+          reason: formData.reason,
+          hpi: formData.hpi,
+          medicalHistory: formData.medicalHistory,
+          symptoms: formData.symptoms,
+          allergies: formData.allergies,
+          currentMedications: formData.currentMedications,
         },
         objective: {
-            vitals: formData.vitals,
-            physicalExam: formData.physicalExam,
-            laboratoryData: formData.laboratoryData,
-            imagingResults: formData.imagingResults,
-            otherData: formData.otherData,
+          vitals: formData.vitals,
+          physicalExam: formData.physicalExam,
+          laboratoryData: formData.laboratoryData,
+          imagingResults: formData.imagingResults,
+          otherData: formData.otherData,
         },
         assessment: {
-            problems: formData.problems,
-            diagnosis: formData.diagnosis,
+          problems: formData.problems,
+          diagnosis: formData.diagnosis,
         },
         plan: formData.plan,
         followUp: formData.followUp
-    }], 
+      }],
       documents: [],
-      prescriptions: [] 
+      prescriptions: []
     };
 
     addPatient(newPatient);
@@ -118,13 +118,13 @@ const AddPatient = ({closeModal}: {closeModal: () => void}) => {
     if (age < 0) {
       return 0;
     }
-    
+
     return age;
   }
 
   return (
     <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[90vh] flex flex-col">
-      <Toaster/>
+      <Toaster />
       <form onSubmit={handleSubmit}>
         <Box className="flex justify-between items-center p-2">
           <Typography variant="h6">Add New Patient</Typography>
@@ -457,9 +457,9 @@ const AddPatient = ({closeModal}: {closeModal: () => void}) => {
           <Button variant="contained" color="primary">Start Recording</Button>
           <Button type="submit" variant="contained" color="primary" >Create Patient</Button>
         </Box>
-        
+
       </form>
-    </Box> 
+    </Box>
   );
 };
 

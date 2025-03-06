@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Button, Card, CardContent, Typography, IconButton, Modal, Box, Grid, TextField, Container} from "@mui/material";
+import { useState, useEffect } from "react";
+import { Button, Card, CardContent, Typography, IconButton, Modal, Box, Grid, TextField, Container } from "@mui/material";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ const EmployeeList = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
     const [hospitals, setHospitals] = useState<IHospital[]>([]);
     const [employees, setEmployees] = useState<IHealthcareProfessional[]>([]);
+    const [selectedHospital, setSelectedHospital] = useState<string>("");
 
     const initialHospitalFormData: IHospital = {
         id: "",
@@ -39,28 +40,40 @@ const EmployeeList = () => {
         phone: "",
         employmentStatus: ""
     };
-    
+
     const [formData, setEmployeeInfo] = useState<IHealthcareProfessional>(initialFormData);
     const [isEditing, setEditingEmployee] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [openModal, setOpenModal] = useState(false);
     const dispatch = useDispatch();
-    const [selectedHospital, setSelectedHospital] = useState<string>("");
 
     //https://firebase.google.com/docs/firestore/query-data/listen
-    const unsub = onSnapshot(hospitalCollection, (querySnapshot) => {
-        const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
-        setHospitals(hospitalList);
-    });
+    useEffect(() => {
+        let isSubscribed = true;
 
-    const unsubHCP = onSnapshot(healthcareProfessionalCollection, (querySnapshot) => {
-        const employeeList: IHealthcareProfessional[] = querySnapshot.docs.map((doc) => doc.data());
-        const filteredEmployees = selectedHospital !== "" 
-            ? employeeList.filter((employee) => employee.hospital === selectedHospital) 
-            : employeeList;
-        setEmployees(filteredEmployees);
-    });
+        const unsubscribeHospitals = onSnapshot(hospitalCollection, (querySnapshot) => {
+            if (isSubscribed) {
+                const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
+                setHospitals(hospitalList);
+            }
+        });
 
+        const unsubscribeHCP = onSnapshot(healthcareProfessionalCollection, (querySnapshot) => {
+            if (isSubscribed) {
+                const employeeList: IHealthcareProfessional[] = querySnapshot.docs.map((doc) => doc.data());
+                const filteredEmployees = selectedHospital !== ""
+                    ? employeeList.filter((employee) => employee.hospital === selectedHospital)
+                    : employeeList;
+                setEmployees(filteredEmployees);
+            }
+        });
+
+        return () => {
+            isSubscribed = false;
+            unsubscribeHospitals();
+            unsubscribeHCP();
+        };
+    }, [selectedHospital]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -73,8 +86,8 @@ const EmployeeList = () => {
 
     const handleSave = () => {
         if (Object.values(errors).some(error => error)) { return; }
-        
-        if(isEditing){
+
+        if (isEditing) {
             const newHCP: IHealthcareProfessional = {
                 id: formData.id,
                 name: formData.name,
@@ -85,10 +98,10 @@ const EmployeeList = () => {
                 phone: formData.phone,
                 employmentStatus: formData.employmentStatus
             };
-    
+
             addHealthCareProfessional(newHCP);
 
-        }else{
+        } else {
             const newHCP: IHealthcareProfessional = {
                 id: uuidv4(),
                 name: formData.name,
@@ -110,21 +123,21 @@ const EmployeeList = () => {
                     id: newHCP.id,
                 }),
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('User created successfully:', data);
-            })
-            .catch(error => {
-                console.error('Error creating user:', error);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('User created successfully:', data);
+                })
+                .catch(error => {
+                    console.error('Error creating user:', error);
+                });
 
             addHealthCareProfessional(newHCP);
-        }       
+        }
 
         handleCloseModal();
     };
@@ -148,18 +161,18 @@ const EmployeeList = () => {
                 id: employee.id,
             }),
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('User created successfully:', data);
-        })
-        .catch(error => {
-            console.error('Error creating user:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('User created successfully:', data);
+            })
+            .catch(error => {
+                console.error('Error creating user:', error);
+            });
     };
 
 
@@ -183,7 +196,7 @@ const EmployeeList = () => {
                 <Typography variant="h5" gutterBottom>
                     Employees
                 </Typography>
-                <div className ="my-4">
+                <div className="my-4">
                     <TextField
                         fullWidth
                         select
@@ -195,7 +208,7 @@ const EmployeeList = () => {
                         }}
                         slotProps={{
                             inputLabel: {
-                              shrink: true,
+                                shrink: true,
                             }
                         }}
                     >
@@ -263,9 +276,9 @@ const EmployeeList = () => {
                                 }}
                                 slotProps={{
                                     inputLabel: {
-                                      shrink: true,
+                                        shrink: true,
                                     }
-                                  }}
+                                }}
                             >
                                 <option value="Select">Select Hospital</option>
                                 {hospitals.map(hospital => (

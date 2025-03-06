@@ -73,12 +73,13 @@ export interface IConsultation {
 }
 
 export interface IPatient {
-    prescriptions: IPrescription[];
     id: string;
     profileInformation?: IProfileInfo;
     medicalHistory?: IMedicalHistory;
     consultationNotes?: ISoapNote[];
     documents?: IDocument[];
+    prescriptions?: IDocument[];
+    referrals?:IDocument[];
 }
 
 export interface IProfileInfo {
@@ -129,7 +130,6 @@ export interface IDocument {
 
 export interface IPrescription {
     plan: string,
-
 }
 
 export interface ISoapNote {

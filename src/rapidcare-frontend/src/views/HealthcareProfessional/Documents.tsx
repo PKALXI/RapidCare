@@ -47,7 +47,7 @@ const Documents: React.FC<DocumentsProps> = ({ patient }) => {
     return (
         <div>
             <div className="flex justify-between">
-                <Typography variant="h5" gutterBottom>Documents</Typography>
+                <Typography variant="h5" gutterBottom>Lab Reports</Typography>
                 <Button variant="contained" color="primary" onClick={handleAddNew}>Add new</Button>
             </div>
 

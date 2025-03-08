@@ -10,12 +10,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import { INetworkInfo } from "../../models/model";
 import { validateField } from "../../helpers/helper";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 const AdminAccount = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
     const [openModal, setOpenModal] = useState(false);
     const [formData, setNetworkInfo] = useState<INetworkInfo>(healthNetworkAdmin?.networkInfo || {
-        id : '',
+        id: '',
         networkName: '',
         typeOfNetwork: 'Public',
         mainContact: '',
@@ -27,24 +29,30 @@ const AdminAccount = () => {
     const [errors, setErrors] = useState<any>({});
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setNetworkInfo({...formData,[name]: value});
-        if (name === "email"  || name === "phone"){
+        setNetworkInfo({ ...formData, [name]: value });
+        if (name === "email" || name === "phone") {
             const errormessage = validateField(name, value);
             setErrors({ ...errors, [name]: errormessage });
-        } 
+        }
     };
 
     const handleSave = () => {
         if (Object.values(errors).some(error => error)) {return;}
 
-        // Save data in backend
-        dispatch(saveNetworkInfo(formData)); 
-        handleCloseModal();        
-    }
+        try {
+            // Save data in backend
+            dispatch(saveNetworkInfo(formData));
+            toast.success('Network information saved successfully!');
+            handleCloseModal();
+        } catch (error) {
+            toast.error('Failed to save network information');
+            console.error(error);
+        }
+    };
 
     const handleOpenModal = () => {
         setOpenModal(true);
@@ -59,18 +67,36 @@ const AdminAccount = () => {
     };
 
     const handleLogout = () => {
-        dispatch(resetState());
-        navigate("/login");
+        try {
+            dispatch(resetState());
+            toast.success('Logged out successfully');
+            navigate("/login");
+        } catch (error) {
+            toast.error('Failed to logout');
+            console.error(error);
+        }
     };
 
-    const handleDelete = () => {
-        //remove account from backend
-
-        dispatch(resetState());
-        navigate("/login");
+    const handleDeleteClick = () => {
+        setOpenDeleteModal(true);
     };
 
+    const handleDeleteConfirm = () => {
+        try {
+            //remove account from backend
+            dispatch(resetState());
+            toast.success('Account deleted successfully');
+            setOpenDeleteModal(false);
+            navigate("/login");
+        } catch (error) {
+            toast.error('Failed to delete account');
+            console.error(error);
+        }
+    };
 
+    const handleDeleteCancel = () => {
+        setOpenDeleteModal(false);
+    };
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -109,24 +135,23 @@ const AdminAccount = () => {
                             <div className="flex justify-center mt-6 gap-4">
                                 <Button variant="contained" color="primary" onClick={handleOpenModal}>Edit Information</Button>
                                 <Button variant="contained" color="error" onClick={handleLogout}>Logout</Button>
-                                <Button variant="contained" color="error" onClick={handleDelete}>Delete Account</Button>
+                                <Button variant="contained" color="error" onClick={handleDeleteClick}>Delete Account</Button>
                             </div>
                         </CardContent>
                     </Card>
                 </Container>
-                ) : (
+            ) : (
                 <div className="flex items-center flex-grow justify-center">
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
+                    <Button
+                        variant="contained"
+                        color="primary"
                         className="mt-4"
                         onClick={handleOpenModal}
                     >
                         Add Network Info
                     </Button>
-                </div> 
-                )}
-            
+                </div>
+            )}
 
             <Modal open={openModal} onClose={handleCloseModal}>
                 <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
@@ -170,7 +195,6 @@ const AdminAccount = () => {
                                 name="mainContact"
                                 value={formData?.mainContact}
                                 onChange={handleChange}
-                                
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -195,13 +219,13 @@ const AdminAccount = () => {
                                 helperText={errors.phone}
                             />
                         </Grid>
-                        <Grid item  xs={12} md={6}>
+                        <Grid item xs={12} md={6}>
                             <TextField
                                 fullWidth
                                 label="Website"
                                 name="website"
                                 value={formData?.website}
-                                onChange={handleChange} 
+                                onChange={handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -221,6 +245,13 @@ const AdminAccount = () => {
                     </div>
                 </Box>
             </Modal>
+
+            <ConfirmationModal
+                open={openDeleteModal}
+                onClose={handleDeleteCancel}
+                onConfirm={handleDeleteConfirm}
+                title="Are you sure you want to delete the account?"
+            />
             <Footer />
         </div>
     );

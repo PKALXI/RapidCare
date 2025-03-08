@@ -6,11 +6,6 @@ export interface AppState {
 }
 
 export interface IHealthNetworkAdminState {
-    user: {
-        id: string;
-        name: string; 
-        email: string;
-    }
     isOnboardingComplete: boolean;
     networkInfo?: INetworkInfo;
     dashboardMetrics?: {

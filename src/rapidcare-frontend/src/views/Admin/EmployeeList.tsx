@@ -2,34 +2,24 @@ import { useState, useEffect } from "react";
 import { Button, Card, CardContent, Typography, IconButton, Modal, Box, Grid, TextField, Container } from "@mui/material";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/store";
+//import { useSelector } from "react-redux";
+//import { RootState } from "../../redux/store";
 import CloseIcon from "@mui/icons-material/Close";
 import { IHealthcareProfessional, IHospital } from "../../models/model";
 import { validateField } from "../../helpers/helper";
 import { onSnapshot } from "firebase/firestore";
 import { addHealthCareProfessional, deleteHealthCareProfessional, healthcareProfessionalCollection, hospitalCollection } from "../../firebaseControllers/DatabaseOps";
-import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
+import { v4 as uuidv4 } from "uuid";
+import toast from 'react-hot-toast';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 const EmployeeList = () => {
-    const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
+    //const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
     const [hospitals, setHospitals] = useState<IHospital[]>([]);
     const [employees, setEmployees] = useState<IHealthcareProfessional[]>([]);
     const [selectedHospital, setSelectedHospital] = useState<string>("");
-
-    const initialHospitalFormData: IHospital = {
-        id: "",
-        name: "",
-        address: "",
-        email: "",
-        phone: "",
-        bedCapacity: 0,
-        operatingHours: "",
-    };
     // const hospitals = healthNetworkAdmin?.hospitals || [];
     // const employees = healthNetworkAdmin?.healthcareProfessionals || [];
-
-
     const initialFormData: IHealthcareProfessional = {
         id: "",
         name: "",
@@ -40,17 +30,16 @@ const EmployeeList = () => {
         phone: "",
         employmentStatus: ""
     };
-
     const [formData, setEmployeeInfo] = useState<IHealthcareProfessional>(initialFormData);
     const [isEditing, setEditingEmployee] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [openModal, setOpenModal] = useState(false);
-    const dispatch = useDispatch();
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [employeeToDelete, setEmployeeToDelete] = useState<IHealthcareProfessional | null>(null);
 
     //https://firebase.google.com/docs/firestore/query-data/listen
     useEffect(() => {
         let isSubscribed = true;
-
         const unsubscribeHospitals = onSnapshot(hospitalCollection, (querySnapshot) => {
             if (isSubscribed) {
                 const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
@@ -67,7 +56,6 @@ const EmployeeList = () => {
                 setEmployees(filteredEmployees);
             }
         });
-
         return () => {
             isSubscribed = false;
             unsubscribeHospitals();
@@ -86,95 +74,114 @@ const EmployeeList = () => {
 
     const handleSave = () => {
         if (Object.values(errors).some(error => error)) { return; }
-
-        if (isEditing) {
-            const newHCP: IHealthcareProfessional = {
-                id: formData.id,
-                name: formData.name,
-                role: formData.role,
-                hospital: formData.hospital,
-                department: formData.department,
-                email: formData.email,
-                phone: formData.phone,
-                employmentStatus: formData.employmentStatus
-            };
-
-            addHealthCareProfessional(newHCP);
-
-        } else {
-            const newHCP: IHealthcareProfessional = {
-                id: uuidv4(),
-                name: formData.name,
-                role: formData.role,
-                hospital: formData.hospital,
-                department: formData.department,
-                email: formData.email,
-                phone: formData.phone,
-                employmentStatus: formData.employmentStatus
-            };
-
-            fetch('http://127.0.0.1:5000/create_user', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
+        try {
+            if (isEditing) {
+                const newHCP: IHealthcareProfessional = {
+                    id: formData.id,
+                    name: formData.name,
+                    role: formData.role,
+                    hospital: formData.hospital,
+                    department: formData.department,
                     email: formData.email,
-                    id: newHCP.id,
-                }),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('User created successfully:', data);
-                })
-                .catch(error => {
-                    console.error('Error creating user:', error);
-                });
+                    phone: formData.phone,
+                    employmentStatus: formData.employmentStatus
+                };
+                addHealthCareProfessional(newHCP);
+                toast.success('Employee updated successfully');
+            } else {
+                const newHCP: IHealthcareProfessional = {
+                    id: uuidv4(),
+                    name: formData.name,
+                    role: formData.role,
+                    hospital: formData.hospital,
+                    department: formData.department,
+                    email: formData.email,
+                    phone: formData.phone,
+                    employmentStatus: formData.employmentStatus
+                };
 
-            addHealthCareProfessional(newHCP);
+                fetch('http://127.0.0.1:5000/create_user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: formData.email,
+                        id: newHCP.id,
+                    }),
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('User created successfully:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error creating user:', error);
+                    });
+                
+                addHealthCareProfessional(newHCP);
+                toast.success('Employee added successfully');
+            }
+            handleCloseModal();
+        } catch (error) {
+            toast.error(isEditing ? 'Failed to update employee' : 'Failed to add employee');
+            console.error(error);
         }
-
-        handleCloseModal();
     };
 
     const handleAdd = () => {
         setOpenModal(true);
     };
 
-    const handleDelete = (employee: IHealthcareProfessional) => {
-        //backend update here
-        //change to only pass id once firestore is setup for this same in action and reducer, for now using name
-        deleteHealthCareProfessional(employee);
-
-        fetch('http://127.0.0.1:5000/create_user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: employee.email,
-                id: employee.id,
-            }),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('User created successfully:', data);
-            })
-            .catch(error => {
-                console.error('Error creating user:', error);
-            });
+    const handleDeleteClick = (employee: IHealthcareProfessional) => {
+        setEmployeeToDelete(employee);
+        setOpenDeleteModal(true);
     };
 
+    const handleDeleteConfirm = () => {
+        try {
+            if (employeeToDelete) {
+                deleteHealthCareProfessional(employeeToDelete);
+
+                fetch('http://127.0.0.1:5000/delete_user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: employeeToDelete.email,
+                        id: employeeToDelete.id,
+                    }),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('User created successfully:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error creating user:', error);
+                    });
+
+                toast.success('Employee deleted successfully');
+            }
+            setOpenDeleteModal(false);
+            setEmployeeToDelete(null);
+        } catch (error) {
+            toast.error('Failed to delete employee');
+            console.error(error);
+        }
+    };
+
+    const handleDeleteCancel = () => {
+        setOpenDeleteModal(false);
+        setEmployeeToDelete(null);
+    };
 
     const handleEdit = (employee: IHealthcareProfessional) => {
         setEditingEmployee(true);
@@ -241,7 +248,7 @@ const EmployeeList = () => {
                                     <Button variant="contained" color="primary" onClick={() => handleEdit(employee)}>Edit</Button>
                                 </Grid>
                                 <Grid item xs={6} sm={1}>
-                                    <Button variant="contained" color="error" onClick={() => handleDelete(employee)}>Delete</Button>
+                                    <Button variant="contained" color="error" onClick={() => handleDeleteClick(employee)}>Delete</Button>
                                 </Grid>
                             </Grid>
                         </CardContent>
@@ -296,6 +303,14 @@ const EmployeeList = () => {
                     </div>
                 </Box>
             </Modal>
+
+            <ConfirmationModal
+                open={openDeleteModal}
+                onClose={handleDeleteCancel}
+                onConfirm={handleDeleteConfirm}
+                title={`Are you sure you want to delete ${employeeToDelete?.name}?`}
+            />
+
             <Footer />
         </div>
     );

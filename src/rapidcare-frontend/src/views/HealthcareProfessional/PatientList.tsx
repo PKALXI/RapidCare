@@ -24,10 +24,18 @@ const PatientList = () => {
     }
 
     //https://firebase.google.com/docs/firestore/query-data/listen
-    const unsub = onSnapshot(patientCollection, (querySnapshot) => {
-        const patientList: IPatient[] = querySnapshot.docs.map((doc) => doc.data());
-        setPatients(patientList);
-    });
+    // const unsub = onSnapshot(patientCollection, (querySnapshot) => {
+    //     const patientList: IPatient[] = querySnapshot.docs.map((doc) => doc.data());
+    //     setPatients(patientList);
+    // });
+    useEffect(() => {
+        const unsub = onSnapshot(patientCollection, (querySnapshot) => {
+            const patientList: IPatient[] = querySnapshot.docs.map((doc) => doc.data());
+            setPatients(patientList);
+        });
+    
+        return () => unsub(); // Cleanup function to unsubscribe when component unmounts
+    }, []);
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -67,9 +75,9 @@ const PatientList = () => {
                     ADD PATIENT
                 </Button>
                 <Modal open={open} onClose={handleClose}>
-                    
-                        <AddPatient closeModal={closeModal}/>
-                    
+                    <Box>
+                        <AddPatient closeModal={closeModal} />
+                    </Box> 
                 </Modal>
             </div>
                 

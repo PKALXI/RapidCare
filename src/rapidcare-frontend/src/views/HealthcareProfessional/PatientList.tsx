@@ -34,7 +34,7 @@ const PatientList = () => {
             setPatients(patientList);
         });
     
-        return () => unsub(); // Cleanup function to unsubscribe when component unmounts
+        return () => unsub();
     }, []);
 
     return (

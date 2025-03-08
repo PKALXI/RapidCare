@@ -3,9 +3,8 @@ import { Card, CardContent, Typography, Box, IconButton, Button, Grid, TextField
 import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
 import { IPatient } from "../../models/model";
 import { addPatient } from "../../firebaseControllers/DatabaseOps";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import CloseIcon from "@mui/icons-material/Close";
-
 
 const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
   const [formData, setFormData] = useState({
@@ -41,7 +40,6 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const newPatient: IPatient = {
       id: uuidv4(),
       profileInformation: {
@@ -96,11 +94,8 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
       documents: [],
       prescriptions: []
     };
-
     addPatient(newPatient);
-
     closeModal();
-
     toast.success("Patient created successfully!");
   };
 
@@ -124,7 +119,6 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
 
   return (
     <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[90vh] flex flex-col">
-      <Toaster />
       <form onSubmit={handleSubmit}>
         <Box className="flex justify-between items-center p-2">
           <Typography variant="h6">Add New Patient</Typography>
@@ -457,7 +451,6 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
           <Button variant="contained" color="primary">Start Recording</Button>
           <Button type="submit" variant="contained" color="primary" >Create Patient</Button>
         </Box>
-
       </form>
     </Box>
   );

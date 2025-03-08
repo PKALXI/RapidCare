@@ -6,6 +6,7 @@ import Navbar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { resetState } from "../../redux/appActions";
 import { Card, CardContent, Typography, Button, Container } from "@mui/material";
+import toast from 'react-hot-toast';
 
 const AccountSettings = () => {
     const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional?.user);
@@ -13,8 +14,14 @@ const AccountSettings = () => {
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-        dispatch(resetState());
-        navigate("/login");
+        try {
+            dispatch(resetState());
+            toast.success('Logged out successfully');
+            navigate("/login");
+        } catch (error) {
+            toast.error('Failed to logout');
+            console.error(error);
+        }
     };
 
     return (

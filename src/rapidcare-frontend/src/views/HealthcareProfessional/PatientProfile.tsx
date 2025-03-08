@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { Button, Box, Typography, Avatar, Divider, Tabs,  Tab, Grid } from "@mui/material";
+import { Button, Box, Typography, Avatar, Divider, Tabs, Tab, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Navbar from "../components/NavBar";
@@ -17,6 +17,8 @@ import { deletePatient, emptyPatient, getPatient, patientCollection } from "../.
 import { IPatient } from "../../models/model";
 import { onSnapshot, query, where } from "firebase/firestore";
 import Referrals from "./Referrals";
+import ConfirmationModal from '../components/ConfirmationModal';
+import toast from 'react-hot-toast';
 
 const PatientProfile = () => {
     const { patientId } = useParams<{ patientId: string }>();
@@ -26,14 +28,7 @@ const PatientProfile = () => {
     // const patient = healthcareProfessional?.patients?.find((p) => p.id === patientId);
     const [patient, setPatient] = useState<IPatient>(emptyPatient);
     const [activeTab, setActiveTab] = useState("Profile Information");
-
-    const q = query(patientCollection, where("id", "==", patientId));
-
-    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    //     querySnapshot.forEach((doc) => {
-    //         setPatient(doc.data())
-    //     });
-    // });
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
     useEffect(() => {
         const q = query(patientCollection, where("id", "==", patientId));
@@ -65,10 +60,25 @@ const PatientProfile = () => {
         navigate("/patients");
     };
 
-    const handleDeleteProfile = () => {
-        // dispatch(deletePatient(patient.id));
-        deletePatient(patient);
-        navigate("/patients");
+    const handleDeleteClick = () => {
+        setOpenDeleteModal(true);
+    };
+
+    const handleDeleteConfirm = () => {
+        try {
+            // dispatch(deletePatient(patient.id));
+            deletePatient(patient);
+            toast.success('Patient profile deleted successfully');
+            setOpenDeleteModal(false);
+            navigate("/patients");
+        } catch (error) {
+            toast.error('Failed to delete patient profile');
+            console.error(error);
+        }
+    };
+
+    const handleDeleteCancel = () => {
+        setOpenDeleteModal(false);
     };
 
     return (
@@ -78,15 +88,15 @@ const PatientProfile = () => {
                 <Box className="flex justify-between mt-6 mb-2 px-32">
                     <Box className="flex justify-center">
                         <Avatar sx={{ width: 100, height: 100 }} >
-                            <PersonIcon sx={{ fontSize: 50 }}  />
+                            <PersonIcon sx={{ fontSize: 50 }} />
                         </Avatar>
                     </Box>
                     <Box className="flex flex-col justify-center">
                         <Grid container spacing={4}>
                             <Grid item xs={12} md={4}>
                                 <Grid container spacing={3}>
-                                <DataRow label="Name" value={patient.profileInformation?.demographics?.name} />
-                                <DataRow label="Gender" value={patient.profileInformation?.demographics?.gender} />
+                                    <DataRow label="Name" value={patient.profileInformation?.demographics?.name} />
+                                    <DataRow label="Gender" value={patient.profileInformation?.demographics?.gender} />
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} md={4}>
@@ -105,7 +115,7 @@ const PatientProfile = () => {
                     </Box>
                     <Box className="flex flex-col justify-center space-y-2">
                         <Button variant="contained" color="primary" onClick={handleCloseProfile}>Close Profile</Button>
-                        <Button variant="contained" color="error" onClick={handleDeleteProfile}>Delete Profile</Button>
+                        <Button variant="contained" color="error" onClick={handleDeleteClick}>Delete Profile</Button>
                     </Box>
                 </Box>
                 <Divider />
@@ -133,7 +143,13 @@ const PatientProfile = () => {
                     </Box>
                 </Box>
             </Box>
-            <Footer/>
+            <ConfirmationModal
+                open={openDeleteModal}
+                onClose={handleDeleteCancel}
+                onConfirm={handleDeleteConfirm}
+                title={`Are you sure you want to delete ${patient.profileInformation?.demographics?.name}'s profile?`}
+            />
+            <Footer />
         </div>
     );
 };

@@ -1,5 +1,6 @@
 \documentclass[12pt, titlepage]{article}
 
+\usepackage{float}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
@@ -449,6 +450,46 @@ should be highlighted.}
 \section{Automated Testing}
 		
 \section{Trace to Requirements}
+
+\begin{table} [H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    TestID & NFR1 & NFR2 & NFR3 & NFR4 & NFR5 & NFR6 & NFR7 & NFR8 & NFR9 \\
+    \hline
+    test-AD\ref{test-AD1} & $\times$ & & & & & & & & \\
+    \hline
+    test-AD\ref{test-AD2} &  $\times$ & & & & & & & & \\
+    \hline
+    test-UR\ref{test-UR1} & & $\times$ &  & & & & & & \\
+    \hline
+    test-UR\ref{test-UR2} & & $\times$ & & & & & & &  \\
+    \hline
+    test-PR\ref{test-PR1} & & & $\times$ & & & & & & \\
+    \hline
+    test-OR\ref{test-OR1} & & & & $\times$ & & & & &  \\
+    \hline
+    test-OR\ref{test-OR2} & & & & $\times$ & & & & & \\
+    \hline
+    test-MR\ref{test-MR1} & & & & & $\times$ & & & &\\
+    \hline
+    test-MR\ref{test-MR2} & & & & & $\times$ & & & &  \\
+    \hline
+    test-SR\ref{test-SR1} & & & & & & $\times$ & & &\\
+    \hline
+    test-SR\ref{test-SR2} & & & & & & $\times$ & & & \\
+    \hline
+    test-CR\ref{test-CR1} & & & & & & & $\times$ & &\\
+    \hline
+    test-LR\ref{test-LR1} & & & & & & & & $\times$ &\\
+    \hline
+    test-LR\ref{test-LR2} & & & & & & & & $\times$ & \\
+    \hline
+    test-S\ref{test-S1} & & & & & & & & & $\times$ \\
+    \hline
+  \end{tabular}
+\caption{\bf Non-Functional Requirements Tests Traceability} \label{tab:nfr-test-traceability}
+\end{table}
 		
 \section{Trace to Modules}		
 

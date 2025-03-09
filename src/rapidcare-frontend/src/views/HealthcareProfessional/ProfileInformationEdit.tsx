@@ -7,6 +7,7 @@ import { updatePatientProfileInfo } from "../../redux/appActions";
 import { validateField } from "../../helpers/helper";
 import { v4 as uuidv4 } from "uuid";
 import { emptyPatient, getPatient, updatePatient } from "../../firebaseControllers/DatabaseOps";
+import toast from 'react-hot-toast';
 
 interface EditProfileInfoProps {
     open: boolean;
@@ -17,12 +18,9 @@ interface EditProfileInfoProps {
 
 const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patientId, profileInformation }) => {
     const dispatch = useDispatch();
-
     const [patient, setPatient] = useState(emptyPatient);
-
     /* 
         CURRENTLY EACH FIELD IS POPULATED WITH NOTHING...The image of DB doc is pulled and edited can be optimized
-        TODO: INREET IMPLEMENT MODAL
     */
 
     const [formData, setFormData] = useState({
@@ -60,79 +58,86 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
     useEffect(() => {
         const fetchPatient = async () => {
             if (patientId) {
-              const patientData = await getPatient(patientId);
-              if (patientData) {
-                setPatient(patientData);
-                
-                setFormData({
-                    demographics: {
-                        name: patientData.profileInformation?.demographics?.name || "",
-                        gender: patientData.profileInformation?.demographics?.gender || "",
-                        age: patientData.profileInformation?.demographics?.age || 0,
-                        dateOfBirth: patientData.profileInformation?.demographics?.dateOfBirth || "",
-                        healthcardNumber: patientData.profileInformation?.demographics?.healthcardNumber || "",
-                        weight: patientData.profileInformation?.demographics?.weight || "",
-                        height: patientData.profileInformation?.demographics?.height || "",
-                        maritalStatus: patientData.profileInformation?.demographics?.maritalStatus || "",
-                        occupation: patientData.profileInformation?.demographics?.occupation || ""
-                    },
-                    contactInformation: {
-                        email: patientData.profileInformation?.contactInformation?.email || "",
-                        phone: patientData.profileInformation?.contactInformation?.phone || "",
-                        address: patientData.profileInformation?.contactInformation?.address || ""
-                    },
-                    insuranceInformation: {
-                        memberID: patientData.profileInformation?.insuranceInformation?.memberID || "",
-                        policyNumber: patientData.profileInformation?.insuranceInformation?.policyNumber || "",
-                        provider: patientData.profileInformation?.insuranceInformation?.provider || ""
-                    },
-                    emergencyContact: {
-                        name: patientData.profileInformation?.emergencyContact?.name || "",
-                        relationship: patientData.profileInformation?.emergencyContact?.relationship || "",
-                        phone: patientData.profileInformation?.emergencyContact?.phone || "",
-                        address: patientData.profileInformation?.emergencyContact?.address || ""
-                    }
-                });
-              }
+                const patientData = await getPatient(patientId);
+                if (patientData) {
+                    setPatient(patientData);
+
+                    setFormData({
+                        demographics: {
+                            name: patientData.profileInformation?.demographics?.name || "",
+                            gender: patientData.profileInformation?.demographics?.gender || "",
+                            age: patientData.profileInformation?.demographics?.age || 0,
+                            dateOfBirth: patientData.profileInformation?.demographics?.dateOfBirth || "",
+                            healthcardNumber: patientData.profileInformation?.demographics?.healthcardNumber || "",
+                            weight: patientData.profileInformation?.demographics?.weight || "",
+                            height: patientData.profileInformation?.demographics?.height || "",
+                            maritalStatus: patientData.profileInformation?.demographics?.maritalStatus || "",
+                            occupation: patientData.profileInformation?.demographics?.occupation || ""
+                        },
+                        contactInformation: {
+                            email: patientData.profileInformation?.contactInformation?.email || "",
+                            phone: patientData.profileInformation?.contactInformation?.phone || "",
+                            address: patientData.profileInformation?.contactInformation?.address || ""
+                        },
+                        insuranceInformation: {
+                            memberID: patientData.profileInformation?.insuranceInformation?.memberID || "",
+                            policyNumber: patientData.profileInformation?.insuranceInformation?.policyNumber || "",
+                            provider: patientData.profileInformation?.insuranceInformation?.provider || ""
+                        },
+                        emergencyContact: {
+                            name: patientData.profileInformation?.emergencyContact?.name || "",
+                            relationship: patientData.profileInformation?.emergencyContact?.relationship || "",
+                            phone: patientData.profileInformation?.emergencyContact?.phone || "",
+                            address: patientData.profileInformation?.emergencyContact?.address || ""
+                        }
+                    });
+                }
             }
-          };
-          fetchPatient();
-        
+        };
+        fetchPatient();
+
     }, [patientId]);
 
 
     const handleChange = (section: keyof IProfileInfo, field: string, value: string | number) => {
-        setFormData((prev) => ({...prev,[section]: {...prev[section],[field]: value,},}));
+        setFormData((prev) => ({ ...prev, [section]: { ...prev[section], [field]: value, }, }));
         const errorMessage = validateField(field, value);
         setErrors((prev) => ({ ...prev, [`${section}-${field}`]: errorMessage }));
     };
 
     const updateEntry = () => {
-        const newPatient: IPatient = {
-            ...patient,
-            profileInformation: {
-              ...patient.profileInformation,
-              demographics: {
-                ...patient.profileInformation?.demographics,
-                ...formData.demographics,
-                weight: Number(formData.demographics.weight),
-                height: Number(formData.demographics.height)
-              },
-              contactInformation: formData.contactInformation,
-              insuranceInformation: formData.insuranceInformation,
-              emergencyContact: formData.emergencyContact
-            }
-        };
+        try {
+            const newPatient: IPatient = {
+                ...patient,
+                profileInformation: {
+                    ...patient.profileInformation,
+                    demographics: {
+                        ...patient.profileInformation?.demographics,
+                        ...formData.demographics,
+                        weight: Number(formData.demographics.weight),
+                        height: Number(formData.demographics.height)
+                    },
+                    contactInformation: formData.contactInformation,
+                    insuranceInformation: formData.insuranceInformation,
+                    emergencyContact: formData.emergencyContact
+                }
+            };
 
-        updatePatient(newPatient);
-    }
-    
+            updatePatient(newPatient);
+            setOpen(false);
+            toast.success('Profile information updated successfully!');
+        } catch (error) {
+            toast.error('Failed to update profile information');
+            console.error(error);
+        }
+    };
+
     const handleClose = () => {
         // setFormData(profileInformation);
         setErrors({});
         setOpen(false);
     };
-    
+
     const handleSave = () => {
         if (Object.values(errors).some(error => error)) {
             return;
@@ -145,157 +150,157 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
 
     return (
         <Dialog open={open} fullWidth>
-                <Box className="p-4 flex justify-between items-center">
-                    <Typography variant="h6">Edit Profile Information</Typography>
-                    <IconButton onClick={handleClose}>
-                        <CloseIcon />
-                    </IconButton>
-                </Box>
-                <Grid container spacing={2} className="px-4 mb-4" >
-                    <Grid item xs={12}>
-                        <Card >
-                            <CardHeader title="Demographics" />
-                            <CardContent>
-                                <Grid container spacing={4} >
-                                    <Grid item xs={6} className="space-y-4">
-                                        <TextField 
-                                            label="Name"
-                                            value={formData.demographics.name}
-                                            onChange={(e) => handleChange('demographics', 'name', e.target.value)}  
-                                        />
-                                        <TextField
-                                            label="Gender"
-                                            value={formData.demographics?.gender}
-                                            onChange={(e) => handleChange('demographics', 'gender', e.target.value)}    
-                                        />
-                                        <TextField
-                                            label="Age" 
-                                            value={formData.demographics?.age}
-                                            onChange={(e) => handleChange('demographics', 'age', e.target.value)}
-                                            error={!!errors['demographics-age']}  
-                                            helperText={errors['demographics-age']} 
-                                        />
-                                        <TextField
-                                            label="DOB" 
-                                            value={formData.demographics?.dateOfBirth}
-                                            onChange={(e) => handleChange('demographics', 'dateOfBirth', e.target.value)} 
-                                            error={!!errors['demographics-dateOfBirth']}  
-                                            helperText={errors['demographics-dateOfBirth']}   
-                                        />
-                                        <TextField
-                                            label="Healthcard No."
-                                            value={formData.demographics?.healthcardNumber}
-                                            onChange={(e) => handleChange('demographics', 'healthcardNumber', e.target.value)}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={6} className="space-y-4">
-                                        <TextField
-                                            label="Weight"
-                                            value={formData.demographics?.weight}
-                                            onChange={(e) => handleChange('demographics', 'weight', e.target.value)}
-                                            error={!!errors['demographics-weight']}  
-                                            helperText={errors['demographics-weight']}                                            
-                                        />
-                                        <TextField
-                                            label="Height"
-                                            value={formData.demographics?.height}
-                                            onChange={(e) => handleChange('demographics', 'height', e.target.value)}
-                                            error={!!errors['demographics-height']}  
-                                            helperText={errors['demographics-height']}
-                                            
-                                        />
-                                        <TextField
-                                            label="Marital Status" 
-                                            value={formData.demographics?.maritalStatus}
-                                            onChange={(e) => handleChange('demographics', 'maritalStatus', e.target.value)}
-                                        />
-                                        <TextField
-                                            label="Occupation" 
-                                            value={formData.demographics?.occupation}
-                                            onChange={(e) => handleChange('demographics', 'occupation', e.target.value)}    
-                                        />
-                                    </Grid>
+            <Box className="p-4 flex justify-between items-center">
+                <Typography variant="h6">Edit Profile Information</Typography>
+                <IconButton onClick={handleClose}>
+                    <CloseIcon />
+                </IconButton>
+            </Box>
+            <Grid container spacing={2} className="px-4 mb-4" >
+                <Grid item xs={12}>
+                    <Card >
+                        <CardHeader title="Demographics" />
+                        <CardContent>
+                            <Grid container spacing={4} >
+                                <Grid item xs={6} className="space-y-4">
+                                    <TextField
+                                        label="Name"
+                                        value={formData.demographics.name}
+                                        onChange={(e) => handleChange('demographics', 'name', e.target.value)}
+                                    />
+                                    <TextField
+                                        label="Gender"
+                                        value={formData.demographics?.gender}
+                                        onChange={(e) => handleChange('demographics', 'gender', e.target.value)}
+                                    />
+                                    <TextField
+                                        label="Age"
+                                        value={formData.demographics?.age}
+                                        onChange={(e) => handleChange('demographics', 'age', e.target.value)}
+                                        error={!!errors['demographics-age']}
+                                        helperText={errors['demographics-age']}
+                                    />
+                                    <TextField
+                                        label="DOB"
+                                        value={formData.demographics?.dateOfBirth}
+                                        onChange={(e) => handleChange('demographics', 'dateOfBirth', e.target.value)}
+                                        error={!!errors['demographics-dateOfBirth']}
+                                        helperText={errors['demographics-dateOfBirth']}
+                                    />
+                                    <TextField
+                                        label="Healthcard No."
+                                        value={formData.demographics?.healthcardNumber}
+                                        onChange={(e) => handleChange('demographics', 'healthcardNumber', e.target.value)}
+                                    />
                                 </Grid>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                </Grid>
+                                <Grid item xs={6} className="space-y-4">
+                                    <TextField
+                                        label="Weight"
+                                        value={formData.demographics?.weight}
+                                        onChange={(e) => handleChange('demographics', 'weight', e.target.value)}
+                                        error={!!errors['demographics-weight']}
+                                        helperText={errors['demographics-weight']}
+                                    />
+                                    <TextField
+                                        label="Height"
+                                        value={formData.demographics?.height}
+                                        onChange={(e) => handleChange('demographics', 'height', e.target.value)}
+                                        error={!!errors['demographics-height']}
+                                        helperText={errors['demographics-height']}
 
-                <Grid container spacing={2} className="px-4 mb-4" >
-                    <Grid item xs={6}>
-                        <Card>
-                            <CardHeader title="Contact Information" />
-                            <CardContent>
-                                <Grid container spacing={4} >
-                                    <Grid item xs={12} className="space-y-4">
-                                        <TextField
-                                            label="Email"
-                                            value={formData.contactInformation?.email}
-                                            onChange={(e) => handleChange('contactInformation', 'email', e.target.value)}
-                                            error={!!errors['contactInformation-email']}  
-                                            helperText={errors['contactInformation-email']}   
-                                        />
-                                        <TextField
-                                            label="Phone"
-                                            value={formData.contactInformation?.phone}
-                                            onChange={(e) => handleChange('contactInformation', 'phone', e.target.value)}
-                                            error={!!errors['contactInformation-phone']}
-                                            helperText={errors['contactInformation-phone']}  
-                                        />
-                                        <TextField
-                                            label="Address"
-                                            value={formData.contactInformation?.address}
-                                            onChange={(e) => handleChange('contactInformation', 'address', e.target.value)}  
-                                        />
-                                    </Grid>
+                                    />
+                                    <TextField
+                                        label="Marital Status"
+                                        value={formData.demographics?.maritalStatus}
+                                        onChange={(e) => handleChange('demographics', 'maritalStatus', e.target.value)}
+                                    />
+                                    <TextField
+                                        label="Occupation"
+                                        value={formData.demographics?.occupation}
+                                        onChange={(e) => handleChange('demographics', 'occupation', e.target.value)}
+                                    />
                                 </Grid>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Card>
-                            <CardHeader title="Insurance Information" />
-                            <CardContent>
-                                <Grid container spacing={4} >
-                                    <Grid item xs={12} className="space-y-4">
-                                        <TextField
-                                            label="Member ID" 
-                                            value={formData.insuranceInformation?.memberID}
-                                            onChange={(e) => handleChange('insuranceInformation', 'memberID', e.target.value)}  
-                                        />
-                                        <TextField
-                                            label="Policy Number" 
-                                            value={formData.insuranceInformation?.policyNumber}
-                                            onChange={(e) => handleChange('insuranceInformation', 'policyNumber', e.target.value)}
-                                        />
-                                        <TextField
-                                            label="Provider" 
-                                            value={formData.insuranceInformation?.provider}
-                                            onChange={(e) => handleChange('insuranceInformation', 'provider', e.target.value)}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
                 </Grid>
+            </Grid>
 
-                <Grid container className="px-4 mb-4" >
+            <Grid container spacing={2} className="px-4 mb-4" >
+                <Grid item xs={6}>
+                    <Card>
+                        <CardHeader title="Contact Information" />
+                        <CardContent>
+                            <Grid container spacing={4} >
+                                <Grid item xs={12} className="space-y-4">
+                                    <TextField
+                                        label="Email"
+                                        value={formData.contactInformation?.email}
+                                        onChange={(e) => handleChange('contactInformation', 'email', e.target.value)}
+                                        error={!!errors['contactInformation-email']}
+                                        helperText={errors['contactInformation-email']}
+                                    />
+                                    <TextField
+                                        label="Phone"
+                                        value={formData.contactInformation?.phone}
+                                        onChange={(e) => handleChange('contactInformation', 'phone', e.target.value)}
+                                        error={!!errors['contactInformation-phone']}
+                                        helperText={errors['contactInformation-phone']}
+                                    />
+                                    <TextField
+                                        label="Address"
+                                        value={formData.contactInformation?.address}
+                                        onChange={(e) => handleChange('contactInformation', 'address', e.target.value)}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={6}>
+                    <Card>
+                        <CardHeader title="Insurance Information" />
+                        <CardContent>
+                            <Grid container spacing={4} >
+                                <Grid item xs={12} className="space-y-4">
+                                    <TextField
+                                        label="Member ID"
+                                        value={formData.insuranceInformation?.memberID}
+                                        onChange={(e) => handleChange('insuranceInformation', 'memberID', e.target.value)}
+                                    />
+                                    <TextField
+                                        label="Policy Number"
+                                        value={formData.insuranceInformation?.policyNumber}
+                                        onChange={(e) => handleChange('insuranceInformation', 'policyNumber', e.target.value)}
+                                    />
+                                    <TextField
+                                        label="Provider"
+                                        value={formData.insuranceInformation?.provider}
+                                        onChange={(e) => handleChange('insuranceInformation', 'provider', e.target.value)}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            </Grid>
+
+            <Grid container className="px-4 mb-4" >
                 <Grid item xs={12}>
                     <Card>
-                        <CardHeader title="Emergency Contact"/>
+                        <CardHeader title="Emergency Contact" />
                         <CardContent>
                             <Grid container spacing={4} >
                                 <Grid item xs={6} className="space-y-4">
                                     <TextField
                                         label="Name"
                                         value={formData.emergencyContact?.name}
-                                        onChange={(e) => handleChange('emergencyContact', 'name', e.target.value)}       
+                                        onChange={(e) => handleChange('emergencyContact', 'name', e.target.value)}
                                     />
                                     <TextField
-                                        label="Relationship" 
+                                        label="Relationship"
                                         value={formData.emergencyContact?.relationship}
-                                        onChange={(e) => handleChange('emergencyContact', 'relationship', e.target.value)}    
+                                        onChange={(e) => handleChange('emergencyContact', 'relationship', e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={6} className="space-y-4">
@@ -304,13 +309,13 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
                                         value={formData.emergencyContact?.phone}
                                         onChange={(e) => handleChange('emergencyContact', 'phone', e.target.value)}
                                         error={!!errors['emergencyContact-phone']}
-                                        helperText={errors['emergencyContact-phone']}  
-      
+                                        helperText={errors['emergencyContact-phone']}
+
                                     />
-                                    <TextField 
+                                    <TextField
                                         label="Address"
                                         value={formData.emergencyContact?.address}
-                                        onChange={(e) => handleChange('emergencyContact', 'address', e.target.value)}       
+                                        onChange={(e) => handleChange('emergencyContact', 'address', e.target.value)}
                                     />
                                 </Grid>
                             </Grid>
@@ -321,7 +326,7 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({ open, setOpen, patien
 
             <div className="flex justify-center my-4">
                 <Button variant="contained" color="primary" onClick={updateEntry}>Save</Button>
-            </div>  
+            </div>
         </Dialog>
     );
 };

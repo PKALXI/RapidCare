@@ -13,17 +13,16 @@ interface ProfileInformationProps {
 const ProfileInformation: React.FC<ProfileInformationProps> = ({ patientId }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-
   const [patient, setPatient] = useState(emptyPatient);
   const q = query(patientCollection, where("id", "==", patientId));
 
   useEffect(() => {
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            setPatient(doc.data())
-        });
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          setPatient(doc.data())
+      });
     });
-    return () => unsubscribe(); // Cleanup function to unsubscribe when component unmounts
+    return () => unsubscribe();
   }, []);
 
   return (

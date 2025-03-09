@@ -26,7 +26,6 @@ const deleteAdmin= async(healthCareProfessional : IHealthcareProfessional) => {
     await deleteDoc(docRef);
 }
 
-
 const addHealthCareProfessional = async (healthCareProfessional: IHealthcareProfessional) => {
     const docRef = doc(healthcareProfessionalCollection, healthCareProfessional.id);
     await setDoc(docRef, healthCareProfessional);

@@ -1,108 +1,91 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { IPatient, IDocument } from "../../models/model";
-import { Card, CardContent, CardHeader, Grid, Button, Typography, Modal, Box, IconButton, Select, MenuItem } from "@mui/material";
+import { Card, CardContent, CardHeader, Grid, Button, Typography, Modal, Box, IconButton, Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch } from "react-redux";
-import { SelectChangeEvent } from "@mui/material";
 import { PDFDocument } from "pdf-lib";
-// import { saveAs } from 'file-saver';
+import { toast } from "react-hot-toast";
+//import { v4 as uuidv4 } from "uuid";
 
 interface ReferralsProps {
     patient: IPatient;
 }
 
-const Referrals: React.FC<ReferralsProps> = ({ patient })=> {
-    const dispatch = useDispatch();
+const Referrals: React.FC<ReferralsProps> = ({ patient }) => {
     const referrals = patient.referrals || [];
     const [selectedDocument, setSelectedDocument] = useState<IDocument | null>(null);
     const [openAddModal, setAddModal] = useState(false);
-    const [openViewModal, setOpenViewModal] = useState(false); 
-
-    const [selectedType, setSelectedType] = useState<string>("");
+    const [openViewModal, setOpenViewModal] = useState(false);
+    const [selectedType, setSelectedType] = useState("");
     const [pdfData, setPdfData] = useState<string | null>(null);
+    const [pdfDoc, setPdfDoc] = useState<PDFDocument | null>(null);
 
-    const handleAddNew = () => {
+    const loadPDF = async (type: string): Promise<void> => {
+        let pdfUrl = "";
+        if (type === "blood-test") pdfUrl = `${process.env.PUBLIC_URL}/bloodWork.pdf`;
+        if (type === "ultrasound") pdfUrl = `${process.env.PUBLIC_URL}/pdfFormExample.pdf`;
+
+        try {
+            const response = await fetch(pdfUrl);
+            const pdfBytes = await response.arrayBuffer();
+            const loadedPdf = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
+
+            // Fill form fields if needed
+            const form = loadedPdf.getForm();
+            // form.getTextField("fieldName").setText("value");
+
+            const filledPdfBytes = await loadedPdf.save();
+
+            setPdfDoc(loadedPdf);
+            setPdfData(URL.createObjectURL(new Blob([filledPdfBytes], { type: "application/pdf" })));
+        } catch (error) {
+            console.error("Error loading PDF:", error);
+            toast.error("Failed to load PDF form");
+        }
+    };
+
+    const handleTypeChange = (event: SelectChangeEvent): void => {
+        const type = event.target.value;
+        setSelectedType(type);
+        loadPDF(type);
+    };
+
+    const handleSave = async (): Promise<void> => {
+        if (!pdfDoc || !pdfData) {
+            toast.error("No PDF to save");
+            return;
+        }
+
+        try {
+            const form = pdfDoc.getForm();
+            form.flatten();
+            const finalPdfBytes = await pdfDoc.save();
+            // const newDocument: IDocument = {
+            //     documentId: uuidv4(),
+            //     name: `${selectedType}-requisition.pdf`,
+            //     type: "pdf",
+            //     url: URL.createObjectURL(new Blob([finalPdfBytes], { type: "application/pdf" }))
+            // };
+            // Update patient's referrals in backend
+            toast.success("Referral saved successfully");
+            setAddModal(false);
+        } catch (error) {
+            console.error("Error saving PDF:", error);
+            toast.error("Failed to save referral");
+        }
+    };
+
+    const handleAddNew = (): void => {
         setAddModal(true);
     };
 
-    const handleOpenDocument = (document: IDocument) => {
+    const handleOpenDocument = (document: IDocument): void => {
         setSelectedDocument(document);
         setOpenViewModal(true);
     };
 
-    const handleCloseModal = () => {
+    const handleCloseModal = (): void => {
         setOpenViewModal(false);
         setSelectedDocument(null);
-    };
-
-    //https://pdf-lib.js.org/
-    const handleTypeChange = async (event: SelectChangeEvent<string>) => {
-        const type = event.target.value;
-        setSelectedType(type);
-    
-        let pdfUrl = "";
-        if (type === "blood-test") pdfUrl = process.env.PUBLIC_URL + "/bloodWork.pdf";
-        if (type === "ultrasound") pdfUrl = process.env.PUBLIC_URL + "/pdfFormExample.pdf";
-    
-        if (pdfUrl) {
-            try {
-                const response = await fetch(pdfUrl);
-                const pdfBytes = await response.arrayBuffer();
-                const pdfDoc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
-                console.log("PDF loaded successfully");
-    
-                const form = pdfDoc.getForm();
-                if (!form) {
-                    console.error("PDF does not contain a form.");
-                    return;
-                }
-    
-                console.log("Filling PDF form...");
-                //form.getTextField("Given Name").setText(patient.profileInformation?.demographics?.name || "");
-                //form.getTextField("Date").setText(new Date().toLocaleDateString());
-                //form.getTextField("Country").setText("Canada");
-    
-                const filledPdfBytes = await pdfDoc.save();
-                setPdfData(URL.createObjectURL(new Blob([filledPdfBytes], { type: "application/pdf" })));
-    
-                console.log("PDF processed and ready to display.");
-            } catch (error) {
-                console.error("Error processing PDF:", error);
-            }
-        }
-    };
-
-    const handleSave = async () => {
-        if (!pdfData) return;
-        try {
-            const response = await fetch(pdfData);
-            const pdfBytes = await response.arrayBuffer();
-            const pdfDoc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
-            const form = pdfDoc.getForm();
-            if (!form) {
-                console.error("PDF does not contain a form.");
-                alert("This PDF cannot be edited because it has no form.");
-                return;
-            }
-            form.flatten();
-            const updatedPdfBytes = await pdfDoc.save();
-            const blob = new Blob([updatedPdfBytes], { type: "application/pdf" });
-            const updatedPdfUrl = URL.createObjectURL(blob);
-    
-            const newDocument: IDocument = {
-                documentId: new Date().getTime().toString(),
-                name: `${selectedType}-requisition.pdf`,
-                type: "pdf",
-                url: updatedPdfUrl,
-            };
-
-            // dispatch(addrequisition(newDocument));
-            /saveAs(blob, newDocument.name);
-            setAddModal(false);
-
-        } catch (error) {
-            console.error("Error saving PDF:", error);
-        }
     };
 
     return (
@@ -141,7 +124,7 @@ const Referrals: React.FC<ReferralsProps> = ({ patient })=> {
                     )}
                 </Box>
             </Modal>
-            
+
             <Modal open={openAddModal} onClose={() => setAddModal(false)}>
                 <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[85vh] overflow-y-auto">
                     <div className="p-2 flex justify-between items-center">
@@ -164,11 +147,11 @@ const Referrals: React.FC<ReferralsProps> = ({ patient })=> {
                         <Button variant="contained" color="primary" onClick={handleSave}>
                             Save
                         </Button>
-                    </div>  
+                    </div>
                 </Box>
             </Modal>
         </div>
     );
 };
 
-export default Referrals
+export default Referrals;

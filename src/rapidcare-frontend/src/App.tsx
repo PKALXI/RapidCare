@@ -13,42 +13,46 @@ import PatientList from './views/HealthcareProfessional/PatientList';
 import AdminAccount from './views/Admin/AdminAccount';
 import EmployeeList from './views/Admin/EmployeeList';
 import HospitalList from './views/Admin/HospitalList';
+import { Toaster } from 'react-hot-toast';
 
 const App: React.FC = () => {
   const { isAuthenticated, isUserAdmin } = useSelector((state: RootState) => state.app);
 
   return (
-    <Router>
-      <Routes>
-        {!isAuthenticated && <Route path="/" element={<Login />} />}
-        
-        {isAuthenticated && isUserAdmin && (
-          <>
-            <Route path="/home" element={<AdminDashboard />} />
-            <Route path="/hospitals" element={<HospitalList />} />
-            <Route path="/employees" element={<EmployeeList />} />
-            <Route path="/account" element={<AdminAccount />} />
-          </>
-        )}
+    <>
+      <Toaster/>
+      <Router>
+        <Routes>
+          {!isAuthenticated && <Route path="/" element={<Login />} />}
 
-        {isAuthenticated && !isUserAdmin && (
-          <>
-            <Route path="/home" element={<HpDashboard />} />
-            <Route path="/patients" element={<PatientList />} />
-            <Route path="/appointments" element={<AppointmentsList />} />
-            <Route path="/account" element={<AccountSettings />} />
-            <Route path="/patient/:patientId" element={<PatientProfile />} />
-          </>
-        )}
+          {isAuthenticated && isUserAdmin && (
+            <>
+              <Route path="/home" element={<AdminDashboard />} />
+              <Route path="/hospitals" element={<HospitalList />} />
+              <Route path="/employees" element={<EmployeeList />} />
+              <Route path="/account" element={<AdminAccount />} />
+            </>
+          )}
 
-        <Route
-          path="*"
-          element={
-            isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/" replace />
-          }
-        />
-      </Routes>
-    </Router>
+          {isAuthenticated && !isUserAdmin && (
+            <>
+              <Route path="/home" element={<HpDashboard />} />
+              <Route path="/patients" element={<PatientList />} />
+              <Route path="/appointments" element={<AppointmentsList />} />
+              <Route path="/account" element={<AccountSettings />} />
+              <Route path="/patient/:patientId" element={<PatientProfile />} />
+            </>
+          )}
+
+          <Route
+            path="*"
+            element={
+              isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/" replace />
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   );
 };
 

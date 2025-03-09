@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, Grid, Button, Typography, Modal, Box, Ic
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import { addDocument } from "../../redux/appActions";
+import toast from 'react-hot-toast';
 
 interface DocumentsProps {
     patient: IPatient;
@@ -27,10 +28,16 @@ const Documents: React.FC<DocumentsProps> = ({ patient }) => {
             const file = event.target.files[0];
             const documentId = Date.now().toString(); 
             const newDoc: IDocument = { documentId, name: file.name, type: file.type, url: URL.createObjectURL(file) };
-
-            //Add document to backend
-            dispatch(addDocument(patient.id, newDoc));
-            setOpenUploadModal(false);
+            
+            try {
+                //Add document to backend
+                dispatch(addDocument(patient.id, newDoc));
+                toast.success('Lab Report saved successfully');
+                setOpenUploadModal(false);
+            } catch (error) {
+                toast.error('Failed to save SOAP note');
+                console.error(error);
+            }
         }
     };
 

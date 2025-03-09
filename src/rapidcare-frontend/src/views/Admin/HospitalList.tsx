@@ -2,33 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, CardContent, Typography, IconButton, Modal, Box, Grid, TextField, Container } from "@mui/material";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavBar";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../../redux/store";
+//import { useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import { IHospital } from "../../models/model";
 import { validateField } from "../../helpers/helper";
 import { onSnapshot } from "firebase/firestore";
 import { addHospital, deleteHospital, hospitalCollection } from "../../firebaseControllers/DatabaseOps";
-import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
-
-
+import { v4 as uuidv4 } from "uuid";
+import toast from 'react-hot-toast';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 const HospitalList = () => {
-    const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
+    //const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
     // const hospitals = healthNetworkAdmin?.hospitals;
-
     const [hospitals, setHospitals] = useState<IHospital[]>([]);
-
-    //https://firebase.google.com/docs/firestore/query-data/listen
-    useEffect(() => {
-        const unsub = onSnapshot(hospitalCollection, (querySnapshot) => {
-            const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
-            setHospitals(hospitalList);
-        });
-      return () => unsub();
-    }, []);
-
     const initialFormData: IHospital = {
         id: "",
         name: "",
@@ -42,55 +31,86 @@ const HospitalList = () => {
     const [isEditing, setEditingHospital] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [openModal, setOpenModal] = useState(false);
-    const dispatch = useDispatch();
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [hospitalToDelete, setHospitalToDelete] = useState<IHospital | null>(null);
+
+    //https://firebase.google.com/docs/firestore/query-data/listen
+    useEffect(() => {
+        const unsub = onSnapshot(hospitalCollection, (querySnapshot) => {
+            const hospitalList: IHospital[] = querySnapshot.docs.map((doc) => doc.data());
+            setHospitals(hospitalList);
+        });
+        return () => unsub();
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setHospitalInfo({...formData,[name]: value});
-        if (name === "email"  || name === "phone"){
+        setHospitalInfo({ ...formData, [name]: value });
+        if (name === "email" || name === "phone") {
             const errormessage = validateField(name, value);
             setErrors({ ...errors, [name]: errormessage });
-        } 
+        }
     };
 
-    const handleDelete = (hospital: IHospital) => {
-        console.log(hospital.id);
-        //backend update
-        deleteHospital(hospital);
+    const handleDeleteClick = (hospital: IHospital) => {
+        setHospitalToDelete(hospital);
+        setOpenDeleteModal(true);
+    };
+
+    const handleDeleteConfirm = () => {
+        try {
+            if (hospitalToDelete) {
+                deleteHospital(hospitalToDelete);
+                toast.success('Hospital deleted successfully');
+            }
+            setOpenDeleteModal(false);
+            setHospitalToDelete(null);
+        } catch (error) {
+            toast.error('Failed to delete hospital');
+            console.error(error);
+        }
+    };
+
+    const handleDeleteCancel = () => {
+        setOpenDeleteModal(false);
+        setHospitalToDelete(null);
     };
 
     const handleSave = () => {
-        if (Object.values(errors).some(error => error)) {return;}
+        if (Object.values(errors).some(error => error)) { return; }
 
-        if(isEditing){
-            const newHospital: IHospital = {
-                id: formData.id,
-                name: formData.name,
-                address: formData.address,
-                email: formData.email,
-                phone: formData.phone,
-                bedCapacity: formData.bedCapacity,
-                operatingHours: formData.operatingHours,
-            };
-    
-            addHospital(newHospital);
-
-        }else{
-            const newHospital: IHospital = {
-                id: uuidv4(),
-                name: formData.name,
-                address: formData.address,
-                email: formData.email,
-                phone: formData.phone,
-                bedCapacity: formData.bedCapacity,
-                operatingHours: formData.operatingHours,
-            };
-
-            addHospital(newHospital);
+        try {
+            if (isEditing) {
+                const newHospital: IHospital = {
+                    id: formData.id,
+                    name: formData.name,
+                    address: formData.address,
+                    email: formData.email,
+                    phone: formData.phone,
+                    bedCapacity: formData.bedCapacity,
+                    operatingHours: formData.operatingHours,
+                };
+                addHospital(newHospital);
+                toast.success('Hospital updated successfully');
+            } else {
+                const newHospital: IHospital = {
+                    id: uuidv4(),
+                    name: formData.name,
+                    address: formData.address,
+                    email: formData.email,
+                    phone: formData.phone,
+                    bedCapacity: formData.bedCapacity,
+                    operatingHours: formData.operatingHours,
+                };
+                addHospital(newHospital);
+                toast.success('Hospital added successfully');
+            }
+            handleCloseModal();
+        } catch (error) {
+            toast.error(isEditing ? 'Failed to update hospital' : 'Failed to add hospital');
+            console.error(error);
         }
-
-        handleCloseModal();    
-    }
+    };
 
     const handleAdd = () => {
         setOpenModal(true);
@@ -137,7 +157,7 @@ const HospitalList = () => {
                                     <Button variant="contained" color="primary" onClick={() => handleEdit(hospital)} >Edit</Button>
                                 </Grid>
                                 <Grid item xs={6} sm={1} md={1}>
-                                    <Button variant="contained" color="error" onClick={() => handleDelete(hospital)} >Delete</Button>
+                                    <Button variant="contained" color="error" onClick={() => handleDeleteClick(hospital)} >Delete</Button>
                                 </Grid>
                             </Grid>
                         </CardContent>
@@ -224,6 +244,13 @@ const HospitalList = () => {
                     </div>
                 </Box>
             </Modal>
+
+            <ConfirmationModal
+                open={openDeleteModal}
+                onClose={handleDeleteCancel}
+                onConfirm={handleDeleteConfirm}
+                title= {`Are you sure you want to delete ${hospitalToDelete?.name}?`}
+            />
 
             <Footer />
         </div>

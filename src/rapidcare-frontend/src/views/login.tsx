@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { setLoginState, setUserData } from '../redux/appActions';
-import { auth, db } from '../firebase';
+import { setLoginState, setHpData, setHnData } from '../redux/appActions';
+import { auth } from '../firebase';
 import { INetworkInfo } from '../models/model'; // Import the INetworkInfo interface
 import { addAdmin, healthcareProfessionalCollection, networkInfoCollection } from '../firebaseControllers/DatabaseOps';
 import { doc, getDoc } from 'firebase/firestore';
@@ -17,7 +17,6 @@ const Login: React.FC = () => {
     const [lastName, setLastName] = useState('');
     const [networkName, setNetworkName] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const isPasswordMatch = password === confirmPassword;
@@ -35,7 +34,7 @@ const Login: React.FC = () => {
 
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-                
+
                 // Create an INetworkInfo object
                 const networkInfo: INetworkInfo = {
                     id: user.uid,
@@ -66,15 +65,18 @@ const Login: React.FC = () => {
 
                 if (docSnap.exists()) {
                     console.log("Document exists:", docSnap.data());
-                    dispatch(setLoginState(true,true));
-                } 
-                
-                if (d2Snap.exists()){
+                    dispatch(setLoginState(true, true));
+                    dispatch(setHnData(docSnap.data()));
+                } else {
+                    console.log("User does not exist")
+                }
+
+                if (d2Snap.exists()) {
                     console.log('Called');
                     // const userData = d2Snap.data();
                     // console.log(userData);
-                    dispatch(setLoginState(false,true));
-                    dispatch(setUserData(d2Snap.data()));
+                    dispatch(setLoginState(false, true));
+                    dispatch(setHpData(d2Snap.data()));
                 }
 
                 // const userDoc = await getDoc(doc(db, 'users', user.uid));

@@ -1,6 +1,6 @@
 import { generateHealthcareProfessionalMockData } from '../mockData/mockData';
 import { AppState } from '../models/model';
-import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_EMPLOYEE, DELETE_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_LOGIN_STATE, SET_USER_DATA, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO } from '../redux/appActions';
+import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_EMPLOYEE, DELETE_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_LOGIN_STATE, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO, SET_HP_DATA, SET_HN_DATA } from '../redux/appActions';
 import { mockConsultations, mockDashboardMetrics } from '../mockData/mockData';
 
 const initialState: AppState = {
@@ -22,7 +22,7 @@ const appReducer = (state = initialState, action: any): AppState => {
                 isAuthenticated: action.payload.isAuthenticated,
             };
 
-        case SET_USER_DATA:
+        case SET_HP_DATA:
             return {
                 ...state, 
                 healthcareProfessional: {
@@ -30,6 +30,22 @@ const appReducer = (state = initialState, action: any): AppState => {
                     dashboardMetrics: mockDashboardMetrics,
                     patients: [], 
                     consultations: mockConsultations,
+                }
+            };
+
+        case SET_HN_DATA:
+            return {
+                ...state, 
+                healthNetworkAdmin: {
+                    isOnboardingComplete: false,
+                    networkInfo: action.payload,
+                    dashboardMetrics: {
+                        totalEmployees: 5,
+                        totalHospitals: 10,
+                    },
+                    hospitals: [],
+                    healthcareProfessionals: [],
+                    patients: []
                 }
             };
 

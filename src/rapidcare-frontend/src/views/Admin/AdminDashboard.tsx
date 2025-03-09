@@ -12,8 +12,6 @@ const AdminDashboard = () => {
     const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin)
     // const isOnboardingComplete = healthNetworkAdmin?.isOnboardingComplete;
     const isOnboardingComplete = true;
-
-
     const dashboardMetrics = healthNetworkAdmin?.dashboardMetrics;
     const hospitals = healthNetworkAdmin?.hospitals;
     const dispatch = useDispatch();

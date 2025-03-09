@@ -18,7 +18,7 @@ export interface IHealthNetworkAdminState {
 }
 
 export interface INetworkInfo {
-    id : string,
+    id: string,
     networkName: string;
     typeOfNetwork: "Public" | "Private" | "Non-Profit";
     mainContact: string;
@@ -46,7 +46,7 @@ export interface IHealthcareProfessional {
     department: string;
     email: string;
     phone: string;
-    employmentStatus: string;   
+    employmentStatus: string;
 }
 
 export interface IHealthcareProfessionalState {
@@ -73,8 +73,8 @@ export interface IPatient {
     medicalHistory?: IMedicalHistory;
     consultationNotes?: ISoapNote[];
     documents?: IDocument[];
-    prescriptions?: IDocument[];
-    referrals?:IDocument[];
+    prescriptions?: IPrescription[];
+    referrals?: IDocument[];
 }
 
 export interface IProfileInfo {
@@ -97,7 +97,7 @@ export interface IProfileInfo {
     };
 };
 
-export interface IDemographics{
+export interface IDemographics {
     name: string;
     gender: string;
     dateOfBirth: string;
@@ -111,9 +111,9 @@ export interface IDemographics{
 
 export interface IMedicalHistory {
     medicalHistory?: string;
-    familyHistory?: string; 
+    familyHistory?: string;
     allergies?: string;
-    medications?: string;   
+    medications?: string;
 }
 
 export interface IDocument {
@@ -124,7 +124,10 @@ export interface IDocument {
 }
 
 export interface IPrescription {
-    plan: string,
+    id: string;
+    date: string;
+    plan: string;
+    patientName: string;
 }
 
 export interface ISoapNote {

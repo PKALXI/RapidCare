@@ -24,10 +24,6 @@ const PatientList = () => {
     }
 
     //https://firebase.google.com/docs/firestore/query-data/listen
-    // const unsub = onSnapshot(patientCollection, (querySnapshot) => {
-    //     const patientList: IPatient[] = querySnapshot.docs.map((doc) => doc.data());
-    //     setPatients(patientList);
-    // });
     useEffect(() => {
         const unsub = onSnapshot(patientCollection, (querySnapshot) => {
             const patientList: IPatient[] = querySnapshot.docs.map((doc) => doc.data());

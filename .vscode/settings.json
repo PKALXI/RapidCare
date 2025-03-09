@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "./test",
+        "./test",
+        "./test",
+        "./src/python-service-template/venv/Lib/site-packages"
+    ]
+}

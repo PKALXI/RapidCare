@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Card, CardContent, Typography, IconButton, Modal, Box, Grid, TextField, Container } from "@mui/material";
-import Footer from "../components/Footer";
-import Navbar from "../components/NavBar";
+import Footer from "../components/AppFooter";
+import Navbar from "../components/AppNavBar";
 //import { useSelector } from "react-redux";
 //import { RootState } from "../../redux/store";
 import CloseIcon from "@mui/icons-material/Close";
@@ -120,7 +120,7 @@ const EmployeeList = () => {
                     .catch(error => {
                         console.error('Error creating user:', error);
                     });
-                
+
                 addHealthCareProfessional(newHCP);
                 toast.success('Employee added successfully');
             }

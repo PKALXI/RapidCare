@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Card, CardContent, Typography, IconButton, Modal, Box, Grid, TextField, Container } from "@mui/material";
-import Footer from "../components/Footer";
-import Navbar from "../components/NavBar";
+import Footer from "../components/AppFooter";
+import Navbar from "../components/AppNavBar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { resetState, saveNetworkInfo } from "../../redux/appActions";
@@ -41,7 +41,7 @@ const AdminAccount = () => {
     };
 
     const handleSave = () => {
-        if (Object.values(errors).some(error => error)) {return;}
+        if (Object.values(errors).some(error => error)) { return; }
 
         try {
             // Save data in backend

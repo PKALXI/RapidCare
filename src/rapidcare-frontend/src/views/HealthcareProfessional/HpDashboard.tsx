@@ -1,6 +1,6 @@
 import React from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/NavBar";
+import Footer from "../components/AppFooter";
+import Navbar from "../components/AppNavBar";
 import { useSelector } from 'react-redux';
 import { RootState } from "../../redux/store";
 import { Card, CardContent, Typography, Button, Box, Grid } from "@mui/material";
@@ -21,47 +21,47 @@ const HpDashboard = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} md={6}>
                         <Card className="mb-4 p-2">
-                        <CardContent>
-                            {/* <Typography variant="h5" gutterBottom>
+                            <CardContent>
+                                {/* <Typography variant="h5" gutterBottom>
                             Metrics
                             </Typography> */}
-                            <Box className="grid grid-cols-2 gap-6 mx-4">
-                                <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
-                                    <Typography variant="h6" className="text-gray-700">
-                                        <strong>Scheduled Visits</strong>
-                                    </Typography>
-                                    <Typography variant="h5" className="text-blue-700">
-                                        {dashboardMetrics?.scheduledVisitsToday || 5}
-                                    </Typography>       
-                                </Box>
+                                <Box className="grid grid-cols-2 gap-6 mx-4">
+                                    <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
+                                        <Typography variant="h6" className="text-gray-700">
+                                            <strong>Scheduled Visits</strong>
+                                        </Typography>
+                                        <Typography variant="h5" className="text-blue-700">
+                                            {dashboardMetrics?.scheduledVisitsToday || 5}
+                                        </Typography>
+                                    </Box>
 
-                                <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
-                                    <Typography variant="h6" className="text-gray-700">
-                                        <strong>Total Patients</strong>
-                                    </Typography>
-                                    <Typography variant="h5" className="text-blue-700">
-                                        {dashboardMetrics?.newPatientsThisMonth || 5}
-                                    </Typography>       
+                                    <Box className="rounded-xl text-center p-6 bg-blue-50 shadow-sm">
+                                        <Typography variant="h6" className="text-gray-700">
+                                            <strong>Total Patients</strong>
+                                        </Typography>
+                                        <Typography variant="h5" className="text-blue-700">
+                                            {dashboardMetrics?.newPatientsThisMonth || 5}
+                                        </Typography>
+                                    </Box>
                                 </Box>
-                            </Box>
-                            <Box className="flex justify-center my-4 mx-4 bg-gray-50 rounded-lg shadow-md">
-                                <BarChart
-                                    xAxis={[{scaleType: 'band', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], label: 'Patient visits this week',}]}
-                                    series={[{data: [150, 200, 500, 400, 800, 2000, 1895],label: 'Visits',},]}
-                                    width={500}
-                                    height={300}
-                                />
-                            </Box>
-                        </CardContent>
+                                <Box className="flex justify-center my-4 mx-4 bg-gray-50 rounded-lg shadow-md">
+                                    <BarChart
+                                        xAxis={[{ scaleType: 'band', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], label: 'Patient visits this week', }]}
+                                        series={[{ data: [150, 200, 500, 400, 800, 2000, 1895], label: 'Visits', },]}
+                                        width={500}
+                                        height={300}
+                                    />
+                                </Box>
+                            </CardContent>
                         </Card>
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
-                            <Card className="mb-4 p-2">
-                                <CardContent>
-                                    <Typography variant="h5" gutterBottom>
-                                        Upcoming Appointments
-                                    </Typography>
-                                    {consultations?.map((consultation, index) => (
+                        <Card className="mb-4 p-2">
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>
+                                    Upcoming Appointments
+                                </Typography>
+                                {consultations?.map((consultation, index) => (
                                     <Card key={index} className="mb-4 p-2">
                                         <CardContent className="flex justify-between items-center">
                                             <div>
@@ -75,9 +75,9 @@ const HpDashboard = () => {
                                             </div>
                                         </CardContent>
                                     </Card>
-                                    ))}
-                                </CardContent>
-                            </Card> 
+                                ))}
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Grid>
             </div>

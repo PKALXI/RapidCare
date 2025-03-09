@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/NavBar";
+import Footer from "../components/AppFooter";
+import Navbar from "../components/AppNavBar";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, Typography, Button, Grid, Container, Modal, Box } from "@mui/material";
 import { IPatient } from "../../models/model";
-import {patientCollection } from "../../firebaseControllers/DatabaseOps";
+import { patientCollection } from "../../firebaseControllers/DatabaseOps";
 import AddPatient from "./AddMyPatient";
 import { onSnapshot } from "firebase/firestore";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -19,7 +19,7 @@ const PatientList = () => {
     // const patients = healthcareProfessional?.patients;
     const [patients, setPatients] = useState<IPatient[]>([]);
 
-    const closeModal = () =>{
+    const closeModal = () => {
         setOpen(false);
     }
 
@@ -29,7 +29,7 @@ const PatientList = () => {
             const patientList: IPatient[] = querySnapshot.docs.map((doc) => doc.data());
             setPatients(patientList);
         });
-    
+
         return () => unsub();
     }, []);
 
@@ -65,18 +65,18 @@ const PatientList = () => {
                     </Card>
                 ))}
 
-            <div className="flex justify-center my-6">
-                <Button variant="contained" color="primary" onClick={handleOpen}>
-                    <AddCircleIcon/>
-                    ADD PATIENT
-                </Button>
-                <Modal open={open} onClose={handleClose}>
-                    <Box>
-                        <AddPatient closeModal={closeModal} />
-                    </Box> 
-                </Modal>
-            </div>
-                
+                <div className="flex justify-center my-6">
+                    <Button variant="contained" color="primary" onClick={handleOpen}>
+                        <AddCircleIcon />
+                        ADD PATIENT
+                    </Button>
+                    <Modal open={open} onClose={handleClose}>
+                        <Box>
+                            <AddPatient closeModal={closeModal} />
+                        </Box>
+                    </Modal>
+                </div>
+
             </Container>
 
             <Footer />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, CardContent, Typography, IconButton, Modal, Box, Grid, TextField, Container } from "@mui/material";
-import Footer from "../components/Footer";
-import Navbar from "../components/NavBar";
+import Footer from "../components/AppFooter";
+import Navbar from "../components/AppNavBar";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../../redux/store";
 //import { useDispatch } from "react-redux";
@@ -249,7 +249,7 @@ const HospitalList = () => {
                 open={openDeleteModal}
                 onClose={handleDeleteCancel}
                 onConfirm={handleDeleteConfirm}
-                title= {`Are you sure you want to delete ${hospitalToDelete?.name}?`}
+                title={`Are you sure you want to delete ${hospitalToDelete?.name}?`}
             />
 
             <Footer />

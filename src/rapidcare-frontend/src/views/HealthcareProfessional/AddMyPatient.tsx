@@ -5,6 +5,7 @@ import { IPatient } from "../../models/model";
 import { addPatient } from "../../firebaseControllers/DatabaseOps";
 import toast from "react-hot-toast";
 import CloseIcon from "@mui/icons-material/Close";
+import { calculateAge } from "../../helpers/helper";
 
 const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
   const [formData, setFormData] = useState({
@@ -98,24 +99,6 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
     closeModal();
     toast.success("Patient created successfully!");
   };
-
-  const calculateAge = (dob: string) => {
-    const birthDate = new Date(dob);
-    const currentDate = new Date();
-
-    let age = currentDate.getFullYear() - birthDate.getFullYear();
-    const month = currentDate.getMonth();
-
-    if (month < birthDate.getMonth() || (month === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())) {
-      age--;
-    }
-
-    if (age < 0) {
-      return 0;
-    }
-
-    return age;
-  }
 
   return (
     <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[90vh] flex flex-col">

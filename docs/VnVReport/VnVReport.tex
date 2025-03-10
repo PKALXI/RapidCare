@@ -307,12 +307,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
 \begin{itemize}
 \item \textbf{test-UR1} \label{test-UR1} \\
-\textbf{Initial State:} System is fully available and accessible to users after a 30-minute training session. \\
-\textbf{Input:} Users perform key functions (logging in, accessing records, adding entries, generating reports). \\
-\textbf{Output:} Team members and peers complete tasks without assistance within 2 minutes per task. \\
-\textbf{Result:} Pass \\
-
-\item \textbf{test-UR2} \label{test-UR2} \\
 \textbf{Initial State:} System is deployed and accessible. \\
 \textbf{Input:} Users navigate and explore system features independently. \\
 \textbf{Output:} Majority of users can locate core functions without additional guidance. \\
@@ -365,12 +359,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
 \begin{itemize}
 \item \textbf{test-SR1} \label{test-SR1} \\
-\textbf{Initial State:} System with live patient data encryption protocols active. \\
-\textbf{Input:} Security audit test performed on the system. \\
-\textbf{Output:} No vulnerabilities detected; all data remains encrypted in transit and at rest. \\
-\textbf{Result:} Pass \\
-
-\item \textbf{test-SR2} \label{test-SR2} \\
 \textbf{Initial State:} System fully operational with access logs enabled. \\
 \textbf{Input:} Simulate unauthorized access attempts. \\
 \textbf{Output:} Unauthorized attempts are blocked; access logs capture details. \\
@@ -381,10 +369,10 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
 \begin{itemize}
 \item \textbf{test-CR1} \label{test-CR1} \\
-\textbf{Initial State:} System operational in default language (English). \\
-\textbf{Input:} User selects an alternate language from the settings menu. \\
-\textbf{Output:} System displays all content in the selected language without loss of functionality. \\
-\textbf{Result:} Fail \\
+\textbf{Initial State:} System operational with default settings. \\
+\textbf{Input:} User interacts with the system in a culturally diverse context, including input that may contain sensitive language. \\
+\textbf{Output:} System processes the input and responds appropriately, ensuring cultural sensitivity and avoiding any inappropriate language in its output. \\
+\textbf{Result:} Pass \\
 \end{itemize}
 
 \subsection{Legal} \label{section:4.8}
@@ -763,7 +751,6 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
 \caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}
 \end{table}
 
-
 \begin{table} [H]
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
@@ -774,9 +761,7 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
     \hline
     test-AD\ref{test-AD2} &  $\times$ & & & & & & & & \\
     \hline
-    test-UR\ref{test-UR1} & & $\times$ &  & & & & & & \\
-    \hline
-    test-UR\ref{test-UR2} & & $\times$ & & & & & & &  \\
+    test-UR\ref{test-UR1} & & $\times$ & & & & & & &  \\
     \hline
     test-PR\ref{test-PR1} & & & $\times$ & & & & & & \\
     \hline
@@ -788,9 +773,7 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
     \hline
     test-MR\ref{test-MR2} & & & & & $\times$ & & & &  \\
     \hline
-    test-SR\ref{test-SR1} & & & & & & $\times$ & & &\\
-    \hline
-    test-SR\ref{test-SR2} & & & & & & $\times$ & & & \\
+    test-SR\ref{test-SR1} & & & & & & $\times$ & & & \\
     \hline
     test-CR\ref{test-CR1} & & & & & & & $\times$ & &\\
     \hline

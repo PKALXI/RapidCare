@@ -170,11 +170,11 @@ This subsection covers FR3, FR6, FR10, and FR11 from of the \href{https://github
 
   Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
 
-  Input: An invalid identifier for the document to be updated.
+  Input: Invalid input data.
 
-  Expected Output: An error message outlining the invalid input along with a possible steps to guide the users to recover from the error state.
+  Expected Output: An error message outlining the invalid fields along with a possible steps to guide the users to recover from the error state.
 
-  Actual Output: An error message outlining the invalid input along with a possible steps to guide the users to recover from the error state.
+  Actual Output: An error message outlining the invalid fields along with a possible steps to guide the users to recover from the error state.
 
   Result: Pass
 
@@ -192,9 +192,9 @@ This subsection covers FR7 from of the \href{https://github.com/Inreet-Kaur/caps
 
   Input: The correct credentials for login.
 
-  Expected Output: A confirmation message and user can access the homepage of the database.
+  Expected Output: A confirmation message and user is logged into the system.
 
-  Actual Output: A confirmation message and user can access the homepage of the database.
+  Actual Output: A confirmation message and user is logged into the system.
 
   Result: Pass
 
@@ -299,7 +299,7 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
 \end{enumerate}
 
-\subsection{Verify completeness and correctmess of data} \label{section:3.8}
+\subsection{Verify completeness and correctness of data} \label{section:3.8}
 
 This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the data sent over is complete.
 
@@ -473,8 +473,6 @@ This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/cap
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Access Requirements Test (AC2)} \label{section:4.10.2}
-
 \begin{itemize}
 \item \textbf{test-AC2-1} \label{test-AC2-1} \\
 \textbf{Initial State:} System operational with standard user and admin accounts configured. \\
@@ -488,7 +486,7 @@ This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/cap
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Integrity Requirements Tests (IR1)} \label{section:4.10.3}
+\subsubsection{Integrity Requirements Tests (IR1)} \label{section:4.10.2}
 
 \begin{itemize}
 \item \textbf{test-IR1-1} \label{test-IR1-1} \\
@@ -498,8 +496,6 @@ This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/cap
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Integrity Requirements Tests (IR2)} \label{section:4.10.4}
-
 \begin{itemize}
 \item \textbf{test-IR2-1} \label{test-IR2-1} \\
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. \\
@@ -507,8 +503,6 @@ This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/cap
 \textbf{Output:} An error message is displayed to the user. No data is added to any database. \\
 \textbf{Result:} Pass \\
 \end{itemize}
-
-\subsubsection{Integrity Requirements Tests (IR3)} \label{section:4.10.5}
 
 \begin{itemize}
 \item \textbf{test-IR3-1} \label{test-IR3-1} \\
@@ -518,8 +512,6 @@ This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/cap
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Integrity Requirements Tests (IR4)} \label{section:4.10.6}
-
 \begin{itemize}
 \item \textbf{test-IR4-1} \label{test-IR4-1} \\
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. A document already exists in the relevant database. \\
@@ -528,8 +520,6 @@ This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/cap
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Integrity Requirements Tests (IR5)} \label{section:4.10.7}
-
 \begin{itemize}
 \item \textbf{test-IR5-1} \label{test-IR5-1} \\
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. A document already exists in the relevant database. \\
@@ -537,8 +527,6 @@ This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/cap
 \textbf{Output:} The data is correctly classified in the generated report with no diagnosis errors. \\
 \textbf{Result:} Pass \\
 \end{itemize}
-
-\subsubsection{Integrity Requirements Tests (IR6)} \label{section:4.10.8}
 
 \begin{itemize}
 \item \textbf{test-IR6-1} \label{test-IR6-1} \\
@@ -551,7 +539,7 @@ This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/cap
 
 \section{Comparison to Existing Implementation}	
 
-This section will not be appropriate for every project.
+This section will not be appropriate for the project.
 
 \section{Unit Testing}
 

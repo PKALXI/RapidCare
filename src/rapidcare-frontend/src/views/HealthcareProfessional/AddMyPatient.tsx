@@ -39,6 +39,8 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    toast.success("HELLO");
+    
     e.preventDefault();
     const newPatient: IPatient = {
       id: uuidv4(),
@@ -94,6 +96,8 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
       documents: [],
       prescriptions: []
     };
+
+    
     addPatient(newPatient);
     closeModal();
     toast.success("Patient created successfully!");
@@ -118,6 +122,8 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
   }
 
   return (
+    <>
+    <Toaster/>
     <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[90vh] flex flex-col">
       <form onSubmit={handleSubmit}>
         <Box className="flex justify-between items-center p-2">

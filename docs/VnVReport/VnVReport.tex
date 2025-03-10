@@ -285,26 +285,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
 \end{enumerate}
 
-\subsection{Verify completeness and correctmess of data} \label{section:3.8}
-
-This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the data sent over is complete.
-
-\begin{enumerate}
-
-  \item{test-FR14-1} \label{test-FR14-1}
-  
-  Initial State: The user has a completed patient profile and wishes to send it over. 
-
-  Input: Correct and completed patient chart to be sent to another healthcare network.
-
-  Expected Output: A successful send where the data is validated at the endpoint, if incomplete data is received an error message should pop up.
-
-  Actual Output: A successful send where the data is validated at the endpoint, if incomplete data is received an error message should pop up.
-
-  Result: Pass
-
-\end{enumerate}
-
 \section{Nonfunctional Requirements Evaluation} \label{section:4}
 
 \subsection{Aesthetic and Design} \label{section:4.1}
@@ -440,6 +420,65 @@ This section will not be appropriate for every project.
 
 \section{Unit Testing}
 
+\subsection{Behaviour-Hiding Module}
+
+\subsubsection{User Authentication Module}
+
+\begin{enumerate}
+
+  \textbf{Control:} Manual
+
+  \textbf{Initial State:} The default email and password are initialized as variables and given a default value.
+
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct registration and login functionality of Firebase Authentication, ensuring valid user creation and authentication processes, as well as error handling for invalid credentials.
+
+  \textbf{Test Procedure:} The tests are performed as follows:
+
+  \begin{itemize}
+    \item Sign up using valid credentials:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the valid credentials of email and password.
+      \item \textbf{Output:} The user object is returned by the signup function.
+      \item \textbf{Test Derivation:} Verifies that the signup function correctly works and creates a new user account when the valid credentials are provided.
+    \end{itemize}
+
+    \item Sign up throwing errors with invalid credentials:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the invalid credentials of email and password.
+      \item \textbf{Output:} An error thrown up by the signup function.
+      \item \textbf{Test Derivation:} Verifies that the signup function correctly throws error when the invalid credentials are provided.
+    \end{itemize}
+
+    \item Sign in using valid credentials:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the valid credentials of email and password. 
+      \item \textbf{Output:} The user object is returned by the signin function.
+      \item \textbf{Test Derivation:}  Verifies that the signin function correctly authenticates the user when valid credentials are provided.
+    \end{itemize}
+
+    \item Sign in throwing errors with invalid credentials: 
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the invalid credentials of email and password. 
+      \item \textbf{Output:} An error thrown up by the signin function.
+      \item \textbf{Test Derivation:} Verifies that the signin function correctly throws error when the invalid credentials are provided.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
 \section{Changes Due to Testing}
 
 \wss{This section should highlight how feedback from the users and from 
@@ -450,6 +489,45 @@ should be highlighted.}
 \section{Automated Testing}
 		
 \section{Trace to Requirements}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 & FR14\\
+  \hline
+  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  \hline
+  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  \hline
+  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  \hline
+  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  \hline
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  \hline
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  \hline
+  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & & \\
+  \hline
+  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & & \\
+  \hline
+  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & & \\
+  \hline
+  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & & \\
+  \hline
+  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-2} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR14-\ref{test-FR14-1} & & & & & & & & & & & & & & $\times$ \\
+  \hline
+\end{tabular}
+\caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}
+\end{table}
+
 
 \begin{table} [H]
   \centering
@@ -494,6 +572,14 @@ should be highlighted.}
 \section{Trace to Modules}		
 
 \section{Code Coverage Metrics}
+
+The image below displays the code coverage metrix. This includes all the files, includes the files for which the team created unit tests. Although some files such as firebase.ts and DatabaseOps.ts for which we have developed the unit tests demonstrate higher test coverage, the overall test coverage is lower. This is because most of the code is prewritten which is why only 55.06'\%' and 30.12'\%' of branches are covered as per the metrcs. The figure below show the code coverage metrics example for RapidCare.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{code_coverage_metrics.jpg}
+  \caption{Code Coverage Metrics}
+\end{figure}
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}

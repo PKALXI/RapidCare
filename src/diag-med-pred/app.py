@@ -136,26 +136,4 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5050, debug=True)
-
-
-# while True:
-#     input_message = input("Prompt: ")
-    
-#     # Initialize the state with the required fields
-#     initial_state = {
-#         "question": input_message,  # Set the question from user input
-#         "query": {"query": "", "section": "beginning"},  # Placeholder for query
-#         "context": [],  # Empty context initially
-#         "answer": ""  # Empty answer initially
-#     }
-    
-#     # Execute the graph and get the final result
-#     result = graph.invoke(initial_state)
-    
-#     # Print the answer from the final state
-#     if result and "answer" in result:
-#         print("\nResponse:")
-#         print(result["answer"])
-#     else:
-#         print("\nNo response generated")
+    app.run(host='127.0.0.1', port=5050, debug=False)

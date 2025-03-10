@@ -23,14 +23,26 @@ public class APIController {
     private ClassifyTextService classifyTextService;
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/classifyText")
-    public ResponseEntity<Map<String, Object>> classifyData(@RequestParam("file") MultipartFile file, @RequestParam("fields") String fields) {
-        if (file.isEmpty()) {
+    @PostMapping("/transcribeText")
+    public ResponseEntity<Map<String, Object>> transcribeText(){
+        try{
+            Map<String, Object> responseData = Map.of(
+                    "classifiedData", "classifiedData",
+                    "transcribedText", "plainText"
+            );
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseData);
+        } catch(Exception e){
             Map <String, Object> response = new HashMap<>();
-            response.put("response", "FILE IS EMPTY");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            response.put("response", "Backend error has occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
 
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/classifyText")
+    public ResponseEntity<Map<String, Object>> classifyData(@RequestParam("transcribedText") String fields) {
         try {
             //Store a temp file
             String filePath = "C:\\Users\\prana\\Downloads\\test.wav"; // Specify your desired save path
@@ -45,11 +57,6 @@ public class APIController {
 
             String classifiedResp = classifyTextService.classifyData(fields, plainText);
             Map<String, Object> classifiedData = jsonParser.parseMap(classifiedResp);
-
-            Map<String, Object> responseData = Map.of(
-                    "classifiedData", classifiedData,
-                    "transcribedText", plainText
-            );
 
             System.out.println("------------" + classifiedResp);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseData);

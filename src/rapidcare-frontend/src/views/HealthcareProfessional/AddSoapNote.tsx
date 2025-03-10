@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, Typography, Modal, Box, IconButton, Button, Grid, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import { ISoapNote } from '../../models/model';
 import { v4 as uuidv4 } from "uuid";
 import toast from 'react-hot-toast';
+import { BrokerModule } from '../../api/BrokerModule';
 
 interface AddSoapNoteProps {
     open: boolean;
@@ -39,7 +40,14 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
         plan: "",
         followUp: ""
     };
+    
     const [formData, setNote] = useState<ISoapNote>(initialFormData);
+    const [isRecording, setIsRecording] = useState(false);
+    const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+    const brokerReference = useRef<BrokerModule | null> (null);
+    const [transcribedText, setTranscribedText] = useState('');
+
+
     const dispatch = useDispatch();
 
     const handleChange = (section: 'subjective' | 'objective' | 'assessment' | 'base', field: string, value: string) => {
@@ -59,6 +67,58 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
             };
         });
     };
+
+    useEffect(() => {
+        // Initialize the broker module
+        brokerReference.current = new BrokerModule(handleTranscriptionCallback);
+    }, []);
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
+    const startRecording = () => {
+        if (!brokerReference.current) return;
+
+        setIsRecording(true);
+
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                const mediaRecorder = new MediaRecorder(stream,{ 
+                    mimeType: 'audio/webm;codecs=opus'
+                });
+                mediaRecorderRef.current = mediaRecorder;
+
+                let chunks: BlobPart[] = [];
+
+                mediaRecorder.ondataavailable = (event) => {
+                    chunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+                    brokerReference.current?.transcribeText(audioBlob);
+                    chunks = [];
+                };
+
+                mediaRecorder.start(1000);
+            })
+            .catch((err) => {
+                console.error('Error accessing microphone: ', err);
+                toast.error('Failed to access microphone.');
+                setIsRecording(false);
+            });
+    }
+
+    const stopRecording = () => {
+        if (mediaRecorderRef.current) {
+            mediaRecorderRef.current.stop();
+            setIsRecording(false);
+            mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+        }
+    }
+
+    const handleTranscriptionCallback = (transcribedText : string) => {
+        console.log('WE GOT THE TEXT: ' + transcribedText);
+        setTranscribedText(transcribedText);
+    }
 
     const handleSave = () => {
         try {
@@ -82,6 +142,14 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
                 </Box>
 
                 <Box className="overflow-y-auto flex-grow max-h-[70vh] p-2 space-y-2">
+                    <Box className="p-2">
+                        <Typography variant="h6" gutterBottom>Transcribed Text</Typography>
+                        <CardContent>
+                            <Typography variant="body1" component="p">
+                                {transcribedText}
+                            </Typography>
+                        </CardContent>
+                    </Box>
                     <Card className="p-2">
                         <CardContent>
                             <Grid container spacing={2}>
@@ -157,7 +225,11 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
                 </Box>
 
                 <Box className="flex justify-between px-16 sticky bottom-0">
-                    <Button variant="contained" color="primary">Start Recording</Button>
+                    {isRecording ? (
+                        <Button variant="contained" color="error" onClick={stopRecording}>Stop Recording</Button>
+                    ) : (
+                        <Button variant="contained" color="primary" onClick={startRecording}>Start Recording</Button>
+                    )}
                     <Button
                         variant="contained"
                         color="primary"

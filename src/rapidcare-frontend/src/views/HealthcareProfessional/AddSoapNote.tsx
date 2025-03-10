@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Card, CardContent, Typography, Modal, Box, IconButton, Button, Grid, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,12 @@ interface AddSoapNoteProps {
     open: boolean;
     setOpen: (open: boolean) => void;
     patientId: string;
+}
+
+interface ResponseType {
+    diagnosis: string;
+    medicine: string;
+    plan: string;
 }
 
 const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) => {
@@ -115,10 +121,67 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
         }
     }
 
-    const handleTranscriptionCallback = (transcribedText : string) => {
+    // const handleTranscriptionCallback = (transcribedText : string) => {
+    //     console.log('WE GOT THE TEXT: ' + transcribedText);
+    //     setTranscribedText(transcribedText);
+
+    //     const data = brokerReference.current?.diagnosePredictText(transcribedText);
+    //     console.log("DESCRIPTION---: " + data);
+    // }
+
+    // const handleTranscriptionCallback = useCallback((transcribedText: string) => {
+    //     console.log('WE GOT THE TEXT: ' + transcribedText);
+    //     setTranscribedText(transcribedText);
+    
+    //     // Only call this once when we get the transcription
+    //     const response = brokerReference.current?.diagnosePredictText(transcribedText);
+    //     try {
+    //         setNote((prev: any) => ({
+    //             ...prev,
+    //             diagnosis: response.diagnosis,
+    //             medicine: response.medicine,
+    //             plan: response.plan
+    //         }));
+    //     } catch (error) {
+    //         console.error('Error parsing diagnosis response:', error);
+    //     }
+    //     console.log("DESCRIPTION---: " + data);
+    // }, []);
+
+    const handleTranscriptionCallback = useCallback((transcribedText: string) => {
         console.log('WE GOT THE TEXT: ' + transcribedText);
         setTranscribedText(transcribedText);
-    }
+    
+        // Define the response type as ResponseType
+        const formData = new FormData();
+        formData.append('transcription', transcribedText);
+    
+        fetch('http://127.0.0.1:5050/predict', {
+            method: 'POST',
+            body: formData 
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log('data BROKER --- ' + data.response);
+            const response = JSON.parse(data.response);
+            setNote((prev: ISoapNote) => ({
+                ...prev,
+                assessment: {
+                    ...prev.assessment,
+                    diagnosis: response.diagnosis
+                },
+                plan: response.plan
+            }));
+        })
+        .catch(error => {
+            console.error('Error classifying text:', error);
+            return error
+        });
+    
+        console.log("DESCRIPTION---: " + transcribedText);  // Optionally log the transcription
+    }, []);
 
     const handleSave = () => {
         try {

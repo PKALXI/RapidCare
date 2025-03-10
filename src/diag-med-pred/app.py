@@ -17,7 +17,7 @@ from langchain_core.prompts import ChatPromptTemplate
 app = Flask(__name__)
 CORS(app)
 
-os.environ['OPENAI_API_KEY'] = "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"
+os.environ['OPENAI_API_KEY'] = ""
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 llm = init_chat_model("gpt-4o-mini", model_provider="openai")

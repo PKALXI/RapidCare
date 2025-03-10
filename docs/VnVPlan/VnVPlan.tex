@@ -582,7 +582,7 @@ How test will be performed: Tester will send a sample patient profile from one d
     
     Input/Condition: Users interact with the UI during routine tasks and provides feedback.
     
-    Output/Result: 80\% of users report satisfaction with the UI design.
+    Output/Result: Team members and peers report satisfaction with the UI design.
     
     How this test will be performed: A test group of users and the supervisor will be given the system, and a set of common tasks to perform. They will be asked to complete these tasks using the interface. After they do this, they will be given a UI satisfaction survey. In the UI satisfaction survey, the supervisor will verify that at least 80\% of users are satisfied with the design.
 \end{enumerate}
@@ -591,25 +591,7 @@ How test will be performed: Tester will send a sample patient profile from one d
 
 
 \begin{enumerate}
-  \item{test-UR1} \label{test-UR1}
-  
-  Type: Non-functional, Dynamic, Manual
-  
-  Initial State: System is fully available and accessible to healthcare workers. Healthcare workers are provided a brief 30-minute training session on key system features and navigation.
-
-  Input/Condition: Healthcare workers perform the following key functions:
-  \begin{itemize}
-      \item Logging in and out of the system.
-      \item Accessing patient records.
-      \item Adding new entries to the database.
-      \item Generating a report from transcribed audio data.
-  \end{itemize}
-
-  Output/Result: 90\% of healthcare workers complete the listed tasks without assistance and within the expected time frame (average of 2 minutes per task).
-
-  How this test will be performed: A test group of healthcare workers and the supervisor will be given access to the system, along with a set of key functions as listed above to perform after a 30-minute training session. They will be asked to complete these functions independently. After completing the tasks, participants will fill out a task completion survey. The supervisor will use the survey and observations to verify that 90\% of healthcare workers completed the listed tasks independently.
-  
-    \item{test-UR2} \label{test-UR2}
+    \item{test-UR1} \label{test-UR1}
     
     Type: Non-functional, Dynamic, Manual
     
@@ -649,11 +631,11 @@ How test will be performed: Tester will send a sample patient profile from one d
     
     Initial State: System is live and connected to monitoring software.
     
-    Input/Condition: 30-day operational period with intermittent load testing.
+    Input/Condition: 7-day operational period with intermittent load testing.
     
     Output/Result: Uptime is consistently maintained at 99.9\% or above.
     
-    How test will be performed: Use uptime monitoring tools to track server availability over the 30-day period.
+    How test will be performed: Use uptime monitoring tools to track server availability over the 7-day period.
 
     \item{test-OR2} \label{test-OR2}
     
@@ -661,11 +643,11 @@ How test will be performed: Tester will send a sample patient profile from one d
     
     Initial State: System in operational use.
     
-    Input/Condition: Users access the system over a 30-day period under normal and peak loads.
+    Input/Condition: Users access the system over a 7-day period under normal and peak loads.
     
     Output/Result: Log data and user feedback confirm uptime meets standards with no significant disruptions.
     
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of usage patterns to follow over 30 days. They will be asked to use the system according to these patterns while monitoring performance. After they do this, they will be given an uptime survey. In the uptime survey, the supervisor will verify that no significant disruptions occurred during the test period.
+    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of usage patterns to follow over 7 days. They will be asked to use the system according to these patterns while monitoring performance. After they do this, they will be given an uptime survey. In the uptime survey, the supervisor will verify that no significant disruptions occurred during the test period.
 \end{enumerate}
 
 \subsubsection{Maintainability Requirement (NFR5)} \label{section:4.2.5}
@@ -702,18 +684,6 @@ How test will be performed: Tester will send a sample patient profile from one d
 \begin{enumerate}
     \item{test-SR1} \label{test-SR1}
     
-    Type: Non-functional, Dynamic, Automated
-    
-    Initial State: System with live patient data encryption protocols active.
-    
-    Input/Condition: Security audit test is performed on the system.
-    
-    Output/Result: No vulnerabilities are detected; all data remains encrypted in transit and at rest.
-    
-    How test will be performed: Conduct automated vulnerability scans and manual security audit to confirm full compliance with PIPEDA and encryption standards.
-
-    \item{test-SR2} \label{test-SR2}
-    
     Type: Non-functional, Dynamic, Manual
     
     Initial State: System fully operational with access logs enabled.
@@ -728,19 +698,18 @@ How test will be performed: Tester will send a sample patient profile from one d
 \subsubsection{Cultural Requirement (NFR7)} \label{section:4.2.7}
 
 \begin{enumerate}
-    \item{test-CR1} \label{test-CR1}
-    
-    Type: Non-functional, Dynamic, Manual
-    
-    Initial State: System operational in default language (English).
-    
-    Input/Condition: User selects an alternate language from the settings menu.
-    
-    Output/Result: System displays all content in the selected language without loss of functionality.
-    
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of language switching scenarios. They will be asked to change the system language and verify content display. After they do this, they will be given a language functionality survey. In the language functionality survey, the supervisor will verify that all content displays correctly in each language.
-
-\end{enumerate}
+  \item{test-CR1} \label{test-CR1}
+  
+  Type: Non-functional, Dynamic, Manual
+  
+  Initial State: System operational with default settings.
+  
+  Input/Condition: User interacts with the system in a culturally diverse context, including input that may contain sensitive language.
+  
+  Output/Result: System processes the input and responds appropriately, ensuring cultural sensitivity and avoiding any inappropriate language in its output.
+  
+  How this test will be performed: A test group of users and the supervisor will be given the system and a set of culturally diverse input scenarios. These scenarios will include region-specific phrases, idioms, and potentially sensitive language. Users will interact with the system using these inputs, and the supervisor will verify that the system responds in a culturally appropriate manner. A survey will be conducted to assess the system's ability to handle cultural sensitivity, and the supervisor will evaluate the results to ensure compliance with cultural appropriateness standards.
+  \end{enumerate}
 
 \subsubsection{Legal Requirement (NFR8)} \label{section:4.2.8}
 
@@ -925,11 +894,11 @@ How test will be performed: Tester will send a sample patient profile from one d
 
   \end{enumerate}
 
-  \subsubsection{IR5}
+  \subsubsection{IR6}
     
   \begin{enumerate}
 
-    \item{test-IR5-1} \label{test-IR5-1} % Classification of data for report generation
+    \item{test-IR6-1} \label{test-IR6-1} % Classification of data for report generation
     
     Type: Functional, Dynamic, Manual
     
@@ -943,12 +912,12 @@ How test will be performed: Tester will send a sample patient profile from one d
 
   \end{enumerate}
 
-\subsubsection{IR6}
+\subsubsection{IR7}
     
 \begin{enumerate}
 
 
-    \item{test-IR6-1} \label{test-IR6-1} % Filter background noise for accuracy 
+    \item{test-IR7-1} \label{test-IR7-1} % Filter background noise for accuracy 
     
     Type: Functional, Dynamic, Manual
     
@@ -1017,9 +986,7 @@ How test will be performed: Tester will send a sample patient profile from one d
     \hline
     test-AD\ref{test-AD2} &  $\times$ & & & & & & & & \\
     \hline
-    test-UR\ref{test-UR1} & & $\times$ &  & & & & & & \\
-    \hline
-    test-UR\ref{test-UR2} & & $\times$ & & & & & & &  \\
+    test-UR\ref{test-UR1} & & $\times$ & & & & & & &  \\
     \hline
     test-PR\ref{test-PR1} & & & $\times$ & & & & & & \\
     \hline
@@ -1031,9 +998,7 @@ How test will be performed: Tester will send a sample patient profile from one d
     \hline
     test-MR\ref{test-MR2} & & & & & $\times$ & & & &  \\
     \hline
-    test-SR\ref{test-SR1} & & & & & & $\times$ & & &\\
-    \hline
-    test-SR\ref{test-SR2} & & & & & & $\times$ & & & \\
+    test-SR\ref{test-SR1} & & & & & & $\times$ & & & \\
     \hline
     test-CR\ref{test-CR1} & & & & & & & $\times$ & &\\
     \hline
@@ -1051,25 +1016,27 @@ How test will be performed: Tester will send a sample patient profile from one d
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
   \hline
-  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 \\
+  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 & IR7 \\
   \hline
-  test-AC1-\ref{test-AC1-1} & $\times$ & & & & & & &   \\
+  test-AC1-\ref{test-AC1-1} & $\times$ & & & & & & & & \\
   \hline
-  test-AC1-\ref{test-AC1-2} & $\times$ & & & & & & &   \\
+  test-AC1-\ref{test-AC1-2} & $\times$ & & & & & & & & \\
   \hline
-  test-AC2-\ref{test-AC2-1} & & $\times$ & & & & & &   \\
+  test-AC2-\ref{test-AC2-1} & & $\times$ & & & & & & &  \\
   \hline
-  test-IR1-\ref{test-IR1-1} & & & $\times$ & & & & &   \\
+  test-IR1-\ref{test-IR1-1} & & & $\times$ & & & & & &  \\
   \hline
-  test-IR2-\ref{test-IR2-1}  & & & & $\times$ & & & &  \\
+  test-IR2-\ref{test-IR2-1}  & & & & $\times$ & & & & & \\
   \hline
-  test-IR3-\ref{test-IR3-1}  & & & & & $\times$ & & &  \\
+  test-IR3-\ref{test-IR3-1}  & & & & & $\times$ & & & & \\
   \hline
-  test-IR4-\ref{test-IR4-1}  & & & & & & $\times$ & &  \\
+  test-IR4-\ref{test-IR4-1}  & & & & & & $\times$ & & & \\
   \hline
-  test-IR5-\ref{test-IR5-1}  & & & & & & &  $\times$ & \\
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1}  & & & & & & & $\times$ & & \\
   \hline
-  test-IR6-\ref{test-IR6-1}  & & & & & & & &  $\times$ \\
+  test-IR6-\ref{test-IR6-1}  & & & & & & & & $\times$ & \\
+  \hline
+  test-IR7-\ref{test-IR7-1}  & & & & & & & & & $\times$ \\
   \hline
 \end{tabular}
 \caption{\bf Safety and Security Requirements Tests Traceability} \label{tab:sns-test-traceability}

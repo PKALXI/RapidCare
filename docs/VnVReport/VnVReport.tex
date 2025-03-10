@@ -828,6 +828,115 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
 		
 \section{Trace to Modules}
 
+See MG Documentation at \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftArchitecture/MG.pdf} {MG} for detailed Information.\\
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  Test ID & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & M10 & M11 & M12 \\
+  \hline
+  test-FR1,4,8-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR1,4,8-2 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR2,5,9-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR2,5,9-2 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR3,6,10,11-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR3,6,10,11-2 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR7-1 & $\times$ & $\times$ & $\times$ & & & $\times$ & & & & & & \\
+  \hline
+  test-FR7-2 & $\times$ & $\times$ & $\times$ & & & $\times$ & & & & & & \\
+  \hline
+  test-FR11-1 & & & $\times$ & & & $\times$ & $\times$ & $\times$ & & & & \\
+  \hline
+  test-FR11-2 & & & $\times$ & & & $\times$ & $\times$ & $\times$ & & & & \\
+  \hline
+  test-FR12,13-1 & & & $\times$ & & & $\times$ & & & $\times$ & $\times$ & & \\
+  \hline
+  test-FR12,13,IR5-1 & & & $\times$ & & & $\times$ & & & $\times$ & $\times$ & & \\
+  \hline
+  test-FR12,13,IR5-2 & & & $\times$ & & & $\times$ & & & $\times$ & $\times$ & & \\
+  \hline
+\end{tabular}
+\caption{\bf Functional Requirements Tests Module Traceability} \label{tab:fr-test-traceability}
+\end{table}
+
+\begin{table} [H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    TestID & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & M10 & M11 & M12 \\
+    \hline
+    test-AD1 & & $\times$ & $\times$ & & & & & & & & &\\
+    \hline
+    test-AD2 & & $\times$ & $\times$ & & & & & & & & &\\
+    \hline
+    test-UR1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-UR2 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-PR1 & & & $\times$ & & & $\times$ & $\times$ & $\times$ & & & &\\
+    \hline
+    test-OR1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-OR2 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-MR1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-MR2 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-SR1 & $\times$ & $\times$ & & & & $\times$ & & & & & & \\
+    \hline
+    test-SR2 & $\times$ & $\times$ & & & & $\times$ & & & & & & \\
+    \hline
+    test-CR1 & & $\times$ & $\times$ & & & & & & & & & \\
+    \hline
+    test-LR1 & & & & & & $\times$ & & & & & $\times$ & $\times$\\
+    \hline
+    test-LR2 & & & & & & $\times$ & & & & & $\times$ & $\times$\\
+    \hline
+    test-S1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+  \end{tabular}
+\caption{\bf Non-Functional Requirements Tests Module Traceability} \label{tab:nfr-test-traceability}
+\end{table}
+
+\begin{table} [H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  Test ID & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & M10 & M11 & M12 \\
+  \hline
+  test-AC1-1 & $\times$ & & & & & & & & & & & \\
+  \hline
+  test-AC1-2 & $\times$ & & & & & & & & & & & \\
+  \hline
+  test-AC2-1 & $\times$ & & & & & & & & & & & \\
+  \hline
+  test-IR1-1 & $\times$ & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$\\
+  \hline
+  test-IR2-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$\\
+  \hline
+  test-IR3-1 & & & & & & & & & $\times$ & $\times$ & &\\
+  \hline
+  test-IR4-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$\\
+  \hline
+  test-IR5-1 & & & & & & & $\times$ & $\times$ & & & &\\
+  \hline
+  test-IR6-1 & & & & & & & $\times$ & $\times$ & & & &\\
+  \hline
+\end{tabular}
+\caption{\bf Safety and Security Requirements Tests Module Traceability} \label{tab:sns-test-traceability}
+\end{table}
+
+\end{landscape}
+\newpage
+
 \section{Code Coverage Metrics}
 
 The image below displays the code coverage metrix. This includes all the files, includes the files for which the team created unit tests. As can been in the figure below, the code coverage for all the files we created the unit tests for is 100'\%.

@@ -60,30 +60,4 @@ export class BrokerModule {
             return error
         });
     }
-
-    // diagnosePredictText(text: string) {
-    //     return new Promise((resolve, reject) => {
-    //         const formData = new FormData();
-    //         formData.append('transcription', text);
-    
-    //         fetch('http://127.0.0.1:5050/predict', {
-    //             method: 'POST',
-    //             body: formData
-    //         })
-    //         .then(response => response.json())  // Parse the response to JSON
-    //         .then(data => {
-    //             if (data.response) {
-    //                 console.log('data BROKER ---', data.response);
-    //                 resolve(data.response); 
-    //                 return JSON.parse(data.response) // Resolve with the response
-    //             } else {
-    //                 reject(new Error('No response field in data'));  // Reject if no response
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.error('Error classifying text:', error);
-    //             reject(error);  // Reject with the error
-    //         });
-    //     });
-    // }
 }

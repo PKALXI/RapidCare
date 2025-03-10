@@ -12,7 +12,7 @@ CORS(app) #Enable CORS
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 # openai.api_key = os.environ.get("OPENAI_API_KEY")
-os.environ['OPENAI_API_KEY'] = "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"
+os.environ['OPENAI_API_KEY'] = "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"
 
 transcribed_text = ""
 

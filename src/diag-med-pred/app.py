@@ -17,7 +17,7 @@ from langchain_core.prompts import ChatPromptTemplate
 app = Flask(__name__)
 CORS(app)
 
-os.environ['OPENAI_API_KEY'] = ""
+os.environ['OPENAI_API_KEY'] = "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"
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 llm = init_chat_model("gpt-4o-mini", model_provider="openai")
@@ -136,26 +136,4 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5050, debug=True)
-
-
-# while True:
-#     input_message = input("Prompt: ")
-    
-#     # Initialize the state with the required fields
-#     initial_state = {
-#         "question": input_message,  # Set the question from user input
-#         "query": {"query": "", "section": "beginning"},  # Placeholder for query
-#         "context": [],  # Empty context initially
-#         "answer": ""  # Empty answer initially
-#     }
-    
-#     # Execute the graph and get the final result
-#     result = graph.invoke(initial_state)
-    
-#     # Print the answer from the final state
-#     if result and "answer" in result:
-#         print("\nResponse:")
-#         print(result["answer"])
-#     else:
-#         print("\nNo response generated")
+    app.run(host='127.0.0.1', port=5050, debug=False)

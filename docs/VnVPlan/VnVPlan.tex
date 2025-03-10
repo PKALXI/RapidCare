@@ -34,15 +34,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-02-11-2024 & Gurleen Rahi & Summary, Objectives, Challenge Level and Extras, Relevant Documentation\\
-03-11-2024 & Inreet Kaur & Tests for functional requirements and safety and security requirements, traceability matrix\\
-03-11-2024 & Pranav & VnV Verification Plan, Implementation Verification Plan, Automated Testing Plan + Tools, Software Validation Plan\\
-03-11-2024 & Moamen Ahmed & Test for NFRs and safety and security requirements\\
-04-11-2024 & Inreet Kaur & Verification and Validation team, SRS Verification Plan, Design Verification Plan\\
-04-11-2024 & Gurleen Rahi & Tests for functional requirements and safety and security requirements, traceability matrix\\
-04-11-2024 & Pranav Kalsi & Tests for functional requirements and safety and security requirements\\
-04-11-2024 & Gurleen Rahi & Reflection and Usability Survey\\
-04-11-2024 & Pranav Kalsi & Usability Survey\\
+04-11-2024 & 1.0 & Initial Version\\
+10-03-2025 & 1.1 & Updates in Accordance to V and V report\\
 \bottomrule
 \end{tabularx}
 
@@ -396,13 +389,13 @@ Control: Manual
 
 Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
 
-Input: An invalid identifier for the document to be updated.
+Input: Invalid input data.
 
-Output: An error message outlining the invalid input along with a possible steps to guide the users to recover from the error state.
+Output: An error message outlining the invalid fields along with a possible steps to guide the users to recover from the error state.
 
-Test Case Derivation: The system should be able to validate the provided identifier and prevent the update of any document.
+Test Case Derivation: The system should be able to validate the provided input and prevent any invalid updates to the document.
 
-How test will be performed: The test controller will input an invalid identifier and check if the system is able to validate and reject the invalid identifier. The controller will verify that an error message appears, and no document is updated in the database. 
+How test will be performed: The test controller will input an invalid input and check if the system is able to validate and reject the invalid inputs. The controller will verify that an error message appears, and no document is updated in the database. 
 
 \end{enumerate}
 
@@ -421,9 +414,9 @@ Initial State: The system is set up, open to the following sections: Patient Rec
 
 Input: The correct credentials for login.
 
-Output: A confirmation message and user can access the homepage of the database.
+Output: A confirmation message and user is logged into the system.
 
-Test Case Derivation: The system should be able to validate the provided credentials and allow to login the database.
+Test Case Derivation: The system should be able to validate the provided credentials and allow to login to the system.
 
 How test will be performed: The test controller will input the valid credentials and check if the system is able to validate and accept the valid input. The controller will verify that a confirmation message appears and the user is able to login the database.
 

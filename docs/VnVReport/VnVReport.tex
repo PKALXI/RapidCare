@@ -31,8 +31,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+2025-03-10 & 1.0 & Initial Report\\
+
 \bottomrule
 \end{tabularx}
 
@@ -46,24 +46,38 @@ Date 2 & 1.1 & Notes\\
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   T & Test\\
+  SRS & Software Requirements Specification\\
+  MG & Module Guide\\
+  MIS & Module Interface Specification\\
+  FR & Functional Requirements\\
+  NFR & Non-Functional Requirements\\
+  UI & User Interface\\
+  MFA & Multi-Factor Authentication \\
+  MG & Module Guide \\
+  M & Module \\
+  MIS & Module Interface Specification \\
+  API & Application Programming Interface \\
+  MFA & Multi-Factor Authentication \\
+  IR & Integrity Requirement\\
+  AR & Access Requirement\\
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
+% \wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
 
 \newpage
 
 \tableofcontents
 
-\listoftables %if appropriate
+\listoftables 
 
-\listoffigures %if appropriate
+\listoffigures
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document ...
+This document summarizes the results of the series of tests as outlined in the VnV Plan, demonstrating the system's compliance with the specified requirements and highlighting areas of success as well as any identified issues. \\
 
 \section{Functional Requirements Evaluation} \label{section:3} 
 
@@ -156,11 +170,11 @@ This subsection covers FR3, FR6, FR10, and FR11 from of the \href{https://github
 
   Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
 
-  Input: An invalid identifier for the document to be updated.
+  Input: Invalid input data.
 
-  Expected Output: An error message outlining the invalid input along with a possible steps to guide the users to recover from the error state.
+  Expected Output: An error message outlining the invalid fields along with a possible steps to guide the users to recover from the error state.
 
-  Actual Output: An error message outlining the invalid input along with a possible steps to guide the users to recover from the error state.
+  Actual Output: An error message outlining the invalid fields along with a possible steps to guide the users to recover from the error state.
 
   Result: Pass
 
@@ -178,9 +192,9 @@ This subsection covers FR7 from of the \href{https://github.com/Inreet-Kaur/caps
 
   Input: The correct credentials for login.
 
-  Expected Output: A confirmation message and user can access the homepage of the database.
+  Expected Output: A confirmation message and user is logged into the system.
 
-  Actual Output: A confirmation message and user can access the homepage of the database.
+  Actual Output: A confirmation message and user is logged into the system.
 
   Result: Pass
 
@@ -427,8 +441,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Access Requirements Test (AC2)} \label{section:4.10.2}
-
 \begin{itemize}
 \item \textbf{test-AC2-1} \label{test-AC2-1} \\
 \textbf{Initial State:} System operational with standard user and admin accounts configured. \\
@@ -442,7 +454,7 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Integrity Requirements Tests (IR1)} \label{section:4.10.3}
+\subsubsection{Integrity Requirements Tests (IR1)} \label{section:4.10.2}
 
 \begin{itemize}
 \item \textbf{test-IR1-1} \label{test-IR1-1} \\
@@ -452,8 +464,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Integrity Requirements Tests (IR2)} \label{section:4.10.4}
-
 \begin{itemize}
 \item \textbf{test-IR2-1} \label{test-IR2-1} \\
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. \\
@@ -461,8 +471,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \textbf{Output:} An error message is displayed to the user. No data is added to any database. \\
 \textbf{Result:} Pass \\
 \end{itemize}
-
-\subsubsection{Integrity Requirements Tests (IR3)} \label{section:4.10.5}
 
 \begin{itemize}
 \item \textbf{test-IR3-1} \label{test-IR3-1} \\
@@ -472,8 +480,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Integrity Requirements Tests (IR4)} \label{section:4.10.6}
-
 \begin{itemize}
 \item \textbf{test-IR4-1} \label{test-IR4-1} \\
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. A document already exists in the relevant database. \\
@@ -482,8 +488,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \textbf{Result:} Pass \\
 \end{itemize}
 
-\subsubsection{Integrity Requirements Tests (IR5)} \label{section:4.10.7}
-
 \begin{itemize}
 \item \textbf{test-IR5-1} \label{test-IR5-1} \\
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. A document already exists in the relevant database. \\
@@ -491,8 +495,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \textbf{Output:} The data is correctly classified in the generated report with no diagnosis errors. \\
 \textbf{Result:} Pass \\
 \end{itemize}
-
-\subsubsection{Integrity Requirements Tests (IR6)} \label{section:4.10.8}
 
 \begin{itemize}
 \item \textbf{test-IR6-1} \label{test-IR6-1} \\
@@ -505,7 +507,7 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
 \section{Comparison to Existing Implementation}	
 
-This section will not be appropriate for every project.
+This section will not be appropriate for the project.
 
 \section{Unit Testing}
 
@@ -696,10 +698,11 @@ This section will not be appropriate for every project.
 
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from 
-the supervisor (when one exists) shaped the final product.  In particular 
-the feedback from the Rev 0 demo to the supervisor (or to potential users) 
-should be highlighted.}
+% \wss{This section should highlight how feedback from the users and from 
+% the supervisor (when one exists) shaped the final product.  In particular 
+% the feedback from the Rev 0 demo to the supervisor (or to potential users) 
+% should be highlighted.}
+Based on the feedback received during the Rev 0 demo, we focused on ensuring that we priortize critical and necessary requirements in the final implementation. We incorporated user feedback messages in accordance with the functional tests. Additionally, we updated the functions responsible for validating input data to cover the edge cases discovered during testing, ensuring that the system can handle unexpected or invalid inputs gracefully. Furthermore, we placed a strong emphasis on UI and usability testing. This involved gathering feedback on the aesthetic appeal and functionality of the user interface, ensuring that users could navigate the system intuitively and efficiently. Iterative testing process allowed us to refine the system significantly and make several design adjustments leading to a more user-friendly application.
 
 \section{Automated Testing}
 
@@ -711,44 +714,47 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
   \caption{Lint codebase error}
 \end{figure}
 
+\newpage
+
+\begin{landscape}
 \section{Trace to Requirements}
+
+See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} for detailed Information.\\
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
   \hline
-   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 & FR14\\
+   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 \\
   \hline
-  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  test-FR1,4,8-1 & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
-  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  test-FR1,4,8-2 & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
-  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR2,5,9-1 & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR2,5,9-2 & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  test-FR3,6,10,11-1 & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
   \hline
-  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  test-FR3,6,10,11-2 & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
   \hline
-  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & & \\
+  test-FR7-1 & & & & & & & $\times$ & & & & & & \\
   \hline
-  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & & \\
+  test-FR7-2 & & & & & & & $\times$ & & & & & & \\
   \hline
-  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & & \\
+  test-FR11-1 & & & & & & & & & & & $\times$ & & \\
   \hline
-  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & & \\
+  test-FR11-2 & & & & & & & & & & & $\times$ & & \\
   \hline
-  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  test-FR12,13-1 & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  test-FR12,13,IR5-1 & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-2} & & & & & & & & & & & & $\times$ & $\times$ & \\
-  \hline
-  test-FR14-\ref{test-FR14-1} & & & & & & & & & & & & & & $\times$ \\
+  test-FR12,13,IR5-2 & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
 \end{tabular}
-\caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}
+\caption{\bf Functional Requirements Tests Requirement Traceability} \label{tab:fr-test-traceability}
 \end{table}
 
 \begin{table} [H]
@@ -757,34 +763,34 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
     \hline
     TestID & NFR1 & NFR2 & NFR3 & NFR4 & NFR5 & NFR6 & NFR7 & NFR8 & NFR9 \\
     \hline
-    test-AD\ref{test-AD1} & $\times$ & & & & & & & & \\
+    test-AD1 & $\times$ & & & & & & & & \\
     \hline
-    test-AD\ref{test-AD2} &  $\times$ & & & & & & & & \\
+    test-AD2 &  $\times$ & & & & & & & & \\
     \hline
-    test-UR\ref{test-UR1} & & $\times$ & & & & & & &  \\
+    test-UR1 & & $\times$ &  & & & & & & \\
     \hline
-    test-PR\ref{test-PR1} & & & $\times$ & & & & & & \\
+    test-PR1 & & & $\times$ & & & & & & \\
     \hline
-    test-OR\ref{test-OR1} & & & & $\times$ & & & & &  \\
+    test-OR1 & & & & $\times$ & & & & &  \\
     \hline
-    test-OR\ref{test-OR2} & & & & $\times$ & & & & & \\
+    test-OR2 & & & & $\times$ & & & & & \\
     \hline
-    test-MR\ref{test-MR1} & & & & & $\times$ & & & &\\
+    test-MR1 & & & & & $\times$ & & & &\\
     \hline
-    test-MR\ref{test-MR2} & & & & & $\times$ & & & &  \\
+    test-MR2 & & & & & $\times$ & & & &  \\
     \hline
-    test-SR\ref{test-SR1} & & & & & & $\times$ & & & \\
+    test-SR1 & & & & & & $\times$ & & &\\
     \hline
-    test-CR\ref{test-CR1} & & & & & & & $\times$ & &\\
+    test-CR1 & & & & & & & $\times$ & &\\
     \hline
-    test-LR\ref{test-LR1} & & & & & & & & $\times$ &\\
+    test-LR1 & & & & & & & & $\times$ &\\
     \hline
-    test-LR\ref{test-LR2} & & & & & & & & $\times$ & \\
+    test-LR2 & & & & & & & & $\times$ & \\
     \hline
-    test-S\ref{test-S1} & & & & & & & & & $\times$ \\
+    test-S1 & & & & & & & & & $\times$ \\
     \hline
   \end{tabular}
-\caption{\bf Non-Functional Requirements Tests Traceability} \label{tab:nfr-test-traceability}
+\caption{\bf Non-Functional Requirements Tests Requirement Traceability} \label{tab:nfr-test-traceability}
 \end{table}
 
 \begin{table} [H]
@@ -793,29 +799,140 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
   \hline
   Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 \\
   \hline
-  test-AC1-\ref{test-AC1-1} & $\times$ & & & & & & &   \\
+  test-AC1-1 & $\times$ & & & & & & &   \\
   \hline
-  test-AC1-\ref{test-AC1-2} & $\times$ & & & & & & &   \\
+  test-AC1-2 & $\times$ & & & & & & &   \\
   \hline
-  test-AC2-\ref{test-AC2-1} & & $\times$ & & & & & &   \\
+  test-AC2-1 & & $\times$ & & & & & &   \\
   \hline
-  test-IR1-\ref{test-IR1-1} & & & $\times$ & & & & &   \\
+  test-IR1-1 & & & $\times$ & & & & &   \\
   \hline
-  test-IR2-\ref{test-IR2-1}  & & & & $\times$ & & & &  \\
+  test-IR2-1  & & & & $\times$ & & & &  \\
   \hline
-  test-IR3-\ref{test-IR3-1}  & & & & & $\times$ & & &  \\
+  test-IR3-1  & & & & & $\times$ & & &  \\
   \hline
-  test-IR4-\ref{test-IR4-1}  & & & & & & $\times$ & &  \\
+  test-IR4-1  & & & & & & $\times$ & &  \\
   \hline
-  test-IR5-\ref{test-IR5-1}  & & & & & & &  $\times$ & \\
+  test-IR5-1  & & & & & & &  $\times$ & \\
   \hline
-  test-IR6-\ref{test-IR6-1}  & & & & & & & &  $\times$ \\
+  test-IR6-1  & & & & & & & &  $\times$ \\
   \hline
 \end{tabular}
-\caption{\bf Safety and Security Requirements Tests Traceability} \label{tab:sns-test-traceability}
+\caption{\bf Safety and Security Requirements Tests Requirement Traceability} \label{tab:sns-test-traceability}
 \end{table}
+
+\newpage
 		
-\section{Trace to Modules}		
+\section{Trace to Modules}
+
+See MG Documentation at \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftArchitecture/MG.pdf} {MG} for detailed Information.\\
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  Test ID & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & M10 & M11 & M12 \\
+  \hline
+  test-FR1,4,8-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR1,4,8-2 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR2,5,9-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR2,5,9-2 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR3,6,10,11-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR3,6,10,11-2 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR7-1 & $\times$ & $\times$ & $\times$ & & & $\times$ & & & & & & \\
+  \hline
+  test-FR7-2 & $\times$ & $\times$ & $\times$ & & & $\times$ & & & & & & \\
+  \hline
+  test-FR11-1 & & & $\times$ & & & $\times$ & $\times$ & $\times$ & & & & \\
+  \hline
+  test-FR11-2 & & & $\times$ & & & $\times$ & $\times$ & $\times$ & & & & \\
+  \hline
+  test-FR12,13-1 & & & $\times$ & & & $\times$ & & & $\times$ & $\times$ & & \\
+  \hline
+  test-FR12,13,IR5-1 & & & $\times$ & & & $\times$ & & & $\times$ & $\times$ & & \\
+  \hline
+  test-FR12,13,IR5-2 & & & $\times$ & & & $\times$ & & & $\times$ & $\times$ & & \\
+  \hline
+\end{tabular}
+\caption{\bf Functional Requirements Tests Module Traceability} \label{tab:fr-test-traceability}
+\end{table}
+
+\begin{table} [H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    TestID & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & M10 & M11 & M12 \\
+    \hline
+    test-AD1 & & $\times$ & $\times$ & & & & & & & & &\\
+    \hline
+    test-AD2 & & $\times$ & $\times$ & & & & & & & & &\\
+    \hline
+    test-UR1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-UR2 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-PR1 & & & $\times$ & & & $\times$ & $\times$ & $\times$ & & & &\\
+    \hline
+    test-OR1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-OR2 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-MR1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-MR2 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+    test-SR1 & $\times$ & $\times$ & & & & $\times$ & & & & & & \\
+    \hline
+    test-SR2 & $\times$ & $\times$ & & & & $\times$ & & & & & & \\
+    \hline
+    test-CR1 & & $\times$ & $\times$ & & & & & & & & & \\
+    \hline
+    test-LR1 & & & & & & $\times$ & & & & & $\times$ & $\times$\\
+    \hline
+    test-LR2 & & & & & & $\times$ & & & & & $\times$ & $\times$\\
+    \hline
+    test-S1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+    \hline
+  \end{tabular}
+\caption{\bf Non-Functional Requirements Tests Module Traceability} \label{tab:nfr-test-traceability}
+\end{table}
+
+\begin{table} [H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  Test ID & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & M10 & M11 & M12 \\
+  \hline
+  test-AC1-1 & $\times$ & & & & & & & & & & & \\
+  \hline
+  test-AC1-2 & $\times$ & & & & & & & & & & & \\
+  \hline
+  test-AC2-1 & $\times$ & & & & & & & & & & & \\
+  \hline
+  test-IR1-1 & $\times$ & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$\\
+  \hline
+  test-IR2-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$\\
+  \hline
+  test-IR3-1 & & & & & & & & & $\times$ & $\times$ & &\\
+  \hline
+  test-IR4-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$\\
+  \hline
+  test-IR5-1 & & & & & & & $\times$ & $\times$ & & & &\\
+  \hline
+  test-IR6-1 & & & & & & & $\times$ & $\times$ & & & &\\
+  \hline
+\end{tabular}
+\caption{\bf Safety and Security Requirements Tests Module Traceability} \label{tab:sns-test-traceability}
+\end{table}
+
+\end{landscape}
+\newpage
 
 \section{Code Coverage Metrics}
 

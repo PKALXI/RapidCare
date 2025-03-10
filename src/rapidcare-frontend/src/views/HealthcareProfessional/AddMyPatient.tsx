@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Box, IconButton, Button, Grid, TextField
 import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
 import { IPatient } from "../../models/model";
 import { addPatient } from "../../firebaseControllers/DatabaseOps";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import CloseIcon from "@mui/icons-material/Close";
 
 const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
@@ -459,6 +459,7 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
         </Box>
       </form>
     </Box>
+    </>
   );
 };
 

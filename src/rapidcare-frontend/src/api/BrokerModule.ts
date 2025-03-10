@@ -4,9 +4,7 @@ import { SetStateAction } from "react";
 
 export class BrokerModule {
     private transcribeServiceEndPoint: string = "http://127.0.0.1:5000";
-    private classifyTextServiceEndPoint: string = "";
-    private chunks: Blob[] = [];
-    // private _hasTranscriptionListener: boolean = false;
+    private classifyTextServiceEndPoint: string = "http://127.0.0.1:5050/predict";
     
     private socket = io(this.transcribeServiceEndPoint, {
         transports: ['websocket']
@@ -35,7 +33,7 @@ export class BrokerModule {
         const formRequestData = new FormData();
         formRequestData.append('transcription', text);
     
-        fetch('http://127.0.0.1:5050/predict', {
+        fetch(this.classifyTextServiceEndPoint, {
             method: 'POST',
             body: formRequestData 
         })

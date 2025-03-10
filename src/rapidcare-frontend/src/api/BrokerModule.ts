@@ -1,4 +1,6 @@
 import { io } from "socket.io-client";
+import { ISoapNote } from "../models/model";
+import { SetStateAction } from "react";
 
 export class BrokerModule {
     private transcribeServiceEndPoint: string = "http://127.0.0.1:5000";
@@ -29,8 +31,33 @@ export class BrokerModule {
         .catch((error) => console.error('Error converting blob to array buffer:', error));
     }
     
-    classifyText(text: string): string {
-        // TO DO: implement text classification logic
-        return text;
+    diagnosePredictText(text: string, setNote: { (value: SetStateAction<ISoapNote>): void; (arg0: (prev: any) => any): void; }) {
+        const formRequestData = new FormData();
+        formRequestData.append('transcription', text);
+    
+        fetch('http://127.0.0.1:5050/predict', {
+            method: 'POST',
+            body: formRequestData 
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log('data BROKER --- ' + data.response)
+            const response = JSON.parse(data.response);
+
+            setNote((prev: any) => ({
+                ...prev,
+                assessment: {
+                    ...prev.assessment,
+                    diagnosis: response.diagnosis
+                },
+                plan: response.plan
+            }));
+        })
+        .catch(error => {
+            console.error('Error classifying text:', error);
+            return error
+        });
     }
 }

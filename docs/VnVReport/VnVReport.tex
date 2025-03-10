@@ -544,6 +544,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The input for this test are the valid credentials of email and password.
       \item \textbf{Output:} The user object is returned by the signup function.
       \item \textbf{Test Derivation:} Verifies that the signup function correctly works and creates a new user account when the valid credentials are provided.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     \item Sign up throwing errors with invalid credentials:
@@ -552,6 +553,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The input for this test are the invalid credentials of email and password.
       \item \textbf{Output:} An error thrown up by the signup function.
       \item \textbf{Test Derivation:} Verifies that the signup function correctly throws error when the invalid credentials are provided.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     \item Sign in using valid credentials:
@@ -560,6 +562,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The input for this test are the valid credentials of email and password. 
       \item \textbf{Output:} The user object is returned by the signin function.
       \item \textbf{Test Derivation:}  Verifies that the signin function correctly authenticates the user when valid credentials are provided.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     \item Sign in throwing errors with invalid credentials: 
@@ -568,6 +571,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The input for this test are the invalid credentials of email and password. 
       \item \textbf{Output:} An error thrown up by the signin function.
       \item \textbf{Test Derivation:} Verifies that the signin function correctly throws error when the invalid credentials are provided.
+      \item \textbf{Result:} Pass
     \end{itemize}
   \end{itemize}
 \end{enumerate}
@@ -590,7 +594,8 @@ This section will not be appropriate for the project.
     \begin{itemize}
       \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
       \item \textbf{Output:} Successful addition of valid information of healthcare networks, healthcare professionals and patients in the database. 
-      \item \textbf{Test Derivation:} Verifies that addHealthcareProfessional, addHospital and addPatient functions work correctly ensuring proper document creation.
+      \item \textbf{Test Derivation:} Verifies that addHealthcareProfessional, addHospital and addPatient functions work correctly ensuring proper document creation. The functions addHealthcareProfessional and addHospital add the documents if they don't exist in the database. However, if they do, then these functions update the data in those documents. The function addPatient is only used to add a new patient record in the database.
+      \item \textbf{Result:} Pass 
     \end{itemize}
 
     \item Removing valid documents from the database:
@@ -599,6 +604,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
       \item \textbf{Output:} Successful deletion of valid information of healthcare networks, healthcare professionals and patients in the database. 
       \item \textbf{Test Derivation:} Verifies that deleteHealthCareProfessional, deleteHospital and deletePatient functions work correctly ensuring proper document deletion.
+      item \textbf{Result:} Pass
     \end{itemize}
 
     \item Updating valid documents in the database:
@@ -607,9 +613,8 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} Mock data of the patients are given as input.  
       \item \textbf{Output:} Successful update of valid information of the patients in the database. 
       \item \textbf{Test Derivation:} Verifies that updatePatient function works correctly ensuring proper patient record update.
+      \item \textbf{Result:} Pass
     \end{itemize}
-
-    All other updates for healthcare networks and healthcare professionals will happen through addhospital and addHealthcareProfessional functions so we have not written unit tests for them.
 
     \item No duplicate addition of patient document in the system:
 
@@ -617,6 +622,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} Mock data of the patients are given as input.  
       \item \textbf{Output:} No specific output is returned by the test function itself. However, the test asserts a specific state in the database. 
       \item \textbf{Test Derivation:} Verifies that the addPatient function correctly handles attempts to add duplicate patient records. It ensures that only one patient record is created even if the addPatient function is called multiple times.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     Since our TypeScript doesn't allow us to accept invalid object, we have not written unit tests for adding an invalid patient. Therefore, we have written the above test to make sure no duplicate patient record is created.
@@ -627,6 +633,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} Mock id of the patients are given as input.  
       \item \textbf{Output:} Retrieval of the correct patient object from the database. 
       \item \textbf{Test Derivation:} Verifies that the getPatient function correctly retrieves an existing patient document from the database after providing patient id.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     \item Retrieval of non-existing document:
@@ -635,6 +642,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} Non-existent mock id of the patients are given as input.  
       \item \textbf{Output:} Returns null. 
       \item \textbf{Test Derivation:} Verifies that the getPatient function correctly handles situations when a non-existing patient document from the database is requested to retrieve after providing a non-existing patient id.
+      \item \textbf{Result:} Pass
     \end{itemize}
   \end{itemize}
 \end{enumerate}
@@ -658,6 +666,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
       \item \textbf{Output:} Returns appropriate error messages on receiving invalid input.
       \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies invalid input values for different field types. It ensures that the function returns appropriate error messages for invalid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     \item Should return an empty string for valid field input:
@@ -666,6 +675,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
       \item \textbf{Output:} Returns an empty string on receiving invalid input.
       \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies valid input values for different field types. It ensures that the function returns an empty string for valid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     \item Correct calculation of age:
@@ -674,6 +684,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The input for this test is the date of birth.    
       \item \textbf{Output:} Returns a number representing the calculated age.
       \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly calculates the age for a given date of birth.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     \item Calculation of age for future dates:
@@ -682,6 +693,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The input for this test is the date of birth in the future.    
       \item \textbf{Output:} Returns 0.
       \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth in the future.
+      \item \textbf{Result:} Pass
     \end{itemize}
 
     \item Calculation of age for the present date:
@@ -690,6 +702,7 @@ This section will not be appropriate for the project.
       \item \textbf{Input:} The input for this test is the date of birth representing today's date.    
       \item \textbf{Output:} Returns 0.
       \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth with today's date.
+      \item \textbf{Result:} Pass
     \end{itemize}
   \end{itemize}
 \end{enumerate}

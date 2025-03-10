@@ -713,44 +713,48 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
   \caption{Lint codebase error}
 \end{figure}
 
+\newpage
+
+\begin{landscape}
 \section{Trace to Requirements}
+
+See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} for detailed Information.\\
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
   \hline
    Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 \\
   \hline
-  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR1,4,8-1 & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
-  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR1,4,8-2 & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
-  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
+  test-FR2,5,9-1 & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
+  test-FR2,5,9-2 & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
+  test-FR3,6,10,11-1 & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
   \hline
-  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
+  test-FR3,6,10,11-2 & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
   \hline
-  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & \\
+  test-FR7-1 & & & & & & & $\times$ & & & & & & \\
   \hline
-  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & \\
+  test-FR7-2 & & & & & & & $\times$ & & & & & & \\
   \hline
-  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & \\
+  test-FR11-1 & & & & & & & & & & & $\times$ & & \\
   \hline
-  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & \\
+  test-FR11-2 & & & & & & & & & & & $\times$ & & \\
   \hline
-  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ \\
+  test-FR12,13-1 & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & & & & & & $\times$ & $\times$ \\
+  test-FR12,13,IR5-1 & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-2} & & & & & & & & & & & & $\times$ & $\times$ \\
+  test-FR12,13,IR5-2 & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
 \end{tabular}
-\caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}
+\caption{\bf Functional Requirements Tests Requirement Traceability} \label{tab:fr-test-traceability}
 \end{table}
-
 
 \begin{table} [H]
   \centering
@@ -758,38 +762,38 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
     \hline
     TestID & NFR1 & NFR2 & NFR3 & NFR4 & NFR5 & NFR6 & NFR7 & NFR8 & NFR9 \\
     \hline
-    test-AD\ref{test-AD1} & $\times$ & & & & & & & & \\
+    test-AD1 & $\times$ & & & & & & & & \\
     \hline
-    test-AD\ref{test-AD2} &  $\times$ & & & & & & & & \\
+    test-AD2 &  $\times$ & & & & & & & & \\
     \hline
-    test-UR\ref{test-UR1} & & $\times$ &  & & & & & & \\
+    test-UR1 & & $\times$ &  & & & & & & \\
     \hline
-    test-UR\ref{test-UR2} & & $\times$ & & & & & & &  \\
+    test-UR2 & & $\times$ & & & & & & &  \\
     \hline
-    test-PR\ref{test-PR1} & & & $\times$ & & & & & & \\
+    test-PR1 & & & $\times$ & & & & & & \\
     \hline
-    test-OR\ref{test-OR1} & & & & $\times$ & & & & &  \\
+    test-OR1 & & & & $\times$ & & & & &  \\
     \hline
-    test-OR\ref{test-OR2} & & & & $\times$ & & & & & \\
+    test-OR2 & & & & $\times$ & & & & & \\
     \hline
-    test-MR\ref{test-MR1} & & & & & $\times$ & & & &\\
+    test-MR1 & & & & & $\times$ & & & &\\
     \hline
-    test-MR\ref{test-MR2} & & & & & $\times$ & & & &  \\
+    test-MR2 & & & & & $\times$ & & & &  \\
     \hline
-    test-SR\ref{test-SR1} & & & & & & $\times$ & & &\\
+    test-SR1 & & & & & & $\times$ & & &\\
     \hline
-    test-SR\ref{test-SR2} & & & & & & $\times$ & & & \\
+    test-SR2 & & & & & & $\times$ & & & \\
     \hline
-    test-CR\ref{test-CR1} & & & & & & & $\times$ & &\\
+    test-CR1 & & & & & & & $\times$ & &\\
     \hline
-    test-LR\ref{test-LR1} & & & & & & & & $\times$ &\\
+    test-LR1 & & & & & & & & $\times$ &\\
     \hline
-    test-LR\ref{test-LR2} & & & & & & & & $\times$ & \\
+    test-LR2 & & & & & & & & $\times$ & \\
     \hline
-    test-S\ref{test-S1} & & & & & & & & & $\times$ \\
+    test-S1 & & & & & & & & & $\times$ \\
     \hline
   \end{tabular}
-\caption{\bf Non-Functional Requirements Tests Traceability} \label{tab:nfr-test-traceability}
+\caption{\bf Non-Functional Requirements Tests Requirement Traceability} \label{tab:nfr-test-traceability}
 \end{table}
 
 \begin{table} [H]
@@ -798,29 +802,31 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
   \hline
   Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 \\
   \hline
-  test-AC1-\ref{test-AC1-1} & $\times$ & & & & & & &   \\
+  test-AC1-1 & $\times$ & & & & & & &   \\
   \hline
-  test-AC1-\ref{test-AC1-2} & $\times$ & & & & & & &   \\
+  test-AC1-2 & $\times$ & & & & & & &   \\
   \hline
-  test-AC2-\ref{test-AC2-1} & & $\times$ & & & & & &   \\
+  test-AC2-1 & & $\times$ & & & & & &   \\
   \hline
-  test-IR1-\ref{test-IR1-1} & & & $\times$ & & & & &   \\
+  test-IR1-1 & & & $\times$ & & & & &   \\
   \hline
-  test-IR2-\ref{test-IR2-1}  & & & & $\times$ & & & &  \\
+  test-IR2-1  & & & & $\times$ & & & &  \\
   \hline
-  test-IR3-\ref{test-IR3-1}  & & & & & $\times$ & & &  \\
+  test-IR3-1  & & & & & $\times$ & & &  \\
   \hline
-  test-IR4-\ref{test-IR4-1}  & & & & & & $\times$ & &  \\
+  test-IR4-1  & & & & & & $\times$ & &  \\
   \hline
-  test-IR5-\ref{test-IR5-1}  & & & & & & &  $\times$ & \\
+  test-IR5-1  & & & & & & &  $\times$ & \\
   \hline
-  test-IR6-\ref{test-IR6-1}  & & & & & & & &  $\times$ \\
+  test-IR6-1  & & & & & & & &  $\times$ \\
   \hline
 \end{tabular}
-\caption{\bf Safety and Security Requirements Tests Traceability} \label{tab:sns-test-traceability}
+\caption{\bf Safety and Security Requirements Tests Requirement Traceability} \label{tab:sns-test-traceability}
 \end{table}
+
+\newpage
 		
-\section{Trace to Modules}		
+\section{Trace to Modules}
 
 \section{Code Coverage Metrics}
 

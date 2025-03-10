@@ -632,19 +632,8 @@ How test will be performed: Tester will send a sample patient profile from one d
 \subsubsection{Performance Requirement (NFR3)} \label{section:4.2.3}
 
 \begin{enumerate}
-    \item{test-PR1} \label{test-PR1}
-    
-    Type: Non-functional, Dynamic, Automated
-    
-    Initial State: System with voice transcription feature is active.
-    
-    Input/Condition: Input of a 30-second audio recording under typical clinic noise levels.
-    
-    Output/Result: System completes transcription within 30 seconds with an accuracy of 85\%.
-    
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of 30-second audio recordings with typical clinic noise. They will be asked to process these recordings through the transcription system. After they do this, they will be given a performance survey. In the performance survey, the supervisor will verify the transcription speed and accuracy meet the 85\% standard.
 
-    \item{test-PR2} \label{test-PR2}
+    \item{test-PR1} \label{test-PR1}
     
     Type: Non-functional, Dynamic, Manual
     
@@ -652,10 +641,11 @@ How test will be performed: Tester will send a sample patient profile from one d
     
     Input/Condition: Real-time voice input provided by healthcare professional.
     
-    Output/Result: Real-time transcription displayed within a 1 second delay.
+    Output/Result: Real-time transcription displayed within a 2 second delay.
     
     How this test will be performed: A test group of healthcare professionals and the supervisor will be given the system, and a set of voice inputs to transcribe. They will be asked to speak these inputs for real-time transcription. After they do this, they will be given a latency survey. In the latency survey, the supervisor will verify that transcription delay remains under 1 second.
-\end{enumerate}
+
+  \end{enumerate}
 
 \subsubsection{Operational Requirement (NFR4)} \label{section:4.2.4}
 
@@ -757,18 +747,6 @@ How test will be performed: Tester will send a sample patient profile from one d
     
     How this test will be performed: A test group of users and the supervisor will be given the system, and a set of language switching scenarios. They will be asked to change the system language and verify content display. After they do this, they will be given a language functionality survey. In the language functionality survey, the supervisor will verify that all content displays correctly in each language.
 
-    \item{test-CR2} \label{test-CR2}
-    
-    Type: Non-functional, Dynamic, Manual
-    
-    Initial State: System set to the default language with alternative language packs installed.
-
-    Input/Condition: User navigates through various sections in alternative language selected.
-    
-    Output/Result: No functional errors or misaligned text appear in the UI.
-    
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of UI navigation tasks in different languages. They will be asked to complete these tasks in various language settings. After they do this, they will be given a language consistency survey. In the language consistency survey, the supervisor will verify that no text misalignment or functional errors occur.
-
 \end{enumerate}
 
 \subsubsection{Legal Requirement (NFR8)} \label{section:4.2.8}
@@ -814,18 +792,6 @@ How test will be performed: Tester will send a sample patient profile from one d
     Output/Result: System maintains consistent performance and response times without a drop in performance.
     
     How test will be performed: Use load testing tools like Apache to simulate concurrent user traffic and monitor system response times, server load, and throughput during the test.
-    
-    \item{test-S2} \label{test-S2}
-    
-    Type: Non-functional, Dynamic, Automated
-    
-    Initial State: System operational with data processing services enabled.
-    
-    Input/Condition: Increase the data input rate gradually from standard load to peak operational load.
-    
-    Output/Result: System processes data without bottlenecks, maintaining efficient load distribution.
-    
-    How this test will be performed: Conduct automated stress tests with data processing simulators and monitor resource usage, CPU, memory, and load balancer performance to ensure scalability standards are met.
     
 \end{enumerate}
 
@@ -966,11 +932,11 @@ How test will be performed: Tester will send a sample patient profile from one d
 
   \end{enumerate}
 
-  \subsubsection{IR6}
+  \subsubsection{IR5}
     
   \begin{enumerate}
 
-    \item{test-IR6-1} \label{test-IR6-1} % Classification of data for report generation
+    \item{test-IR5-1} \label{test-IR5-1} % Classification of data for report generation
     
     Type: Functional, Dynamic, Manual
     
@@ -984,12 +950,12 @@ How test will be performed: Tester will send a sample patient profile from one d
 
   \end{enumerate}
 
-\subsubsection{IR7}
+\subsubsection{IR6}
     
 \begin{enumerate}
 
 
-    \item{test-IR7-1} \label{test-IR7-1} % Filter background noise for accuracy 
+    \item{test-IR6-1} \label{test-IR6-1} % Filter background noise for accuracy 
     
     Type: Functional, Dynamic, Manual
     
@@ -1064,8 +1030,6 @@ How test will be performed: Tester will send a sample patient profile from one d
     \hline
     test-PR\ref{test-PR1} & & & $\times$ & & & & & & \\
     \hline
-    test-PR\ref{test-PR2} & & & $\times$ & & & & & & \\
-    \hline
     test-OR\ref{test-OR1} & & & & $\times$ & & & & &  \\
     \hline
     test-OR\ref{test-OR2} & & & & $\times$ & & & & & \\
@@ -1080,49 +1044,42 @@ How test will be performed: Tester will send a sample patient profile from one d
     \hline
     test-CR\ref{test-CR1} & & & & & & & $\times$ & &\\
     \hline
-    test-CR\ref{test-CR2} & & & & & & & $\times$ & & \\
-    \hline
     test-LR\ref{test-LR1} & & & & & & & & $\times$ &\\
     \hline
     test-LR\ref{test-LR2} & & & & & & & & $\times$ & \\
     \hline
     test-S\ref{test-S1} & & & & & & & & & $\times$ \\
     \hline
-    test-S\ref{test-S2} & & & & & & & & & $\times$\\
-    \hline
   \end{tabular}
 \caption{\bf Non-Functional Requirements Tests Traceability} \label{tab:nfr-test-traceability}
 \end{table}
-
 
 \begin{table} [H]
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
   \hline
-  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 & IR7 \\
+  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 \\
   \hline
-  test-AC1-\ref{test-AC1-1} & $\times$ & & & & & & & & \\
+  test-AC1-\ref{test-AC1-1} & $\times$ & & & & & & &   \\
   \hline
-  test-AC1-\ref{test-AC1-2} & $\times$ & & & & & & & & \\
+  test-AC1-\ref{test-AC1-2} & $\times$ & & & & & & &   \\
   \hline
-  test-AC2-\ref{test-AC2-1} & & $\times$ & & & & & & & \\
+  test-AC2-\ref{test-AC2-1} & & $\times$ & & & & & &   \\
   \hline
-  test-IR1-\ref{test-IR1-1} & & & $\times$ & & & & & &  \\
+  test-IR1-\ref{test-IR1-1} & & & $\times$ & & & & &   \\
   \hline
-  test-IR2-\ref{test-IR2-1}  & & & & $\times$ & & & & & \\
+  test-IR2-\ref{test-IR2-1}  & & & & $\times$ & & & &  \\
   \hline
-  test-IR3-\ref{test-IR3-1}  & & & & & $\times$ & & & & \\
+  test-IR3-\ref{test-IR3-1}  & & & & & $\times$ & & &  \\
   \hline
-  test-IR4-\ref{test-IR4-1}  & & & & & & $\times$ & & & \\
+  test-IR4-\ref{test-IR4-1}  & & & & & & $\times$ & &  \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & $\times$ & & \\
+  test-IR5-\ref{test-IR5-1}  & & & & & & &  $\times$ & \\
   \hline
-  test-IR6-\ref{test-IR6-1}  & & & & & & & & $\times$ & \\
-  \hline
-  test-IR7-\ref{test-IR7-1}  & & & & & & & & & $\times$ \\
+  test-IR6-\ref{test-IR6-1}  & & & & & & & &  $\times$ \\
   \hline
 \end{tabular}
-\caption{\bf Safety and Security Requirements Traceability} \label{tab:sns-test-traceability}
+\caption{\bf Safety and Security Requirements Tests Traceability} \label{tab:sns-test-traceability}
 \end{table}
 
 \end{landscape}

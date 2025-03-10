@@ -697,10 +697,11 @@ This section will not be appropriate for the project.
 
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from 
-the supervisor (when one exists) shaped the final product.  In particular 
-the feedback from the Rev 0 demo to the supervisor (or to potential users) 
-should be highlighted.}
+% \wss{This section should highlight how feedback from the users and from 
+% the supervisor (when one exists) shaped the final product.  In particular 
+% the feedback from the Rev 0 demo to the supervisor (or to potential users) 
+% should be highlighted.}
+Based on the feedback received during the Rev 0 demo, we focused on ensuring that we priortize critical and necessary requirements in the final implementation. We incorporated user feedback messages in accordance with the functional tests. Additionally, we updated the functions responsible for validating input data to cover the edge cases discovered during testing, ensuring that the system can handle unexpected or invalid inputs gracefully. Furthermore, we placed a strong emphasis on UI and usability testing. This involved gathering feedback on the aesthetic appeal and functionality of the user interface, ensuring that users could navigate the system intuitively and efficiently. Iterative testing process allowed us to refine the system significantly and make several design adjustments leading to a more user-friendly application.
 
 \section{Automated Testing}
 
@@ -718,35 +719,33 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
   \hline
-   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 & FR14\\
+   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 \\
   \hline
-  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
-  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
-  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
   \hline
-  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
   \hline
-  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & & \\
+  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & \\
   \hline
-  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & & \\
+  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & \\
   \hline
-  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & & \\
+  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & \\
   \hline
-  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & & \\
+  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & \\
   \hline
-  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-2} & & & & & & & & & & & & $\times$ & $\times$ & \\
-  \hline
-  test-FR14-\ref{test-FR14-1} & & & & & & & & & & & & & & $\times$ \\
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-2} & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
 \end{tabular}
 \caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}

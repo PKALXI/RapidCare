@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Box, IconButton, Button, Grid, TextField
 import { v4 as uuidv4 } from "uuid";  // Importing uuidv4
 import { IPatient } from "../../models/model";
 import { addPatient } from "../../firebaseControllers/DatabaseOps";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import CloseIcon from "@mui/icons-material/Close";
 import { calculateAge } from "../../helpers/helper";
 
@@ -40,6 +40,8 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    toast.success("HELLO");
+    
     e.preventDefault();
     const newPatient: IPatient = {
       id: uuidv4(),
@@ -95,12 +97,16 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
       documents: [],
       prescriptions: []
     };
+
+    
     addPatient(newPatient);
     closeModal();
     toast.success("Patient created successfully!");
   };
 
   return (
+    <>
+    <Toaster/>
     <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[90vh] flex flex-col">
       <form onSubmit={handleSubmit}>
         <Box className="flex justify-between items-center p-2">
@@ -436,6 +442,7 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
         </Box>
       </form>
     </Box>
+    </>
   );
 };
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import Footer from "../components/Footer";
-import Navbar from "../components/NavBar";
+import Footer from "../components/AppFooter";
+import Navbar from "../components/AppNavBar";
 import { Card, CardContent, Typography, Button, Container } from "@mui/material";
 
 const AppointmentsList = () => {

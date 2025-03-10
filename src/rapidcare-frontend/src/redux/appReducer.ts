@@ -1,4 +1,3 @@
-import { generateHealthcareProfessionalMockData } from '../mockData/mockData';
 import { AppState } from '../models/model';
 import { ADD_DOCUMENT, ADD_EMPLOYEE, ADD_HOSPITAL, DELETE_EMPLOYEE, DELETE_HOSPITAL, DELETE_PATIENT, RESET_STATE, SAVE_NETWORK_INFO, SET_LOGIN_STATE, SET_ONBOARDING_STATUS, UPDATE_EMPLOYEE, UPDATE_HOSPITAL, UPDATE_PATIENT_PROFILEINFO, SET_HP_DATA, SET_HN_DATA } from '../redux/appActions';
 import { mockConsultations, mockDashboardMetrics } from '../mockData/mockData';
@@ -9,8 +8,6 @@ const initialState: AppState = {
     healthNetworkAdmin: null,
     healthcareProfessional: null
 };
-
-
 
 const appReducer = (state = initialState, action: any): AppState => {
 
@@ -117,7 +114,6 @@ const appReducer = (state = initialState, action: any): AppState => {
                     : null,
             };
 
-
         case SAVE_NETWORK_INFO:
             return {
                 ...state,
@@ -126,105 +122,105 @@ const appReducer = (state = initialState, action: any): AppState => {
                     : null,
             };
 
-            case ADD_HOSPITAL: {
-                if (state.healthNetworkAdmin) {
-                    const updatedHospitals = state.healthNetworkAdmin.hospitals
-                    ? [...state.healthNetworkAdmin.hospitals, action.payload]
-                    : [action.payload]; 
+        case ADD_HOSPITAL: {
+            if (state.healthNetworkAdmin) {
+                const updatedHospitals = state.healthNetworkAdmin.hospitals
+                ? [...state.healthNetworkAdmin.hospitals, action.payload]
+                : [action.payload]; 
     
-                    return {
-                        ...state,
-                        healthNetworkAdmin: {
-                            ...state.healthNetworkAdmin,
-                            hospitals: updatedHospitals, 
-                        },
-                    };
-                }
-                return state;  
+                return {
+                    ...state,
+                    healthNetworkAdmin: {
+                        ...state.healthNetworkAdmin,
+                        hospitals: updatedHospitals, 
+                    },
+                };
             }
+            return state;  
+        }
 
-            case UPDATE_HOSPITAL: {
-                if (state.healthNetworkAdmin) {
-                    const updatedHospitals = state.healthNetworkAdmin.hospitals?.map(hospital =>
-                        hospital.id === action.payload.id ? action.payload : hospital
-                    );
-                    return {
-                        ...state,
-                        healthNetworkAdmin: { 
-                            ...state.healthNetworkAdmin, 
-                            hospitals: updatedHospitals 
-                        },
-                    };
-                }
-                return state;
+        case UPDATE_HOSPITAL: {
+            if (state.healthNetworkAdmin) {
+                const updatedHospitals = state.healthNetworkAdmin.hospitals?.map(hospital =>
+                    hospital.id === action.payload.id ? action.payload : hospital
+                );
+                return {
+                    ...state,
+                    healthNetworkAdmin: { 
+                        ...state.healthNetworkAdmin, 
+                        hospitals: updatedHospitals 
+                    },
+                };
             }
+            return state;
+        }
 
-            case ADD_EMPLOYEE: {
-                if (state.healthNetworkAdmin) {
-                    const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals
-                    ? [...state.healthNetworkAdmin.healthcareProfessionals, action.payload]
-                    : [action.payload]; 
+        case ADD_EMPLOYEE: {
+            if (state.healthNetworkAdmin) {
+                const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals
+                ? [...state.healthNetworkAdmin.healthcareProfessionals, action.payload]
+                : [action.payload]; 
     
-                    return {
-                        ...state,
-                        healthNetworkAdmin: {
-                            ...state.healthNetworkAdmin,
-                            healthcareProfessionals: updatedEmployees, 
-                        },
-                    };
-                }
-                return state;  
+                return {
+                    ...state,
+                    healthNetworkAdmin: {
+                        ...state.healthNetworkAdmin,
+                        healthcareProfessionals: updatedEmployees, 
+                    },
+                };
             }
+            return state;  
+        }
 
-            case UPDATE_EMPLOYEE: {
-                if (state.healthNetworkAdmin) {
-                    const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals?.map(employee =>
-                        employee.id === action.payload.id ? action.payload : employee
-                    );
-                    return {
-                        ...state,
-                        healthNetworkAdmin: { 
-                            ...state.healthNetworkAdmin, 
-                            healthcareProfessionals: updatedEmployees 
-                        },
-                    };
-                }
-                return state;
+        case UPDATE_EMPLOYEE: {
+            if (state.healthNetworkAdmin) {
+                const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals?.map(employee =>
+                    employee.id === action.payload.id ? action.payload : employee
+                );
+                return {
+                    ...state,
+                    healthNetworkAdmin: { 
+                        ...state.healthNetworkAdmin, 
+                        healthcareProfessionals: updatedEmployees 
+                    },
+                };
             }
+            return state;
+        }
 
-            case DELETE_HOSPITAL: {
-                if (state.healthNetworkAdmin) {
-                    const updatedHospitals = state.healthNetworkAdmin.hospitals?.filter(hospital =>
-                        //change to id
-                        hospital.name !== action.payload.name
-                    );
-                    return {
-                        ...state,
-                        healthNetworkAdmin: { 
-                            ...state.healthNetworkAdmin, 
-                            hospitals: updatedHospitals 
-                        },
-                    };
-                }
-                return state;
+        case DELETE_HOSPITAL: {
+            if (state.healthNetworkAdmin) {
+                const updatedHospitals = state.healthNetworkAdmin.hospitals?.filter(hospital =>
+                    //change to id
+                    hospital.name !== action.payload.name
+                );
+                return {
+                    ...state,
+                    healthNetworkAdmin: { 
+                        ...state.healthNetworkAdmin, 
+                        hospitals: updatedHospitals 
+                    },
+                };
             }
+            return state;
+        }
 
-            case DELETE_EMPLOYEE: {
-                if (state.healthNetworkAdmin) {
-                    const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals?.filter(employee =>
-                        //change to id
-                        employee.name !== action.payload.name
-                    );
-                    return {
-                        ...state,
-                        healthNetworkAdmin: { 
-                            ...state.healthNetworkAdmin, 
-                            healthcareProfessionals: updatedEmployees 
-                        },
-                    };
-                }
-                return state;
+        case DELETE_EMPLOYEE: {
+            if (state.healthNetworkAdmin) {
+                const updatedEmployees = state.healthNetworkAdmin.healthcareProfessionals?.filter(employee =>
+                    //change to id
+                    employee.name !== action.payload.name
+                );
+                return {
+                    ...state,
+                    healthNetworkAdmin: { 
+                        ...state.healthNetworkAdmin, 
+                        healthcareProfessionals: updatedEmployees 
+                    },
+                };
             }
+            return state;
+        }
 
         default:
             return state;

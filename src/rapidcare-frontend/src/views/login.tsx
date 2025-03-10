@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { setLoginState, setHpData, setHnData } from '../redux/appActions';
-import { auth } from '../firebase';
-import { INetworkInfo } from '../models/model'; // Import the INetworkInfo interface
+import { INetworkInfo } from '../models/model';
 import { addAdmin, healthcareProfessionalCollection, networkInfoCollection } from '../firebaseControllers/DatabaseOps';
+import { signIn, signUp } from '../firebaseControllers/firebaseAuth';
 import { doc, getDoc } from 'firebase/firestore';
 
 const Login: React.FC = () => {
@@ -32,10 +30,12 @@ const Login: React.FC = () => {
                     return;
                 }
 
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
+                const user = await signUp(email, password);
+                if (!user) {
+                    setError('Account creation failed. Please try again.');
+                    return;
+                }
 
-                // Create an INetworkInfo object
                 const networkInfo: INetworkInfo = {
                     id: user.uid,
                     networkName: networkName,
@@ -48,18 +48,15 @@ const Login: React.FC = () => {
                 };
 
                 addAdmin(networkInfo);
-
-                console.log(`Account Created: ${user.email}`);
                 alert('Account successfully created! You can now log in.');
                 setIsSignUp(false);
-
             } else {
-                const person = await signInWithEmailAndPassword(auth, email, password);
-                const docId = person.user.uid;
-
+                const person = await signIn(email, password);
+                const docId = person.uid;
+                    
                 const docRef = doc(networkInfoCollection, docId);
                 const docSnap = await getDoc(docRef);
-
+                    
                 const d2 = doc(healthcareProfessionalCollection, docId);
                 const d2Snap = await getDoc(d2);
 
@@ -70,26 +67,12 @@ const Login: React.FC = () => {
                 } else {
                     console.log("User does not exist")
                 }
-
+    
                 if (d2Snap.exists()) {
                     console.log('Called');
-                    // const userData = d2Snap.data();
-                    // console.log(userData);
                     dispatch(setLoginState(false, true));
                     dispatch(setHpData(d2Snap.data()));
                 }
-
-                // const userDoc = await getDoc(doc(db, 'users', user.uid));
-                // if (userDoc.exists()) {
-                //     const userData = userDoc.data();
-                //     const isUserAdmin = userData.role === 'admin';
-
-                //     console.log(`User authenticated: ${user.email}, Role: ${userData.role}`);
-
-                //     isUserAdmin ? navigate('/home') : navigate('/hpDashboard');
-                // } else {
-                //     setError('User role not found. Please contact support.');
-                // }
             }
         } catch (error: any) {
             if (error.code === 'auth/wrong-password') {
@@ -98,7 +81,7 @@ const Login: React.FC = () => {
                 setError('No user found with this email.');
             } else {
                 setError(error.message || 'An error occurred during authentication.');
-            }
+            } 
         }
     };
 
@@ -137,7 +120,7 @@ const Login: React.FC = () => {
                                 value={networkName}
                                 onChange={(e) => setNetworkName(e.target.value)}
                                 required
-                                placeholder="Enter your last name"
+                                placeholder="Enter your network name"
                                 className="w-full p-2 border border-gray-300 rounded"
                             />
                         </div>
@@ -168,25 +151,14 @@ const Login: React.FC = () => {
                 {isSignUp && (
                     <div className="mb-4 text-left">
                         <label className="block font-bold mb-1">Confirm Password:</label>
-                        <div className="flex items-center">
-                            <input
-                                type="password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                required
-                                placeholder="Confirm your password"
-                                className="flex-1 p-2 border border-gray-300 rounded"
-                            />
-                            <span className="ml-2">
-                                {confirmPassword && (
-                                    isPasswordMatch ? (
-                                        <span className="text-green-500">✔</span>
-                                    ) : (
-                                        <span className="text-red-500">✘</span>
-                                    )
-                                )}
-                            </span>
-                        </div>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            placeholder="Confirm your password"
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
                     </div>
                 )}
                 {error && <p className="text-red-500 mb-4">{error}</p>}

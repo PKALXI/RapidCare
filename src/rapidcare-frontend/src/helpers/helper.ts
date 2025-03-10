@@ -10,6 +10,8 @@ export const validateField = (field: string, value: string | number | boolean): 
                 if (!emailRegex.test(value)) {
                     errorMessage = 'Invalid email format';
                 }
+            } else {
+                errorMessage = 'Invalid email format';  
             }
             break;
 
@@ -19,6 +21,8 @@ export const validateField = (field: string, value: string | number | boolean): 
                 if (!phoneRegex.test(value)) {
                     errorMessage = 'Invalid phone number format';
                 }
+            } else {
+                errorMessage = 'Invalid phone number format'
             }
             break;
 
@@ -28,6 +32,8 @@ export const validateField = (field: string, value: string | number | boolean): 
                 if (!dobRegex.test(value)) {
                     errorMessage = 'Invalid date format (YYYY-MM-DD)';
                 }
+            } else {
+                errorMessage = 'Invalid date format (YYYY-MM-DD)';
             }
             break;
 
@@ -46,86 +52,20 @@ export const validateField = (field: string, value: string | number | boolean): 
     return errorMessage;
 };
 
-export const mapHealthcareProfessionalData = (data: any): IHealthcareProfessionalState => ({
-    user: {
-        id: data.user.id,
-        name: data.user.name,
-        role: data.user.role,
-        hospital: data.user.hospital,
-        department: data.user.department,
-        email: data.user.email,
-        phone: data.user.phone,
-        employmentStatus: data.user.employmentStatus
-    },
-    dashboardMetrics: data.dashboardMetrics ? {
-        scheduledVisitsToday: Number(data.dashboardMetrics.scheduledVisitsToday) || 0,
-        newPatientsThisMonth: Number(data.dashboardMetrics.newPatientsThisMonth) || 0,
-        totalPatients: Number(data.dashboardMetrics.totalPatients) || 0
-    } : undefined,
-    patients: data.patients ? data.patients.map((patient: any) => ({
-        id: patient.id,
-        profileInformation: patient.profileInformation ? {
-            demographics: patient.profileInformation.demographics ? {
-                ...patient.profileInformation.demographics,
-                age: Number(patient.profileInformation.demographics.age) || null,
-                weight: Number(patient.profileInformation.demographics.weight) || null,
-                height: Number(patient.profileInformation.demographics.height) || null
-            } : undefined,
-            insuranceInformation: patient.profileInformation.insuranceInformation || undefined,
-            contactInformation: patient.profileInformation.contactInformation || undefined,
-            emergencyContact: patient.profileInformation.emergencyContact || undefined
-        } : undefined,
-        medicalHistory: patient.medicalHistory || undefined,
-        consultationNotes: patient.consultationNotes || undefined,
-        documents: patient.documents || undefined
-    })) : [],
-    consultations: data.consultations ? data.consultations.map((consultation: any) => ({
-        patientName: consultation.patientName,
-        photo: consultation.photo || undefined,
-        date: consultation.date,
-        time: consultation.time
-    })) : []
-});
+export const calculateAge = (dob: string) => {
+    const birthDate = new Date(dob);
+    const currentDate = new Date();
 
-//need to update according to new model
-// export const mapHealthNetworkAdminData = (data: any): IHealthNetworkAdminState => ({
-//     id: data.id,
-//     name: data.name,
-//     email: data.email,
-//     healthcareNetwork: {
-//         name: data.healthcareNetwork.name,
-//         totalPatients: Number(data.healthcareNetwork.totalPatients) || 0,
-//         newPatients: Number(data.healthcareNetwork.newPatients) || 0,
-//         totalHospitals: Number(data.healthcareNetwork.totalHospitals) || 0,
-//         hospitals: data.healthcareNetwork.hospitals ? data.healthcareNetwork.hospitals.map((hospital: any) => ({
-//             id: hospital.id,
-//             name: hospital.name,
-//             address: hospital.address,
-//             healthcareProfessionals: hospital.healthcareProfessionals ? hospital.healthcareProfessionals.map((prof: any) => ({
-//                 id: prof.id,
-//                 name: prof.name,
-//                 email: prof.email,
-//                 phone: prof.phone,
-//                 hospital: prof.hospital,
-//                 department: prof.department
-//             })) : undefined,
-//             patients: hospital.patients ? hospital.patients.map((patient: any) => ({
-//                 id: patient.id,
-//                 profileInformation: patient.profileInformation ? {
-//                     demographics: patient.profileInformation.demographics ? {
-//                         ...patient.profileInformation.demographics,
-//                         age: Number(patient.profileInformation.demographics.age) || null,
-//                         weight: Number(patient.profileInformation.demographics.weight) || null,
-//                         height: Number(patient.profileInformation.demographics.height) || null
-//                     } : undefined,
-//                     insuranceInformation: patient.profileInformation.insuranceInformation || undefined,
-//                     contactInformation: patient.profileInformation.contactInformation || undefined,
-//                     emergencyContact: patient.profileInformation.emergencyContact || undefined
-//                 } : undefined,
-//                 medicalHistory: patient.medicalHistory || undefined,
-//                 consultationNotes: patient.consultationNotes || undefined,
-//                 documents: patient.documents || undefined
-//             })) : undefined
-//         })) : []
-//     }
-// });
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    if (month < birthDate.getMonth() || (month === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    if (age < 0) {
+      return 0;
+    }
+
+    return age;
+  }

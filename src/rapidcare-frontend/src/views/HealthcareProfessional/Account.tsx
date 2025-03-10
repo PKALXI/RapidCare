@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
-import Footer from "../components/Footer";
-import Navbar from "../components/NavBar";
+import Footer from "../components/AppFooter";
+import Navbar from "../components/AppNavBar";
 import { useNavigate } from "react-router-dom";
 import { resetState } from "../../redux/appActions";
 import { Card, CardContent, Typography, Button, Container } from "@mui/material";

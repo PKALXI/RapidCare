@@ -2,8 +2,15 @@
 
 \usepackage{float}
 \usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{pdflscape}
 \usepackage{tabularx}
 \usepackage{hyperref}
+
+\usepackage{fullpage}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{ulem}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -15,6 +22,18 @@
 
 \input{../Comments}
 \input{../Common}
+
+\newcounter{acnum}
+\newcommand{\actheacnum}{AC\theacnum}
+\newcommand{\acref}[1]{AC\ref{#1}}
+
+\newcounter{ucnum}
+\newcommand{\uctheucnum}{UC\theucnum}
+\newcommand{\uref}[1]{UC\ref{#1}}
+
+\newcounter{mnum}
+\newcommand{\mthemnum}{M\themnum}
+\newcommand{\mref}[1]{M\ref{#1}}
 
 \begin{document}
 
@@ -489,7 +508,8 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \end{itemize}
 
 \begin{itemize}
-\item \textbf{test-IR5-1} \label{test-IR5-1} \\
+\item \textbf{test-IR5-1} \label{test-IR5-1} \\ 
+% Need to fix this test
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. A document already exists in the relevant database. \\
 \textbf{Input:} Written text transcribed from the audio data. \\
 \textbf{Output:} The data is correctly classified in the generated report with no diagnosis errors. \\
@@ -503,6 +523,8 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \textbf{Output:} The written text transcribed from the input data matches the conversation with minimal to no interference. \\
 \textbf{Result:} Pass \\
 \end{itemize}
+
+% Missing IR7
 
 
 \section{Comparison to Existing Implementation}	
@@ -679,8 +701,9 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1\textwidth]{lint_codebase_error.png}
+  \includegraphics[width=0.7\textwidth]{lintCodebaseError.png}
   \caption{Lint codebase error}
+  \label{FigUH}
 \end{figure}
 
 \newpage
@@ -725,6 +748,9 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
 \end{tabular}
 \caption{\bf Functional Requirements Tests Requirement Traceability} \label{tab:fr-test-traceability}
 \end{table}
+
+\end{landscape}
+\newpage
 
 \begin{table} [H]
   \centering
@@ -844,8 +870,6 @@ See MG Documentation at \href{https://github.com/PKALXI/RapidCare/blob/main/docs
     \hline
     test-UR1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
     \hline
-    test-UR2 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-    \hline
     test-PR1 & & & $\times$ & & & $\times$ & $\times$ & $\times$ & & & &\\
     \hline
     test-OR1 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
@@ -857,8 +881,6 @@ See MG Documentation at \href{https://github.com/PKALXI/RapidCare/blob/main/docs
     test-MR2 & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
     \hline
     test-SR1 & $\times$ & $\times$ & & & & $\times$ & & & & & & \\
-    \hline
-    test-SR2 & $\times$ & $\times$ & & & & $\times$ & & & & & & \\
     \hline
     test-CR1 & & $\times$ & $\times$ & & & & & & & & & \\
     \hline
@@ -900,7 +922,6 @@ See MG Documentation at \href{https://github.com/PKALXI/RapidCare/blob/main/docs
 \caption{\bf Safety and Security Requirements Tests Module Traceability} \label{tab:sns-test-traceability}
 \end{table}
 
-\end{landscape}
 \newpage
 
 \section{Code Coverage Metrics}
@@ -909,8 +930,9 @@ The image below displays the code coverage metrix. This includes all the files, 
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1\textwidth]{code_coverage_metrics.jpg}
+  \includegraphics[width=0.7\textwidth]{CodeCoverageMetrics.jpg}
   \caption{Code Coverage Metrics}
+  \label{FigUH}
 \end{figure}
 
 \bibliographystyle{plainnat}

@@ -693,7 +693,7 @@ This section will not be appropriate for the project.
   \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses.\\
   \textbf{Test Procedure:} The tests are performed as follows:\\
 
-  \begin{itemize}
+  \begin{enumerate}
     \item Confidence score test:
       \begin{itemize}
         \item \textbf{Input:} The input for this test is the list of strings which represent patient conversation.   
@@ -717,7 +717,7 @@ This section will not be appropriate for the project.
         \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes invalid input data. It sends POST request with invalid and missing transcription to the API endpoint and asserts that the response status code is 400, successful identification of invalid input.
         \item \textbf{Result:} Pass
       \end{itemize}
-  \end{itemize}
+  \end{enumerate}
 
 
 \section{Changes Due to Testing}

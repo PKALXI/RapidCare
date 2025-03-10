@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Card, CardContent, Typography, Modal, Box, IconButton, Button, Grid, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ interface AddSoapNoteProps {
     setOpen: (open: boolean) => void;
     patientId: string;
 }
+
 
 const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) => {
     const initialFormData: ISoapNote = {
@@ -115,10 +116,15 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
         }
     }
 
-    const handleTranscriptionCallback = (transcribedText : string) => {
+
+    const handleTranscriptionCallback = useCallback((transcribedText: string) => {
         console.log('WE GOT THE TEXT: ' + transcribedText);
         setTranscribedText(transcribedText);
-    }
+    
+        brokerReference.current?.diagnosePredictText(transcribedText, setNote);
+
+        console.log("DESCRIPTION---: " + transcribedText);  // Optionally log the transcription
+    }, []);
 
     const handleSave = () => {
         try {

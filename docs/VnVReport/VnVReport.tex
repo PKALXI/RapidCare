@@ -686,6 +686,39 @@ This section will not be appropriate for the project.
       \end{itemize}
   \end{itemize}
 
+  \subsubsection{Diagnosis Prediction Module and Medicine Prediction Module}
+
+  \textbf{Control:} Manual\\
+  \textbf{Initial State:} A predefined set of conversation is used for testing. It also assumes that Open API Key is configured correctly.\\
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses.\\
+  \textbf{Test Procedure:} The tests are performed as follows:\\
+
+  \begin{itemize}
+    \item Confidence score test:
+      \begin{itemize}
+        \item \textbf{Input:} The input for this test is the list of strings which represent patient conversation.   
+        \item \textbf{Output:} There is no direct output. This test asserts a condition based on the number of successful evaluations.
+        \item \textbf{Test Derivation:} Verifies that the testConfidence function correctly sends each conversation to the API endpoint. The test calculates the success rate based on the number of relevant responses and asserts that the success rate is above a certain threshold (0.85). Due to the output of this test not being the deterministic, we have used a strategy that involves using a third independent AI agent to evaluate the confidence. This allows for an initial benchmark of the confidence on the service's performance. 
+        \item \textbf{Result:} Pass
+      \end{itemize}
+
+    \item Valid data input test:
+      \begin{itemize}
+        \item \textbf{Input:} A dictionary that contains a valid transcription of a patient conversation. 
+        \item \textbf{Output:} Returns a response object from API endpoint.
+        \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes valid input data. It sends POST request with valid transcription to the API endpoint and asserts that the response status code is 200, indicating successful processing of the input.
+        \item \textbf{Result:} Pass
+      \end{itemize}
+
+    \item Invalid data input test:
+      \begin{itemize}
+        \item \textbf{Input:} A dictionary that contains an empty string of invalid transcription of a patient conversation.    
+        \item \textbf{Output:} Returns a response object from API endpoint.
+        \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes invalid input data. It sends POST request with invalid and missing transcription to the API endpoint and asserts that the response status code is 400, successful identification of invalid input.
+        \item \textbf{Result:} Pass
+      \end{itemize}
+  \end{itemize}
+
 
 \section{Changes Due to Testing}
 

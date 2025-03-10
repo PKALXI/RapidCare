@@ -285,26 +285,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
 \end{enumerate}
 
-\subsection{Verify completeness and correctmess of data} \label{section:3.8}
-
-This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the data sent over is complete.
-
-\begin{enumerate}
-
-  \item{test-FR14-1} \label{test-FR14-1}
-  
-  Initial State: The user has a completed patient profile and wishes to send it over. 
-
-  Input: Correct and completed patient chart to be sent to another healthcare network.
-
-  Expected Output: A successful send where the data is validated at the endpoint, if incomplete data is received an error message should pop up.
-
-  Actual Output: A successful send where the data is validated at the endpoint, if incomplete data is received an error message should pop up.
-
-  Result: Pass
-
-\end{enumerate}
-
 \section{Nonfunctional Requirements Evaluation} \label{section:4}
 
 \subsection{Aesthetic and Design} \label{section:4.1}
@@ -450,6 +430,45 @@ should be highlighted.}
 \section{Automated Testing}
 		
 \section{Trace to Requirements}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 & FR14\\
+  \hline
+  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  \hline
+  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  \hline
+  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  \hline
+  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  \hline
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  \hline
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  \hline
+  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & & \\
+  \hline
+  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & & \\
+  \hline
+  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & & \\
+  \hline
+  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & & \\
+  \hline
+  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-2} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR14-\ref{test-FR14-1} & & & & & & & & & & & & & & $\times$ \\
+  \hline
+\end{tabular}
+\caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}
+\end{table}
+
 
 \begin{table} [H]
   \centering

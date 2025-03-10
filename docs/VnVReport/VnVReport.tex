@@ -637,14 +637,60 @@ This section will not be appropriate for every project.
   \end{itemize}
 \end{enumerate}
 
+\subsubsection{Administrator View Module and Patient View Module}
 
+\begin{enumerate}
 
+  \textbf{Control:} Manual
 
+  \textbf{Initial State:} No specific initialization is required as tests solely focus on validating fields.
 
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct implementation of data validation rules and age calculation logic, ensuring accurate identification of invalid input, acceptance of valid input, and precise calculation of age based on provided dates.
 
+  \textbf{Test Procedure:} The tests are performed as follows:
 
+  \begin{itemize}
+    \item Should return appropriate error for invalid field input:
 
+    \begin{itemize}
+      \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
+      \item \textbf{Output:} Returns appropriate error messages on receiving invalid input.
+      \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies invalid input values for different field types. It ensures that the function returns appropriate error messages for invalid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+    \end{itemize}
 
+    \item Should return an empty string for valid field input:
+
+    \begin{itemize}
+      \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
+      \item \textbf{Output:} Returns an empty string on receiving invalid input.
+      \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies valid input values for different field types. It ensures that the function returns an empty string for valid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+    \end{itemize}
+
+    \item Correct calculation of age:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth.    
+      \item \textbf{Output:} Returns a number representing the calculated age.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly calculates the age for a given date of birth.
+    \end{itemize}
+
+    \item Calculation of age for future dates:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth in the future.    
+      \item \textbf{Output:} Returns 0.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth in the future.
+    \end{itemize}
+
+    \item Calculation of age for the present date:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth representing today's date.    
+      \item \textbf{Output:} Returns 0.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth with today's date.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
 
 
 \section{Changes Due to Testing}

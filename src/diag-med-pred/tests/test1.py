@@ -6,9 +6,10 @@ import os
 '''
 gptAssistance method created using the below docs.
 https://platform.openai.com/docs/api-reference
+https://docs.python.org/3/library/unittest.html 
 '''
 
-os.environ['OPENAI_API_KEY'] = ""
+os.environ['OPENAI_API_KEY'] = "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"
 
 def gptAssistance(situation, response):
     prompt = f"Given the situation: '{situation}', is the following response relevant? Respond with '1' for relevant and '0' for not appropriate.\nResponse: {response}"

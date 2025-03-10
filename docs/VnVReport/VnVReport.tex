@@ -285,26 +285,6 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
 \end{enumerate}
 
-\subsection{Verify completeness and correctmess of data} \label{section:3.8}
-
-This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the data sent over is complete.
-
-\begin{enumerate}
-
-  \item{test-FR14-1} \label{test-FR14-1}
-  
-  Initial State: The user has a completed patient profile and wishes to send it over. 
-
-  Input: Correct and completed patient chart to be sent to another healthcare network.
-
-  Expected Output: A successful send where the data is validated at the endpoint, if incomplete data is received an error message should pop up.
-
-  Actual Output: A successful send where the data is validated at the endpoint, if incomplete data is received an error message should pop up.
-
-  Result: Pass
-
-\end{enumerate}
-
 \section{Nonfunctional Requirements Evaluation} \label{section:4}
 
 \subsection{Aesthetic and Design} \label{section:4.1}
@@ -541,6 +521,178 @@ This section will not be appropriate for every project.
 
 \section{Unit Testing}
 
+\subsection{Behaviour-Hiding Module}
+
+\subsubsection{User Authentication Module}
+
+\begin{enumerate}
+
+  \textbf{Control:} Manual
+
+  \textbf{Initial State:} The default email and password are initialized as variables and given a default value.
+
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct registration and login functionality of Firebase Authentication, ensuring valid user creation and authentication processes, as well as error handling for invalid credentials.
+
+  \textbf{Test Procedure:} The tests are performed as follows:
+
+  \begin{itemize}
+    \item Sign up using valid credentials:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the valid credentials of email and password.
+      \item \textbf{Output:} The user object is returned by the signup function.
+      \item \textbf{Test Derivation:} Verifies that the signup function correctly works and creates a new user account when the valid credentials are provided.
+    \end{itemize}
+
+    \item Sign up throwing errors with invalid credentials:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the invalid credentials of email and password.
+      \item \textbf{Output:} An error thrown up by the signup function.
+      \item \textbf{Test Derivation:} Verifies that the signup function correctly throws error when the invalid credentials are provided.
+    \end{itemize}
+
+    \item Sign in using valid credentials:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the valid credentials of email and password. 
+      \item \textbf{Output:} The user object is returned by the signin function.
+      \item \textbf{Test Derivation:}  Verifies that the signin function correctly authenticates the user when valid credentials are provided.
+    \end{itemize}
+
+    \item Sign in throwing errors with invalid credentials: 
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the invalid credentials of email and password. 
+      \item \textbf{Output:} An error thrown up by the signin function.
+      \item \textbf{Test Derivation:} Verifies that the signin function correctly throws error when the invalid credentials are provided.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Administrator Account Management Module and Patient Account Management Module}
+
+\begin{enumerate}
+
+  \textbf{Control:} Manual
+
+  \textbf{Initial State:} Provides mock data of healthcare professionals, healthcare networks and patients.
+
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functionality of onboarding, updating, and removing the healthcare networks, healthcare professionals and patient records.
+
+  \textbf{Test Procedure:} The tests are performed as follows:
+
+  \begin{itemize}
+    \item Adding valid documents to the database:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
+      \item \textbf{Output:} Successful addition of valid information of healthcare networks, healthcare professionals and patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that addHealthcareProfessional, addHospital and addPatient functions work correctly ensuring proper document creation.
+    \end{itemize}
+
+    \item Removing valid documents from the database:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
+      \item \textbf{Output:} Successful deletion of valid information of healthcare networks, healthcare professionals and patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that deleteHealthCareProfessional, deleteHospital and deletePatient functions work correctly ensuring proper document deletion.
+    \end{itemize}
+
+    \item Updating valid documents in the database:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the patients are given as input.  
+      \item \textbf{Output:} Successful update of valid information of the patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that updatePatient function works correctly ensuring proper patient record update.
+    \end{itemize}
+
+    All other updates for healthcare networks and healthcare professionals will happen through addhospital and addHealthcareProfessional functions so we have not written unit tests for them.
+
+    \item No duplicate addition of patient document in the system:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the patients are given as input.  
+      \item \textbf{Output:} No specific output is returned by the test function itself. However, the test asserts a specific state in the database. 
+      \item \textbf{Test Derivation:} Verifies that the addPatient function correctly handles attempts to add duplicate patient records. It ensures that only one patient record is created even if the addPatient function is called multiple times.
+    \end{itemize}
+
+    Since our TypeScript doesn't allow us to accept invalid object, we have not written unit tests for adding an invalid patient. Therefore, we have written the above test to make sure no duplicate patient record is created.
+
+    \item Retrieval of correct existing document:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock id of the patients are given as input.  
+      \item \textbf{Output:} Retrieval of the correct patient object from the database. 
+      \item \textbf{Test Derivation:} Verifies that the getPatient function correctly retrieves an existing patient document from the database after providing patient id.
+    \end{itemize}
+
+    \item Retrieval of non-existing document:
+
+    \begin{itemize}
+      \item \textbf{Input:} Non-existent mock id of the patients are given as input.  
+      \item \textbf{Output:} Returns null. 
+      \item \textbf{Test Derivation:} Verifies that the getPatient function correctly handles situations when a non-existing patient document from the database is requested to retrieve after providing a non-existing patient id.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Administrator View Module and Patient View Module}
+
+\begin{enumerate}
+
+  \textbf{Control:} Manual
+
+  \textbf{Initial State:} No specific initialization is required as tests solely focus on validating fields.
+
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct implementation of data validation rules and age calculation logic, ensuring accurate identification of invalid input, acceptance of valid input, and precise calculation of age based on provided dates.
+
+  \textbf{Test Procedure:} The tests are performed as follows:
+
+  \begin{itemize}
+    \item Should return appropriate error for invalid field input:
+
+    \begin{itemize}
+      \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
+      \item \textbf{Output:} Returns appropriate error messages on receiving invalid input.
+      \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies invalid input values for different field types. It ensures that the function returns appropriate error messages for invalid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+    \end{itemize}
+
+    \item Should return an empty string for valid field input:
+
+    \begin{itemize}
+      \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
+      \item \textbf{Output:} Returns an empty string on receiving invalid input.
+      \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies valid input values for different field types. It ensures that the function returns an empty string for valid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+    \end{itemize}
+
+    \item Correct calculation of age:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth.    
+      \item \textbf{Output:} Returns a number representing the calculated age.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly calculates the age for a given date of birth.
+    \end{itemize}
+
+    \item Calculation of age for future dates:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth in the future.    
+      \item \textbf{Output:} Returns 0.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth in the future.
+    \end{itemize}
+
+    \item Calculation of age for the present date:
+
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth representing today's date.    
+      \item \textbf{Output:} Returns 0.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth with today's date.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+
 \section{Changes Due to Testing}
 
 \wss{This section should highlight how feedback from the users and from 
@@ -549,8 +701,55 @@ the feedback from the Rev 0 demo to the supervisor (or to potential users)
 should be highlighted.}
 
 \section{Automated Testing}
-		
+
+In our repository, we use GitHub Actions to automate critical aspects of our development workflow, primarily focusing on testing and code quality. This automation ensures that every code change undergoes a rigorous validation process before being integrated into the main branch. The execution of our suite of unit and integration tests forms the basis of our continuous integration approach. This makes sure that any new code modifications don't cause regressions or interfere with already-existing functionality. These tests are automatically executed on each pull request, allowing us to promptly detect and fix any possible problems early in the development cycle. Our team has been continuously running into linting problems on all pull requests lately. Even though our tests pass GitHub Actions CI / Explore-GitHub-Actions (push) test, it fails the Lint code base (push) test. The screenshot below show an example of lint-codebase error.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{lint_codebase_error.png}
+  \caption{Lint codebase error}
+\end{figure}
+
 \section{Trace to Requirements}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 & FR14\\
+  \hline
+  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  \hline
+  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  \hline
+  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  \hline
+  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  \hline
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  \hline
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  \hline
+  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & & \\
+  \hline
+  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & & \\
+  \hline
+  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & & \\
+  \hline
+  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & & \\
+  \hline
+  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR12,13,IR5-\ref{test-FR12,13,IR5-2} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  \hline
+  test-FR14-\ref{test-FR14-1} & & & & & & & & & & & & & & $\times$ \\
+  \hline
+\end{tabular}
+\caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}
+\end{table}
+
 
 \begin{table} [H]
   \centering
@@ -623,6 +822,14 @@ should be highlighted.}
 \section{Trace to Modules}		
 
 \section{Code Coverage Metrics}
+
+The image below displays the code coverage metrix. This includes all the files, includes the files for which the team created unit tests. As can been in the figure below, the code coverage for all the files we created the unit tests for is 100'\%.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{code_coverage_metrics.jpg}
+  \caption{Code Coverage Metrics}
+\end{figure}
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}

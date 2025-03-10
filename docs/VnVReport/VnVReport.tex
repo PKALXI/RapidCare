@@ -570,6 +570,73 @@ This section will not be appropriate for every project.
   \end{itemize}
 \end{enumerate}
 
+\subsubsection{Administrator Account Management Module and Patient Account Management Module}
+
+\begin{enumerate}
+
+  \textbf{Control:} Manual
+
+  \textbf{Initial State:} Provides mock data of healthcare professionals, healthcare networks and patients.
+
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functionality of onboarding, updating, and removing the healthcare networks, healthcare professionals and patient records.
+
+  \textbf{Test Procedure:} The tests are performed as follows:
+
+  \begin{itemize}
+    \item Adding valid documents to the database:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
+      \item \textbf{Output:} Successful addition of valid information of healthcare networks, healthcare professionals and patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that addHealthcareProfessional, addHospital and addPatient functions work correctly ensuring proper document creation.
+    \end{itemize}
+
+    \item Removing valid documents from the database:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
+      \item \textbf{Output:} Successful deletion of valid information of healthcare networks, healthcare professionals and patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that deleteHealthCareProfessional, deleteHospital and deletePatient functions work correctly ensuring proper document deletion.
+    \end{itemize}
+
+    \item Updating valid documents in the database:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the patients are given as input.  
+      \item \textbf{Output:} Successful update of valid information of the patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that updatePatient function works correctly ensuring proper patient record update.
+    \end{itemize}
+
+    All other updates for healthcare networks and healthcare professionals will happen through addhospital and addHealthcareProfessional functions so we have not written unit tests for them.
+
+    \item No duplicate addition of patient document in the system:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the patients are given as input.  
+      \item \textbf{Output:} No specific output is returned by the test function itself. However, the test asserts a specific state in the database. 
+      \item \textbf{Test Derivation:} Verifies that the addPatient function correctly handles attempts to add duplicate patient records. It ensures that only one patient record is created even if the addPatient function is called multiple times.
+    \end{itemize}
+
+    Since our TypeScript doesn't allow us to accept invalid object, we have not written unit tests for adding an invalid patient. Therefore, we have written the above test to make sure no duplicate patient record is created.
+
+    \item Retrieval of correct existing document:
+
+    \begin{itemize}
+      \item \textbf{Input:} Mock id of the patients are given as input.  
+      \item \textbf{Output:} Retrieval of the correct patient object from the database. 
+      \item \textbf{Test Derivation:} Verifies that the getPatient function correctly retrieves an existing patient document from the database after providing patient id.
+    \end{itemize}
+
+    \item Retrieval of non-existing document:
+
+    \begin{itemize}
+      \item \textbf{Input:} Non-existent mock id of the patients are given as input.  
+      \item \textbf{Output:} Returns null. 
+      \item \textbf{Test Derivation:} Verifies that the getPatient function correctly handles situations when a non-existing patient document from the database is requested to retrieve after providing a non-existing patient id.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
 
 
 

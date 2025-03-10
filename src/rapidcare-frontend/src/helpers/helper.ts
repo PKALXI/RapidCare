@@ -10,6 +10,8 @@ export const validateField = (field: string, value: string | number | boolean): 
                 if (!emailRegex.test(value)) {
                     errorMessage = 'Invalid email format';
                 }
+            } else {
+                errorMessage = 'Invalid email format';  
             }
             break;
 
@@ -19,6 +21,8 @@ export const validateField = (field: string, value: string | number | boolean): 
                 if (!phoneRegex.test(value)) {
                     errorMessage = 'Invalid phone number format';
                 }
+            } else {
+                errorMessage = 'Invalid phone number format'
             }
             break;
 
@@ -28,6 +32,8 @@ export const validateField = (field: string, value: string | number | boolean): 
                 if (!dobRegex.test(value)) {
                     errorMessage = 'Invalid date format (YYYY-MM-DD)';
                 }
+            } else {
+                errorMessage = 'Invalid date format (YYYY-MM-DD)';
             }
             break;
 

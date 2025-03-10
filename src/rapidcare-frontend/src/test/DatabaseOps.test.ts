@@ -13,59 +13,26 @@ describe('DatabaseOps', () => {
         // Clear all collections or specific documents
     });
 
-
-    //admin
-
-    test('addAdmin should add a valid document', async () => {
+    test('should add a valid document to database', async () => {
+        
         await addAdmin(mockAdmin);
         const docSnapshot = await getDoc(doc(db, 'admin', mockAdmin.id));
         expect(docSnapshot.exists()).toBe(true);
-    });
 
-    test('deleteAdmin should delete a existing document', async () => {
-        await deleteAdmin(mockHealthCareProfessional);
-        const docSnapshot = await getDoc(doc(db, 'admin', mockHealthCareProfessional.id));
-        expect(docSnapshot.exists()).toBe(false);
-    });
-
-    //hp
-
-    test('addHealthCareProfessional should add a valid document', async () => {
         await addHealthCareProfessional(mockHealthCareProfessional);
-        const docSnapshot = await getDoc(doc(db, 'healthcare_professional', mockHealthCareProfessional.id));
-        expect(docSnapshot.exists()).toBe(true);
-    });
+        const docSnapshot1 = await getDoc(doc(db, 'healthcare_professional', mockHealthCareProfessional.id));
+        expect(docSnapshot1.exists()).toBe(true);
 
-    test('deleteHealthCareProfessional should delete a existing document', async () => {
-        await deleteHealthCareProfessional(mockHealthCareProfessional);
-        const docSnapshot = await getDoc(doc(db, 'healthcare_professional', mockHealthCareProfessional.id));
-        expect(docSnapshot.exists()).toBe(false);
-    });
-
-    //hospital
-
-    test('addHospital should add a valid document', async () => {
         await addHospital(mockHospital);
-        const docSnapshot = await getDoc(doc(db, 'hospitals', mockHospital.id));
-        expect(docSnapshot.exists()).toBe(true);
-    });
+        const docSnapshot2 = await getDoc(doc(db, 'hospitals', mockHospital.id));
+        expect(docSnapshot2.exists()).toBe(true);
 
-    test('deleteHospital should delete a existing document', async () => {
-        await deleteHospital(mockHospital);
-        const docSnapshot = await getDoc(doc(db, 'hospitals', mockHospital.id));
-        expect(docSnapshot.exists()).toBe(false);
-    });
-
-
-    //patients
-
-    test('addPatient should add a valid document', async () => {
         await addPatient(mockPatient);
-        const docSnapshot = await getDoc(doc(db, 'patients', mockPatient.id));
-        expect(docSnapshot.exists()).toBe(true);
+        const docSnapshot3 = await getDoc(doc(db, 'patients', mockPatient.id));
+        expect(docSnapshot3.exists()).toBe(true);
     });
 
-    test('Duplicate document should not added', async () => {
+    test('should not add duplicate document', async () => {
         await addPatient(mockPatient);
         await addPatient(mockPatient);
 
@@ -76,26 +43,38 @@ describe('DatabaseOps', () => {
         expect(matchingPatients.length).toBe(1);
     });
 
-    test('getPatient should retreive a correct existing document', async () => {
+    test('should retreive correct existing document', async () => {
         const patient = await getPatient(mockPatient.id);
         expect(patient).toMatchObject(mockPatient);
     });
 
-    test('getPatient should return null for a non-existent document', async () => {
+    test('should return null for a non-existent document', async () => {
         const patient = await getPatient("1234567");
         expect(patient).toBeNull();
     });
 
-    test('updatePatient should update the correct patient', async () => {
+    test('should update the correct existing document', async () => {
         await updatePatient(mockPatient2);
         const docSnapshot = await getDoc(doc(db, 'patients', mockPatient2.id));
         expect(docSnapshot.data()).toMatchObject(mockPatient2);
     });
 
-    test('deletePatient should delete an existing document', async () => {
-        await deletePatient(mockPatient);
-        const docSnapshot = await getDoc(doc(db, 'patients', mockPatient.id));
+    test('deleteAdmin should delete a existing document', async () => {
+        await deleteAdmin(mockHealthCareProfessional);
+        const docSnapshot = await getDoc(doc(db, 'admin', mockHealthCareProfessional.id));
         expect(docSnapshot.exists()).toBe(false);
+
+        await deleteHealthCareProfessional(mockHealthCareProfessional);
+        const docSnapshot1 = await getDoc(doc(db, 'healthcare_professional', mockHealthCareProfessional.id));
+        expect(docSnapshot1.exists()).toBe(false);
+
+        await deleteHospital(mockHospital);
+        const docSnapshot2 = await getDoc(doc(db, 'hospitals', mockHospital.id));
+        expect(docSnapshot2.exists()).toBe(false);
+
+        await deletePatient(mockPatient);
+        const docSnapshot3 = await getDoc(doc(db, 'patients', mockPatient.id));
+        expect(docSnapshot3.exists()).toBe(false);
     });
 
 });

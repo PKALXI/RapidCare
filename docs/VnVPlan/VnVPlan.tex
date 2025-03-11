@@ -334,7 +334,7 @@ This subsection covers FR2, FR5, and FR9 from of the \href{https://github.com/In
 
 Control: Manual
 
-Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
+Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input. A document exists in the appropriate database.
 
 Input: A correct identifier for the document to be deleted.
 
@@ -349,7 +349,7 @@ How test will be performed: The test controller will input a valid identifier an
 
 Control: Manual
 
-Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
+Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input. A document exists in the appropriate database.
 
 Input: An invalid identifier for the document to be deleted.
 
@@ -485,9 +485,9 @@ This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet
 
 Control: Automatic
 
-Initial State: The user has uploaded the blank chart, and the chart has been populated with the patients symptoms.
+Initial State: Patient's blank chart is present, and a transcription of the Patient-Healthcare Professional conversation is present.
 
-Input: Correct and complete input data where all the symptoms fields of the chart are filled out.
+  Input: Correct and complete input data where all the symptoms fields of the chart are filled out.
 
 Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine.
 
@@ -509,7 +509,7 @@ Control: Automatic
 
 Initial State: The user has uploaded a blank chart.
 
-Input: Correct and complete input data where all the symptoms fields of the chart are filled out.
+Input: Correct and complete input data where the transcription is present.
 
 Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine.
 
@@ -521,11 +521,11 @@ How test will be performed: When the system is deployed the model input will be 
 
 Control: Automatic
 
-Initial State: The user has uploaded the blank chart a blank chart.
+Initial State: The patient's blank chart is present.
 
-Input: Incorrect and incomplete input data where all the symptoms fields of the chart are filled out.
+Input: Incorrect and incomplete transcription field as it was not recorded/complete.
 
-Output: An error message asking to fix the respective fields.
+Output: An error message relaying the error along with a HTTP status code indicating incomplete request.
 
 Test Case Derivation: The system will test if the chart data is relevant and correct.  
 

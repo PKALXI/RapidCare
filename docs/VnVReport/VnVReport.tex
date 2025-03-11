@@ -330,7 +330,7 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
   Input: Team members and peers view the UI under normal operating conditions.
 
-  Output: Feedback collected on UI’s aesthetic appeal and simplicity.
+  Output: Feedback collected on UI's aesthetic appeal and simplicity.
 
   Result: Pass
 
@@ -768,7 +768,7 @@ N/A
 
   \textbf{Control:} Automatic\\
   \textbf{Initial State:} A predefined set of conversation is used for testing. It also assumes that Open API Key is configured correctly.\\
-  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses. We will review the manual test by our supervisor.
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses. We will review the manual test by our supervisor.\\
   \textbf{Test Procedure:} The tests are performed as follows:\\
 
   \begin{enumerate}
@@ -967,7 +967,7 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
   \hline
   test-AC2-1 & & $\times$ & & & & & & & \\
   \hline
-  test-IR1-1 & & & $\times$ & & & & & & \\
+  test-IR1-1 & $\times$ & $\times$ & $\times$ & & & & & & \\
   \hline
   test-IR2-1  & & & & $\times$ & & & & &\\
   \hline
@@ -1102,6 +1102,8 @@ The image below displays the code coverage matrix for UI, Patient Account Manage
   \label{FigUH}
 \end{figure}
 
+\clearpage
+
 We also created unit tests for software decision modules. As can be seen in the figures below, we could not obtain 100\% coverage for all the tests because according to the report, the only thing missing is the run command for the tests.
 
 \begin{figure}[h]
@@ -1125,6 +1127,8 @@ We also created unit tests for software decision modules. As can be seen in the 
   \label{FigUH}
 \end{figure}
 
+\clearpage
+
 The below is the code coverage metrics for diagnosis prediction and medicine prediction modules. As can be seen in the figure below, we could not obtain 100\% coverage for all the tests because the catch that is not covered is alternatively covered by the 'else' statement which both yield the same http response code indicating a failure.
 
 \begin{figure}[h]
@@ -1141,6 +1145,8 @@ The below is the code coverage metrics for diagnosis prediction and medicine pre
   \label{FigUH}
 \end{figure}
 
+\clearpage
+
 The below is the code coverage metrics for transcription module. As can be seen in the figure below, we could not obtain 100\% coverage for all the tests because according to the report, the only thing missing is the run command for the tests.
 
 \begin{figure}[h]
@@ -1149,6 +1155,8 @@ The below is the code coverage metrics for transcription module. As can be seen 
   \caption{Code Coverage Metrics for Transcription Module}
   \label{FigUH}
 \end{figure}
+
+\clearpage 
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}

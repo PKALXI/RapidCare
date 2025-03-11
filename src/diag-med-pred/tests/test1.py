@@ -6,6 +6,7 @@ import os
 '''
 gptAssistance method created using the below docs.
 https://platform.openai.com/docs/api-reference
+https://docs.python.org/3/library/unittest.html 
 '''
 
 os.environ['OPENAI_API_KEY'] = ""

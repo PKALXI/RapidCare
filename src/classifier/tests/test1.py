@@ -77,7 +77,7 @@ class TestAPI(unittest.TestCase):
         response = requests.post(f"{self.BASE_URL}/predict", data=form_data)
         assert(200 == response.status_code)
 
-    def testHealthForValidInput(self):
+    def testHealthForInvalidInput(self):
         form_data = {
            
         }

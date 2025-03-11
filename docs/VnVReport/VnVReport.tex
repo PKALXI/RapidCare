@@ -780,7 +780,7 @@ This section will not be appropriate for the project.
 
   \textbf{Control:} Automatic\\
   \textbf{Initial State:} A predefined set of conversation is used for testing. It also assumes that Open API Key is configured correctly.\\
-  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses.\\
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses. We will review the manual test by our supervisor.
   \textbf{Test Procedure:} The tests are performed as follows:\\
 
   \begin{enumerate}
@@ -830,6 +830,39 @@ This section will not be appropriate for the project.
         \item \textbf{Input:} The input for this test is the path to the invalid audio file. 
         \item \textbf{Output:} Returns an empty string containing transcribed text from the audio file.  
         \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles invalid input data. It establishes the connection with the server and asserts that transcription_text remains empty indicating that the invalid input is correctly handled.
+        \item \textbf{Result:} Pass
+      \end{itemize}
+  \end{enumerate}
+
+  \subsubsection{Classification Module}
+
+  \textbf{Control:} Automatic\\
+  \textbf{Initial State:} A list of pre-defined conversation containing patient's symptoms, allergies, medications is initialized.\\
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient conversations, extracts key information (symptoms, reason for visit, allergies, current medications), and provides relevant responses. The tests ensure that the API accurately extracts information from various conversation formats, handles both valid and invalid input data, and maintains a high level of confidence in generating appropriate responses.\\
+  \textbf{Test Procedure:} The tests are performed as follows:\\
+
+  \begin{enumerate}
+    \item Confidence score test:
+      \begin{itemize}
+        \item \textbf{Input:} The input for this test is the list of strings representing the patient conversation consisting of medications, allergies and current medications.   
+        \item \textbf{Output:} There is no direct output. This test asserts a condition based on the number of successful evaluations.
+        \item \textbf{Test Derivation:} Verifies the confidence of the API in correctly extracting information from patient conversations. It iterates through the list sending conversation to the API endpoint. We will test it manually with our supervisor. 
+        \item \textbf{Result:} Pass
+      \end{itemize}
+
+    \item Test for valid input:
+      \begin{itemize}
+        \item \textbf{Input:} The input for this test is the valid patient transcription. 
+        \item \textbf{Output:} Returns a response object from the API endpoint. 
+        \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes valid input data. It sends POST request with valid input to the API endpoint and asserts that the response status code is 200, indicating successful processing of the input.
+        \item \textbf{Result:} Pass
+      \end{itemize}
+
+      \item Test for invalid input:
+      \begin{itemize}
+        \item \textbf{Input:} The input for this test is an empty dictionary. 
+        \item \textbf{Output:} Returns a response object from the API endpoint. 
+        \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles empty input data. It sends POST request with empty input to the API endpoint and asserts that the response status code is 400, indicating successful processing of the input.
         \item \textbf{Result:} Pass
       \end{itemize}
   \end{enumerate}

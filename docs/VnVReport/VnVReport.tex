@@ -617,7 +617,7 @@ Result: Pass
 
 \section{Comparison to Existing Implementation}	
 
-This section will not be appropriate for the project.
+N/A
 
 \section{Unit Testing}
 
@@ -876,7 +876,7 @@ Based on the feedback received during the Rev 0 demo, we focused on ensuring tha
 
 \section{Automated Testing}
 
-In our repository, we use GitHub Actions to automate critical aspects of our development workflow, primarily focusing on testing and code quality. This automation ensures that every code change undergoes a rigorous validation process before being integrated into the main branch. The execution of our suite of unit and integration tests forms the basis of our continuous integration approach. This makes sure that any new code modifications don't cause regressions or interfere with already-existing functionality. These tests are automatically executed on each pull request, allowing us to promptly detect and fix any possible problems early in the development cycle. Our team has been continuously running into linting problems on all pull requests lately. Even though our tests pass GitHub Actions CI / Explore-GitHub-Actions (push) test, it fails the Lint code base (push) test. The screenshot below show an example of lint-codebase error.
+We useD GitHub Actions to automate critical aspects of our development workflow, primarily focusing on testing and code quality. This automation ensures that every code change undergoes a rigorous validation process before being integrated into the main branch. The execution of suite of unit and integration tests forms the basis of our continuous integration approach. This makes sure that any new code modifications don't cause regressions or interfere with already-existing functionality. These tests are automatically executed on each pull request, allowing us to promptly detect and fix any possible problems early in the development cycle. Our team has been continuously running into linting problems on all pull requests lately. Even though our tests pass GitHub Actions CI / Explore-GitHub-Actions (push) test, it fails the Lint code base (push) test. The screenshot below show an example of lint-codebase error. We hope to resolve this issue before final demonstration by fixing all the lint errors in the code.
 
 \begin{figure}[h]
   \centering
@@ -1107,7 +1107,7 @@ See MG Documentation at \href{https://github.com/PKALXI/RapidCare/blob/main/docs
 
 \section{Code Coverage Metrics}
 
-The image below displays the code coverage matrix. This includes all the files, includes the files for which the team created unit tests. As can been in the figure below, the code coverage for all the files we created the unit tests for is 100\%.
+The image below displays the code coverage matrix for UI, Patient Account Management, Administrator Account Management, and Authentication Modules. As can been in the figure below, the code coverage for all the files we created the unit tests for is 100\%. 
 
 \begin{figure}[h]
   \centering

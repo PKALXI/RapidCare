@@ -273,13 +273,13 @@ This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet
 
   \item{test-FR12,13-1} \label{test-FR12,13-1}
   
-  Initial State: The user has uploaded the blank chart, and the chart has been populated with the patients symptoms.
+  Initial State: Patient's blank chart is present, and a transcription of the Patient-Healthcare Professional conversation is present.
 
   Input: Correct and complete input data where all the symptoms fields of the chart are filled out.
 
-  Expected Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine.
+  Expected Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine and a plan of treatment.
 
-  Actual Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine.
+  Actual Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine and a plan of treatment.
 
   Result: Pass
 
@@ -294,9 +294,9 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
   \item{test-FR12,13,IR5-1} \label{test-FR12,13,IR5-1}
   
-  Initial State: The user has uploaded a blank chart.
+  Initial State: The patient's blank chart is present.
 
-  Input: Correct and complete input data where all the symptoms fields of the chart are filled out.
+  Input: Correct and complete input data where the transcription is present.
 
   Expected Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine.
 
@@ -306,13 +306,13 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
   \item{test-FR12,13,IR5-2} \label{test-FR12,13,IR5-2}
   
-  Initial State: The user has uploaded the blank chart a blank chart.
+  Initial State: The patient's blank chart is present.
 
-  Input: Incorrect and incomplete input data where all the symptoms fields of the chart are filled out.
+  Input: Incorrect and incomplete transcription field as it was not recorded/complete.
 
-  Expected Output: An error message asking to fix the respective fields.
+  Expected Output: An error message relaying the error along with a HTTP status code indicating incomplete request.
 
-  Actual Output: An error message asking to fix the respective fields.
+  Actual Output: An error message relaying the error along with a HTTP status code indicating incomplete request.
 
   Result: Pass
 

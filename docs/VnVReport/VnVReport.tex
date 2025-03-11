@@ -352,11 +352,11 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 
   \item {test-UR1} \label{test-UR1}
 
-  Initial State: System is deployed and accessible.
+  Initial State: System is up.
 
   Input: Users navigate and explore system features independently.
 
-  Output: Majority of users can locate core functions without additional guidance.
+  Output: Majority of users can locate core functions without additional guidance. System reflects clear discoverability, affordances, and visibility.
 
   Result: Pass
 
@@ -423,7 +423,7 @@ Result: Pass
 \item test-SR1 \label{test-SR1}
 
 Initial State: System fully operational with access logs enabled.
-
+ 
 Input: Simulate unauthorized access attempts.
 
 Output: Unauthorized attempts are blocked; access logs capture details.
@@ -834,7 +834,7 @@ N/A
       \begin{itemize}
         \item \textbf{Input:} The input for this test is the list of strings representing the patient conversation consisting of medications, allergies and current medications.   
         \item \textbf{Output:} There is no direct output. This test asserts a condition based on the number of successful evaluations.
-        \item \textbf{Test Derivation:} Verifies the confidence of the API in correctly extracting information from patient conversations. It iterates through the list sending conversation to the API endpoint. We will test it manually with our supervisor. 
+        \item \textbf{Test Derivation:} Verifies the confidence of the API in correctly extracting information from patient conversations. It iterates through the list sending conversation to the API endpoint. We will test it manually with our supervisor. Due to the output of this test not being the deterministic, we have used a strategy that involves using a third independent AI agent to evaluate the confidence. This allows for an initial benchmark of the confidence on the service's performance.  
         \item \textbf{Result:} Pass
       \end{itemize}
 
@@ -1099,6 +1099,54 @@ The image below displays the code coverage matrix for UI, Patient Account Manage
   \centering
   \includegraphics[width=0.7\textwidth]{CodeCoverageMetrics.jpg}
   \caption{Code Coverage Metrics}
+  \label{FigUH}
+\end{figure}
+
+We also created unit tests for software decision modules. As can be seen in the figures below, we could not obtain 100\% coverage for all the tests because according to the report, the only thing missing is the run command for the tests.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{CCM_for_Classify.jpg}
+  \caption{Code Coverage Metrics for Classification Module}
+  \label{FigUH}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Classify_tests.jpg}
+  \caption{Tests for Classification Module}
+  \label{FigUH}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{CCMmissing.jpg}
+  \caption{Tests for Classification Module}
+  \label{FigUH}
+\end{figure}
+
+The below is the code coverage metrics for diagnosis prediction and medicine prediction modules. As can be seen in the figure below, we could not obtain 100\% coverage for all the tests because the catch that is not covered is alternatively covered by the 'else' statement which both yield the same http response code indicating a failure.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{CCM_for_Diag_Med_Pred.jpg}
+  \caption{Code Coverage Metrics for Diagnosis Prediction and Medicine Prediction Module}
+  \label{FigUH}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Diag_Med_Prediction.jpg}
+  \caption{Tests for Diagnosis Prediction and Medicine Prediction Module}
+  \label{FigUH}
+\end{figure}
+
+The below is the code coverage metrics for transcription module. As can be seen in the figure below, we could not obtain 100\% coverage for all the tests because according to the report, the only thing missing is the run command for the tests.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Vtttest.jpg}
+  \caption{Code Coverage Metrics for Transcription Module}
   \label{FigUH}
 \end{figure}
 

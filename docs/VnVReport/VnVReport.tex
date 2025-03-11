@@ -395,25 +395,26 @@ Result: Pass
 \subsection{Maintainability} \label{section:4.5}
 
 \begin{enumerate}
-\item test-MR1 \label{test-MR1}
+  \item test-MR1 \label{test-MR1}
+  
+  Initial State: System is running in the development environment.
+  
+  Input: Review and modify system components (e.g., refactoring code, adding new functionality).
+  
+  Output: Changes are successfully integrated without breaking existing functionality, verified through automated/unit tests.
+  
+  Result: Pass
 
-Initial State: System running on the latest version with recent update logs.
+  \item test-MR2 \label{test-MR2} 
 
-Input: Regular software update applied for bug fixes and improvements.
-
-Output: System successfully applies updates without impacting stability.
-
-Result: Pass
-
-\item test-MR2 \label{test-MR2} 
-
-Initial State: Previous version of the system with identified bugs or issues.
-
-Input: Apply updates addressing known issues.
-
-Output: System functions as expected with resolved issues and no new errors introduced.
-
-Result: Pass
+  Initial State: Codebase is under active development.
+  
+  Input: Perform a code maintainability review i.e. checking adherence to coding standards, documentation completeness.
+  
+  Output: Code follows maintainability best practices, including clear documentation and modular structure.
+  
+  Result: Pass/Fail
+  \end{enumerate}
 
 \end{enumerate}
 

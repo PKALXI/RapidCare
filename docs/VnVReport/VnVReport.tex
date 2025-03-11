@@ -508,8 +508,7 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \end{itemize}
 
 \begin{itemize}
-\item \textbf{test-IR5-1} \label{test-IR5-1} \\ 
-% Need to fix this test
+\item \textbf{test-IR6-1} \label{test-IR6-1} \\
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. A document already exists in the relevant database. \\
 \textbf{Input:} Written text transcribed from the audio data. \\
 \textbf{Output:} The data is correctly classified in the generated report with no diagnosis errors. \\
@@ -517,14 +516,12 @@ This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/
 \end{itemize}
 
 \begin{itemize}
-\item \textbf{test-IR6-1} \label{test-IR6-1} \\
+\item \textbf{test-IR7-1} \label{test-IR7-1} \\
 \textbf{Initial State:} System is set up, open to the relevant section, and ready to take user input. \\
 \textbf{Input:} Audio conversation between the patient and healthcare professional. \\
 \textbf{Output:} The written text transcribed from the input data matches the conversation with minimal to no interference. \\
 \textbf{Result:} Pass \\
 \end{itemize}
-
-% Missing IR7
 
 
 \section{Comparison to Existing Implementation}	
@@ -827,7 +824,7 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
   \hline
-  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 \\
+  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 & IR7 \\
   \hline
   test-AC1-1 & $\times$ & & & & & & &   \\
   \hline
@@ -843,9 +840,11 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
   \hline
   test-IR4-1  & & & & & & $\times$ & &  \\
   \hline
-  test-IR5-1  & & & & & & &  $\times$ & \\
+  test-FR12,13,IR5  & & & & & & & $\times$ & & \\
   \hline
-  test-IR6-1  & & & & & & & &  $\times$ \\
+  test-IR6-1  & & & & & & &  $\times$ & \\
+  \hline
+  test-IR7-1  & & & & & & & &  $\times$ \\
   \hline
 \end{tabular}
 \caption{\bf Safety and Security Requirements Tests Requirement Traceability} \label{tab:sns-test-traceability}

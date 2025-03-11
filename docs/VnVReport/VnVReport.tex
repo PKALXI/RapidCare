@@ -778,7 +778,7 @@ This section will not be appropriate for the project.
 
   \subsubsection{Diagnosis Prediction Module and Medicine Prediction Module}
 
-  \textbf{Control:} Manual\\
+  \textbf{Control:} Automatic\\
   \textbf{Initial State:} A predefined set of conversation is used for testing. It also assumes that Open API Key is configured correctly.\\
   \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses.\\
   \textbf{Test Procedure:} The tests are performed as follows:\\
@@ -805,6 +805,31 @@ This section will not be appropriate for the project.
         \item \textbf{Input:} A dictionary that contains an empty string of invalid transcription of a patient conversation.    
         \item \textbf{Output:} Returns a response object from API endpoint.
         \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes invalid input data. It sends POST request with invalid and missing transcription to the API endpoint and asserts that the response status code is 400, successful identification of invalid input.
+        \item \textbf{Result:} Pass
+      \end{itemize}
+  \end{enumerate}
+
+  \subsubsection{Transcription Module}
+
+  \textbf{Control:} Manual\\
+  \textbf{Initial State:} The audio files are provided as input for the tests and Socket.IO Server is running at a specified host.\\
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of a Socket.IO server that receives audio chunks, performs transcription, and emits transcription results or errors. The tests ensure that the server correctly transcribes valid audio data, handles invalid audio input, and emits appropriate events with accurate transcription results or error indicators.\\
+  \textbf{Test Procedure:} The tests are performed as follows:\\
+
+  \begin{enumerate}
+    \item Test for valid audio file:
+      \begin{itemize}
+        \item \textbf{Input:} The input for this test is the path to the valid audio file.   
+        \item \textbf{Output:} Returns a string containing transcribed text from the audio file.
+        \item \textbf{Test Derivation:} Verifies the audio transcription functionality of the Socket.IO server. It establishes a connection with the server and sends the audio data in chunks and then emits the transcribed text. 
+        \item \textbf{Result:} Pass
+      \end{itemize}
+
+    \item Test for invalid audio file:
+      \begin{itemize}
+        \item \textbf{Input:} The input for this test is the path to the invalid audio file. 
+        \item \textbf{Output:} Returns an empty string containing transcribed text from the audio file.  
+        \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles invalid input data. It establishes the connection with the server and asserts that transcription_text remains empty indicating that the invalid input is correctly handled.
         \item \textbf{Result:} Pass
       \end{itemize}
   \end{enumerate}

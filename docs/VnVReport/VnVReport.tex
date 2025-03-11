@@ -20,8 +20,8 @@
 }
 \usepackage[round]{natbib}
 
-\input{../Comments}
-\input{../Common}
+\input{docs/Comments}
+\input{docs/Common.tex}
 
 \newcounter{acnum}
 \newcommand{\actheacnum}{AC\theacnum}
@@ -829,7 +829,7 @@ This section will not be appropriate for the project.
       \begin{itemize}
         \item \textbf{Input:} The input for this test is the path to the invalid audio file. 
         \item \textbf{Output:} Returns an empty string containing transcribed text from the audio file.  
-        \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles invalid input data. It establishes the connection with the server and asserts that transcription_text remains empty indicating that the invalid input is correctly handled.
+        \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles invalid input data. It establishes the connection with the server and asserts that transcription\_text remains empty indicating that the invalid input is correctly handled.
         \item \textbf{Result:} Pass
       \end{itemize}
   \end{enumerate}
@@ -882,7 +882,7 @@ In our repository, we use GitHub Actions to automate critical aspects of our dev
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.7\textwidth]{lintCodebaseError.png}
+  \includegraphics[width=0.7\textwidth]{docs/VnVReport/lintCodebaseError.png}
   \caption{Lint codebase error}
   \label{FigUH}
 \end{figure}
@@ -1113,7 +1113,7 @@ The image below displays the code coverage metrix. This includes all the files, 
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.7\textwidth]{CodeCoverageMetrics.jpg}
+  \includegraphics[width=0.7\textwidth]{docs/VnVReport/CodeCoverageMetrics.jpg}
   \caption{Code Coverage Metrics}
   \label{FigUH}
 \end{figure}
@@ -1127,7 +1127,7 @@ The image below displays the code coverage metrix. This includes all the files, 
 The information in this section will be used to evaluate the team members on the
 graduate attribute of Reflection.
 
-\input{../Reflection.tex}
+\input{docs/Reflection.tex}
 
 \begin{enumerate}
   \item What went well while writing this deliverable?\\

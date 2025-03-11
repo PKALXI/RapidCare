@@ -296,7 +296,7 @@ This subsection covers FR1, FR4, and FR8 from of the \href{https://github.com/In
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
+Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
 
 Input: Correct and complete input data for all required fields.
 
@@ -311,7 +311,7 @@ How test will be performed: The test controller will input a valid data object a
 
 Control: Manual
 					
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
+Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
 
 Input: Invalid input data.
 
@@ -334,7 +334,7 @@ This subsection covers FR2, FR5, and FR9 from of the \href{https://github.com/In
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input. A document exists in the appropriate database.
+Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
 
 Input: A correct identifier for the document to be deleted.
 
@@ -349,7 +349,7 @@ How test will be performed: The test controller will input a valid identifier an
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input. A document exists in the appropriate database.
+Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
 
 Input: An invalid identifier for the document to be deleted.
 
@@ -372,7 +372,7 @@ This subsection covers FR3, FR6, FR10, and FR11 from of the \href{https://github
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
+Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
 
 Input: A correct identifier for the document to be updated.
 
@@ -387,7 +387,7 @@ How test will be performed: The test controller will input a valid identifier an
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
+Initial State: The system is set up, open to the relevant section (e.g., Healthcare Network, Healthcare Professional, or Patient Records), and ready to take the user input.
 
 Input: Invalid input data.
 
@@ -410,7 +410,7 @@ This subsection covers FR7 from of the \href{https://github.com/Inreet-Kaur/caps
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
+Initial State:  The system is set up, and the user is on the login page, ready to enter their credentials.
 
 Input: The correct credentials for login.
 
@@ -425,7 +425,7 @@ How test will be performed: The test controller will input the valid credentials
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
+Initial State:  The system is set up, and the user is on the login page, ready to enter their credentials.
 
 Input: Invalid credentials for login.
 
@@ -447,7 +447,7 @@ This subsection covers FR7 from of the \href{https://github.com/Inreet-Kaur/caps
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
+Initial State: The user has successfully logged in and is on the appropriate view to take audio input. 
 
 Input: A valid audio chunk from the conversation between the healthcare professional and the patient.
 
@@ -462,7 +462,7 @@ How test will be performed: The test controller will input a valid audio chunk a
 
 Control: Manual
 
-Initial State: The system is set up, open to the following sections: Patient Records, Healthcare Professional Records and Healthcare Network Records. The system is ready to take the user input.
+Initial State: The user has successfully logged in and is on the appropriate view to take audio input.
 
 Input: An invalid data format for transcription.
 
@@ -533,28 +533,6 @@ How test will be performed: When the system is deployed the model input will be 
 
 \end{enumerate}
 
-
-\subsubsection{Verify completeness and correctness of data}\label{section:4.1.8}
-This subsection covers FR14 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the data sent over is complete.
-
-\begin{enumerate}
-
-\item{test-FR14-1} \label{test-FR14-1}
-
-Control: Manual
-
-Initial State: The user has a completed patient profile and wishes to send it over. 
-
-Input: Correct and completed patient chart to be sent to another healthcare network.
-
-Output: A successful send where the data is validated at the endpoint, if incomplete data is received an error message should pop up.
-
-Test Case Derivation: The system will test if the patient profile properly got sent over.
-
-How test will be performed: Tester will send a sample patient profile from one dummy network to another, then the test cases will check if the integrity of the profile is in tact.
-
-
-\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements} \label{section:4.2}
 

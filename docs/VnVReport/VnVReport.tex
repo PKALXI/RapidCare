@@ -557,6 +557,7 @@ Result: Pass
 
   Input: Simulate multiple concurrent failed login attempts while monitoring credential storage.
 
+
   Output: User credentials remain unchanged, and system maintains stability.
 
   Result: Pass
@@ -591,8 +592,8 @@ Result: Pass
 
   Result: Pass
 
-  \item test-IR5-1 \label{test-IR5-1} 
-  % Need to fix this test
+  \item test-IR5-1 \label{test-IR6-1} 
+  
   Initial State: System is set up, open to the relevant section, and ready to take user input. A document already exists in the relevant database.
 
   Input: Written text transcribed from the audio data.
@@ -601,7 +602,7 @@ Result: Pass
 
   Result: Pass
 
-  \item test-IR6-1 \label{test-IR6-1}
+  \item test-IR6-1 \label{test-IR7-1}
 
   Initial State: System is set up, open to the relevant section, and ready to take user input.
 
@@ -611,8 +612,8 @@ Result: Pass
 
   Result: Pass
 
-% Missing IR7
 \end{enumerate}
+
 
 \section{Comparison to Existing Implementation}	
 
@@ -914,7 +915,7 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
   \hline
-  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 \\
+  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 & IR7 \\
   \hline
   test-AC1-1 & $\times$ & & & & & & &   \\
   \hline
@@ -930,9 +931,11 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
   \hline
   test-IR4-1  & & & & & & $\times$ & &  \\
   \hline
-  test-IR5-1  & & & & & & &  $\times$ & \\
+  test-FR12,13,IR5  & & & & & & & $\times$ & & \\
   \hline
-  test-IR6-1  & & & & & & & &  $\times$ \\
+  test-IR6-1  & & & & & & &  $\times$ & \\
+  \hline
+  test-IR7-1  & & & & & & & &  $\times$ \\
   \hline
 \end{tabular}
 \caption{\bf Safety and Security Requirements Tests Requirement Traceability} \label{tab:sns-test-traceability}
@@ -1036,9 +1039,9 @@ See MG Documentation at \href{https://github.com/PKALXI/RapidCare/blob/main/docs
   \hline
   test-IR4-1 & & $\times$ & $\times$ & & & & & & & & $\times$ & $\times$\\
   \hline
-  test-IR5-1 & & & & & & & $\times$ & $\times$ & & & &\\
-  \hline
   test-IR6-1 & & & & & & & $\times$ & $\times$ & & & &\\
+  \hline
+  test-IR7-1 & & & & & & & $\times$ & $\times$ & & & &\\
   \hline
 \end{tabular}
 \caption{\bf Safety and Security Requirements Tests Module Traceability} \label{tab:sns-test-traceability}

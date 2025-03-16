@@ -49,17 +49,18 @@ Ontario is facing an extreme shortage of family doctors, with the number of pati
 Inputs for this project will be the following:
 
 \begin{itemize}
-    \item \textbf{Doctor-Patient Conversation} -- They are the stored information of the conversation between the medical staff and the patient that contains information such as the patient’s personal history, disease history, and current treatment among others.
-    \item \textbf{Common Diseases List} -- This comprises features such as symptoms and treatment/diagnosis using machine learning algorithms.
-    \item \textbf{Voice Profiles} -- Voice profiles that can be specific for doctors and patients will enable them to be recognized for the chart filled out accordingly. 
+    \item \textbf{Doctor-Patient Conversation} -- To streamline the documentation process, the conversation between the doctor and the patient is recorded using the recording tool.
+    \item \textbf{Medical Prediction Context} -- A comprehensive knowledge of common diseases and the associated medicines is served as input for the model to predict the diagnosis and medicines.
+    \item \textbf{Text Field Input} -- Text field entries are utilized as input parameters for subsequent data processing operations.
+     
 \end {itemize}
 
 Outputs for this project will be the following: 
 
 \begin{itemize} 
-    \item \textbf{Triage information} -- The subjects involve triage data entry from the recorded conversation with the aim of enhancing the documentation process within the emergency department.
-    \item \textbf{Auto-filled documents} -- The documentation process will be done according to the conversation which will be recorded and then transcribed to electronic means for filing in the patient’s profile.
-    \item \textbf{Alerts for Medical Staff} -- In case of any priority cases the alert will be sent to the doctor, especially in the emergency department, based on the symptoms mentioned for treatment.
+    \item \textbf{Transcribed Text} -- After the audio conversation is given as the input, it is then processed and transcribed into written text as its output.
+    \item \textbf{Predicted Diagnosis} -- The system predicted the diagnosis and its associated medicines solely based on the provided context about common diseases in the world.  
+    \item \textbf{Auto-filled documents} -- The transcribed text is further classified into relevant categories to autofill the charts with patient's medical information.
 \end{itemize}
 
 \wss{Inputs:}

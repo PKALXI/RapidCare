@@ -38,6 +38,7 @@
 24--09--2024 & Gurleen & Coding Standards\\
 24--09--2024 & All & Reflection\\
 24--09--2024 & All & Team Charter\\
+16--03--2025 & Gurleen Rahi & Copyright License Update + Expected Technology Update\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -137,15 +138,15 @@ The team will be using the following projects:
 \item \textbf{Development workflow} -- This project will be used to record issues for different features, feature enhancements, bug fixes, and other needs of the project. The issues will be divided into the above listed categories and will use customized templates for each. 
 \end{itemize}
 
-CI/CD will be critical for project development. We will be using \textbf{Jenkins} which is an open-source CI/CD development tool that will act as an automated DevOps tool.
+CI/CD will be critical for project development. We will be using \textbf{GitHub Actions} which is a CI/CD automation tool provided by GitHub. It will act as an automated DevOps tool to streamline our development pipeline.
 
-Jenkins will allow us to achieve Continuous Integration and Continuous Delivery through the following:
+GitHub Actions will allow us to achieve Continuous Integration and Continuous Delivery through the following:
 \begin{itemize}
-  \item \textbf{Continuous Integration} -- On the continuous integration time Jenkins offers automated build and testing. This will save a lot of overhead on testing and test feedback as Jenkins will be responsible for it not only will it build and test the code it will also offer instant feedback to the developer.
-  \item \textbf{Continuous Deployment} -- Jenkins offers automated deployment functionalities meaning that once the build passes all tests it can be deployed into a production or pre-production environment. This will ensure the deployment is consistent, reliable, and efficient. This also will make sure that all features pass a minimum functionality standard ensuring that they are ready for production. Jenkins offers integrations with git as well so deployments will be version-controlled meaning they may be reverted as needed.
+  \item \textbf{Continuous Integration} -- On the continuous integration time GitHub Actions provides automated build and testing workflows directly within the GitHub repository. Upon each code commit or pull request, it triggers automated builds and tests, delivering instant feedback to developers. This helps to identify any possible errors rightaway and resolves any integration issues leading to faster development iterations and also improves the code quality.
+  \item \textbf{Continuous Deployment} -- GitHub Actions enables the creation of automated pipelines that deploy the code to production or pre-production environments. Once all tests pass, the automated workflow takes over, ensuring consistent, reliable, and efficient deployments. This process helps to minimize errors and gurantees that also allow easy rollbacks when needed. 
 \end{itemize}
 
-By implementing a CI/CD tool (Jenkins) we can ensure that code isn't riddled with errors and automate a lot of tasks which will increase productivity. Having Jenkins also will reduce the risk of human error in the project and will automate many areas of DevOps.
+By implementing a CI/CD tool (GitHub Actions) we can ensure that code isn't riddled with errors and automate a lot of tasks which will increase productivity. Having GitHub Actions also will reduce the risk of human error in the project and will automate many areas of DevOps.
 
 \section{Project Decomposition and Scheduling}
 
@@ -205,8 +206,8 @@ In terms of expected technologies, we need to expect will again change will impl
     \begin{itemize}
       \item ReactJS -- This will be used for the front end of the application.
       \item Python (Flask) -- This will be used to write backend services.
-      \item Java (SpringBoot) -- This will also provide an alternative option for backend services. It could be specifically useful for MongoDB integration.
-      \item MongoDB -- All data will be managed through a MongoDB database as it offers built-in caching and performs well under load.
+      \item Java (SpringBoot) -- This will also provide an alternative option for backend services. It could be specifically useful for Firebase integration.
+      \item Firebase -- All data will be managed through a Firebase realtime database as it offers built-in client-side caching and performs well under load for real time applications.
       \item Distributed Cache (Redis) -- Items that make frequent calls can be cached through Redis. This will overall increase the performance of the application.
     \end{itemize}
     
@@ -214,16 +215,18 @@ In terms of expected technologies, we need to expect will again change will impl
   \item Libraries
     Key frameworks:
     \begin{itemize}
-      \item LangChain -- This will be used for LLM integrations as it offers integrations will all the big LLMs.
-      \item NLTK -- NLTK will be used for any natural language processing needs. 
+      \item LangGraph -- LangGraph will be critical in building multi-agent applications with LLMs by managing interactions between different agents.
+      \item OpenAI -- OpenAI will be critical in pre-training AI models. Its cutting-edge models like GPT-4 is used to prevent the wastage of time in training them from scratch.
       \item Redux -- Redux will be critical in managing frontend states.
       \item OAuth -- OAuth will be critical in microservices communication to validate the services. This will especially come in handy in a specific middleware layer is implemented.
+      \item Jest -- Jest will be critical to use in unit testing for frontend development to validate the services. 
+      \item Unittest -- Unittest framework will be critical in writing and running the unit tests for validating backend services.    
     \end{itemize}
 
-  \item Specific linter tool -- Linters are useful for catching errors early in the development process. This also ensures the code that is written adheres to the standard which will mitigate code smells and enforce a specific style. Linters we can use include PyLint (Python), PMD for error catching, and/or Checkstyle to ensure the required coding standard is upheld.
-  \item Specific unit testing framework -- For frontend testing, we can use selenium to interact with the front and leverage frameworks like JUnit for backend unit testing.
+  \item Specific linter tool -- Linters are useful for catching errors early in the development process. This also ensures the code that is written adheres to the standard which will mitigate code smells and enforce a specific style. The linter we will use is Super-linter, which is packaged into a Docker container which is called by GitHub Actions. This also makes sure that the required coding standard is upheld.
+  \item Specific unit testing framework -- For frontend testing, we can use Jest to interact with the front and leverage frameworks like Unittest for backend unit testing.
   \item Investigation of code coverage measuring tools -- language-specific code coverage tools will be used such as Coverage.py for Python to assess coverage metrics and which cases are tested for.
-  \item Continuous integration -- As stated above Jenkins will be used to automate a lot of CI tasks. Please refer to the CI/CD section above.
+  \item Continuous integration -- As stated above GitHub Actions will be used to automate a lot of CI tasks. Please refer to the CI/CD section above.
 
   \item Tools we will be using include Git, GitHub, and GitHub projects for development. This will mean using version control as be the workflow plan above, and planning features and sprints based on GitHub projects. 
 \end{itemize}

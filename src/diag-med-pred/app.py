@@ -13,11 +13,13 @@ from typing_extensions import Annotated, List, TypedDict
 from langchain_openai import OpenAIEmbeddings
 from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
 
+load_dotenv('../.env')
 app = Flask(__name__)
 CORS(app)
 
-os.environ['OPENAI_API_KEY'] = ""
+# os.environ['OPENAI_API_KEY'] = ""
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 llm = init_chat_model("gpt-4o-mini", model_provider="openai")

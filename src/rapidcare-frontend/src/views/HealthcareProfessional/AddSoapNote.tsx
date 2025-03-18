@@ -134,7 +134,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
         } catch (error) {
             toast.error('Failed to save SOAP note');
             console.error(error);
-        }
+        }    
     };
 
     return (

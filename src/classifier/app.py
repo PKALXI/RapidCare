@@ -22,6 +22,9 @@ from langgraph.graph import START, StateGraph
 from typing_extensions import Annotated, List, TypedDict
 from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
+
+load_dotenv('../.env')
 
 app = Flask(__name__)
 

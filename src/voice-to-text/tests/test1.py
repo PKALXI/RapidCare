@@ -30,7 +30,7 @@ def on_transcription(data):
 
 
 @sio.on("transcription_error")
-def on_transcription(data):
+def on_transcription_error(data):
     global transcription_error
     transcription_error = True
 

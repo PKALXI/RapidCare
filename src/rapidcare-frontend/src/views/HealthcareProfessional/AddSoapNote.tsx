@@ -122,7 +122,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({ open, setOpen, patientId }) =
         setTranscribedText(transcribedText);
     
         brokerReference.current?.diagnosePredictText(transcribedText, setNote);
-
+        brokerReference.current?.classifyPredictText(transcribedText, setNote);
         console.log("DESCRIPTION---: " + transcribedText);  // Optionally log the transcription
     }, []);
 

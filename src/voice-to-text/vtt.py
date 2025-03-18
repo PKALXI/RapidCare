@@ -5,14 +5,17 @@ from flask_cors import CORS
 import openai
 import io
 from pydub import AudioSegment
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
 CORS(app) #Enable CORS
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# openai.api_key = os.environ.get("OPENAI_API_KEY")
-os.environ['OPENAI_API_KEY'] = ""
+load_dotenv('../.env')
+
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+# os.environ['OPENAI_API_KEY'] = ""
 
 transcribed_text = ""
 

@@ -142,7 +142,7 @@ CI/CD will be critical for project development. We will be using \textbf{GitHub 
 
 GitHub Actions will allow us to achieve Continuous Integration and Continuous Delivery through the following:
 \begin{itemize}
-  \item \textbf{Continuous Integration} -- On the continuous integration time GitHub Actions provides automated build and testing workflows directly within the GitHub repository. Upon each code commit or pull request, it triggers automated builds and tests, delivering instant feedback to developers. This helps to identify any possible errors rightaway and resolves any integration issues leading to faster development iterations and also improves the code quality.
+  \item \textbf{Continuous Integration} -- On the continuous integration time GitHub Actions provides automated build and testing workflows directly within the GitHub repository. Upon each code commit or pull request, it will trigger a linting service that will ensure that the code maintains code standards that are outlined in the section below. This helps to identify any possible errors rightaway and resolves any integration issues leading to faster development iterations and also improves the code quality.
   \item \textbf{Continuous Deployment} -- GitHub Actions enables the creation of automated pipelines that deploy the code to production or pre-production environments. Once all tests pass, the automated workflow takes over, ensuring consistent, reliable, and efficient deployments. This process helps to minimize errors and gurantees that also allow easy rollbacks when needed. 
 \end{itemize}
 
@@ -206,17 +206,15 @@ In terms of expected technologies, we need to expect will again change will impl
     \begin{itemize}
       \item ReactJS -- This will be used for the front end of the application.
       \item Python (Flask) -- This will be used to write backend services.
-      \item Java (SpringBoot) -- This will also provide an alternative option for backend services. It could be specifically useful for Firebase integration.
-      \item Firebase -- All data will be managed through a Firebase realtime database as it offers built-in client-side caching and performs well under load for real time applications.
-      \item Distributed Cache (Redis) -- Items that make frequent calls can be cached through Redis. This will overall increase the performance of the application.
+      \item Firebase -- All data will be managed through a Firebase realtime database as it provides the database along with authentication functionality.
     \end{itemize}
     
 
   \item Libraries
     Key frameworks:
     \begin{itemize}
-      \item LangGraph -- LangGraph will be critical in building multi-agent applications with LLMs by managing interactions between different agents.
-      \item OpenAI -- OpenAI will be critical in pre-training AI models. Its cutting-edge models like GPT-4 is used to prevent the wastage of time in training them from scratch.
+      \item LangGraph -- LangGraph will be critical in building multi-agent applications with LLMs by managing interactions between different agents. By representing workflows as directed graphs, LangGraph allows for precise control over the flow of information and execution, enabling complex reasoning and problem-solving. Agents, acting as nodes in the graph, process information and perform tasks, guided by dynamically generated prompts that can incorporate knowledge retrieved from vector stores. 
+      \item OpenAI -- OpenAI will be critical in pre-training AI models. Its cutting-edge models like GPT-4 is used to prevent the wastage of time in training them from scratch. It will support creating embedding out of context (pdfs, txt, etc...) as well as provide agentic functions to interact with the context.
       \item Redux -- Redux will be critical in managing frontend states.
       \item OAuth -- OAuth will be critical in microservices communication to validate the services. This will especially come in handy in a specific middleware layer is implemented.
       \item Jest -- Jest will be critical to use in unit testing for frontend development to validate the services. 

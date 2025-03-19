@@ -45,6 +45,6 @@ jobs:
         continue-on-error: true # Allow build to continue if ESLint finds issues (lax)
 
       - name: Format with Prettier
-        uses: prettier/prettier@v3
+        uses: prettier/prettier
         with:
           args: --write .

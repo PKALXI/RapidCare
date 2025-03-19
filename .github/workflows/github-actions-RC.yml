@@ -1,6 +1,5 @@
 name: GitHub Actions CI
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-
 on: [push]
 
 jobs:
@@ -22,13 +21,13 @@ jobs:
   LintCode:
     name: Lint code base
     runs-on: ubuntu-latest
-    needs: Explore-GitHub-Actions
+    needs: Explore-GitHub-Actions # Make this job depend on the previous one (optional) 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Use the latest version
 
-      - name: Run Mega-Linter
-        uses: oxsecurity/megalinter@v7
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

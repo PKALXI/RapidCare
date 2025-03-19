@@ -43,8 +43,8 @@ jobs:
         run: |
           npx eslint . --ext .ts,.tsx --quiet # quiet option to reduce output noise.
         continue-on-error: true # Allow build to continue if ESLint finds issues (lax)
+
       - name: Format with Prettier
-        uses: creimers/run-prettier@v2.0.0
+        uses: prettier/prettier@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           args: --write .

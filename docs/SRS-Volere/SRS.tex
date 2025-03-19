@@ -124,14 +124,18 @@
 \subsection{Purpose of Document} \label{sec_PurposeOfDocument}
 The purpose of this document is to provide a comprehensive description of the requirements for a software application that aims to streamline the healthcare documentation process aimed to be run as a web application. This document will be used in as a contract in a sense between the team and the client who intends to use this application. This document will allow for an in-depth description of the software's functionality, performance, and other non-functional requirements. Additionally, it will outline common use-cases under which the software will be used. This will in turn provide a direction to the developers such that they will be empowered to creating the right product as this document will contain various stakeholders' requirements. Along with development direction, this document will be a direct reference for all of the stakeholders to understand the product's scope, functionality, and limitations.
 
+\subsection{Characteristics of Intended Reader} \label{sec_IntendedReader} 
+
+The intended readers of this SRS document include project managers, software developers, testing engineers, and stakeholders directly involved in the design and implementation of the software system. Project managers and testing engineers would be directly involved in the development and testing process. They would generally have an education in computer science along with experience in software design, web or mobile development, and software testing. Project managers generally have experience in managing software projects and knowledge of software development processes. Stakeholders like doctors and nursing staff would have domain knowledge and could provide insights to understand the clinical workflow and documentation process. 
+
+
 \section{Purpose of the Project}
 
 \subsection{User Business}
-Ontario is facing an extreme shortage of family doctors, with the number of patients without one jumping by 600,000 to 2.5 million which is a growing number [1]. This situation is only to get worse as predicted by the Ontario Medical Association [2]. As a result, people find themselves going to the ER with coughs and colds and flooding the ER causing massive wait times which ends in patients even resulting in leaving without being seen [3]. A massive part of the wait time is due to the overhead of documentation tasks. Doctors, healthcare professionals, and support staff find themselves spending most of their time on documentation which overall slows the pipeline of patients tremendously.
 
 \subsection{Goals of the Project}
 % Gurleen copy from PS
-
+% not completed
 
 \section{Stakeholders}
 
@@ -174,6 +178,8 @@ User participation is vital for the design, development, and acceptance testing 
 System administrators and IT staff will be responsible for maintaining the system. They would be responsible to provide assistance to the users and troubleshoot any technical issues that may arise ensuring that the system remains functional. 
 
 \section{Mandated Constraints}
+% Moamen
+% not completed
 \subsection{Solution Constraints}
 \lips
 \subsection{Implementation Environment of the Current System}
@@ -192,27 +198,141 @@ System administrators and IT staff will be responsible for maintaining the syste
 \lips
 
 \section{Naming Conventions and Terminology}
+
 \subsection{Glossary of All Terms, Including Acronyms, Used by Stakeholders
 involved in the Project}
-\lips
+The following is the glossary for this document:
+\begin{itemize}
+  \item \textbf{System:} The intended solution/product.
+  \item \textbf{User:} A person who will use the product.
+  \item \textbf{Healthcare Professional:} A doctor, nurse, and other healthcare professional who will be using the product.
+  \item \textbf{Patient:} Any person who is receiving medical treatment.
+  \item \textbf{Healthcare Network:} An organisation that has group of hospitals or clinics and will use the system.
+\end{itemize}
+
+\begin{tabular}{l l} 
+  \toprule    
+  \textbf{symbol} & \textbf{description}\\
+  \midrule 
+  A & Assumption\\
+  G & Goals\\
+  UI & User Interface\\
+  UX & User Experience\\
+  HIPAA & Health Insurance Portability and Accountability Act\\
+  STG & Stretch Goals\\
+  FR & Functional Requirement\\
+  NFR & Non-functional Requirement\\
+  LC & Likely Change\\
+  ULC & Unlikely Change\\
+  SRS & Software Requirements Specification\\
+  EHR & Electronic Healthcare Record\\
+  \bottomrule
+\end{tabular}\\
 
 \section{Relevant Facts And Assumptions}
 \subsection{Relevant Facts}
-\lips
+% not completed
 \subsection{Business Rules}
 \lips
+% not completed
 \subsection{Assumptions}
-\lips
+
+\begin{itemize}
+  \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_reliableInternet}:] \textbf{Reliable Internet Connection:} We assume that the user has a reliable internet connection throughout their operational hours.
+  \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sufficientHardware}:] \textbf{Sufficient Hardware Accessories:} We are assuming that the user has the required hardware devices such as monitors, iPads etc. to access the system.
+  \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_patientConsent}:] \textbf{Patient's Consent:} We also assume that medical staff will obtain patients' consent when required.  
+\end{itemize}
+
 
 \section{The Scope of the Work}
+
 \subsection{The Current Situation}
-\lips
+Ontario is facing an extreme shortage of family doctors, with the number of patients without one jumping by 600,000 to 2.5 million which is a growing number [1]. This situation is only to get worse as predicted by the Ontario Medical Association [2]. As a result, people find themselves going to the ER with coughs and colds and flooding the ER causing massive wait times which ends in patients even resulting in leaving without being seen [3]. A massive part of the wait time is due to the overhead of documentation tasks. Doctors, healthcare professionals, and support staff find themselves spending most of their time on documentation which overall slows the pipeline of patients tremendously.
+
 \subsection{The Context of the Work}
-\lips
+
+Through this project we aim to develop a solution that will address key niche problems through customizability and add features of critical need that do not already exist in existing solutions. This will allow healthcare networks to centralize the data of their hospitals and increase the staff productivity.\\
+
+\noindent This product has been conceived by the group members based on elicitation. Through interviews and discussion the problem of documentation overhead was found. This is the problem to be solved for the capstone course SFWRENG 4G06.
+
+\begin{figure}[H]
+  \includegraphics[width=0.8\textwidth]{System_Context.png}
+  \caption{This is the System Context diagram for this scenario.}
+  % \label{fig:Use-Case Diagram}
+\end{figure}
+
+\begin{itemize}
+  \item \textbf{Inputs:}
+  \begin{itemize}
+    \item Audio from healthcare professionals and patient interaction.
+    \item Keyboard input.
+  \end{itemize}
+  \item \textbf{Outputs:}
+  \begin{itemize}
+    \item Transcription of audio into text.
+    \item Classification of text into clinical notes.
+    \item Diagnosis and medication suggestions.
+  \end{itemize}
+  \item \textbf{User Responsibilities:}
+  \begin{itemize}
+    \item Record audio.
+    \item Amend or delete documentation as needed.
+    \item Maintain existing data, and journey tracks.
+  \end{itemize}
+  \item \textbf{System Responsibilities:}
+  \begin{itemize}
+    \item Accurately transcribe audio into text and classify it.
+    \item Accurate mapping of patient journey in application.
+  \end{itemize}
+
+\item{\textbf{Expected Benefits:}}
+
+\begin{itemize}
+  \item Reduced documentation overhead time
+  \item Increased patient throughput
+  \item Improved patient care
+  \item Increased doctor and healthcare professional satisfaction
+\end{itemize}
+\end{itemize}
+Much like how copilot is a tool for programmers, the aim is to create a tool for healthcare professionals to help with documentation such that the number of patient processed per day can be increased, and the focus of doctors and nurses can be shifted from documentation to patient care.
+
+
 \subsection{Work Partitioning}
 \lips
+% not completed
+
 \subsection{Specifying a Business Use Case (BUC)}
-\lips
+
+\textbf{Main Usage Scenario: Documenting a Patient Consultation}
+
+\begin{itemize}
+  \item\textbf{Use Case:} UC2, UC3
+  \item\textbf{Primary Actor:} Healthcare professional (such as a medical doctor or a nurse)
+  \item\textbf{Precondition:} The user has been successfully authenticated, logged into the system and has patient's profile is created. The basic information such as name, contact information, and history is prefilled.
+  \item\textbf{Trigger:} The user will initiate dictation.
+  \item\textbf{Main Success Scenario:}
+  \begin{itemize}
+    \item The user will initiate dictation.
+    \item The system will convert audio to text in real-time.
+    \item The user will press stop button.
+    \item The user reviews the transcribed notes. 
+    \item The system has accurately transcribed the audio to text without any inaccuracies.
+    \item The user selects the submit button after review. 
+  \end{itemize}
+  \item\textbf{Secondary Success Scenario:}
+  \begin{itemize}
+    \item The system has produced some inaccuracies in the transcribed text.
+    \begin{itemize}
+      \item The user selects the edit button.
+      \item The system prompts user to edit the text.
+      \item The user manually edits the transcribed text.
+    \end{itemize} 
+  \end{itemize}
+  \item\textbf{Success Postcondition:}
+  \begin{itemize}
+    \item The notes are successfully saved in patient database and changes are reflected in the user interface.
+  \end{itemize}
+\end{itemize}
 
 \section{Business Data Model and Data Dictionary}
 \subsection{Business Data Model}
@@ -222,15 +342,638 @@ involved in the Project}
 
 \section{The Scope of the Product}
 \subsection{Product Boundary}
-\lips
+The scope of this project can be be split into the following:
+
+\begin{itemize}
+  \item \textbf{Out of Scope:}
+  \begin{itemize}
+    \item The system will not be responsible for patient scheduling, billing, or other administrative tasks.
+    \item The system will not include development of any hardware components. All needed peripherals will be assumed as apart of the runtime environment.
+  \end{itemize}
+  \item \textbf{Typical Values of Input}
+  \begin{itemize}
+    \item The primary input mode will be audio, allowing for transcription and segmentation of conversations.
+    \item The other input is typing through a keyboard to amend or edit any documentation.
+    \item Standard office environment is expected, with standard computer equipment (i.e. mice, keyboards, internet).
+  \end{itemize}
+\end{itemize}
+
 \subsection{Product Use Case Table}
-\lips
+% not completed
+
 \subsection{Individual Product Use Cases (PUC's)}
-\lips
+
+\begin{itemize}
+  \item\textbf{UC1 Login:}
+  \begin{itemize}
+    \item The user accesses the system using an internet browser.
+    \item The user enters valid credentials on the log in page.
+    \item The user selects the login button.
+    \item The user lands on the default dashboard.
+  \end{itemize}
+  \item\textbf{UC2 Recording Clinical Notes:}
+  \begin{itemize}
+    \item The user accesses patient's record.
+    \item The user initiates dictation.
+    \item The user dictates the notes and hit the stop button.
+    \item The user reviews the transcribed text.
+    \item The user selects the submit button.
+  \end{itemize}
+  \item\textbf{UC3 Diagnostic Suggestions:}
+  \begin{itemize}
+    \item The user submits the transcribed text.
+    \item The user reviews the potential diagnostic suggestions.
+    \item The user accepts or rejects suggestions.
+  \end{itemize}
+  \item\textbf{UC4 Create Patient Profile:}
+  \begin{itemize}
+    \item The user log into the system.
+    \item The user selects the 'create a new record' button.
+    \item The user provide input for the required fields.    
+    \item The user selects the submit button.
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+  \includegraphics[width=0.8\textwidth]{use-case.drawio.png}
+  \caption{This is the use-case diagram for this scenario.}
+  \label{fig:Use-Case Diagram}
+\end{figure}
+
 
 \section{Functional Requirements}
 \subsection{Functional Requirements}
-\lips
+
+
+\noindent \begin{itemize}
+
+  \item [FR\refstepcounter{reqnum}\thereqnum \label{FR_addHealthNetwork}:] 
+  
+  \textbf{Requirement:} The system should allow a healthcare network to be onboarded to the system.
+  
+  \textbf{Rationale:} Rapid care is an organizational tool, where networks can register their various hospitals, and in turn add the corresponding health care professionals. When the networks want to register, the app needs to be able to add the network to the database along with the relevant staff profiles etc.
+  
+  \textbf{Fit Criterion:} The network data and profiles are fully added to the database. This could be verified by returning the valid entries from the patient database.
+  
+  \textbf{Dependencies:} N/A
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The system should update the entries with the latency of 1 second.
+    \item After user input is taken the system only adds valid entries to the database and prevents any data leaks.
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:} 
+  \begin{itemize}
+    \item Database management system to store health network data.
+    \item Internet browser to access the application.
+  \end{itemize}
+  
+  \textbf{Normal Behavior:} 
+  \begin{itemize}
+    \item All input data is validated as being entered into the system.
+    \item Once all required fields are completed the user selects the submits the information and the network is added successfully to the system.
+    \item The process should have a low turnover time such that health networks will not have to spend a long time waiting to use the system.
+  \end{itemize}
+  
+  \textbf{Undesired Event Handling:} 
+  \begin{itemize}
+    \item The user may enter invalid input data. The system should display appropriate error messages. 
+    \item The system should have constraints to restrict the user from submitting, unless all required fields are completed and have valid input data. 
+    \item When the database is overloaded with requests, appropriate error messages should be delayed. 
+    \item The updates will be queued to prevent this in the future, data resources will be scaled just so that the calls are faster.
+  \end{itemize}
+  
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_removeHealthNetwork}:]  
+  
+  \textbf{Requirement:} The system should allow health network to remove itself from the system.
+  
+  \textbf{Rationale:} 
+  When health networks close and want to pivot to another documentation tool their data and profiles must be deleted. Therefore, there is a requirement for functionality that allows organizations to deregister and have their data deleted.
+  
+  \textbf{Fit Criterion:} 
+  The network data and profiles are fully deleted from the database. This could be verified by returning the valid entries from the patient database.
+  
+  \textbf{Dependencies:} FR\ref{FR_addHealthNetwork} 
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The removal process must be easy to complete with a latency of 1 second. 
+    \item The system should be able to identify the correct record to delete. 
+    \item The system should delete the correct record without affecting the rest of the database. 
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:}
+  \begin{itemize}
+    \item Access to health network database.
+    \item Internet browser to access the application.
+  \end{itemize}
+  
+  \textbf{Normal Behavior:}
+  \begin{itemize}
+    \item Network is successfully removed from database with low turnover time such that health networks will not have to spend a long time waiting for their data to be deleted.
+  \end{itemize}
+  
+  \textbf{Undesired Event Handling:}
+  \begin{itemize}
+    \item If the system fails to delete the health network due to a system error, the system should display an appropriate error message. 
+    \item When the database is overloaded with requests, the operation to delete all the hospital data will be queued as the next action in line.
+  \end{itemize}
+  
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_UpdateHealthNetwork}:]
+  
+  \textbf{Requirement:} The healthcare network should be able to update its organizational and hospital information.
+  
+  \textbf{Rationale:} The healthcare network will update its own organizational changes. This will include creating and maintaining the staff present as well as the hospitals in the network.
+  
+  \textbf{Fit Criterion:} The healthcare network data will be up to date with its current state (i.e. number of hospitals, staff etc.), the data's recency will depend on the networks need. 
+  
+  \textbf{Dependencies:} FR\ref{FR_addHealthNetwork}
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The updating process of healthcare networks should be quick and easy so that healthcare professionals remain up to date with the facility information, operational data, healthcare professional data, and patient data.
+    \item Under a standard load the request should be fulfilled within 1 second.
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:} 
+  \begin{itemize}
+    \item Internet browser to access the application.
+  \end{itemize}
+  
+  \textbf{Normal Behavior:}
+  \begin{itemize}
+    \item Network is updated in the database without any leaks or latency.
+    \item Normal behavior will be seen as updated reflected on the front-end and backend of the system.
+  \end{itemize} 
+  
+  \textbf{Undesired Event Handling:} 
+  \begin{itemize}
+    \item When the health network data is being updated and the database is overloaded with requests, then updates will be queued.
+  \end{itemize}
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_AddHealthProfessional}:]
+  
+  \textbf{Requirement:} The system should allow healthcare network administrators to add healthcare professionals to the system.
+  
+  \textbf{Rationale:} When new healthcare professionals join the healthcare network, their information is to be added to the system for authentication purposes. This will include adding a list of hospital staff members to the network.
+  
+  \textbf{Fit Criterion:} The healthcare professional's data will be up to date in the system so that they can get authenticated without any delay. 
+  
+  \textbf{Dependencies:} N/A 
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The addition process should be quick and easy to ensure that all professionals can access the database without any interruptions, with a minimum uptime of 99.5\%.
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:} 
+  \begin{itemize}
+    \item Internet browser to access the database.
+  \end{itemize}
+  
+  \textbf{Normal Behavior:}
+  \begin{itemize}
+    \item Data is added to the database without any leaks or latency. Normal behavior will be seen as updated are reflected in database and UI of the system.
+  \end{itemize} 
+  
+  \textbf{Undesired Event Handling:}
+  \begin{itemize}
+    \item When the healthcare professional's data is being added and the database is overloaded with requests, then updates will be queued.
+  \end{itemize} 
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_RemoveHealthProfessionals}:] 
+  
+  \textbf{Requirement:} The system should allow healthcare network administrators to remove healthcare professionals from the system. 
+  
+  \textbf{Rationale:} Sometimes a healthcare professional decides to change the area of service or leaves the organization and retires. Therefore, there is a need for functionality that allows to remove them from the system.
+  
+  \textbf{Fit Criterion:} The healthcare professional is successfully removed from the system, this will be verified by the fact that they are not present in the databases. 
+  
+  \textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:}
+  \begin{itemize}
+    \item The deleting process must be easy to complete with a low turnover time such that health networks will not have to spend a long time waiting for their data to be deleted.
+  \end{itemize} 
+  
+  \textbf{Hardware Requirements:}
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize} 
+  
+  \textbf{Software Requirements:}
+  \begin{itemize}
+    \item Internet browser to access the database.
+  \end{itemize} 
+  
+  \textbf{Normal Behavior:}
+  \begin{itemize}
+    \item Data is removed to the database without any leaks or latency. Normal behavior will be seen as updated are reflected on the frontend and backend of the system.
+  \end{itemize} 
+  
+  \textbf{Undesired Event Handling:}
+  \begin{itemize}
+    \item When the healthcare professional's data is being removed and the database is overloaded with requests, then updates will be queued.
+  \end{itemize} 
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_UpdateHealthProfessionals}:]
+  
+  \textbf{Requirement:} The system should allow healthcare network administrators to update healthcare professional's data in the system.
+  
+  \textbf{Rationale:} Sometimes healthcare professionals receive promotions or other changes in their roles which require updating the information in their profiles. Therefore, it is essential for functionality that allows to edit the data in case there are inaccuracies.  
+  
+  \textbf{Fit Criterion:} The healthcare professional's data will be up to date in its current state (i.e. role of each healthcare professional and the organization they work in etc). 
+  
+  \textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The changes should be reflected in real time on the UI.
+    \item The changes should be stored successfully in the database.
+  \end{itemize} 
+  
+  \textbf{Hardware Requirements:}
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize} 
+  
+  \textbf{Software Requirements:}
+  \begin{itemize}
+    \item Internet browser to access the database.
+  \end{itemize} 
+  
+  \textbf{Normal Behavior:}
+  \begin{itemize}
+    \item Data is updated in the database without any leaks or latency. Normal behavior will be seen as updated are reflected on the front-end and backend of the system.
+  \end{itemize} 
+  
+  \textbf{Undesired Event Handling:}
+  \begin{itemize}
+    \item When the healthcare professional's data is being updated and the database is overloaded with requests, then updates will be queued.
+  \end{itemize} 
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_login}:]
+  
+  \textbf{Requirement:} The system should allow the authorized user to successfully log in to the system.
+  
+  \textbf{Rationale:} Doctors and other medical professionals should be able to log into the system to create patients, update, and delete patient records and access their medical records. The system should also authenticate the user to avoid unauthorized access to the data.
+  
+  \textbf{Fit Criterion:} The system only authenticates the authorized users to log into the system and has 100\% accuracy. 
+  
+  \textbf{Dependencies:} FR\ref{FR_AddHealthProfessional}, FR\ref{NFR_Security}
+  
+  \textbf{Monitored and Controlled Variables:} number of failed login attempts
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The system successfully redirects users to correct system state based on authentication.
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:} 
+  \begin{itemize}
+    \item Authentication protocols and encryption for security. 
+    \item Internet browser to access the system.
+  \end{itemize}
+  
+  \textbf{Normal Behavior:} 
+  \begin{itemize}
+    \item The user is able to successfully login upon providing valid credentials and is redirected to the appropriate dashboard based on their role.
+  \end{itemize}
+  
+  \textbf{Undesired Event Handling:}
+  \begin{itemize}
+    \item If a user provides invalid credentials, the system will display an error message and redirect the user to sign in page.
+    \item After three failed login attempts, the user account will be locked, and the user will have to contact the support team to regain access.
+  \end{itemize}
+   
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_createRecord}:]
+  
+  \textbf{Requirement:} The user should be able to create a new patient record. 
+  
+  \textbf{Rationale:} The patient data and medical history must be stored in a secure manner. Therefore, medical staff should be able to create a new patient record to store all the relevant information. 
+  
+  \textbf{Fit Criterion:} The record is created and added to the patient database. This could be verified by returning the valid entries from the patient database.
+  
+  \textbf{Dependencies:} FR\ref{FR_login}
+  
+  \textbf{Monitored and Controlled Variables:} field validation
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The system should update the patient database with the latency of 1 second. 
+    \item The system only adds valid entries to the database.
+    \item The system prevents any data leaks.
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:} 
+  \begin{itemize}
+    \item Database management system to store patient information.
+    \item Internet browser to access the system.
+  \end{itemize}
+  
+  \textbf{Normal Behavior:} 
+  \begin{itemize}
+    \item All input data is validated as it is entered using field level validation. 
+    \item Once all required fields are completed the user selects the submit button, a new patient record is successfully created and stored.
+  \end{itemize}
+  
+  \textbf{Undesired Event Handling:} 
+  \begin{itemize}
+    \item The user may enter invalid input data. The system should display appropriate error messages. 
+    \item The system should have constraints to restrict the user from submitting, unless all required fields are completed and have valid input data. 
+    \item If the system fails to save the record due to a system error, the system should display an appropriate error message. 
+  \end{itemize}
+  
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_deleteRecord}:]
+  
+  \textbf{Requirement:} The user should be able to delete an existing patient record from the system.
+  
+  \textbf{Rationale:} There can be instances where medical professionals need to delete a certain patient record, for example inaccurate entries, duplicate records etc. Therefore, the system should allow authorized users to remove patient records.
+  
+  \textbf{Fit Criterion:} The record is successfully removed from the patient database. This could be verified by returning the valid entries from the patient database.
+  
+  \textbf{Dependencies:} FR\ref{FR_login}, FR\ref{FR_createRecord}
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The deletion process must be easy to complete with a latency of 1 second. 
+    \item The system should be able to identify the correct record to delete. 
+    \item The system should delete the correct record without affecting the rest of the database. 
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:} 
+  \begin{itemize}
+    \item Access to patient record database.
+    \item Role based access control system to manage user permissions.
+    \item Internet browser to access the system.
+  \end{itemize}
+  
+  \textbf{Normal Behavior:} 
+  \begin{itemize}
+    \item The user selects the delete button and confirms the deletion. The patient record is successfully removed from the database and no longer appears on the system.
+  \end{itemize}
+  
+  \textbf{Undesired Event Handling:} 
+  \begin{itemize}
+    \item If the user does not have permission to delete the record, the system should show an appropriate error message.
+    \item If the system fails to delete the record due to a system error, the system should display an appropriate error message. 
+  \end{itemize}
+  
+  
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_updateRecordtyping}:]
+  
+  \textbf{Requirement:} : The system should allow the user to update the patient records manually by typing.
+  
+  \textbf{Rationale:} Medical professionals frequently need to update patient information, such as changes in diagnosis, medication, or medical history. The healthcare professional may want to add some information manually. Moreover, if healthcare professionals use the dictation tool, they still should be allowed to edit the auto filled transcribed data in case there are inaccuracies.
+  
+  \textbf{Fit Criterion:} The system should update the current state and patient database with the input information.
+  
+  \textbf{Dependencies:} FR\ref{FR_login}, FR\ref{FR_createRecord}
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:} 
+  \begin{itemize}
+    \item The changes should be reflected in real time on the user interface.
+    \item The changes should be stored successfully in the database.
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:} 
+  \begin{itemize}
+    \item Access to patient record database.
+    \item Internet browser to access the system. 
+  \end{itemize}
+  
+  \textbf{Normal Behavior:} 
+  \begin{itemize}
+    \item The user edits the selected field and enters new information. 
+    \item The system successfully updates the changes in database and reflect changes on the user interface. 
+  \end{itemize}
+  
+  \textbf{Undesired Event Handling:}
+  \begin{itemize}
+    \item If an unauthorized user tries to update a record, the system displays appropriate error messages. 
+    \item If the system fails to update the record due to a system error, the system should display an appropriate error message. 
+  \end{itemize}
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_DictationRecording}:]
+  
+  \textbf{Requirement:} The system should allow healthcare workers to update patient records using dictation. 
+      
+  \textbf{Rationale:} This will reduce the workload on the healthcare workers, while also efficiently reducing the time spent on documentation. 
+      
+  \textbf{Fit Criterion:} The system should use voice dictation to document medical reports with a minimum of 90\% accuracy. 
+      
+  \textbf{Dependencies:} FR\ref{FR_login}, FR\ref{FR_createRecord} 
+      
+  \textbf{Monitored Variables:} Accuracy
+      
+  \textbf{Performance:} 
+    \begin{itemize}
+        \item System should transcribe speech in real time and segment it into the right fields onto the record with a minimum of 90\% accuracy.
+    \end{itemize}
+      
+  \textbf{Hardware Requirements:}
+    \begin{itemize}
+        \item Workstations to access the system and a microphone which can record the voice in the system. 
+    \end{itemize}
+      
+  \textbf{Software Requirements:}
+    \begin{itemize}
+        \item An audio transcription service to transcribe audio to text 
+        \item Access to patient record database. 
+        \item Internet browser to access the system.  
+    \end{itemize}
+      
+  \textbf{Normal Use:} 
+  \begin{itemize}
+    \item The system records the provider's voice and updates the patient file with the transcribed text.
+  \end{itemize}
+      
+  \textbf{Undesired Event Handling:} 
+  \begin{itemize}
+    \item If the recording or transcription fails, the system should notify the user and offer manual review.
+  \end{itemize}
+  
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_DiagnosticSuggestions}:]
+  
+  \textbf{Requirement:} The system should analyze transcribed text and provide diagnostic suggestions based on the input.
+      
+  \textbf{Rationale:} This alerts the healthcare professionals about the possible diagnostics and helps them to diagnose the patients quicker based on suggested options.
+      
+  \textbf{Fit Criterion:} The system must suggest diagnoses within 5 seconds after transcript is provided, with 85\% accuracy based on known patient's medical record.
+      
+  \textbf{Dependencies:} FR\ref{FR_DictationRecording}
+      
+  \textbf{Monitored Variables:} Suggested diagnostic accuracy, time to generate suggestions 
+    
+  \textbf{Performance:}
+    \begin{itemize}
+      \item Suggestions must be provided within 5 seconds of transcript completion. 
+      \item Suggestions should match known diagnoses with 85\% accuracy. 
+    \end{itemize}
+      
+  \textbf{Hardware Requirements:}
+    \begin{itemize}
+      \item Workstations and other peripherals to access the system. 
+    \end{itemize}
+      
+  \textbf{Software Requirements:}
+    \begin{itemize}
+      \item Access to patient record database. 
+      \item Internet browser to access the system.  
+      \item Service engine that generates diagnostic suggestions. 
+    \end{itemize}
+      
+  \textbf{Normal Use:} 
+    \begin{itemize}
+      \item The system analyzes the transcribed conversation and suggests possible diagnoses based on a patient's medical record. 
+    \end{itemize}
+      
+  \textbf{Undesired Event Handling:} 
+    \begin{itemize}
+      \item If the system can't suggest a diagnosis, it should notify the user and offer a manual search option. 
+    \end{itemize}
+  
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_medicalSuggestions}:] 
+  
+  \textbf{Requirement:} The system should provide a list of frequently used medicines based on accepted diagnosis.
+  
+  \textbf{Rationale:} As the patients' medical records and data is being added into the charts, having a model that can provide a preliminary set of diagnosis such that documentation time can be saved. This supplementary tool will provide auto-completion analogous to what auto-completion tools programmers use.
+  
+  \textbf{Fit Criterion:} Auto-completion suggestions regarding diagnoses and medicine are applicable 85+\% of the time. The model will be measured through cross validation techniques.
+   
+  \textbf{Dependencies:} FR\ref{FR_DictationRecording}, FR\ref{FR_DiagnosticSuggestions}
+  
+  \textbf{Monitored and Controlled Variables:} accuracy
+  
+  \textbf{Performance Requirements:}
+  \begin{itemize}
+    \item The autocompletion is accurate, such that it is correct 85+\% of the time. 
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  Workstations and other peripherals to access the system.
+  
+  \textbf{Software Requirements:}
+  \begin{itemize}
+    \item Access to patient record database.
+    \item Internet browser to access the system. 
+  \end{itemize}
+  
+  \textbf{Normal Behavior:}
+  \begin{itemize}
+    \item A list of medicine suggestion is provided almost instantly analogous to an auto-complete feature based on the selected diagnosis.
+  \end{itemize}
+  
+  \textbf{Undesired Event Handling:}
+  \begin{itemize}
+    \item In case no medicine suggestions are provided the doctor can manually add a prescription.
+  \end{itemize}
+  
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_transferPatient}:] 
+  \textbf{Requirement:} The system should be able to transfer patient documentation to another provider. 
+  
+  \textbf{Rationale:} If the patient goes to a hospital in another health network, perhaps the medical history is to be shared. This functionality will allow the request and transfer of files.
+  
+  \textbf{Fit Criterion:} Transfer over the files in a short time, the transfer protocol is secure, and data is not leaked.
+  
+  \textbf{Dependencies:} FR\ref{FR_createRecord}
+  
+  \textbf{Monitored and Controlled Variables:} N/A
+  
+  \textbf{Performance Requirements:}
+  \begin{itemize}
+    \item The system should transfer data with a latency of less than 1 seconds.
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  \begin{itemize}
+    \item Workstations and other peripherals to access the system.
+  \end{itemize}
+  
+  \textbf{Software Requirements:}
+  Access to patient record database.
+  \begin{itemize}
+    \item Internet browser to access the system. 
+  \end{itemize}
+  
+  \textbf{Normal Behavior:}
+  \begin{enumerate}
+    \item A patient file is requested
+    \item The request is approved then the files are transferred.
+  \end{enumerate}
+  -
+  \textbf{Undesired Event Handling:}
+  \begin{enumerate}
+    \item A patient file is requested 
+    \item The request for the file is denied. 
+    \item A detailed request is submitted for approval to provide further information that may have been missing.
+  \end{enumerate}
+  \end{itemize}
+
 
 \section{Look and Feel Requirements}
 \subsection{Appearance Requirements}
@@ -307,6 +1050,7 @@ involved in the Project}
 \lips
 \subsection{Standards Compliance Requirements}
 \lips
+
 
 \section{Open Issues}
 \lips

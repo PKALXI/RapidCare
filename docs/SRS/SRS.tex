@@ -813,7 +813,7 @@ The network data and profiles are fully deleted from the database. This could be
 
 \textbf{Software Requirements:} 
 \begin{itemize}
-  \item Authentication protocols and encryption for security. 
+  \item Authentication protocols.
   \item Internet browser to access the system.
 \end{itemize}
 
@@ -1182,11 +1182,11 @@ Access to patient record database.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Security}:] \textbf{Security Requirement}
 
-    \textbf{Requirement:} The system should have all patient data encrypted, and in compliance with Personal Information Protection and Electronic Documents Act (PIPEDA) standards.
+    \textbf{Requirement:} The system should have all patient data in compliance with Personal Information Protection and Electronic Documents Act (PIPEDA) standards.
 
     \textbf{Rationale:} A secure and confidential system ensures the user to be confident in using the application while protecting sensitive patient data.
 
-    \textbf{Fit Criterion:} Security audits will confirm full compliance with PIPEDA, encryption and data protection standards.  
+    \textbf{Fit Criterion:} Security audits will confirm full compliance with PIPEDA and data protection standards.  
 
     \textbf{Dependencies:} N/A
 
@@ -1194,15 +1194,15 @@ Access to patient record database.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Cultural}:] \textbf{Cultural Requirement}
 
-    \textbf{Requirement:} The system should allow customization of language settings to accommodate all healthcare workers.
-
-    \textbf{Rationale:} A customized UI allows the user to feel comfortable and confident when using the application.
-
-    \textbf{Fit Criterion:} Tests will show that healthcare workers can navigate through the application and switch languages based on their preference without impacting the functionality of the application.
-
+    \textbf{Requirement:} The system should ensure cultural sensitivity by appropriately processing user input and providing responses that avoid inappropriate or offensive language.
+    
+    \textbf{Rationale:} Maintaining cultural sensitivity fosters trust and inclusivity, ensuring that the system is respectful and appropriate for all users.
+    
+    \textbf{Fit Criterion:} Tests will demonstrate that the system correctly processes culturally diverse input and ensures that the output remains culturally appropriate without causing offense or misunderstanding.
+    
     \textbf{Dependencies:} N/A
-
-    \textbf{Undesired Event Handling:} If a language bundle fails to load, the system will revert to the default language and notify the user.
+    
+    \textbf{Undesired Event Handling:} If the system detects potentially inappropriate or offensive content, it should flag the content, provide a warning to the user, and apply appropriate safeguards to prevent the dissemination of such content.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Legal}:] \textbf{Legal Requirement}
 
@@ -1276,9 +1276,6 @@ FR\ref{FR_transferPatient}\\
   \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_maintainability}:] The system should be updated with new features without causing downtime longer than 2 minutes.(NFR\ref{NFR_Maintainability})\\
   \textbf{Rationale:} This a likely change because of the availability of technologies and services that can be integrated into the system.
 
-  \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_cultural}:] The system should allow customization of language settings to accommodate all healthcare workers.(NFR\ref{NFR_Cultural})\\
-  \textbf{Rationale:} This is a likely change because health network may not have the resources to customize the language settings.
-
   \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_operational}:] The system should have an uptime guarantee of 99.9\% during operational hours.(NFR\ref{NFR_Operational})\\
   \textbf{Rationale:} This a likely change because of the availability of technologies and services that can be integrated into the system.
 
@@ -1336,8 +1333,11 @@ FR\ref{FR_transferPatient}\\
   \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_performance}:] The system should convert voice recordings into text onto medical charts within 30 seconds of recording.(NFR\ref{NFR_Performance})\\
   \textbf{Rationale:} This is unlikely to change because this is a key functionality that addresses the overhead of the healthcare documentation process.
 
-  \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_security}:] The system should have all patient data encrypted, and in compliance with PIPEDA standards.(NFR\ref{NFR_Security})\\
+  \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_security}:] The system should have all patient data in compliance with PIPEDA standards.(NFR\ref{NFR_Security})\\
   \textbf{Rationale:} This is unlikely to change because patient data must be stored securely and protected against unauthorized access.
+
+  \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_cultural}:] The system should ensure cultural sensitivity by appropriately processing user input and providing responses that avoid inappropriate or offensive language. (NFR\ref{NFR_Cultural})\\
+  \textbf{Rationale:} This is unlikely to change because maintaining cultural sensitivity is a fundamental requirement that ensures trust and inclusivity across diverse user groups.
 
   \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_legal}:] The system should comply with all healthcare data protection regulations. (NFR\ref{NFR_Legal})\\
   \textbf{Rationale:} This is unlikely to change because patient data must be protected and compliant with healthcare data protection regulations.

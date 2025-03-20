@@ -143,7 +143,7 @@ CI/CD will be critical for project development. We will be using \textbf{GitHub 
 GitHub Actions will allow us to achieve Continuous Integration and Continuous Delivery through the following:
 \begin{itemize}
   \item \textbf{Continuous Integration} -- On the continuous integration time GitHub Actions provides automated build and testing workflows directly within the GitHub repository. Upon each code commit or pull request, it will trigger a linting service that will ensure that the code maintains code standards that are outlined in the section below. This helps to identify any possible errors rightaway and resolves any integration issues leading to faster development iterations and also improves the code quality.
-  \item \textbf{Continuous Deployment} -- GitHub Actions enables the creation of automated pipelines that deploy the code to production or pre-production environments. Once all tests pass, the automated workflow takes over, ensuring consistent, reliable, and efficient deployments. This process helps to minimize errors and gurantees that also allow easy rollbacks when needed. 
+  \item \textbf{Continuous Deployment} -- Continuous Deployment is not required in this project due to absence of multiple environment which is needed for continuous delivery.
 \end{itemize}
 
 By implementing a CI/CD tool (GitHub Actions) we can ensure that code isn't riddled with errors and automate a lot of tasks which will increase productivity. Having GitHub Actions also will reduce the risk of human error in the project and will automate many areas of DevOps.
@@ -179,7 +179,6 @@ Looking at implementation details there are a few risks that come up, if these r
 
 \begin{itemize}
   \item \textbf{Speech Input} -- A hospital or a clinic can be a loud place, in the event audio input is taken we need to ensure that it is clean and clear. This would mean essentially blocking outside noise. 
-  \item \textbf{Pre-Trained Models} -- To manipulate and use both inputs above we need to create a model to be accurate and provide accuracy when filling in charts. 
   \item \textbf{Data Privacy} -- This application will hold a lot of patient data so creating a store that is secure and making sure standard data security practice is applied is a must.
   \item \textbf{User Acceptance} -- This will require further elicitation with our supervisor. This would help us to gather data on what critical needs of healthcare professionals such that critical features are present. 
 \end{itemize}
@@ -214,7 +213,7 @@ In terms of expected technologies, we need to expect will again change will impl
     Key frameworks:
     \begin{itemize}
       \item LangGraph -- LangGraph will be critical in building multi-agent applications with LLMs by managing interactions between different agents. By representing workflows as directed graphs, LangGraph allows for precise control over the flow of information and execution, enabling complex reasoning and problem-solving. Agents, acting as nodes in the graph, process information and perform tasks, guided by dynamically generated prompts that can incorporate knowledge retrieved from vector stores. 
-      \item OpenAI -- OpenAI will be critical in pre-training AI models. Its cutting-edge models like GPT-4 is used to prevent the wastage of time in training them from scratch. It will support creating embedding out of context (pdfs, txt, etc...) as well as provide agentic functions to interact with the context.
+      \item OpenAI -- OpenAI will be critical in interacting with the nodes in LangGraph and fine tuning them to provide faithful output.
       \item Redux -- Redux will be critical in managing frontend states.
       \item OAuth -- OAuth will be critical in microservices communication to validate the services. This will especially come in handy in a specific middleware layer is implemented.
       \item Jest -- Jest will be critical to use in unit testing for frontend development to validate the services. 

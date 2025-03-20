@@ -28,6 +28,8 @@
 24--09--2024 & Pranav Kalsi & Challenge Level and Extras\\
 24--09--2024 & Pranav Kalsi, Moamen Ahmed & Goals + Stretch Goals\\
 24--09--2024 & All & Reflection\\
+04--01--2025 & Moamen Ahmed & Updated Goals according to TA's feedback\\
+16--03--2025 & Gurleen Rahi & Revised Inputs and Outputs + Extras + Goals + Stretch Goals according to the TA's feedback\\ 
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -49,17 +51,18 @@ Ontario is facing an extreme shortage of family doctors, with the number of pati
 Inputs for this project will be the following:
 
 \begin{itemize}
-    \item \textbf{Doctor-Patient Conversation} -- They are the stored information of the conversation between the medical staff and the patient that contains information such as the patient’s personal history, disease history, and current treatment among others.
-    \item \textbf{Common Diseases List} -- This comprises features such as symptoms and treatment/diagnosis using machine learning algorithms.
-    \item \textbf{Voice Profiles} -- Voice profiles that can be specific for doctors and patients will enable them to be recognized for the chart filled out accordingly. 
+    \item \textbf{Doctor-Patient Conversation} -- To streamline the documentation process, the conversation between the doctor and the patient is recorded using the recording tool.
+    \item \textbf{Medical Prediction Context} -- A comprehensive knowledge of common diseases and the associated medicines is served as input for the model to predict the diagnosis and medicines.
+    \item \textbf{Text Field Input} -- Text field entries are utilized as input parameters provided by the user for various data processing operations such as filling out patient data, creating SOAP notes, etc.
+     
 \end {itemize}
 
 Outputs for this project will be the following: 
 
 \begin{itemize} 
-    \item \textbf{Triage information} -- The subjects involve triage data entry from the recorded conversation with the aim of enhancing the documentation process within the emergency department.
-    \item \textbf{Auto-filled documents} -- The documentation process will be done according to the conversation which will be recorded and then transcribed to electronic means for filing in the patient’s profile.
-    \item \textbf{Alerts for Medical Staff} -- In case of any priority cases the alert will be sent to the doctor, especially in the emergency department, based on the symptoms mentioned for treatment.
+    \item \textbf{Transcribed Text} -- After the audio conversation is given as the input, it is then processed and transcribed into written text as its output.
+    \item \textbf{Predicted Diagnosis} -- The system predicted the diagnosis and its associated medicines along with the action plan solely based on the provided context about common diseases in the world.  
+    \item \textbf{Auto-filled documents} -- The transcribed text is further classified into relevant categories to autofill the charts with patient's medical information.
 \end{itemize}
 
 \wss{Inputs:}
@@ -94,6 +97,10 @@ The goals for this project are as follows:
         Use voice to fill in medical documentation (charts, files, etc.) & The app will record conversations and automatically turn them into medical notes and charts. & This will save doctors time by automating paperwork, letting them focus more on patients. \\
         \midrule
         Reduce documentation overhead time.  & Through tracking the whole patient journey in the app, we look to reduce the overhead of triaging, clinical documentation, and other registrations.  & This helps hospital healthcare professionals focus on care and lowers the time taken through registration for hospital staff. \\
+        \midrule
+        Automated diagnosis suggestions.  & Use AI to suggest possible diagnoses based on what the doctor and patient discuss.  & This will help doctors make faster, more accurate diagnoses, especially in tricky cases. \\
+        \midrule
+        Automated medicine suggestions. & Based on diagnosis and patient data provide medicine suggestions. & This will help doctors fill out their charts faster. \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -106,11 +113,7 @@ The stretch goals for this project are as follows:
     \centering
     \begin{tabular}{p{4cm} p{4cm} p{4cm}}
         \toprule
-        \textbf{Goal} & \textbf{Explaining} & \textbf{Reasoning} \\
-        \midrule
-        Automated medicine suggestions. & Based on diagnosis and patient data provide medicine suggestions. & This will help doctors fill out their charts faster. \\ % Row 1
-        \midrule
-        Automated diagnosis suggestions.  & Use AI to suggest possible diagnoses based on what the doctor and patient discuss.  & This will help doctors make faster, more accurate diagnoses, especially in tricky cases.\\ 
+        \textbf{Goal} & \textbf{Explaining} & \textbf{Reasoning} \\ 
         \midrule
         Patient triage system. & Prioritize patients based on the severity of their condition. & Ensures the most critical patients receive care first, improving emergency response. \\
         \bottomrule
@@ -144,7 +147,7 @@ In terms of the project challenge level, the project will come in the general ca
 As part of the extras for this project, we will accomplish the following extras:
 \begin{itemize}
     \item Usability testing.
-    \item User documentation.
+    \item User manual.
 \end{itemize}
 
 \section{References}

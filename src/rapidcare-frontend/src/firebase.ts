@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from 'firebase/auth';
+import { getAuth } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -13,7 +13,7 @@ const firebaseConfig = {
   projectId: "rapidcare-101",
   storageBucket: "rapidcare-101.firebasestorage.app",
   messagingSenderId: "680548870359",
-  appId: "1:680548870359:web:6cb4c7e91c455e90226892"
+  appId: "1:680548870359:web:6cb4c7e91c455e90226892",
 };
 
 // Initialize Firebase

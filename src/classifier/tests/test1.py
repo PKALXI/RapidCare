@@ -3,11 +3,11 @@ import requests
 import openai
 import os
 
-'''
+"""
 gptAssistance method created using the below docs.
 https://platform.openai.com/docs/api-reference
 https://docs.python.org/3/library/unittest.html 
-'''
+"""
 
 
 def gptAssistance(situation, response):
@@ -17,13 +17,16 @@ def gptAssistance(situation, response):
     result = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "You are evaluator to check if a doctor is giving an relevant plan for a patient."},
-            {"role": "user", "content": prompt}
-        ]
+            {
+                "role": "system",
+                "content": "You are evaluator to check if a doctor is giving an relevant plan for a patient.",
+            },
+            {"role": "user", "content": prompt},
+        ],
     )
 
     evaluation = result.choices[0].message.content.strip()
-    
+
     return int(evaluation)
 
 
@@ -45,16 +48,14 @@ class TestAPI(unittest.TestCase):
             "Conversation: My head hurts I have a migraine. Medications: Sumatriptan (triptan), Ibuprofen. Allergies: MSG. Current Medication: B complex vitamins.",
             "Conversation: I have intense throbbing headache with nausea and light sensitivity. Medications: Rizatriptan (triptan), Metoclopramide (anti-nausea). Allergies: Dairy. Current Medication: Melatonin.",
             "Conversation: I lost my sense of taste and smell. Medications: Zinc lozenges, Vitamin D. Allergies: Soy. Current Medication: Probiotic.",
-            "Conversation: I have fatigue, loss of smell and taste with body aches. Medications: Acetaminophen, Vitamin C. Allergies: Gluten. Current Medication: Iron supplement."
+            "Conversation: I have fatigue, loss of smell and taste with body aches. Medications: Acetaminophen, Vitamin C. Allergies: Gluten. Current Medication: Iron supplement.",
         ]
 
         success = 0
 
         for i, conversation in enumerate(conversations):
-            print(f'Iteration: {i + 1}')
-            form_data = {
-                "transcription": conversation
-            }
+            print(f"Iteration: {i + 1}")
+            form_data = {"transcription": conversation}
 
             response = requests.post(f"{self.BASE_URL}/predict", data=form_data)
 
@@ -62,28 +63,25 @@ class TestAPI(unittest.TestCase):
                 evaluationScore = gptAssistance(conversation, response.json())
                 if evaluationScore == 1:
                     success += 1
-                    print('-----Success------')
+                    print("-----Success------")
 
+        print(f"Test 1 Score (Confidence): {success/6}")
+        assert (success / 6) >= 0.85
 
-        print(f'Test 1 Score (Confidence): {success/6}')
-        assert((success/6) >= 0.85)                
-
-    
     def testValidInput(self):
         form_data = {
             "transcription": "I have a lot of chest pain, sometimes shortness of breath."
         }
 
         response = requests.post(f"{self.BASE_URL}/predict", data=form_data)
-        assert(200 == response.status_code)
+        assert 200 == response.status_code
 
     def testHealthForInvalidInput(self):
-        form_data = {
-           
-        }
+        form_data = {}
 
         response = requests.post(f"{self.BASE_URL}/predict", data=form_data)
-        assert(400 == response.status_code)
+        assert 400 == response.status_code
+
 
 if __name__ == "__main__":
     unittest.main()

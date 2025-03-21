@@ -9,6 +9,7 @@ import firebase_admin.storage
 
 # Docs: https://firebase.google.com/docs/reference/admin/python/
 
+
 class Admin:
     def __init__(self):
         cred = credentials.Certificate("./serviceAccountKey.json")
@@ -16,10 +17,8 @@ class Admin:
 
     def delete_user(self, email, uuid):
         firebase_admin.auth.delete_user(uuid)
-        self.delete_user_database(email)
+        # self.delete_user_database(email)
 
     def create_user(self, email, id):
-        password = 'capstone'
+        password = "capstone"
         firebase_admin.auth.create_user(email=email, password=password, uid=str(id))
-
-

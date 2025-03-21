@@ -3,42 +3,56 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import Footer from "../components/AppFooter";
 import Navbar from "../components/AppNavBar";
-import { Card, CardContent, Typography, Button, Container } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Container,
+} from "@mui/material";
 
 const AppointmentsList = () => {
-    const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional);
-    const consultations = healthcareProfessional?.consultations;
+  const healthcareProfessional = useSelector(
+    (state: RootState) => state.app.healthcareProfessional
+  );
+  const consultations = healthcareProfessional?.consultations;
 
-    return (
-        <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <Container className="flex-grow p-6 pb-16">
-                <Typography variant="h5" gutterBottom>
-                    Upcoming Appointments
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <Container className="flex-grow p-6 pb-16">
+        <Typography variant="h5" gutterBottom>
+          Upcoming Appointments
+        </Typography>
+
+        {consultations?.map((consultation, index) => (
+          <Card key={index} className="mb-4 p-2">
+            <CardContent className="flex justify-between items-center">
+              <div>
+                <Typography variant="h6">{consultation.patientName}</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {consultation.date}
                 </Typography>
+              </div>
+              <div className="text-right">
+                <Typography variant="body1">{consultation.time}</Typography>
+                <Button variant="contained" color="primary">
+                  View Details
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
 
-                {consultations?.map((consultation, index) => (
-                    <Card key={index} className="mb-4 p-2">
-                        <CardContent className="flex justify-between items-center">
-                            <div>
-                                <Typography variant="h6">{consultation.patientName}</Typography>
-                                <Typography variant="body2" color="text.secondary">{consultation.date}</Typography>
-                            </div>
-                            <div className="text-right">
-                                <Typography variant="body1">{consultation.time}</Typography>
-                                <Button variant="contained" color="primary">View Details</Button>
-                            </div>
-                        </CardContent>
-                    </Card>
-                ))}
-
-                <div className="flex justify-center mt-6">
-                    <Button variant="contained" color="primary">Add New Appointment</Button>
-                </div>
-            </Container>
-            <Footer />
+        <div className="flex justify-center mt-6">
+          <Button variant="contained" color="primary">
+            Add New Appointment
+          </Button>
         </div>
-    );
+      </Container>
+      <Footer />
+    </div>
+  );
 };
 
 export default AppointmentsList;

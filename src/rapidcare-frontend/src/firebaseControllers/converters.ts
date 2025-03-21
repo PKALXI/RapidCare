@@ -1,5 +1,13 @@
-import { QueryDocumentSnapshot, FirestoreDataConverter } from "firebase/firestore";
-import { IHealthcareProfessional, IHospital, INetworkInfo, IPatient } from "../models/model";
+import {
+  QueryDocumentSnapshot,
+  FirestoreDataConverter,
+} from "firebase/firestore";
+import {
+  IHealthcareProfessional,
+  IHospital,
+  INetworkInfo,
+  IPatient,
+} from "../models/model";
 
 //https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
 //Adapted to fit interfaces
@@ -7,8 +15,8 @@ const patientConverter: FirestoreDataConverter<IPatient> = {
   toFirestore: (data: IPatient) => {
     return {
       ...data,
-      profileInformation: data.profileInformation || {}, 
-      medicalHistory: data.medicalHistory || {}, 
+      profileInformation: data.profileInformation || {},
+      medicalHistory: data.medicalHistory || {},
       consultationNotes: data.consultationNotes || [],
       documents: data.documents || [],
     };
@@ -23,7 +31,7 @@ const patientConverter: FirestoreDataConverter<IPatient> = {
       consultationNotes: data.consultationNotes || [],
       documents: data.documents || [],
     } as IPatient;
-  }
+  },
 };
 
 const hospitalConverter: FirestoreDataConverter<IHospital> = {
@@ -35,7 +43,7 @@ const hospitalConverter: FirestoreDataConverter<IHospital> = {
       email: data.email || "",
       phone: data.phone || "",
       bedCapacity: data.bedCapacity || 0,
-      operatingHours: data.operatingHours || ""
+      operatingHours: data.operatingHours || "",
     };
   },
 
@@ -48,39 +56,40 @@ const hospitalConverter: FirestoreDataConverter<IHospital> = {
       email: data.email || "",
       phone: data.phone || "",
       bedCapacity: data.bedCapacity || 0,
-      operatingHours: data.operatingHours || ""
+      operatingHours: data.operatingHours || "",
     } as IHospital;
-  }
-};
-
-const healthcareProfessionalConverter: FirestoreDataConverter<IHealthcareProfessional> = {
-  toFirestore: (data: IHealthcareProfessional) => {
-    return {
-      ...data,
-      name: data.name || "",
-      role: data.role || "",
-      hospital: data.hospital || "",
-      department: data.department || "",
-      email: data.email || "",
-      phone: data.phone || "",
-      employmentStatus: data.employmentStatus || ""
-    };
   },
-
-  fromFirestore: (snap: QueryDocumentSnapshot): IHealthcareProfessional => {
-    const data = snap.data();
-    return {
-      id: snap.id,
-      name: data.name || "",
-      role: data.role || "",
-      hospital: data.hospital || "",
-      department: data.department || "",
-      email: data.email || "",
-      phone: data.phone || "",
-      employmentStatus: data.employmentStatus || ""
-    } as IHealthcareProfessional;
-  }
 };
+
+const healthcareProfessionalConverter: FirestoreDataConverter<IHealthcareProfessional> =
+  {
+    toFirestore: (data: IHealthcareProfessional) => {
+      return {
+        ...data,
+        name: data.name || "",
+        role: data.role || "",
+        hospital: data.hospital || "",
+        department: data.department || "",
+        email: data.email || "",
+        phone: data.phone || "",
+        employmentStatus: data.employmentStatus || "",
+      };
+    },
+
+    fromFirestore: (snap: QueryDocumentSnapshot): IHealthcareProfessional => {
+      const data = snap.data();
+      return {
+        id: snap.id,
+        name: data.name || "",
+        role: data.role || "",
+        hospital: data.hospital || "",
+        department: data.department || "",
+        email: data.email || "",
+        phone: data.phone || "",
+        employmentStatus: data.employmentStatus || "",
+      } as IHealthcareProfessional;
+    },
+  };
 
 const networkInfoConverter: FirestoreDataConverter<INetworkInfo> = {
   toFirestore: (data: INetworkInfo) => {
@@ -91,7 +100,7 @@ const networkInfoConverter: FirestoreDataConverter<INetworkInfo> = {
       email: data.email || "",
       phone: data.phone || "",
       website: data.website || "",
-      address: data.address || ""
+      address: data.address || "",
     };
   },
 
@@ -104,10 +113,14 @@ const networkInfoConverter: FirestoreDataConverter<INetworkInfo> = {
       email: data.email || "",
       phone: data.phone || "",
       website: data.website || "",
-      address: data.address || ""
+      address: data.address || "",
     } as INetworkInfo;
-  }
+  },
 };
 
-
-export {networkInfoConverter, healthcareProfessionalConverter, patientConverter, hospitalConverter };
+export {
+  networkInfoConverter,
+  healthcareProfessionalConverter,
+  patientConverter,
+  hospitalConverter,
+};

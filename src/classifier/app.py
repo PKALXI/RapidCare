@@ -1,4 +1,4 @@
-'''
+"""
 STARTER CODE TAKEN FROM THE FOLLOWING SOURCES AND EDITED TO FIT THE USE CASE:
 
 https://python.langchain.com/docs/concepts/prompt_templates/
@@ -10,7 +10,7 @@ https://python.langchain.com/docs/tutorials/rag/
 https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.ChatPromptTemplate.html
 https://langchain-ai.github.io/langgraph/tutorials/introduction/
 https://python.langchain.com/docs/tutorials/chatbot/
-'''
+"""
 
 from typing import Literal
 import os
@@ -24,26 +24,31 @@ from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 
-load_dotenv('../.env')
+load_dotenv("../.env")
 
 app = Flask(__name__)
 
 CORS(app)
 
-llm = init_chat_model("gpt-4o-mini", model_provider="openai", api_key=os.environ.get('OPENAI_API_KEY'))
+llm = init_chat_model(
+    "gpt-4o-mini", model_provider="openai", api_key=os.environ.get("OPENAI_API_KEY")
+)
+
 
 # Define schema for search
 class Search(TypedDict):
     """Search query."""
+
     query: Annotated[str, ..., "Search query to run."]
-    section: Annotated[
-        Literal["beginning", "middle", "end"],
-        ..., "Section to query."
-    ]
+    section: Annotated[Literal["beginning", "middle", "end"], ..., "Section to query."]
+
 
 # Define refined prompt for question-answering
-prompt = ChatPromptTemplate.from_messages([
-    ("system", """
+prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            """
     You are a highly knowledgeable medical assistant specializing in extracting key details from doctor-patient conversations. 
     
     Your goal is to identify and extract essential medical information from the provided transcription. Use the following structured format for your response:
@@ -63,48 +68,52 @@ prompt = ChatPromptTemplate.from_messages([
 
     If the context is insufficient to extract this information, respond with empty fields for all.
      
-    """),
-    ("human", "Transcription: {question}"),
-    ("assistant", "I'll extract the key details from the conversation.")
-])
+    """,
+        ),
+        ("human", "Transcription: {question}"),
+        ("assistant", "I'll extract the key details from the conversation."),
+    ]
+)
+
 
 # Define state for application
 class State(TypedDict):
     question: str
     answer: str
 
+
 def generate(state: State):
     messages = prompt.invoke({"question": state["question"]})
     response = llm.invoke(messages)
     return {"answer": response.content}
 
+
 graph_builder = StateGraph(State).add_sequence([generate])
 graph_builder.add_edge(START, "generate")
 graph = graph_builder.compile()
 
-@app.route('/predict', methods=['POST'])
+
+@app.route("/predict", methods=["POST"])
 def predict():
-    input_message = request.form.get('transcription')
-    
+    input_message = request.form.get("transcription")
+
     if not input_message:
-        return jsonify({'error': 'No transcription provided'}), 400
-        
+        return jsonify({"error": "No transcription provided"}), 400
+
     try:
-        initial_state = {
-            "question": input_message,
-            "answer": ""
-        }
-    
+        initial_state = {"question": input_message, "answer": ""}
+
         result = graph.invoke(initial_state)
-        
+
         if result and "answer" in result:
-            return jsonify({'response': result["answer"]})
+            return jsonify({"response": result["answer"]})
         else:
-            return jsonify({'error': 'No response generated'}), 500
+            return jsonify({"error": "No response generated"}), 500
 
     except Exception as e:
         print(f"Error in prediction: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5080, debug=False)
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=5080, debug=False)

@@ -148,8 +148,7 @@ The primary customer of the project are healthcare professionals, specifically t
 \subsection{Other Stakeholders}
 \begin{itemize}
   \item \textbf{Society:} Society is a major stakeholder in this project. The healthcare institutions such as hospitals and clinics are a part of users group within the society that will be benefitted with improved efficiency, effective staff management, and reduction in cost. This project will significantly impact various aspects like health, safety, and cultural diversity of society.By reducing documentation overhead, healthcare professionals can spend more time with patients, leading to better quality of care. This will help reduce emergency room wait times, ultimately improving public health outcomes. The system will meet all accessbility standards, use appropriate medical terminology, and does not use biased language to accomodate users with diverse cultural backgrounds. Accurate documentation and diagnostic suggestions will help reduce medical errors and improve patient safety.
-    
-
+  
   \item \textbf{Regulatory Bodies:} These are the organizations that set standards for healthcare technology and data protection. They are concerned with compliance to regulations such as PIPEDA and other relevant laws.
 \end{itemize}
 
@@ -1061,20 +1060,37 @@ The scope of this project can be be split into the following:
 \subsection{Standards Compliance Requirements}
 \lips
 
-
-
-
-
 \section{Open Issues}
-\lips
+
+The following list of risks were identified that could potentially impact project's sucess:
+\begin{itemize}
+  \item \textbf{Speech Input} -- A hospital or a clinic can be a loud place, in the event audio input is taken we need to ensure that it is clean and clear. This would mean essentially blocking outside noise. 
+  \item \textbf{Pre-Trained Models} -- To manipulate and use both inputs above we need to create a model to be accurate and provide accuracy when filling in charts. 
+  \item \textbf{Data Privacy} -- This application will hold a lot of patient data so creating a store that is secure and making sure standard data security practice is applied is a must.
+  \item \textbf{User Acceptance} -- This will require further elicitation with our supervisor. This would help us to gather data on what critical needs of healthcare professionals such that critical features are present. 
+\end{itemize}
 
 \section{Off-the-Shelf Solutions}
 \subsection{Ready-Made Products}
-\lips
+There are several existing EHR and medical documentation systems available in the market such as Epic, Cerner, MEDITECH, etc. While these solutions offer basic speech-to-text and documentation management functionalities for healthcare professionals, they lack advanced capabilities like diagnostic suggestions and medication recommendations. As noted by our supervisor, these EHR systems are difficult to navigate and lack integration across the network. In addition to this, these software are quite expensive making it difficult to be afforded by a single family practitioner. Our system aims to provide a one-stop affordable solution which improves the current functionalities offered by existing products and provide other advanced functionalities for better user experience and integration.
+
 \subsection{Reusable Components}
-\lips
+There are serveral existing libraries and existing APIs could be integrated into our system to reduce developed time and improve accuracy. Some of the libraries that could be used 
+include:
+
+\begin{itemize}
+  \item Material UI for consistent and accessible UI
+  \item Redux for state management
+  \item Firebase for authentication and real-time updates
+  \item Docker for containerization and deployment
+  \item Whisper API for accurate speech-to-text transcription
+  \item Jest for unit testing
+  \item GitHub Actions for CI/CD pipeline 
+\end{itemize}
+
 \subsection{Products That Can Be Copied}
-\lips
+Our system will derive its inspiration from existing EHR systems and medical documentation workflows like Dragon Medical One. Our supervisor will provide detailed insights into clinical documentation processes, such as the specific structure used for patient records, SOAP notes, and consultation notes. Furthermore, we will improve the system based on acceptance and usability testing performed by our supervisor and other stakeholders. In order to minimize the barrier to user acceptance, we will follow similar workflows, medical terminology, clinical note structuring, and template management approaches as existing products.
+
 
 \section{New Problems}
 \subsection{Effects on the Current Environment}

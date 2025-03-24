@@ -1,3 +1,7 @@
+# Starter flow and parts taken from the following:
+# https://github.com/actions/starter-workflows/blob/main/ci/python-app.yml
+# https://docs.github.com/en/actions/writing-workflows/quickstart
+
 name: Python application
 on: [push, workflow_dispatch]
 

@@ -1,26 +1,33 @@
-import './App.css';
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from './redux/store';
-import Login from './views/login';
-import PatientProfile from './views/HealthcareProfessional/PatientProfile';
-import AdminDashboard from './views/Admin/AdminDashboard';
-import AppointmentsList from './views/HealthcareProfessional/AppointmentList';
-import AccountSettings from './views/HealthcareProfessional/Account';
-import HpDashboard from './views/HealthcareProfessional/HpDashboard';
-import PatientList from './views/HealthcareProfessional/PatientList';
-import AdminAccount from './views/Admin/AdminAccount';
-import EmployeeList from './views/Admin/EmployeeList';
-import HospitalList from './views/Admin/HospitalList';
-import { Toaster } from 'react-hot-toast';
+import "./App.css";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "./redux/store";
+import Login from "./views/login";
+import PatientProfile from "./views/HealthcareProfessional/PatientProfile";
+import AdminDashboard from "./views/Admin/AdminDashboard";
+import AppointmentsList from "./views/HealthcareProfessional/AppointmentList";
+import AccountSettings from "./views/HealthcareProfessional/Account";
+import HpDashboard from "./views/HealthcareProfessional/HpDashboard";
+import PatientList from "./views/HealthcareProfessional/PatientList";
+import AdminAccount from "./views/Admin/AdminAccount";
+import EmployeeList from "./views/Admin/EmployeeList";
+import HospitalList from "./views/Admin/HospitalList";
+import { Toaster } from "react-hot-toast";
 
 const App: React.FC = () => {
-  const { isAuthenticated, isUserAdmin } = useSelector((state: RootState) => state.app);
+  const { isAuthenticated, isUserAdmin } = useSelector(
+    (state: RootState) => state.app
+  );
 
   return (
     <>
-      <Toaster/>
+      <Toaster />
       <Router>
         <Routes>
           {!isAuthenticated && <Route path="/" element={<Login />} />}
@@ -47,7 +54,11 @@ const App: React.FC = () => {
           <Route
             path="*"
             element={
-              isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/" replace />
+              isAuthenticated ? (
+                <Navigate to="/home" replace />
+              ) : (
+                <Navigate to="/" replace />
+              )
             }
           />
         </Routes>

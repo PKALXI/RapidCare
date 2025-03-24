@@ -4,7 +4,7 @@
 # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#workflow_dispatch
 
 name: JS Test
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
   build:

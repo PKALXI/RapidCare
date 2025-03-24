@@ -35,3 +35,4 @@ jobs:
       run: |
         cd src/rapidcare-frontend
         npm test
+        

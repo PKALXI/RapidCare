@@ -33,6 +33,8 @@ import { onSnapshot, query, where } from "firebase/firestore";
 import Referrals from "./Referrals";
 import ConfirmationModal from "../components/ConfirmationModal";
 import toast from "react-hot-toast";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import AIChat from "./AIChat";
 
 const PatientProfile = () => {
   const { patientId } = useParams<{ patientId: string }>();
@@ -45,6 +47,7 @@ const PatientProfile = () => {
   const [patient, setPatient] = useState<IPatient>(emptyPatient);
   const [activeTab, setActiveTab] = useState("Profile Information");
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openChat, setOpenChat] = useState(false);
 
   useEffect(() => {
     const q = query(patientCollection, where("id", "==", patientId));
@@ -97,9 +100,36 @@ const PatientProfile = () => {
     setOpenDeleteModal(false);
   };
 
+  const handleOpenChat = () =>{
+    setOpenChat(true);
+  }
+
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <Navbar />
+      {!openChat && <Button
+        variant="contained"
+        // endIcon={}
+        sx={{
+          position: "fixed",
+          bottom: 50,
+          right: 30,
+          borderRadius: "50%",
+          minWidth: 0,
+          padding: 2,
+          zIndex: 1000,
+        }}
+        onClick={handleOpenChat}
+      >
+        <TipsAndUpdatesIcon />
+      </Button>}
+
+      {openChat && (
+        <div className="fixed bottom-8 right-8 z-1000">
+          <AIChat setOpenChat={setOpenChat} />
+        </div>
+      )}
+
       <Box className="flex flex-col flex-grow">
         <Box className="flex justify-between mt-6 mb-2 px-32">
           <Box className="flex justify-center">

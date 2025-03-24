@@ -25,9 +25,7 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: |
-        cd src/rapidcare-frontend
         npm install
     - name: Run tests
       run: |
-        cd src/rapidcare-frontend
         npm test

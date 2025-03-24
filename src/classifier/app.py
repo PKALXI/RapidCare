@@ -92,7 +92,6 @@ graph_builder = StateGraph(State).add_sequence([generate])
 graph_builder.add_edge(START, "generate")
 graph = graph_builder.compile()
 
-
 @app.route("/predict", methods=["POST"])
 def predict():
     input_message = request.form.get("transcription")

@@ -147,9 +147,10 @@ The primary customer of the project are healthcare professionals, specifically t
 
 \subsection{Other Stakeholders}
 \begin{itemize}
-  \item \textbf{Society:} Society is a major stakeholder in this project. The healthcare institutions such as hospitals and clinics are a part of users group within the society that will be benefitted with improved efficiency. Additionally, they will be able to manage their staff better which in turn help in managing cost. Moreover, this project will help patients to get improved access to healthcare which will benenfit the society. 
+  \item \textbf{Society:} Society is a major stakeholder in this project. The healthcare institutions such as hospitals and clinics are a part of users group within the society that will be benefitted with improved efficiency, effective staff management, and reduction in cost. This project will significantly impact various aspects like health, safety, and cultural diversity of society.By reducing documentation overhead, healthcare professionals can spend more time with patients, leading to better quality of care. This will help reduce emergency room wait times, ultimately improving public health outcomes. The system will meet all accessbility standards, use appropriate medical terminology, and does not use biased language to accomodate users with diverse cultural backgrounds. Accurate documentation and diagnostic suggestions will help reduce medical errors and improve patient safety.
+    
 
-  \item \textbf{Regulatory Bodies:} These are  the organizations that set standards for healthcare technology and data protection. They are concerned with compliance to regulations such as PIPEDA and other relevant laws.
+  \item \textbf{Regulatory Bodies:} These are the organizations that set standards for healthcare technology and data protection. They are concerned with compliance to regulations such as PIPEDA and other relevant laws.
 \end{itemize}
 
 \subsection{Hands-On Users of the Project}
@@ -401,6 +402,14 @@ The scope of this project can be be split into the following:
   \label{fig:Use-Case Diagram}
 \end{figure}
 
+\subsection{System Boundaries}
+\begin{itemize}
+  \item The system will not be responsible for patient scheduling, billing, or other administrative tasks.
+  \item The system will not include development of any hardware components. All needed peripherals will be assumed as apart of the runtime environment.
+\end{itemize}
+
+\subsection{Formalised Math Specification}
+\lips
 
 \section{Functional Requirements}
 \subsection{Functional Requirements}
@@ -1083,31 +1092,123 @@ Inhibit the New Product}
 \section{Tasks}
 \subsection{Project Planning}
 
+\begin{itemize}
+  \item Hazard Analysis: Oct. 12 -- Oct. 23  
+  \begin{itemize}
+    \item Identify potential risks and hazards.
+    \item Identify potential mitigation strategies.
+  \end{itemize}
 
-\section{Phase-In Plan}
+  \item V & V Plan : Oct. 24 -- Nov. 1  
+  \begin{itemize}
+    \item Develop a verification and validation plan for the system.
+    \item Identify different methods required for complete testing of the system.
+  \end{itemize}
 
-All requirements with High priority must be implemented prior to the Revision 0 demonstration as they represent the core functionality of our system.\\
-FR\ref{FR_AddHealthProfessional}\\
-FR\ref{FR_login}\\
-FR\ref{FR_createRecord}\\
-FR\ref{FR_deleteRecord}\\
-FR\ref{FR_updateRecordtyping}\\ 
-FR\ref{FR_DictationRecording}\\
+  \item POC Demonstration: Nov.2  -- Nov. 11  
+  \begin{itemize}
+    \item Demonstrate core functionalities are feasible.
+    \item Semonstrate mitigation strategy for identifed risks.
+  \end{itemize}
 
-All requirements with Medium priority will be implemented before the Revision 1 demonstration.\\
-FR\ref{FR_addHealthNetwork}\\
-FR\ref{FR_DiagnosticSuggestions}\\
-FR\ref{FR_medicalSuggestions}\\
+  \item Design Documentation: Nov. 12 -- Jan. 25 
+  \begin{itemize}
+    \item Provide details about different components of the system.
+    \item Porvide details about the architecture used, data flow, and explanation fir different design decisions.
+  \end{itemize}
 
-All requirements with Low priority will be added after all High and Medium requirements are implemented, time permitting.\\
-FR\ref{FR_removeHealthNetwork}\\
-FR\ref{FR_UpdateHealthNetwork}\\
-FR\ref{FR_RemoveHealthProfessionals}\\
-FR\ref{FR_UpdateHealthProfessionals}\\ 
-FR\ref{FR_transferPatient}\\
+  \item Rev 0 Demonstration: Jan. 26 -- Feb. 12
+  \begin{itemize}
+    \item Demonstrate the core functionality of the system.
+    \item Identify areas of improvement and prioritization for remaining functionality.
+  \end{itemize}
+
+  \item V & V Report: Feb. 13 -- Mar. 7 
+  \begin{itemize}
+    \item Provide a report of the results for all the functional and non-functional requirements according to the V & V plan.
+    \item Provide any changes made during testing and comparison to existing implementation.
+  \end{itemize}
+  
+  \item Final Demonstration: Mar. 7 -- Mar. 29 
+  \begin{itemize}
+    \item Address feedback given in Revision 0 demonstration.
+    \item Implement any remaining functionality and complete the fully functional version of the system.
+  \end{itemize}
+
+  \item Final Documentation: Mar. 29 -- Apr. 2 
+  \begin{itemize}
+    \item Update all documentation with most recent updates and address feedback from tA, supervisor, and peers.
+    \item Submit final Expo Video and poster.
+  \end{itemize}
+
+  \item Expo: Apr. 2 -- Apr. 8 
+  \begin{itemize}
+    \item Arrange any required items and collect the printed poster. 
+    \item Present the final product at the ehibition.
+  \end{itemize}
 
 \subsection{Planning of the Development Phases}
-\lips
+
+The development tasks will be completed as following: 
+
+\begin{itemize}
+  \item Week of Jan. 19th -- Prep Rev0 Demonstration:
+    \begin{itemize}
+      \item Transcription optimization (Gurleen, Pranav)
+      \item Text Classification Service Review (Moamen)
+      \item Setup Socket communication through API and Transcription Service (Pranav)
+      \item Containerize application + Setup deployment environment (Pranav)
+      \item Build out login page, dedication classify text UI (Inreet)
+    \end{itemize}
+  \item Week of Jan. 26th -- Prep Rev0 Demonstration:
+    \begin{itemize}
+      \item Setup ML Training Pipeline (Pranav)
+      \item Employee management + Patient Management Views (Inreet, Gurleen)
+      \item Data Layer setup (Moamen)
+    \end{itemize}
+  \item Week of Feb. 2nd
+    \begin{itemize}
+      \item Rev0 Demonstration
+      \item Complete final optimizations and refinements (All)
+      \item Worker onboarding FR
+    \end{itemize}
+  \item Week of Feb. 9th -- Prep V & V Report
+    \begin{itemize}
+      \item Supervisor acceptance meeting + resolve supervisor reviews (All)
+    \end{itemize}
+  \item Week of Feb. 16th -- Prep V & V Report
+    \begin{itemize}
+      \item Testing introduce testing suites as per VnV plan (All)
+    \end{itemize}
+  \item Week of Feb. 23rd -- Prep V & V Report
+    \begin{itemize}
+      \item Testing introduce testing suites as per VnV plan (All)
+      \item Implemet changes due to testing (All)
+    \end{itemize}
+  \item Week of Mar. 2nd -- Prep V & V Report
+    \begin{itemize}
+      \item VnV Report Completion and Submission (All)
+    \end{itemize}
+  \item Week of Mar. 9th -- Prep Final Demonstration
+    \begin{itemize}
+      \item Complete outlying tickets converse with supervisor on additional functionality (All)
+      \item Suggestion model retraining capabilities (All)
+    \end{itemize}
+  \item Week of Mar. 16th -- Prep Final Demonstration
+    \begin{itemize}
+      \item Diagonistic suggestions and Medication suggestions improvement (Pranav)
+      \item Presentation preparation (All)
+    \end{itemize}
+  \item Week of Mar. 23rd -- Prep Final Demonstration
+    \begin{itemize}
+      \item Make final code changes, code refactorization, and cleanup (All)
+    \end{itemize}
+  \item Week of Mar. 29rd -- Final Demonstration
+    \begin{itemize}
+      \item Final demonstration (All)
+    \end{itemize}
+
+\end{itemize}
 
 \section{Migration to the New Product}
 \subsection{Requirements for Migration to the New Product}
@@ -1128,7 +1229,6 @@ FR\ref{FR_transferPatient}\\
 
 \section{Ideas for Solution}
 \lips
-
 
 \newpage
     \begin{landscape}
@@ -1165,9 +1265,6 @@ FR\ref{FR_transferPatient}\\
       \end{table}
     \end{landscape}
 
-
-\section{Development Plan}
-N/A
 
 
 ~\newpage

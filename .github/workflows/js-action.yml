@@ -8,7 +8,6 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -18,14 +17,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: src/rapidcare-frontend/package-lock.json  # Ensures correct caching
+
     - name: Install dependencies
       run: |
+        cd src/rapidcare-frontend
         npm install
+
     - name: Run tests
       run: |
+        cd src/rapidcare-frontend
         npm test

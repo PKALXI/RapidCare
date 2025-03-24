@@ -618,40 +618,37 @@ N/A
   \textbf{Control:} Manual \\
   \textbf{Initial State:} The default email and password are initialized as variables and given a default value.\\
   \textbf{Test Case Derivation:} The expected behavior is derived from the correct registration and login functionality of Firebase Authentication, ensuring valid user creation and authentication processes, as well as error handling for invalid credentials.\\
-  \textbf{Test Procedure:} The tests are performed as follows:
-  \begin{enumerate}
-    \item Sign up using valid credentials:
+  \textbf{Test Procedure:} The tests are performed as follows:\\
+
+  \begin{itemize}
+    \item Sign up using valid credentials:\\
       \begin{itemize}
         \item \textbf{Input:} The input for this test are the valid credentials of email and password.
         \item \textbf{Output:} The user object is returned by the signup function.
         \item \textbf{Test Derivation:} Verifies that the signup function correctly works and creates a new user account when the valid credentials are provided.
-        \item \textbf{Result:} Pass 
       \end{itemize}
 
-    \item Sign up throwing errors with invalid credentials:
+    \item Sign up throwing errors with invalid credentials:\\
       \begin{itemize}
         \item \textbf{Input:} The input for this test are the invalid credentials of email and password.
         \item \textbf{Output:} An error thrown up by the signup function.
         \item \textbf{Test Derivation:} Verifies that the signup function correctly throws error when the invalid credentials are provided.
-        \item \textbf{Result:} Pass 
       \end{itemize}
 
-    \item Sign in using valid credentials:
+    \item Sign in using valid credentials:\\
       \begin{itemize}
         \item \textbf{Input:} The input for this test are the valid credentials of email and password. 
         \item \textbf{Output:} The user object is returned by the signin function.
         \item \textbf{Test Derivation:}  Verifies that the signin function correctly authenticates the user when valid credentials are provided.
-        \item \textbf{Result:} Pass 
       \end{itemize}
 
-    \item Sign in throwing errors with invalid credentials:
+    \item Sign in throwing errors with invalid credentials: \\
       \begin{itemize}
         \item \textbf{Input:} The input for this test are the invalid credentials of email and password. 
         \item \textbf{Output:} An error thrown up by the signin function.
         \item \textbf{Test Derivation:} Verifies that the signin function correctly throws error when the invalid credentials are provided.
-        \item \textbf{Result:} Pass 
       \end{itemize}
-  \end{enumerate}
+  \end{itemize}
 
 
 \subsubsection{Administrator Account Management Module and Patient Account Management Module}

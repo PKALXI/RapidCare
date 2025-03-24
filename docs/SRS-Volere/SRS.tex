@@ -148,6 +148,7 @@ The primary customer of the project are healthcare professionals, specifically t
 \subsection{Other Stakeholders}
 \begin{itemize}
   \item \textbf{Society:} Society is a major stakeholder in this project. The healthcare institutions such as hospitals and clinics are a part of users group within the society that will be benefitted with improved efficiency. Additionally, they will be able to manage their staff better which in turn help in managing cost. Moreover, this project will help patients to get improved access to healthcare which will benenfit the society. 
+
   \item \textbf{Regulatory Bodies:} These are  the organizations that set standards for healthcare technology and data protection. They are concerned with compliance to regulations such as PIPEDA and other relevant laws.
 \end{itemize}
 
@@ -218,7 +219,7 @@ The following is the glossary for this document:
   G & Goals\\
   UI & User Interface\\
   UX & User Experience\\
-  HIPAA & Health Insurance Portability and Accountability Act\\
+  PIPEDA & Personal Information Protection and Electronic Documents Act\\
   STG & Stretch Goals\\
   FR & Functional Requirement\\
   NFR & Non-functional Requirement\\
@@ -1133,32 +1134,31 @@ FR\ref{FR_transferPatient}\\
     \begin{landscape}
       \section{Traceability Matrices and Graphs}
       \begin{table}[H]
-      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
       \hline
-      & \rotatebox{90}{FR\ref{FR_addHealthNetwork}} & \rotatebox{90}{FR\ref{FR_removeHealthNetwork}} & \rotatebox{90}{FR\ref{FR_UpdateHealthNetwork}} & \rotatebox{90}{FR\ref{FR_AddHealthProfessional}} & \rotatebox{90}{FR\ref{FR_RemoveHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_UpdateHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_login}} & \rotatebox{90}{FR\ref{FR_createRecord}} & \rotatebox{90}{FR\ref{FR_deleteRecord}} & \rotatebox{90}{FR\ref{FR_updateRecordtyping}} & \rotatebox{90}{FR\ref{FR_DictationRecording}} & \rotatebox{90}{FR\ref{FR_DiagnosticSuggestions}} & \rotatebox{90}{FR\ref{FR_medicalSuggestions}} & \rotatebox{90}{FR\ref{FR_transferPatient}} & \rotatebox{90}{NFR\ref{NFR_LookAndFeel}} & \rotatebox{90}{NFR\ref{NFR_Usability}} & \rotatebox{90}{NFR\ref{NFR_Performance}} & \rotatebox{90}{NFR\ref{NFR_Operational}} & \rotatebox{90}{NFR\ref{NFR_Maintainability}} & \rotatebox{90}{NFR\ref{NFR_Security}} & \rotatebox{90}{NFR\ref{NFR_Cultural}} & \rotatebox{90}{NFR\ref{NFR_Legal}} \\
+      & \rotatebox{90}{FR\ref{FR_addHealthNetwork}} & \rotatebox{90}{FR\ref{FR_removeHealthNetwork}} & \rotatebox{90}{FR\ref{FR_UpdateHealthNetwork}} & \rotatebox{90}{FR\ref{FR_AddHealthProfessional}} & \rotatebox{90}{FR\ref{FR_RemoveHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_UpdateHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_login}} & \rotatebox{90}{FR\ref{FR_createRecord}} & \rotatebox{90}{FR\ref{FR_deleteRecord}} & \rotatebox{90}{FR\ref{FR_updateRecordtyping}} & \rotatebox{90}{FR\ref{FR_DictationRecording}} & \rotatebox{90}{FR\ref{FR_DiagnosticSuggestions}} & \rotatebox{90}{FR\ref{FR_medicalSuggestions}} & \rotatebox{90}{NFR\ref{NFR_LookAndFeel}} & \rotatebox{90}{NFR\ref{NFR_Usability}} & \rotatebox{90}{NFR\ref{NFR_Performance}} & \rotatebox{90}{NFR\ref{NFR_Operational}} & \rotatebox{90}{NFR\ref{NFR_Maintainability}} & \rotatebox{90}{NFR\ref{NFR_Security}} & \rotatebox{90}{NFR\ref{NFR_Cultural}} & \rotatebox{90}{NFR\ref{NFR_Legal}} \\
       \hline
-      FR\ref{FR_addHealthNetwork} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_removeHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_UpdateHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_AddHealthProfessional} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_RemoveHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_UpdateHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_login} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - \\ \hline
-      FR\ref{FR_createRecord} & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_deleteRecord} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_updateRecordtyping} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_DictationRecording} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_DiagnosticSuggestions} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_medicalSuggestions} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_transferPatient} & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_LookAndFeel} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Usability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Performance} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & X & - & - & - & - \\ \hline
-      NFR\ref{NFR_Operational} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & X \\ \hline
-      NFR\ref{NFR_Maintainability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Security} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Cultural} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Legal} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_addHealthNetwork} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_removeHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_UpdateHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_AddHealthProfessional} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_RemoveHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_UpdateHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_login} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - \\ \hline
+      FR\ref{FR_createRecord} & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_deleteRecord} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_updateRecordtyping} & - & - & - & - & - & - & X & X &  - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_DictationRecording} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_DiagnosticSuggestions} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_medicalSuggestions} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_LookAndFeel} & - & - & - & - & - & - & - & - & - & - & - & - & -  & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Usability} & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Performance} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & X & - & - & - & - \\ \hline
+      NFR\ref{NFR_Operational} & - & - & - & - & - & - & - & - & - & - & X & -  & - & - & - & - & - & - & - & - & X \\ \hline
+      NFR\ref{NFR_Maintainability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Security} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Cultural} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Legal} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
       \end{tabular}
       \caption{Traceability Matrix Showing the Connections Between Requirements}
       \label{Table:A_trace}

@@ -145,6 +145,10 @@ The intended readers of this SRS document include project managers, software dev
 
 \subsection{User Business}
 
+The healthcare industry in Canada is facing significant challenges. After talking to multiple stakeholders, we discovered that the major reason behind this is documentation overhead and inefficient workflows. Healthcare professionals spend a major portion of their time on documentation tasks. This in turn leaves them with less time to actually provide care to patients. This contributes to longer wait times, reduced patient throughput, and increased stress on healthcare workers.\\
+The current EHR systems are often difficult to navigate and require manual data entry, which is time-consuming and prone to errors. Moreover, the EHR systems with speech-to-text transcription are not very accurate and require a lot of review from the users. These EHR systems are quite expensive and cannot be afforded by smaller practices. Therefore, healthcare professionals need a more efficient way to document patient interactions and health data which is cost-effective and also extends the functionality of the current EHR systems.\\
+This project aims to address these issues by providing a healthcare documentation system that leverages speech recognition and ML to streamline the documentation process. Along with real-time transcription and classification of the text, the system will also be able to provide diagnostic and medication suggestions to reduce cognitive load and improve accuracy. This will reduce the time spent on administrative tasks, allowing healthcare professionals to focus more on patient care while maintaining accurate and comprehensive medical records.\\
+
 \subsection{Goals of the Project}
 % Gurleen copy from PS
 % not completed
@@ -249,11 +253,36 @@ The following is the glossary for this document:
 \end{tabular}\\
 
 \section{Relevant Facts And Assumptions}
+
 \subsection{Relevant Facts}
-% not completed
+\begin{itemize}
+  
+  \item The healthcare system in Canada faces significant challenges due to documentation overhead.
+  
+  \item The current EHR systems mostly use manual data entry and basic speech-to-text functionality. This impacts the efficiency of the workflow and is prone to errors.
+  
+  \item The NLP techniques and speech recognition software have made significant advancements in recent years. 
+  
+  \item These technologies can be adapted to improve accuracy, provide diagnostic and medication suggestions, and improve the efficiency of healthcare workflows. 
+  
+  \item The healthcare industry has strict regulations regarding patient data privacy and security.
+
+\end{itemize}
+
 \subsection{Business Rules}
-\lips
-% not completed
+\begin{itemize}
+  \item Access to patient records must be strictly controlled based on user roles and permissions.
+  
+  \item The system must comply with all relevant healthcare data protection regulations, including PIPEDA and other privacy laws, to protect all sensitive patient and network information.
+  
+  \item Any modifications to the codebase must be accompanied by a review from peers to meet the standard coding standards.
+  
+  \item The project must implement a CI/CD pipeline to ensure that all changes are validated before integration.
+
+  \item The system must be scalable to accommodate large datasets and multiple users accessing the system simultaneously.
+
+\end{itemize}
+
 \subsection{Assumptions}
 
 \begin{itemize}
@@ -313,7 +342,6 @@ Through this project we aim to develop a solution that will address key niche pr
   \item Increased doctor and healthcare professional satisfaction
 \end{itemize}
 \end{itemize}
-Much like how copilot is a tool for programmers, the aim is to create a tool for healthcare professionals to help with documentation such that the number of patient processed per day can be increased, and the focus of doctors and nurses can be shifted from documentation to patient care.
 
 
 \subsection{Work Partitioning}
@@ -1290,8 +1318,6 @@ This section cannot be completed at this point but will be completed at a later 
       \label{Table:A_trace}
       \end{table}
     \end{landscape}
-
-
 
 ~\newpage
 

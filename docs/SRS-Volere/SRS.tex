@@ -281,14 +281,15 @@ Through this project we aim to develop a solution that will address key niche pr
 \begin{itemize}
   \item \textbf{Inputs:}
   \begin{itemize}
-    \item Audio from healthcare professionals and patient interaction.
-    \item Keyboard input.
+    \item \textbf{Doctor-Patient Conversation} -- To streamline the documentation process, the conversation between the doctor and the patient is recorded using the recording tool.
+    \item \textbf{Medical Prediction Context} -- A comprehensive knowledge of common diseases and the associated medicines is served as input for the model to predict the diagnosis and medicines.
+    \item \textbf{Text Field Input} -- Text field entries are utilized as input parameters provided by the user for various data processing operations such as filling out patient data, creating SOAP notes, etc.
   \end{itemize}
   \item \textbf{Outputs:}
   \begin{itemize}
-    \item Transcription of audio into text.
-    \item Classification of text into clinical notes.
-    \item Diagnosis and medication suggestions.
+    \item \textbf{Transcribed Text} -- After the audio conversation is given as the input, it is then processed and transcribed into written text as its output.
+    \item \textbf{Predicted Diagnosis} -- The system predicted the diagnosis and its associated medicines along with the action plan solely based on the provided context about common diseases in the world.  
+    \item \textbf{Auto-filled documents} -- The transcribed text is further classified into relevant categories to autofill the charts with patient's medical information.
   \end{itemize}
   \item \textbf{User Responsibilities:}
   \begin{itemize}
@@ -387,6 +388,16 @@ The scope of this project can be be split into the following:
 
 \subsection{Product Use Case Table}
 % not completed
+
+\begin{tabular}{ | p{3cm} | p{3cm} | p{3cm} | p{3cm} | p{3cm} | }
+  \hline
+  \textbf{PUC No} & \textbf{PUC Name} & \textbf{Actor} & \textbf{Input} & \textbf{Output}  \\ \hline
+  1 & Login/Register & Healthcare professional & Login credentials & Access to System \\ \hline
+  2 & Recording Clinical Notes & Healthcare professional & Conversation with the patient & System displays transcripted text \\ \hline
+  3 & Diagnostic Suggestions & Healthcare professional & Submits transcripted text & Potential diagnostic suggestions based on the transcripted text \\ \hline
+  4 & Create Patient Profile & Healthcare professional & Provides patient details in the required fields & Patient profile is created after submission \\ \hline 
+\end{tabular}
+\captionof{table}{Product Use Case Table}
 
 \subsection{Individual Product Use Cases (PUC's)}
 

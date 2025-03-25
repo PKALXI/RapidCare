@@ -178,24 +178,136 @@ User participation is vital for the design, development, and acceptance testing 
 System administrators and IT staff will be responsible for maintaining the system. They would be responsible to provide assistance to the users and troubleshoot any technical issues that may arise ensuring that the system remains functional. 
 
 \section{Mandated Constraints}
-% Moamen
-% not completed
+
 \subsection{Solution Constraints}
-\lips
+The following fundamental constraints govern the core functionality of the RapidCare system:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+The system shall maintain voice-to-text transcription accuracy of at least 85\%. & Critical for patient safety and medical record accuracy as specified in performance requirements. \\
+\hline
+The interface shall maintain a maximum 2-second response time for transcriptions. & Essential for real-time clinical workflow as per speed requirements. \\
+\hline
+\end{tabular}
+\caption{Solution Constraints}
+\label{tab:solution_constraints}
+\end{table}
+
 \subsection{Implementation Environment of the Current System}
-\lips
+The system must operate within these environmental parameters:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+The system shall operate in standard clinic environments with ambient noise. & Must function reliably in typical healthcare settings as per operational requirements. \\
+\hline
+The user interface must be accessible via a web browser on any computer with an internet connection. & Users will operate the website on their facility computers, which may lack the capability to run it without an internet connection. \\
+\hline
+\end{tabular}
+\caption{Implementation Environment Constraints}
+\label{tab:implementation_constraints}
+\end{table}
+
 \subsection{Partner or Collaborative Applications}
-\lips
+Integration with external systems must comply with:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+Voice recognition APIs shall maintain 85\% accuracy for medical terminology. & Critical to meet the system's accuracy requirements for clinical use. \\
+\hline
+Cloud hosting services shall guarantee 99.9\% uptime. & Necessary to meet the robustness requirements for healthcare applications. \\
+\hline
+\end{tabular}
+\caption{Partner Application Constraints}
+\label{tab:partner_constraints}
+\end{table}
+
 \subsection{Off-the-Shelf Software}
-\lips
+Third-party components must meet these standards:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+All third-party libraries must be actively maintained with security updates. & Essential to meet security and maintainability requirements. \\
+\hline
+\end{tabular}
+\caption{Off-the-Shelf Software Constraints}
+\label{tab:off_the_shelf_constraints}
+\end{table}
+
 \subsection{Anticipated Workplace Environment}
-\lips
+The system is specifically designed for deployment in:
+\begin{itemize}
+\item Busy hospital wards and clinics with background noise
+\item Environments with multiple concurrent users
+\item Locations with reliable but not necessarily high-speed internet
+\end{itemize}
+
 \subsection{Schedule Constraints}
-\lips
+Project timelines must respect these mandatory sequences:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+The voice recognition core must be finalized before UI integration. & UI design depends on transcription capabilities as per usability requirements. \\
+\hline
+\end{tabular}
+\caption{Schedule Constraints}
+\label{tab:schedule_constraints}
+\end{table}
+
 \subsection{Budget Constraints}
-\lips
+Financial limitations for the project include:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+Total speech API costs shall not exceed \$0.002 per transcription. & Necessary to maintain affordable operation at scale. \\
+\hline
+\end{tabular}
+\caption{Budget Constraints}
+\label{tab:budget_constraints}
+\end{table}
+
 \subsection{Enterprise Constraints}
-\lips
+Organizational policies impose these requirements:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+All clinical staff must complete system training before access. & Required to meet usability and security requirements. \\
+\hline
+System access shall be revoked after 3 failed login attempts. & Security measure to protect sensitive health data. \\
+\hline
+All code changes require peer review before deployment. & Quality control measure to maintain system reliability. \\
+\hline
+\end{tabular}
+\caption{Enterprise Constraints}
+\label{tab:enterprise_constraints}
+\end{table}
 
 \section{Naming Conventions and Terminology}
 

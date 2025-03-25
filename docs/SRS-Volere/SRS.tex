@@ -1087,84 +1087,103 @@ The scope of this project can be be split into the following:
   \end{itemize}
 
 
-\section{Look and Feel Requirements}
-\subsection{Appearance Requirements}
-\lips
-\subsection{Style Requirements}
-\lips
-
-\section{Usability and Humanity Requirements}
-\subsection{Ease of Use Requirements}
-\lips
-\subsection{Personalization and Internationalization Requirements}
-\lips
-\subsection{Learning Requirements}
-\lips
-\subsection{Understandability and Politeness Requirements}
-\lips
-\subsection{Accessibility Requirements}
-\lips
-
-\section{Performance Requirements}
-\subsection{Speed and Latency Requirements}
-\lips
-\subsection{Safety-Critical Requirements}
-\lips
-\subsection{Precision or Accuracy Requirements}
-\lips
-\subsection{Robustness or Fault-Tolerance Requirements}
-\lips
-\subsection{Capacity Requirements}
-\lips
-\subsection{Scalability or Extensibility Requirements}
-\lips
-\subsection{Longevity Requirements}
-\lips
-
-\section{Operational and Environmental Requirements}
-\subsection{Expected Physical Environment}
-\lips
-\subsection{Wider Environment Requirements}
-\lips
-\subsection{Requirements for Interfacing with Adjacent Systems}
-\lips
-\subsection{Productization Requirements}
-\lips
-\subsection{Release Requirements}
-\lips
-
-\section{Maintainability and Support Requirements}
-\subsection{Maintenance Requirements}
-\lips
-\subsection{Supportability Requirements}
-\lips
-\subsection{Adaptability Requirements}
-\lips
-
-\section{Security Requirements}
-\subsection{Access Requirements}
-\lips
-\subsection{Integrity Requirements}
-\lips
-\subsection{Privacy Requirements}
-\lips
-\subsection{Audit Requirements}
-\lips
-\subsection{Immunity Requirements}
-\lips
-
-\section{Cultural Requirements}
-\subsection{Cultural Requirements}
-\lips
-
-\section{Compliance Requirements}
-\subsection{Legal Requirements}
-\lips
-\subsection{Standards Compliance Requirements}
-\lips
-
-
-
+  \section{Look and Feel Requirements} \label{NFR_LookAndFeel}
+  \subsection{Appearance Requirements}
+  The user interface (UI) of the system should have a clean and modern design that prioritizes simplicity and ease of navigation. The UI should be visually appealing and intuitive, ensuring that users can quickly locate core functions without additional guidance. The design should reduce excess noise and make the interface as simple as possible, allowing healthcare professionals to focus on patient care rather than managing the system.
+  
+  \subsection{Style Requirements}
+  The system should adhere to a consistent style guide, including color schemes, typography, and layout. The style should be professional and align with healthcare standards, ensuring that the system is easy to use for healthcare professionals of all skill levels. The UI should be designed to be accessible and inclusive, accommodating users with varying technical expertise and diverse educational backgrounds.
+  
+  \section{Usability Requirements} \label{NFR_Usability}
+  \subsection{Ease of Use Requirements}
+  The system should be highly intuitive, ensuring that healthcare workers can effectively use the system after a brief 30-minute training session. The system should allow users to perform key functions such as logging in, accessing patient records, adding entries, and generating reports without assistance. The majority of users should be able to locate core functions without additional guidance.
+  
+  \subsection{Personalization Requirements}
+  The system allows for limited personalization, where hospitals can add and manage their employees, and healthcare professionals can create and update patient records. Each hospital can customize the system by adding their staff members, while healthcare professionals can personalize the system by creating new patient profiles and adding relevant medical files. This ensures that the system is tailored to the specific needs of each hospital and healthcare professional, while maintaining a consistent and user-friendly interface for all users.
+  
+  \subsection{Learning Requirements}
+  The system should be designed to minimize the learning curve for new users. Healthcare professionals should be able to learn and use the system quickly, with minimal training. The system should provide clear instructions and guidance for users to navigate and perform tasks efficiently.
+  
+  \subsection{Understandability and Politeness Requirements}
+  The system should provide clear and concise error messages that guide users to recover from errors. The system should be polite and respectful in its interactions with users, ensuring that users feel confident and supported while using the system.
+  
+  \subsection{Accessibility Requirements}
+  The system should meet established accessibility standards to ensure usability for all healthcare staff, including those with disabilities. The UI should be designed for ease of navigation, incorporating various accessibility features such as step-by-step instructions and support for assistive technologies.
+  
+  \section{Performance Requirements} \label{NFR_Performance}
+  \subsection{Speed and Latency Requirements}
+  The system should provide responsive voice-to-text conversion, with real-time transcription displayed within a 2-second delay. The system should maintain high processing throughput during peak operational loads, ensuring that users can complete tasks quickly and efficiently.
+  
+  \subsection{Safety-Critical Requirements}
+  The system should ensure the accuracy and reliability of transcribed medical data. Misinterpretation of words could lead to inaccurate records and wrong diagnoses, so the system must provide accurate transcriptions with a minimum accuracy of 85\%.
+  
+  \subsection{Accuracy Requirements}
+  The system should provide accurate transcriptions of voice input, with a minimum accuracy of 85\%. The system should also provide accurate diagnostic and medication suggestions based on the transcribed data, with a confidence score exceeding 85\%.
+  
+  \subsection{Robustness Requirements}
+  The system should maintain stability and uptime of 99.9\% or above during operational hours. The system should handle unexpected or invalid inputs gracefully, providing appropriate error messages and guiding users to recover from errors.
+  
+  \subsection{Capacity Requirements}
+  The system should be capable of handling an increasing number of concurrent users without degradation in performance. The system should scale horizontally to support concurrent users while maintaining consistent response times.
+  
+  \subsection{Scalability Requirements}
+  The system should be scalable to accommodate future growth and additional features. The system should be designed to integrate with existing hospital environments and support future enhancements without significant rework.
+  
+  \subsection{Longevity Requirements}
+  The system should be designed for long-term use, with regular updates and maintenance to ensure continued reliability and performance. The system should be adaptable to changes in healthcare regulations and technological advancements.
+  
+  \section{Operational Requirements} \label{NFR_Operational}
+  \subsection{Expected Physical Environment}
+  The system is expected to operate in a standard office environment with standard computer equipment, such as monitors, keyboards, and internet access. The system should be compatible with typical clinic noise levels and other environmental factors.
+  
+  \subsection{Wider Environment Requirements}
+  The system should comply with healthcare regulations and data protection standards, ensuring the confidentiality and security of patient data. The system should be designed to operate in a cloud-based environment.
+  
+  \subsection{Requirements for Interfacing with Adjacent Systems}
+  The system should integrate seamlessly with existing hospital systems, such as Electronic Health Record (EHR) systems. The system should support data exchange and interoperability with other healthcare systems to ensure a smooth workflow.
+  
+  \subsection{Productization Requirements}
+  The system should be designed for easy deployment and maintenance, with clear documentation and support for regular updates. The system should be packaged and distributed in a way that allows for easy installation and configuration.
+  
+  \subsection{Release Requirements}
+  The system should undergo rigorous testing and validation before release to ensure that it meets all functional and non-functional requirements. The system should be released with comprehensive user documentation and support materials.
+  
+  \section{Maintainability Requirements} \label{NFR_Maintainability}
+  \subsection{Maintenance Requirements}
+  The system should undergo regular updates for bug fixes and feature enhancements, ensuring minimal disruption to users. The system should be designed to be modular and maintainable, allowing for easy updates and modifications.
+  
+  \subsection{Supportability Requirements}
+  The system should provide clear documentation and support resources for users and administrators. The system should include logging and monitoring tools to assist in troubleshooting and resolving issues.
+  
+  \subsection{Adaptability Requirements}
+  The system should be adaptable to changes in healthcare regulations, technological advancements, and user needs. The system should be designed to support future enhancements and integrations without significant rework.
+  
+  \section{Security Requirements} \label{NFR_Security}
+  \subsection{Access Requirements}
+  The system should provide secure user authentication methods to ensure that only authorized personnel can access sensitive patient information. Unauthorized access attempts should be blocked and logged, with notifications sent to the security team.
+  
+  \subsection{Integrity Requirements}
+  The system should ensure the integrity of patient data by validating input data and preventing unauthorized modifications. The system should log all actions and provide audit trails for review by the security team.
+  
+  \subsection{Privacy Requirements}
+  The system should comply with data protection regulations, such as PIPEDA, to ensure the privacy and confidentiality of patient data. The system should handle patient data securely and prevent unauthorized access or data breaches.
+  
+  \subsection{Audit Requirements}
+  The system should provide logging and audit trails for all actions, including access attempts, data modifications, and system updates. The system should allow administrators to review logs and audit trails to ensure compliance with security policies.
+  
+  \subsection{Immunity Requirements}
+  The system should be designed to resist common security threats, such as unauthorized access, data breaches, and denial-of-service attacks. The system should include security measures to protect against these threats and ensure the continued operation of the system.
+  
+  \section{Cultural Requirements} \label{NFR_Cultural}
+  \subsection{Cultural Sensitivity Requirements}
+  The system should ensure that all content, including transcribed text and generated reports, is culturally sensitive and free from inappropriate language. The system must avoid any offensive or culturally insensitive content in its output, ensuring that it is professional and respectful in all interactions with users.
+  
+  \section{Legal Requirements}  \label{NFR_Legal}
+  \subsection{Compliance Requirements}
+  The system should comply with all relevant healthcare data protection regulations, such as PIPEDA. The system should ensure that patient data is handled securely and in compliance with legal requirements.
+  
+  \subsection{Standards Compliance Requirements}
+  The system should adhere to industry standards for software development, data security, and healthcare documentation. The system should be designed to meet or exceed these standards, ensuring that it is reliable and secure.
 
 
 \section{Open Issues}

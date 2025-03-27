@@ -88,6 +88,18 @@
 \newcommand{\ltheulcnum}{ULC\theulcnum}
 \newcommand{\ulcref}[1]{ULC\ref{#1}}
 
+\newcounter{udnum} % User documentation
+\newcommand{\ltheudnum}{UD\theudnum}
+\newcommand{\udref}[1]{UD\ref{#1}}
+
+\newcounter{trnum} % traninig requirement
+\newcommand{\lthetrnum}{TR\thetrnum}
+\newcommand{\trref}[1]{TR\ref{#1}}
+
+\newcounter{mnpnum} % traninig requirement
+\newcommand{\lthemnpnum}{TR\themnpnum}
+\newcommand{\mnpref}[1]{MNP\ref{#1}}
+
 \begin{document}
 
 \title{Software Requirements Specification for \progname: RapidCare} 
@@ -122,7 +134,7 @@
 \section{Introduction}
 
 \subsection{Purpose of Document} \label{sec_PurposeOfDocument}
-The purpose of this document is to provide a comprehensive description of the requirements for a software application that aims to streamline the healthcare documentation process aimed to be run as a web application. This document will be used in as a contract in a sense between the team and the client who intends to use this application. This document will allow for an in-depth description of the software's functionality, performance, and other non-functional requirements. Additionally, it will outline common use-cases under which the software will be used. This will in turn provide a direction to the developers such that they will be empowered to creating the right product as this document will contain various stakeholders' requirements. Along with development direction, this document will be a direct reference for all of the stakeholders to understand the product's scope, functionality, and limitations.
+The purpose of this document is to provide a comprehensive description of the requirements for a software application that aims to streamline the healthcare documentation process aimed to be run as a web application. This document will be used as a contract in a sense between the team and the client who intends to use this application. This document will allow for an in-depth description of the software's functionality, performance, and other non-functional requirements. Additionally, it will outline common use-cases under which the software will be used. This will in turn provide a direction to the developers such that they will be empowered to creating the right product as this document will contain various stakeholders' requirements. Along with development direction, this document will be a direct reference for all of the stakeholders to understand the product's scope, functionality, and limitations.
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader} 
 
@@ -132,6 +144,10 @@ The intended readers of this SRS document include project managers, software dev
 \section{Purpose of the Project}
 
 \subsection{User Business}
+
+The healthcare industry in Canada is facing significant challenges. After talking to multiple stakeholders, we discovered that the major reason behind this is documentation overhead and inefficient workflows. Healthcare professionals spend a major portion of their time on documentation tasks. This in turn leaves them with less time to actually provide care to patients. This contributes to longer wait times, reduced patient throughput, and increased stress on healthcare workers.\\
+The current EHR systems are often difficult to navigate and require manual data entry, which is time-consuming and prone to errors. Moreover, the EHR systems with speech-to-text transcription are not very accurate and require a lot of review from the users. These EHR systems are quite expensive and cannot be afforded by smaller practices. Therefore, healthcare professionals need a more efficient way to document patient interactions and health data which is cost-effective and also extends the functionality of the current EHR systems.\\
+This project aims to address these issues by providing a healthcare documentation system that leverages speech recognition and ML to streamline the documentation process. Along with real-time transcription and classification of the text, the system will also be able to provide diagnostic and medication suggestions to reduce cognitive load and improve accuracy. This will reduce the time spent on administrative tasks, allowing healthcare professionals to focus more on patient care while maintaining accurate and comprehensive medical records.\\
 
 \subsection{Goals of the Project}
 % Gurleen copy from PS
@@ -143,12 +159,13 @@ The intended readers of this SRS document include project managers, software dev
 The primary client for this project are healthcare institutions such as hospitals and clinics. These institutions will benefit from the project as it will help in streamlining the documentation process, reducing administrative overhead, and enhancing the quality of patient care.
 
 \subsection{Customer}
-The primary customer of the project are healthcare professionals, specifically those involved in patient documentation, including doctors, nurses, and other clinical administrative staff. The project will provide a user-friendly interface that allows for efficient data entry and retrieval, as well as accurate transcription of patient interactions. The ystem will minimize the time spent on documentation, allowing them to focus more on patient care.
+The primary customer of the project are healthcare professionals, specifically those involved in patient documentation, including doctors, nurses, and other clinical administrative staff. The project will provide a user-friendly system that allows for efficient data entry and retrieval, as well as accurate transcription of patient interactions. The system will minimize the time spent on documentation, allowing them to focus more on patient care.
 
 \subsection{Other Stakeholders}
 \begin{itemize}
-  \item \textbf{Society:} Society is a major stakeholder in this project. The healthcare institutions such as hospitals and clinics are a part of users group within the society that will be benefitted with improved efficiency. Additionally, they will be able to manage their staff better which in turn help in managing cost. Moreover, this project will help patients to get improved access to healthcare which will benenfit the society. 
-  \item \textbf{Regulatory Bodies:} These are  the organizations that set standards for healthcare technology and data protection. They are concerned with compliance to regulations such as PIPEDA and other relevant laws.
+  \item \textbf{Society:} Society is a major stakeholder in this project. The healthcare institutions such as hospitals and clinics are a part of users group within the society that will be benefited with improved efficiency, effective staff management, and reduction in cost. This project will significantly impact various aspects like health, safety, and cultural diversity of society. By reducing documentation overhead, healthcare professionals can spend more time with patients, leading to better quality of care. This will help reduce emergency room wait times, ultimately improving public health outcomes. The system will meet all accessibility standards, use appropriate medical terminology, and does not use biased language to accommodate users with diverse cultural backgrounds. Accurate documentation and diagnostic suggestions will help reduce medical errors and improve patient safety.
+
+  \item \textbf{Regulatory Bodies:} These are the organizations that set standards for healthcare technology and data protection. They are concerned with compliance to regulations such as PIPEDA and other relevant laws.
 \end{itemize}
 
 \subsection{Hands-On Users of the Project}
@@ -160,8 +177,8 @@ The primary customer of the project are healthcare professionals, specifically t
 \subsection{Personas}
 \begin{itemize}
     \item \textbf{Healthcare Professional: Dr. Virat} - Dr. Virat works in the emergency department at Brampton Hospital. He frequently uses EHR systems to document clinical notes and manage patient records. However, he feels that most of his time is spent recording notes. He wishes for a system that could speed up this process and allow him to focus more on direct patient care and serve more patients throughout the day.
-    \item \textbf{Nurse: Anushka} - Anushka is a registered nurse who relies on the system to access patient information quickly and update records during patient triage. She often feel streesed due to increased patient volume and long hours of shift due to inefficent staff maangmement at her hospital.
-    \item \textbf{Patient: John} - John is a working professional who recently visited the emergency department for a sprained ankle. He had to wait 13 hours in the emergency room due to high patient volume and inefficient documentation process. He expects the system that reduce wait times .
+    \item \textbf{Nurse: Anushka} - Anushka is a registered nurse who relies on the system to access patient information quickly and update records during patient triage. She often feels stressed due to increased patient volume and long hours of shift due to inefficient staff management at her hospital.
+    \item \textbf{Patient: John} - John is a working professional who recently visited the emergency department for a sprained ankle. He had to wait 13 hours in the emergency room due to high patient volume and inefficient documentation process. He expects the system to reduce wait times.
 \end{itemize}
 
 \subsection{Priorities Assigned to Users}
@@ -319,7 +336,7 @@ The following is the glossary for this document:
   G & Goals\\
   UI & User Interface\\
   UX & User Experience\\
-  HIPAA & Health Insurance Portability and Accountability Act\\
+  PIPEDA & Personal Information Protection and Electronic Documents Act\\
   STG & Stretch Goals\\
   FR & Functional Requirement\\
   NFR & Non-functional Requirement\\
@@ -327,15 +344,46 @@ The following is the glossary for this document:
   ULC & Unlikely Change\\
   SRS & Software Requirements Specification\\
   EHR & Electronic Healthcare Record\\
+  SOAP & Subjective Objective Assessment Plan \\
+  ML & Machine Learning \\
+  API & Application Programming Interface \\
+  TR & Trainig Requirement \\
+  UD & User Documentation Requirement \\
+  MNP & Migration to new Product Requirement \\
   \bottomrule
 \end{tabular}\\
 
 \section{Relevant Facts And Assumptions}
+
 \subsection{Relevant Facts}
-% not completed
+\begin{itemize}
+  
+  \item The healthcare system in Canada faces significant challenges due to documentation overhead.
+  
+  \item The current EHR systems mostly use manual data entry and basic speech-to-text functionality. This impacts the efficiency of the workflow and is prone to errors.
+  
+  \item The NLP techniques and speech recognition software have made significant advancements in recent years. 
+  
+  \item These technologies can be adapted to improve accuracy, provide diagnostic and medication suggestions, and improve the efficiency of healthcare workflows. 
+  
+  \item The healthcare industry has strict regulations regarding patient data privacy and security.
+
+\end{itemize}
+
 \subsection{Business Rules}
-\lips
-% not completed
+\begin{itemize}
+  \item Access to patient records must be strictly controlled based on user roles and permissions.
+  
+  \item The system must comply with all relevant healthcare data protection regulations, including PIPEDA and other privacy laws, to protect all sensitive patient and network information.
+  
+  \item Any modifications to the codebase must be accompanied by a review from peers to meet the standard coding standards.
+  
+  \item The project must implement a CI/CD pipeline to ensure that all changes are validated before integration.
+
+  \item The system must be scalable to accommodate large datasets and multiple users accessing the system simultaneously.
+
+\end{itemize}
+
 \subsection{Assumptions}
 
 \begin{itemize}
@@ -395,7 +443,6 @@ Through this project we aim to develop a solution that will address key niche pr
   \item Increased doctor and healthcare professional satisfaction
 \end{itemize}
 \end{itemize}
-Much like how copilot is a tool for programmers, the aim is to create a tool for healthcare professionals to help with documentation such that the number of patient processed per day can be increased, and the focus of doctors and nurses can be shifted from documentation to patient care.
 
 
 \subsection{Work Partitioning}
@@ -501,6 +548,14 @@ The scope of this project can be be split into the following:
   \label{fig:Use-Case Diagram}
 \end{figure}
 
+\subsection{System Boundaries}
+\begin{itemize}
+  \item The system will not be responsible for patient scheduling, billing, or other administrative tasks.
+  \item The system will not include development of any hardware components. All needed peripherals will be assumed as apart of the runtime environment.
+\end{itemize}
+
+\subsection{Formalised Math Specification}
+\lips
 
 \section{Functional Requirements}
 \subsection{Functional Requirements}
@@ -874,8 +929,6 @@ The scope of this project can be be split into the following:
     \item If the system fails to delete the record due to a system error, the system should display an appropriate error message. 
   \end{itemize}
   
-  
-  
   \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_updateRecordtyping}:]
   
   \textbf{Requirement:} : The system should allow the user to update the patient records manually by typing.
@@ -1033,48 +1086,6 @@ The scope of this project can be be split into the following:
   \begin{itemize}
     \item In case no medicine suggestions are provided the doctor can manually add a prescription.
   \end{itemize}
-  
-  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_transferPatient}:] 
-  \textbf{Requirement:} The system should be able to transfer patient documentation to another provider. 
-  
-  \textbf{Rationale:} If the patient goes to a hospital in another health network, perhaps the medical history is to be shared. This functionality will allow the request and transfer of files.
-  
-  \textbf{Fit Criterion:} Transfer over the files in a short time, the transfer protocol is secure, and data is not leaked.
-  
-  \textbf{Dependencies:} FR\ref{FR_createRecord}
-  
-  \textbf{Monitored and Controlled Variables:} N/A
-  
-  \textbf{Performance Requirements:}
-  \begin{itemize}
-    \item The system should transfer data with a latency of less than 1 seconds.
-  \end{itemize}
-  
-  \textbf{Hardware Requirements:} 
-  \begin{itemize}
-    \item Workstations and other peripherals to access the system.
-  \end{itemize}
-  
-  \textbf{Software Requirements:}
-  Access to patient record database.
-  \begin{itemize}
-    \item Internet browser to access the system. 
-  \end{itemize}
-  
-  \textbf{Normal Behavior:}
-  \begin{enumerate}
-    \item A patient file is requested
-    \item The request is approved then the files are transferred.
-  \end{enumerate}
-  -
-  \textbf{Undesired Event Handling:}
-  \begin{enumerate}
-    \item A patient file is requested 
-    \item The request for the file is denied. 
-    \item A detailed request is submitted for approval to provide further information that may have been missing.
-  \end{enumerate}
-  \end{itemize}
-
 
   \section{Look and Feel Requirements} \label{NFR_LookAndFeel}
 \subsection{Appearance Requirements}
@@ -1219,15 +1230,36 @@ The system shall follow industry standards for healthcare software.  \\
 \textbf{Dependencies:} N/A
 
 \section{Open Issues}
-\lips
+
+The following list of risks were identified that could potentially impact project's sucess:
+\begin{itemize}
+  \item \textbf{Speech Input} -- A hospital or a clinic can be a loud place, in the event audio input is taken we need to ensure that it is clean and clear. This would mean essentially blocking outside noise. 
+  \item \textbf{Pre-Trained Models} -- To manipulate and use both inputs above we need to create a model to be accurate and provide accuracy when filling in charts. 
+  \item \textbf{Data Privacy} -- This application will hold a lot of patient data so creating a store that is secure and making sure standard data security practice is applied is a must.
+  \item \textbf{User Acceptance} -- This will require further elicitation with our supervisor. This would help us to gather data on what critical needs of healthcare professionals such that critical features are present. 
+\end{itemize}
 
 \section{Off-the-Shelf Solutions}
 \subsection{Ready-Made Products}
-\lips
+There are several existing EHR and medical documentation systems available in the market such as Epic, Cerner, MEDITECH, etc. While these solutions offer basic speech-to-text and documentation management functionalities for healthcare professionals, they lack advanced capabilities like diagnostic suggestions and medication recommendations. As noted by our supervisor, these EHR systems are difficult to navigate and lack integration across the network. In addition to this, these software are quite expensive making it difficult to be afforded by a single family practitioner. Our system aims to provide a one-stop affordable solution which improves the current functionalities offered by existing products and provide other advanced functionalities for better user experience and integration.
+
 \subsection{Reusable Components}
-\lips
+There are several existing libraries and existing APIs that could be integrated into our system to reduce development time and improve accuracy. Some of the libraries that could be used include:
+
+\begin{itemize}
+  \item Material UI for consistent and accessible UI
+  \item Redux for state management
+  \item Firebase for authentication and real-time updates
+  \item Docker for containerization and deployment
+  \item OpenAI API for ML components
+  \item Whisper API for accurate speech-to-text transcription
+  \item Jest for unit testing
+  \item GitHub Actions for CI/CD pipeline 
+\end{itemize}
+
 \subsection{Products That Can Be Copied}
-\lips
+Our system will derive its inspiration from existing EHR systems and medical documentation workflows like Dragon Medical One. Our supervisor will provide detailed insights into clinical documentation processes, such as the specific structure used for patient records, SOAP notes, and consultation notes. Furthermore, we will improve the system based on acceptance and usability testing performed by our supervisor and other stakeholders. In order to minimize the barrier to user acceptance, we will follow similar workflows, medical terminology, clinical note structuring, and template management approaches as existing products.
+
 
 \section{New Problems}
 \subsection{Effects on the Current Environment}
@@ -1245,93 +1277,214 @@ Inhibit the New Product}
 \section{Tasks}
 \subsection{Project Planning}
 
+\begin{itemize}
+  \item Hazard Analysis: Oct. 12 -- Oct. 23  
+  \begin{itemize}
+    \item Identify potential risks and hazards.
+    \item Identify potential mitigation strategies.
+  \end{itemize}
 
-\section{Phase-In Plan}
+  \item V & V Plan : Oct. 24 -- Nov. 1  
+  \begin{itemize}
+    \item Develop a verification and validation plan for the system.
+    \item Identify different methods required for complete testing of the system.
+  \end{itemize}
 
-All requirements with High priority must be implemented prior to the Revision 0 demonstration as they represent the core functionality of our system.\\
-FR\ref{FR_AddHealthProfessional}\\
-FR\ref{FR_login}\\
-FR\ref{FR_createRecord}\\
-FR\ref{FR_deleteRecord}\\
-FR\ref{FR_updateRecordtyping}\\ 
-FR\ref{FR_DictationRecording}\\
+  \item POC Demonstration: Nov.2  -- Nov. 11  
+  \begin{itemize}
+    \item Demonstrate core functionalities are feasible.
+    \item Demonstrate mitigation strategy for identified risks.
+  \end{itemize}
 
-All requirements with Medium priority will be implemented before the Revision 1 demonstration.\\
-FR\ref{FR_addHealthNetwork}\\
-FR\ref{FR_DiagnosticSuggestions}\\
-FR\ref{FR_medicalSuggestions}\\
+  \item Design Documentation: Nov. 12 -- Jan. 25 
+  \begin{itemize}
+    \item Provide details about different components of the system.
+    \item Provide details about the architecture used, data flow, and explanation for different design decisions.
+  \end{itemize}
 
-All requirements with Low priority will be added after all High and Medium requirements are implemented, time permitting.\\
-FR\ref{FR_removeHealthNetwork}\\
-FR\ref{FR_UpdateHealthNetwork}\\
-FR\ref{FR_RemoveHealthProfessionals}\\
-FR\ref{FR_UpdateHealthProfessionals}\\ 
-FR\ref{FR_transferPatient}\\
+  \item Rev 0 Demonstration: Jan. 26 -- Feb. 12
+  \begin{itemize}
+    \item Demonstrate the core functionality of the system.
+    \item Identify areas of improvement and prioritization for remaining functionality.
+  \end{itemize}
+
+  \item V & V Report: Feb. 13 -- Mar. 7 
+  \begin{itemize}
+    \item Provide a report of the results for all the functional and non-functional requirements according to the V & V plan.
+    \item Provide any changes made during testing and comparison to existing implementation.
+  \end{itemize}
+  
+  \item Final Demonstration: Mar. 7 -- Mar. 29 
+  \begin{itemize}
+    \item Address feedback given in Revision 0 demonstration.
+    \item Implement any remaining functionality and complete the fully functional version of the system.
+  \end{itemize}
+
+  \item Final Documentation: Mar. 29 -- Apr. 2 
+  \begin{itemize}
+    \item Update all documentation with most recent updates and address feedback from tA, supervisor, and peers.
+    \item Submit final Expo Video and poster.
+  \end{itemize}
+
+  \item Expo: Apr. 2 -- Apr. 8 
+  \begin{itemize}
+    \item Arrange any required items and collect the printed poster. 
+    \item Present the final product at the exhibition.
+  \end{itemize}
 
 \subsection{Planning of the Development Phases}
-\lips
+
+The development tasks will be completed as following: 
+
+\begin{itemize}
+  \item Week of Jan. 19th -- Prep Rev0 Demonstration:
+    \begin{itemize}
+      \item Transcription optimization (Gurleen, Pranav)
+      \item Text Classification Service Review (Moamen)
+      \item Setup Socket communication through API and Transcription Service (Pranav)
+      \item Containerize application + Setup deployment environment (Pranav)
+      \item Build out login page, dedication classify text UI (Inreet)
+    \end{itemize}
+  \item Week of Jan. 26th -- Prep Rev0 Demonstration:
+    \begin{itemize}
+      \item Setup ML Training Pipeline (Pranav)
+      \item Employee management + Patient Management Views (Inreet, Gurleen)
+      \item Data Layer setup (Moamen)
+    \end{itemize}
+  \item Week of Feb. 2nd
+    \begin{itemize}
+      \item Rev0 Demonstration
+      \item Complete final optimizations and refinements (All)
+      \item Worker onboarding FR
+    \end{itemize}
+  \item Week of Feb. 9th -- Prep V & V Report
+    \begin{itemize}
+      \item Supervisor acceptance meeting + resolve supervisor reviews (All)
+    \end{itemize}
+  \item Week of Feb. 16th -- Prep V & V Report
+    \begin{itemize}
+      \item Testing introduce testing suites as per VnV plan (All)
+    \end{itemize}
+  \item Week of Feb. 23rd -- Prep V & V Report
+    \begin{itemize}
+      \item Testing introduce testing suites as per VnV plan (All)
+      \item Implement changes due to testing (All)
+    \end{itemize}
+  \item Week of Mar. 2nd -- Prep V & V Report
+    \begin{itemize}
+      \item VnV Report Completion and Submission (All)
+    \end{itemize}
+  \item Week of Mar. 9th -- Prep Final Demonstration
+    \begin{itemize}
+      \item Complete outlying tickets converse with supervisor on additional functionality (All)
+      \item Suggestion model retraining capabilities (All)
+    \end{itemize}
+  \item Week of Mar. 16th -- Prep Final Demonstration
+    \begin{itemize}
+      \item Diagnostic suggestions and Medication suggestions improvement (Pranav)
+      \item Presentation preparation (All)
+    \end{itemize}
+  \item Week of Mar. 23rd -- Prep Final Demonstration
+    \begin{itemize}
+      \item Make final code changes, code refactorization, and cleanup (All)
+    \end{itemize}
+  \item Week of Mar. 29rd -- Final Demonstration
+    \begin{itemize}
+      \item Final demonstration (All)
+    \end{itemize}
+
+\end{itemize}
 
 \section{Migration to the New Product}
 \subsection{Requirements for Migration to the New Product}
-\lips
+\begin{itemize}
+  \item [mnp\refstepcounter{mnpnum}\themnpnum \label{MNP_tools}:] 
+  \textbf{Requirement:} The system shall provide documentation for migrating system data to the new platform.\\
+  \textbf{Rationale:} Healthcare network need a reliable and secure way to transfer their existing data to a new system to ensure continuity and maintain historical records.\\
+
+  \item [mnp\refstepcounter{mnpnum}\themnpnum \label{MNP_security}:] 
+  \textbf{Requirement:} The system shall maintain data integrity and security when migrating to a new product.\\
+  \textbf{Rationale:} The system should protect senstive patient during transfer, ensuring compliance with healthcare data protection regulations such as Canada's Privacy Act.\\
+\end{itemize}
+
 \subsection{Data That Has to be Modified or Translated for the New System}
-\lips
+The following data will need to be translated during migration to new system: 
+\begin{itemize}
+  \item Health network data and records including the associated hospitals, healthcare professionals, and other staff. 
+  \item Patient medical records from existing EHR systems such as demographic information, past clinical notes, and medical history etc.
+\end{itemize}
 
 \section{Costs}
-\lips
+The costs associated with the project primarily come from cloud infrastructure and API services. For cloud infrastructure, we will utilize AWS services. Additionally, we plan to use OpenAI API for some of our ML components and Whisper API for speech-to-text functionality. This is subject to change as the project progresses. 
+
 \section{User Documentation and Training}
 \subsection{User Documentation Requirements}
-\lips
+\begin{itemize}
+  \item [UD\refstepcounter{udnum}\theudnum \label{UD_doc1}:] 
+  \textbf{Requirement:} The user documentation should be available in the code repository in the PDF format.\\
+  \textbf{Rationale:} The healthcare professionals need to have access to the user documentation to use the system without any difficulties.\\
+
+  \item [UD\refstepcounter{udnum}\theudnum \label{UD_doc2}:] 
+  \textbf{Requirement:} The user documentation must include step-by-step guides for all major functionalities of the system with clear instructions. \\
+  \textbf{Rationale:} The healthcare professional should be able to perform all basic tasks including creating, accessing, and updating patient records, adding a SOAP note, recording audio, editing classified text, and viewing and accepting diagnostic and medication suggestions with minimal training.\\
+
+  \item [UD\refstepcounter{udnum}\theudnum \label{UD_doc3}:] 
+  \textbf{Requirement:} The user documentation should include answers to frequently asked questions and resolution to common error codes.\\
+  \textbf{Rationale:} The user should have quick access to common questions. In case of an error, the user should have access to the steps to recover from the error state.\\ 
+\end{itemize}
+
 \subsection{Training Requirements}
-\lips
+\begin{itemize}
+
+  \item [TR\refstepcounter{trnum}\thetrnum \label{TR_tr1}:] 
+  \textbf{Requirement:} Training sessions should be provided to new users, with additional sessions following a major system update.\\
+  \textbf{Rationale:} Training to new users ensures that they can effectively navigate through the system. Moreover, continuous training ensures that the user can adapt to the new features of the product. \\ 
+
+  \item [TR\refstepcounter{trnum}\thetrnum \label{TR_tr2}:] 
+  \textbf{Requirement:} All users should be provided training sessions based on their roles.\\
+  \textbf{Rationale:} As there are multiple users of the system, training sessions should include modules specific to the role of the user.\\ 
+\end{itemize}
 
 \section{Waiting Room}
-\lips
+At this point, there are no other critical requirements and tasks that may hinder the success of the project. This may change if the scope of the project changes during the development process.
 
 \section{Ideas for Solution}
-\lips
-
+This section cannot be completed at this point but will be completed at a later stage in the project.
 
 \newpage
     \begin{landscape}
       \section{Traceability Matrices and Graphs}
       \begin{table}[H]
-      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
       \hline
-      & \rotatebox{90}{FR\ref{FR_addHealthNetwork}} & \rotatebox{90}{FR\ref{FR_removeHealthNetwork}} & \rotatebox{90}{FR\ref{FR_UpdateHealthNetwork}} & \rotatebox{90}{FR\ref{FR_AddHealthProfessional}} & \rotatebox{90}{FR\ref{FR_RemoveHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_UpdateHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_login}} & \rotatebox{90}{FR\ref{FR_createRecord}} & \rotatebox{90}{FR\ref{FR_deleteRecord}} & \rotatebox{90}{FR\ref{FR_updateRecordtyping}} & \rotatebox{90}{FR\ref{FR_DictationRecording}} & \rotatebox{90}{FR\ref{FR_DiagnosticSuggestions}} & \rotatebox{90}{FR\ref{FR_medicalSuggestions}} & \rotatebox{90}{FR\ref{FR_transferPatient}} & \rotatebox{90}{NFR\ref{NFR_LookAndFeel}} & \rotatebox{90}{NFR\ref{NFR_Usability}} & \rotatebox{90}{NFR\ref{NFR_Performance}} & \rotatebox{90}{NFR\ref{NFR_Operational}} & \rotatebox{90}{NFR\ref{NFR_Maintainability}} & \rotatebox{90}{NFR\ref{NFR_Security}} & \rotatebox{90}{NFR\ref{NFR_Cultural}} & \rotatebox{90}{NFR\ref{NFR_Legal}} \\
+      & \rotatebox{90}{FR\ref{FR_addHealthNetwork}} & \rotatebox{90}{FR\ref{FR_removeHealthNetwork}} & \rotatebox{90}{FR\ref{FR_UpdateHealthNetwork}} & \rotatebox{90}{FR\ref{FR_AddHealthProfessional}} & \rotatebox{90}{FR\ref{FR_RemoveHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_UpdateHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_login}} & \rotatebox{90}{FR\ref{FR_createRecord}} & \rotatebox{90}{FR\ref{FR_deleteRecord}} & \rotatebox{90}{FR\ref{FR_updateRecordtyping}} & \rotatebox{90}{FR\ref{FR_DictationRecording}} & \rotatebox{90}{FR\ref{FR_DiagnosticSuggestions}} & \rotatebox{90}{FR\ref{FR_medicalSuggestions}} & \rotatebox{90}{NFR\ref{NFR_LookAndFeel}} & \rotatebox{90}{NFR\ref{NFR_Usability}} & \rotatebox{90}{NFR\ref{NFR_Performance}} & \rotatebox{90}{NFR\ref{NFR_Operational}} & \rotatebox{90}{NFR\ref{NFR_Maintainability}} & \rotatebox{90}{NFR\ref{NFR_Security}} & \rotatebox{90}{NFR\ref{NFR_Cultural}} & \rotatebox{90}{NFR\ref{NFR_Legal}} \\
       \hline
-      FR\ref{FR_addHealthNetwork} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_removeHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_UpdateHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_AddHealthProfessional} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_RemoveHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_UpdateHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_login} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - \\ \hline
-      FR\ref{FR_createRecord} & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_deleteRecord} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_updateRecordtyping} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_DictationRecording} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_DiagnosticSuggestions} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_medicalSuggestions} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_transferPatient} & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_LookAndFeel} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Usability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Performance} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & X & - & - & - & - \\ \hline
-      NFR\ref{NFR_Operational} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & X \\ \hline
-      NFR\ref{NFR_Maintainability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Security} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Cultural} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Legal} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_addHealthNetwork} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_removeHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_UpdateHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_AddHealthProfessional} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_RemoveHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_UpdateHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_login} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - \\ \hline
+      FR\ref{FR_createRecord} & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_deleteRecord} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_updateRecordtyping} & - & - & - & - & - & - & X & X &  - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_DictationRecording} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_DiagnosticSuggestions} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_medicalSuggestions} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_LookAndFeel} & - & - & - & - & - & - & - & - & - & - & - & - & -  & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Usability} & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Performance} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & X & - & - & - & - \\ \hline
+      NFR\ref{NFR_Operational} & - & - & - & - & - & - & - & - & - & - & X & -  & - & - & - & - & - & - & - & - & X \\ \hline
+      NFR\ref{NFR_Maintainability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Security} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Cultural} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Legal} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
       \end{tabular}
       \caption{Traceability Matrix Showing the Connections Between Requirements}
       \label{Table:A_trace}
       \end{table}
     \end{landscape}
-
-
-\section{Development Plan}
-N/A
-
 
 ~\newpage
 

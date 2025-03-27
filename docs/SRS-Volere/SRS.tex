@@ -178,24 +178,125 @@ User participation is vital for the design, development, and acceptance testing 
 System administrators and IT staff will be responsible for maintaining the system. They would be responsible to provide assistance to the users and troubleshoot any technical issues that may arise ensuring that the system remains functional. 
 
 \section{Mandated Constraints}
-% Moamen
-% not completed
+
 \subsection{Solution Constraints}
-\lips
+The following fundamental constraints govern the core functionality of the RapidCare system:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+Voice recognition APIs must support Canadian English dialects. & Required for accurate transcription in Ontario healthcare settings. \\
+\hline
+\end{tabular}
+\caption{Solution Constraints}
+\label{tab:solution_constraints}
+\end{table}
+
 \subsection{Implementation Environment of the Current System}
-\lips
+The system must operate within these environmental parameters:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+Must function with standard clinic microphones. & Hospitals will not upgrade existing audio hardware. \\
+\hline
+The user interface must be accessible via a web browser on any computer with an internet connection. & Users will access the website on their workplace computers, which may not have the capability to run it without an internet connection. \\
+\hline
+\end{tabular}
+\caption{Implementation Environment Constraints}
+\label{tab:implementation_constraints}
+\end{table}
+
 \subsection{Partner or Collaborative Applications}
-\lips
+Integration with external systems must comply with:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+Cloud hosting services shall guarantee 99.9\% uptime. & Necessary to meet the robustness requirements for healthcare applications. \\
+\hline
+\end{tabular}
+\caption{Partner Application Constraints}
+\label{tab:partner_constraints}
+\end{table}
+
 \subsection{Off-the-Shelf Software}
-\lips
+Third-party components must meet these standards:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+All third-party libraries must be actively maintained with security updates. & Essential to meet security and maintainability requirements. \\
+\hline
+\end{tabular}
+\caption{Off-the-Shelf Software Constraints}
+\label{tab:off_the_shelf_constraints}
+\end{table}
+
 \subsection{Anticipated Workplace Environment}
-\lips
+There are no constraints imposed upon us by the anticipated workplace environment.
+
 \subsection{Schedule Constraints}
-\lips
+Project timelines must respect these mandatory sequences:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+The voice recognition core must be finalized before UI integration. & UI design depends on transcription capabilities as per usability requirements. \\
+\hline
+\end{tabular}
+\caption{Schedule Constraints}
+\label{tab:schedule_constraints}
+\end{table}
+
 \subsection{Budget Constraints}
-\lips
+Financial limitations for the project include:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+Firebase usage shall not exceed the free tier limits (1.5GB storage, 50K document reads/day). & Maintains zero-cost operation during development and initial deployment. \\ 
+\hline
+Total project expenditures shall not exceed \$50. & Course-mandated budget cap for all development and testing. \\
+\hline
+\end{tabular}
+\caption{Budget Constraints}
+\label{tab:budget_constraints}
+\end{table}
+
 \subsection{Enterprise Constraints}
-\lips
+Organizational policies impose these requirements:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Constraint} & \textbf{Rationale} \\
+\hline
+All code changes require peer review before deployment. & Quality control measure to maintain system reliability. \\
+\hline
+\end{tabular}
+\caption{Enterprise Constraints}
+\label{tab:enterprise_constraints}
+\end{table}
 
 \section{Naming Conventions and Terminology}
 
@@ -975,85 +1076,147 @@ The scope of this project can be be split into the following:
   \end{itemize}
 
 
-\section{Look and Feel Requirements}
+  \section{Look and Feel Requirements} \label{NFR_LookAndFeel}
 \subsection{Appearance Requirements}
-\lips
+The UI shall have a clean, modern design prioritizing simplicity and ease of navigation. \\ 
+\textbf{Rationale:} Ensures healthcare professionals can focus on patient care rather than system complexity. 
+
 \subsection{Style Requirements}
-\lips
+The UI shall adhere to a consistent style guide (colors, typography, layout) aligned with healthcare standards. \\ 
+\textbf{Rationale:} Promotes professionalism and accessibility for users of all technical skill levels. \\
+  \\
+\textbf{Dependencies:} N/A
 
-\section{Usability and Humanity Requirements}
+\section{Usability Requirements} \label{NFR_Usability}
 \subsection{Ease of Use Requirements}
-\lips
-\subsection{Personalization and Internationalization Requirements}
-\lips
+The system shall be intuitive, allowing users to perform core tasks (e.g., logging in, accessing records) after a 30-minute training.  \\
+\textbf{Rationale:} Minimizes learning time and maximizes efficiency in clinical workflows.
+
+\subsection{Personalization Requirements}
+The system shall allow hospitals to manage staff and healthcare professionals to update patient records. \\ 
+\textbf{Rationale:} Balances customization with consistency for diverse user roles.
+
 \subsection{Learning Requirements}
-\lips
+The system shall minimize the learning curve with clear instructions and guided workflows.  \\
+\textbf{Rationale:} Reduces training overhead for new users.
+
 \subsection{Understandability and Politeness Requirements}
-\lips
+Error messages shall be concise and guide users toward resolution.  \\
+\textbf{Rationale:} Ensures users can recover from errors without frustration.
+
 \subsection{Accessibility Requirements}
-\lips
+N/A
+\\
+  \\
+\textbf{Dependencies:} NFR\ref{NFR_LookAndFeel}
 
-\section{Performance Requirements}
+\section{Performance Requirements} \label{NFR_Performance}
 \subsection{Speed and Latency Requirements}
-\lips
+Voice-to-text transcription shall display real-time output within 2 seconds.  \\
+\textbf{Rationale:} Critical for seamless documentation during patient consultations.
+
 \subsection{Safety-Critical Requirements}
-\lips
-\subsection{Precision or Accuracy Requirements}
-\lips
-\subsection{Robustness or Fault-Tolerance Requirements}
-\lips
+Transcribed medical data shall have 85\% precision.  \\
+\textbf{Rationale:} Prevents misdiagnosis due to transcription errors.
+
+\subsection{Accuracy Requirements}
+Diagnostic suggestions shall have 85\% confidence scores.  \\
+\textbf{Rationale:} Ensures reliable clinical decision support.
+
+\subsection{Robustness Requirements}
+The system shall handle invalid inputs gracefully with user-friendly error messages.  \\
+\textbf{Rationale:} Maintains usability under edge cases.
+
 \subsection{Capacity Requirements}
-\lips
-\subsection{Scalability or Extensibility Requirements}
-\lips
+The system shall support concurrent users without performance degradation.  \\
+\textbf{Rationale:} Scales for hospital-wide adoption.
+
+\subsection{Scalability Requirements}
+The system shall integrate with existing hospital environments.  \\
+\textbf{Rationale:} Ensures portability across healthcare networks.
+
 \subsection{Longevity Requirements}
-\lips
+The system shall support updates for regulatory changes.  \\
+\textbf{Rationale:} Future-proofs the solution. \\
+  \\
+\textbf{Dependencies:} FR\ref{FR_DictationRecording}, NFR\ref{NFR_Operational}
 
-\section{Operational and Environmental Requirements}
+\section{Operational Requirements} \label{NFR_Operational}
 \subsection{Expected Physical Environment}
-\lips
+The system shall operate in standard clinic settings with typical computer equipment.  \\
+\textbf{Rationale:} Matches real-world deployment conditions.
+
 \subsection{Wider Environment Requirements}
-\lips
+The system shall comply with healthcare data protection regulations (e.g., PIPEDA).  \\
+\textbf{Rationale:} Mandatory for handling sensitive patient data.
+
 \subsection{Requirements for Interfacing with Adjacent Systems}
-\lips
+N/A
+
 \subsection{Productization Requirements}
-\lips
+N/A
+
 \subsection{Release Requirements}
-\lips
+Releases shall undergo rigorous testing before deployment.  \\
+\textbf{Rationale:} Guarantees reliability in production environments. \\
+  \\
+\textbf{Dependencies:} FR\ref{FR_DictationRecording}, NFR\ref{NFR_Legal}
 
-\section{Maintainability and Support Requirements}
+\section{Maintainability Requirements} \label{NFR_Maintainability}
 \subsection{Maintenance Requirements}
-\lips
+The system shall support modular updates for bug fixes/features.  \\
+\textbf{Rationale:} Reduces downtime during improvements.
+
 \subsection{Supportability Requirements}
-\lips
+The system shall provide logging tools for troubleshooting.  \\
+\textbf{Rationale:} Aids administrators in resolving issues.
+
 \subsection{Adaptability Requirements}
-\lips
+The system shall accommodate future regulatory changes.  \\
+\textbf{Rationale:} Extends solution lifespan. \\
+  \\
+\textbf{Dependencies:} N/A
 
-\section{Security Requirements}
+\section{Security Requirements} \label{NFR_Security}
 \subsection{Access Requirements}
-\lips
+The system shall authenticate users via role-based permissions.  \\
+\textbf{Rationale:} Prevents unauthorized access to patient data.
+
 \subsection{Integrity Requirements}
-\lips
+Input validation shall ensure only correct data enters the system.  \\
+\textbf{Rationale:} Maintains data accuracy for clinical decisions.
+
 \subsection{Privacy Requirements}
-\lips
+The system shall comply with PIPEDA for patient data handling.  \\
+\textbf{Rationale:} Legal requirement for healthcare applications.
+
 \subsection{Audit Requirements}
-\lips
+The system shall log critical actions. \\ 
+\textbf{Rationale:} Supports accountability and compliance audits.
+
 \subsection{Immunity Requirements}
-\lips
+The system shall resist common security threats (e.g., unauthorized access).  \\
+\textbf{Rationale:} Protects sensitive data from breaches. \\
+  \\
+\textbf{Dependencies:} N/A
 
-\section{Cultural Requirements}
-\subsection{Cultural Requirements}
-\lips
+\section{Cultural Requirements} \label{NFR_Cultural}
+\subsection{Cultural Sensitivity Requirements}
+The system shall avoid culturally insensitive language in outputs.  \\
+\textbf{Rationale:} Ensures professionalism in diverse healthcare settings. \\
+  \\
+\textbf{Dependencies:} N/A
 
-\section{Compliance Requirements}
-\subsection{Legal Requirements}
-\lips
+\section{Legal Requirements} \label{NFR_Legal}
+\subsection{Compliance Requirements}
+The system shall adhere to healthcare data protection laws.  \\
+\textbf{Rationale:} Avoids legal penalties and builds user trust.
+
 \subsection{Standards Compliance Requirements}
-\lips
-
-
-
-
+The system shall follow industry standards for healthcare software.  \\
+\textbf{Rationale:} Ensures reliability and interoperability. \\
+  \\
+\textbf{Dependencies:} N/A
 
 \section{Open Issues}
 \lips

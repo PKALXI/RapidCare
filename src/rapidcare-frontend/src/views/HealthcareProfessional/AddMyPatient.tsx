@@ -22,6 +22,7 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
     name: "",
     gender: "",
     dateOfBirth: "",
+    transcription: "",
     phone: "",
     address: "",
     maritalStatus: "",
@@ -85,6 +86,7 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
           id: "", //Kalsi look into this
           date: formData.date,
           practioner: formData.practioner,
+          transcription: formData.transcription,
           subjective: {
             reason: formData.reason,
             hpi: formData.hpi,

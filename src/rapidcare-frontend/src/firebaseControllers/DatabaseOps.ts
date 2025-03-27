@@ -3,20 +3,22 @@ import {
   deleteDoc,
   doc,
   getDoc,
-  getDocs,
-  onSnapshot,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import {
   IHealthcareProfessional,
   IHospital,
+  IMessage,
   INetworkInfo,
   IPatient,
+  ISoapNote,
 } from "../models/model";
 import {
   healthcareProfessionalConverter,
   hospitalConverter,
+  messageConverter,
   networkInfoConverter,
   patientConverter,
 } from "../firebaseControllers/converters";
@@ -25,24 +27,68 @@ const PATIENT_COLLECTION = "patients";
 const HEALTHCARE_PROFESSIONAL_COLLECTION = "healthcare_professional";
 const HOSPITAL_COLLECTION = "hospitals";
 const ADMIN_COLLECTION = "admin";
+const CHAT_COLLECTION = "chat";
 
 //https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
 //TODO: Add hcp collection
 const patientCollection = collection(db, PATIENT_COLLECTION).withConverter(
   patientConverter
 );
+
 const hospitalCollection = collection(db, HOSPITAL_COLLECTION).withConverter(
   hospitalConverter
 );
+
 const healthcareProfessionalCollection = collection(
   db,
   HEALTHCARE_PROFESSIONAL_COLLECTION
 ).withConverter(healthcareProfessionalConverter);
+
 const networkInfoCollection = collection(db, ADMIN_COLLECTION).withConverter(
   networkInfoConverter
 );
 
+const AIChatCollection = collection(db, CHAT_COLLECTION).withConverter(
+  messageConverter
+);
+
 //https://firebase.google.com/docs/firestore/manage-data/add-data
+const addMessage = async (message: IMessage) => {
+  const docRef = doc(AIChatCollection, message.id);
+  await setDoc(docRef, message);
+};
+
+const addSoap = async (
+  patientId: string,
+  soapNote: ISoapNote
+) => {
+  try {
+    const patientDocRef = doc(patientCollection, patientId);
+    const patientDoc = await getDoc(patientDocRef);
+
+    if (patientDoc.exists()) {
+      const patientData = patientDoc.data() as IPatient;
+
+      const updatedConsultationNotes = [
+        ...(patientData.consultationNotes || []),
+        soapNote,
+      ];
+
+      // Use updateDoc to only update the consultationNotes field
+      await updateDoc(patientDocRef, {
+        consultationNotes: updatedConsultationNotes,
+      });
+
+      console.log("SOAP note appended to patient's consultation notes.");
+    } else {
+      console.error("No such patient document!");
+    }
+  } catch (error) {
+    console.error("Error appending SOAP note:", error);
+    throw error; // Rethrow the error for handling elsewhere if needed
+  }
+};
+
 const addAdmin = async (admin: INetworkInfo) => {
   const docRef = doc(networkInfoCollection, admin.id);
   await setDoc(docRef, admin);
@@ -153,4 +199,7 @@ export {
   addPatient,
   updatePatient,
   deletePatient,
+  addSoap,
+  addMessage,
+  AIChatCollection,
 };

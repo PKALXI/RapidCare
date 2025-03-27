@@ -15,7 +15,8 @@ import { useDispatch } from "react-redux";
 import { ISoapNote } from "../../models/model";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
-import { BrokerModule } from "../../api/BrokerModule";
+import { TranscriptionBrokerModule } from "../../api/TranscriptionBrokerModule";
+import { addSoap } from "../../firebaseControllers/DatabaseOps";
 
 interface AddSoapNoteProps {
   open: boolean;
@@ -32,6 +33,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
     id: "",
     date: "",
     practioner: "",
+    transcription: "",
     subjective: {
       reason: "",
       hpi: "",
@@ -58,8 +60,8 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
   const [formData, setNote] = useState<ISoapNote>(initialFormData);
   const [isRecording, setIsRecording] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const brokerReference = useRef<BrokerModule | null>(null);
-  const [transcribedText, setTranscribedText] = useState("");
+  const brokerReference = useRef<TranscriptionBrokerModule | null>(null);
+  // const [transcribedText, setTranscribedText] = useState("");
 
   const dispatch = useDispatch();
 
@@ -87,7 +89,9 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
 
   useEffect(() => {
     // Initialize the broker module
-    brokerReference.current = new BrokerModule(handleTranscriptionCallback);
+    brokerReference.current = new TranscriptionBrokerModule(
+      handleTranscriptionCallback
+    );
   }, []);
 
   // https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
@@ -137,8 +141,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
 
   const handleTranscriptionCallback = useCallback((transcribedText: string) => {
     console.log("WE GOT THE TEXT: " + transcribedText);
-    setTranscribedText(transcribedText);
-
+    handleChange("base", "transcription", transcribedText);
     brokerReference.current?.diagnosePredictText(transcribedText, setNote);
     brokerReference.current?.classifyPredictText(transcribedText, setNote);
     console.log("DESCRIPTION---: " + transcribedText); // Optionally log the transcription
@@ -149,6 +152,12 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
       // Save in backend
       toast.success("SOAP note saved successfully");
       setOpen(false);
+
+      const soapCopy = { ...formData };
+      soapCopy.id = uuidv4();
+
+      addSoap(patientId, soapCopy);
+      setNote(initialFormData);
     } catch (error) {
       toast.error("Failed to save SOAP note");
       console.error(error);
@@ -172,7 +181,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
             </Typography>
             <CardContent>
               <Typography variant="body1" component="p">
-                {transcribedText}
+                {formData.transcription}
               </Typography>
             </CardContent>
           </Box>

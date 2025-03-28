@@ -5,8 +5,10 @@ import {
 import {
   IHealthcareProfessional,
   IHospital,
+  IMessage,
   INetworkInfo,
   IPatient,
+  ISoapNote,
 } from "../models/model";
 
 //https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
@@ -118,9 +120,32 @@ const networkInfoConverter: FirestoreDataConverter<INetworkInfo> = {
   },
 };
 
+const messageConverter = {
+  toFirestore: (message: IMessage) => {
+    return {
+      sender: message.sender,
+      reciever: message.reciever,
+      date: message.date.toISOString(),
+      message: message.message,
+    };
+  },
+
+  fromFirestore: (snap: QueryDocumentSnapshot): IMessage => {
+    const data = snap.data();
+    return {
+      sender: data.sender || "",
+      reciever: data.reciever || "",
+      date: data.date ? new Date(data.date) : new Date(),
+      message: data.message || "",
+    } as IMessage;
+  },
+};
+
+
 export {
   networkInfoConverter,
   healthcareProfessionalConverter,
   patientConverter,
   hospitalConverter,
+  messageConverter,
 };

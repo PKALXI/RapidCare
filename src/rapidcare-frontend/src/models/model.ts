@@ -5,6 +5,14 @@ export interface AppState {
   healthcareProfessional: IHealthcareProfessionalState | null;
 }
 
+export interface IMessage{
+  id: string;
+  sender: string;
+  reciever: string;
+  date: Date;
+  message: string;
+}
+
 export interface IHealthNetworkAdminState {
   isOnboardingComplete: boolean;
   networkInfo?: INetworkInfo;
@@ -134,6 +142,7 @@ export interface ISoapNote {
   id: string;
   date: string;
   practioner: string;
+  transcription: string;
   subjective: {
     reason: string;
     hpi: string;

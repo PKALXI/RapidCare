@@ -126,10 +126,9 @@ const PatientProfile = () => {
 
       {openChat && (
         <div className="fixed bottom-8 right-8 z-1000">
-          <AIChat setOpenChat={setOpenChat} />
+          <AIChat setOpenChat={setOpenChat} patient={patient} />
         </div>
       )}
-
       <Box className="flex flex-col flex-grow">
         <Box className="flex justify-between mt-6 mb-2 px-32">
           <Box className="flex justify-center">

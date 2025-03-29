@@ -207,9 +207,11 @@ The following fundamental constraints govern the core functionality of the syste
 \hline
 \textbf{Constraint} & \textbf{Rationale} \\
 \hline
-Voice recognition APIs must support various Canadian English dialects. & Required for accurate transcription in Ontario healthcare settings. \\
+The system must adhere to healthcare regulations & Mandatory for handling patient health information and ensuring the confidentiality and security of patient data. \\
 \hline
-he system must adhere to healthcare regulations ensuring the confidentiality and security of patient data. & Mandatory for handling patient health information. \\
+The system must maintain PIPEDA compliance for all patient data. & Essential for protecting patient privacy and meeting Canadian healthcare data protection standards. \\
+\hline
+The system must comply with Canada's Privacy Law and all applicable healthcare data protection regulations. & Required to ensure legal compliance and protect sensitive medical information. \\
 \hline
 \end{tabular}
 \caption{Solution Constraints}
@@ -1117,7 +1119,7 @@ The scope of this project can be be split into the following:
 
 \textbf{Undesired Event Handling:} If the surveys show less than 80\% satisfaction, UI will be revised.
 
-\section{Usability and Humanity Requirements} 
+\section{Usability and Humanity Requirements}
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:]
 
@@ -1169,7 +1171,7 @@ The scope of this project can be be split into the following:
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Security}:] 
 
-\textbf{Requirement:} The system should have all patient data in compliance with PIPEDA standards.
+\textbf{Requirement:} The system must implement comprehensive security measures including secure authentication mechanisms and role based access control.
 
 \textbf{Rationale:} A secure and confidential system ensures compliance with regulatory standards and laws. 
 
@@ -1193,9 +1195,9 @@ The scope of this project can be be split into the following:
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Legal}:] 
 
-\textbf{Requirement:} The system should comply with all healthcare data protection regulations such as Canada's Privacy Law. 
+\textbf{Requirement:} The system must display appropriate medical disclaimers and feedback to the users.
 
-\textbf{Rationale:} Legal compliance is necessary to ensure patient data protection and avoid potential legal penalties.  
+\textbf{Rationale:} Legal compliance is necessary to ensure patient data protection and avoid potential legal penalties.
 
 \textbf{Dependencies:} N/A
 
@@ -1472,7 +1474,7 @@ This section cannot be completed at this point but will be completed at a later 
       \caption{Traceability Matrix Showing the Connections Between Requirements}
       \label{Table:A_trace}
       \end{table}
-   
+
 
 ~\newpage
 

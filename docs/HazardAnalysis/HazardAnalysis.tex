@@ -178,14 +178,6 @@ To identify potential hazards, we first define the system boundaries and break i
         \item Account cannot be created, updated, or deleted
     \end{itemize}
     
-    \item \textbf{Report Generating Module:}
-    The report generating module is responsible for generating accurate reports using the transcribed data from transcription module. The important aspects of medical data (such as the symptoms, illness history, etc.) is extracted from the data which is then compiled into the report using this module.
-
-    Potential Hazards:
-    \begin{itemize}
-        \item Data inaccuracy in reports
-    \end{itemize}
-
     \item \textbf{Transcription Module:}
     The transcription module is responsible for converting audio data from the conversation to written text. The converted written text is used thereafter used by the report generation module to generate the report of the patient.
 
@@ -194,7 +186,15 @@ To identify potential hazards, we first define the system boundaries and break i
         \item Incorrect transcription from audio to text
     \end{itemize}
 
-    \item \textbf{Prediction Modules}
+    \item \textbf{Classification Module:}
+    The classification module is responsible for extracting the key information from the transcription (such as symptoms, reason for visit, allergies, current medications, etc..) and automatically fill out the patient health document.
+
+    Potential Hazards:
+    \begin{itemize}
+        \item Incorrect classification from text to document
+    \end{itemize}
+
+    \item \textbf{Prediction Modules:}
     This module is responsible for all of the predictions that will occur based on the medical notes.
 
     \begin{itemize}

@@ -154,12 +154,12 @@ To identify potential hazards, we first define the system boundaries and break i
         \item Database crashes   
     \end{itemize}
     
-    \item \textbf{API Module (OAuth):}
-    This component securely connects different parts of the system using OAuth authentication. It verifies the identity of users and services before allowing them to access protected resources. The module manages the OAuth process, including user authentication, issuing access tokens, and validating these tokens for each request.
+    \item \textbf{Broker Module:}
+    This component provides OAuth 2.0-based request authentication and authorization for all requests. It also generates tokens as well as routes the requests between services to fulfill the user cases. 
     
     Potential Hazards:
     \begin{itemize}
-        \item Failed connection between components
+        \item Failed communication protocols leading to failed service requests. 
     \end{itemize}
     
     \item \textbf{User Authentication:}

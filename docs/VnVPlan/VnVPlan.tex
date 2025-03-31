@@ -503,15 +503,13 @@ Test Case Derivation: The system will create a validation set of data, where the
 
 How test will be performed: When the model is deployed it will be automatically evaluated such that it will have to have a classification accuracy greater or equal than 85\%.
 
-\end{enumerate}
 
 
 \subsubsection{Validate input data for models} \label{section:4.1.7}
 This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to validate the input data in the charts such that it may be inputted into the prediction module.
 
-\begin{enumerate}
 
-\item{test-FR12,13-1} \label{test-FR12,13-1}
+\item{test-FR12,13-2} \label{test-FR12,13-2}
 
 Control: Automatic
 
@@ -525,7 +523,7 @@ Test Case Derivation: The system will test if the chart data is relevant and cor
 
 How test will be performed: When the system is deployed the model input will be tested such that it only accepts valid inputs.
 
-\item{test-FR12,13-2} \label{test-FR12,13-2}
+\item{test-FR12,13-3} \label{test-FR12,13-3}
 
 Control: Automatic
 
@@ -767,9 +765,9 @@ How test will be performed: When the system is deployed the model input will be 
     
     Initial State: The system is set up, open to the relevant section and ready to take the user input.
     
-    Input/Condition: Submit an invalid data input.
+    Input: Submit an invalid data input.
     
-    Output/Result: An error message is displayed to the user with feedback to recover from error state. No data is added to any database. 
+    Output: An error message is displayed to the user with feedback to recover from error state. No data is added to any database. 
     
     How test will be performed: The test controller will input an invalid data input and check if the system is able to validate and reject the invalid data. The controller will verify that an error message appears.
 
@@ -786,7 +784,7 @@ How test will be performed: When the system is deployed the model input will be 
     
     Initial State: The prediction model is ready for to predict trestment plan and diagnosis.
     
-    Input/Condition: A test set of various patient medical charts.
+    Input: A test set of various patient medical charts.
 
     Output: The prediction includes a diagnosis and treatment prediction, each with a confidence score exceeding 85\%.
     
@@ -864,9 +862,9 @@ How test will be performed: When the system is deployed the model input will be 
   \hline
   test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ \\
-  \hline
   test-FR12,13-\ref{test-FR12,13-2} & & & & & & & & & & & & $\times$ & $\times$ \\
+  \hline
+  test-FR12,13-\ref{test-FR12,13-3} & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
 \end{tabular}
 \caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}

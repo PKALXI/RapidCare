@@ -140,10 +140,6 @@ To identify potential hazards, we first define the system boundaries and break i
     The data layer in the system is responsible for managing and processing all data related to patient records, healthcare professionals, health networks, and predictive models for medication and diagnosis. It is divided into the following databases:
     \begin{itemize}
         \item DB1: Patient, Healthcare Professional, and Network Database: This database stores patient records, healthcare professionals, and healthcare network profiles. This component is responsible for storing, retrieving, updating, and deleting data. 
-
-        \item DB2: Diagnosis Prediction Database: This database stores the data used by the diagnosis prediction component to suggest potential diagnoses based on analysis of the transcribed data.
-
-        \item DB3: Medication Prediction Database: This database holds the data used by the medical prediction component to suggest appropriate medications based on the identified or accepted diagnosis.
     \end{itemize}
 
     Potential Hazards:
@@ -155,7 +151,7 @@ To identify potential hazards, we first define the system boundaries and break i
     \end{itemize}
     
     \item \textbf{User Authentication:}
-    This component verifies and validates user credentials for secure system access. It implements multi-factor authentication and integrates with the system's cryptographic infrastructure. The component also handles password security and implements measures against unauthorized access attempts.
+    This component is responsible for verifying and validating the user credentials so that unauthorized users cannot access any system data or functions. 
     
     Potential Hazards:
     \begin{itemize}
@@ -254,7 +250,7 @@ The following FMEA table lists all potential hazards related to identified syste
         \midrule
         Prediction Module & \raggedright Use medical notes outline standard practices for various procedures to predict a diagnosis along with a treatment plan. & \raggedright Incorrect due to biased prediction & \raggedright Healthcare professional may be misled. & \raggedright Poorly trained model; Biased data. & \raggedright Use validation and cross-validation to evaluate the models. & \raggedright Use healthcare professional evaluation and train systematically. & IR\ref{IR_ValidationScore} & H10.1 \\
         \midrule
-        & \raggedright Incorrect diagnosis and treatment plan that have to deviate from standard practice documentation. & \raggedright Processing non-medical related inputs & \raggedright Healthcare professional may be misled. & \raggedright Inputs for model are not appropriately filtered. & \raggedright Add filters to the model pipeline to ensure data inputted is useful data. & \raggedright Add filters to check for quantitative inputs. & - & H10.2 \\ 
+        & \raggedright Incorrect diagnosis and treatment plan that have to deviate from standard practice documentation. & \raggedright Processing non-medical related inputs & \raggedright Healthcare professional may be misled. & \raggedright Inputs for model are not appropriately filtered. & \raggedright Add filters to the model pipeline to ensure data inputted is useful data. & \raggedright Add filters to check for quantitative inputs. & IR\ref{IR_ValidationScore} & H10.2 \\ 
         \bottomrule
         \caption{\bf Failure Mode and Effect Analysis of the System}
     \end{longtable}

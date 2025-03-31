@@ -149,7 +149,7 @@ The intended readers of this SRS document include project managers, software dev
 
 The healthcare industry in Canada is facing significant challenges. After talking to multiple stakeholders, we discovered that the major reason behind this is documentation overhead and inefficient workflows. Healthcare professionals spend a major portion of their time on documentation tasks. This in turn leaves them with less time to actually provide care to patients. This contributes to longer wait times, reduced patient throughput, and increased stress on healthcare workers.\\
 The current EHR systems are often difficult to navigate and require manual data entry, which is time-consuming and prone to errors. Moreover, the EHR systems with speech-to-text transcription are not very accurate and require a lot of review from the users. These EHR systems are quite expensive and cannot be afforded by smaller practices. Therefore, healthcare professionals need a more efficient way to document patient interactions and health data which is cost-effective and also extends the functionality of the current EHR systems.\\
-This project aims to address these issues by providing a healthcare documentation system that leverages speech recognition and ML to streamline the documentation process. Along with real-time transcription and classification of the text, the system will also be able to provide diagnostic and medication suggestions to reduce cognitive load and improve accuracy. This will reduce the time spent on administrative tasks, allowing healthcare professionals to focus more on patient care while maintaining accurate and comprehensive medical records.\\
+This project aims to address these issues by providing a healthcare documentation system that leverages speech recognition and ML to streamline the documentation process. Along with real-time transcription and classification of the text, the system will also be able to provide diagnostic and treatment plan suggestions to reduce cognitive load and improve accuracy. This will reduce the time spent on administrative tasks, allowing healthcare professionals to focus more on patient care while maintaining accurate and comprehensive medical records.\\
 
 \subsection{Goals of the Project}
 
@@ -167,7 +167,7 @@ The goals for this project are as follows:
       \midrule
       Automated diagnosis suggestions.  & Use AI to suggest possible diagnoses based on what the doctor and patient discuss.  & This will help doctors make faster, more accurate diagnoses, especially in tricky cases. \\
       \midrule
-      Automated medicine suggestions. & Based on diagnosis and patient data provide medicine suggestions. & This will help doctors fill out their charts faster. \\
+      Automated treatment plan suggestions. & Based on diagnosis and patient data provide treatment plan suggestions. & This will help doctors fill out their charts faster. \\
       \bottomrule
   \end{tabular}
 \end{table}
@@ -224,7 +224,7 @@ The following fundamental constraints govern the core functionality of the syste
 \hline
 \textbf{Constraint} & \textbf{Rationale} \\
 \hline
-The system must adhere to healthcare regulations & Mandatory for handling patient health information and ensuring the confidentiality and security of patient data. \\
+The system must adhere to healthcare regulations. & Mandatory for handling patient health information and ensuring the confidentiality and security of patient data. \\
 \hline
 The system must maintain PIPEDA compliance for all patient data. & Essential for protecting patient privacy and meeting Canadian healthcare data protection standards. \\
 \hline
@@ -401,7 +401,7 @@ The following is the glossary for this document:
   
   \item The NLP techniques and speech recognition software have made significant advancements in recent years. 
   
-  \item These technologies can be adapted to improve accuracy, provide diagnostic and medication suggestions, and improve the efficiency of healthcare workflows. 
+  \item These technologies can be adapted to improve accuracy, provide diagnostic and treatment plan suggestions, and improve the efficiency of healthcare workflows. 
   
   \item The healthcare industry has strict regulations regarding patient data privacy and security.
 \end{itemize}
@@ -449,14 +449,14 @@ Through this project we aim to develop a solution that will address key niche pr
   \item \textbf{Inputs:}
   \begin{itemize}
     \item \textbf{Doctor-Patient Conversation} -- The conversation between the doctor and the patient is recorded using the recording tool.
-    \item \textbf{Medical Prediction Context} -- A comprehensive knowledge of common diseases and the associated medicines is served as input for the model to predict the diagnosis and medicines.
+    \item \textbf{Medical Prediction Context} -- A comprehensive knowledge of common diseases and the associated medicines is served as input for the model to predict the diagnosis and treatment plans.
     \item \textbf{Text Field Input} -- Text field entries are utilized as input parameters provided by the user for various data processing operations such as filling out patient data, creating consultation notes, etc.    
   \end {itemize}
   \item \textbf{Outputs:}
   \begin{itemize} 
     \item \textbf{Transcribed Text} -- The audio from healthcare professional and patient conversation is transcribed into text.
     \item \textbf{Auto-filled documents} -- The transcribed text is further classified into relevant categories to autofill the charts with patient's medical information.
-    \item \textbf{Predicted Diagnosis and Plan} -- Classified data is used to provide diagnosis and the action plan based on the context about common diseases and associated diagnosis.  
+    \item \textbf{Predicted Diagnosis and Plan} -- Classified data is used to provide diagnosis and the treatment plan based on the context about common diseases and associated diagnosis.  
   \end{itemize}
   \item \textbf{User Responsibilities:}
   \begin{itemize}
@@ -488,7 +488,7 @@ The work partitioning for this project was done as follows:
 
 \begin{enumerate}
 
-  \item \textbf{Research and Data Collection:} Research and gather a dataset of the current diseases and associated medicines to train and test the diagnosis and medicine prediction models.\\
+  \item \textbf{Research and Data Collection:} Research and gather a dataset of the current diseases and associated medicines to train and test the diagnosis and treatment plan prediction models.\\
   \item \textbf{Model Development:} Develop a machine learning model which is trained on the gathered dataset of current diseases and associated medicines, to assist in the diagnosis of the patient and prediction of potential treatment options.\\
   \item \textbf{Unit Testing and Validation:} Conduct unit testing on the modules with various test cases to validate the performance and accuracy of the system. This will also help to ensure that the existing code implementation remains intact after the code is given various inputs.\\
   \item \textbf{Documentation:} Document the system's architecture, performance and corresponding results after unit testing is performed on each module.\\  
@@ -1107,11 +1107,11 @@ The scope of this project can be be split into the following:
   
   \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_medicalSuggestions}:] 
   
-  \textbf{Requirement:} The system should provide a list of frequently used medicines based on accepted diagnosis.
+  \textbf{Requirement:} The system should provide a treatment plan based on accepted diagnosis.
   
-  \textbf{Rationale:} As the patients' medical records and data is being added into the charts, having a model that can provide a preliminary set of diagnosis such that documentation time can be saved. This supplementary tool will provide auto-completion analogous to what auto-completion tools programmers use.
+  \textbf{Rationale:} As the patients' medical records and data is being added into the charts, having a model that can provide a preliminary treatment plan such that documentation time can be saved. This supplementary tool will provide auto-completion analogous to what auto-completion tools programmers use.
   
-  \textbf{Fit Criterion:} Auto-completion suggestions regarding diagnoses and medicine are applicable 85+\% of the time. The model will be measured through cross validation techniques.
+  \textbf{Fit Criterion:} Auto-completion suggestions regarding treatment plans are applicable 85+\% of the time. The model will be measured through cross validation techniques.
    
   \textbf{Dependencies:} FR\ref{FR_DictationRecording}, FR\ref{FR_DiagnosticSuggestions}
   
@@ -1133,12 +1133,12 @@ The scope of this project can be be split into the following:
   
   \textbf{Normal Behavior:}
   \begin{itemize}
-    \item A list of medicine suggestion is provided almost instantly analogous to an auto-complete feature based on the selected diagnosis.
+    \item Treatment plan is provided almost instantly analogous to an auto-complete feature.
   \end{itemize}
   
   \textbf{Undesired Event Handling:}
   \begin{itemize}
-    \item In case no medicine suggestions are provided the doctor can manually add a prescription.
+    \item In case no treatment plan suggestions are provided the doctor can manually add a prescription.
   \end{itemize}
 
 \end{itemize}
@@ -1268,7 +1268,7 @@ The following list of risks were identified that could potentially impact projec
 
 \section{Off-the-Shelf Solutions}
 \subsection{Ready-Made Products}
-There are several existing EHR and medical documentation systems available in the market such as Epic, Cerner, MEDITECH, etc. While these solutions offer basic speech-to-text and documentation management functionalities for healthcare professionals, they lack advanced capabilities like diagnostic suggestions and medication recommendations. As noted by our supervisor, these EHR systems are difficult to navigate and lack integration across the network. In addition to this, these software are quite expensive making it difficult to be afforded by a single family practitioner. Our system aims to provide a one-stop affordable solution which improves the current functionalities offered by existing products and provide other advanced functionalities for better user experience and integration.
+There are several existing EHR and medical documentation systems available in the market such as Epic, Cerner, MEDITECH, etc. While these solutions offer basic speech-to-text and documentation management functionalities for healthcare professionals, they lack advanced capabilities like diagnostic suggestions and treatment plan recommendations. As noted by our supervisor, these EHR systems are difficult to navigate and lack integration across the network. In addition to this, these software are quite expensive making it difficult to be afforded by a single family practitioner. Our system aims to provide a one-stop affordable solution which improves the current functionalities offered by existing products and provide other advanced functionalities for better user experience and integration.
 
 \subsection{Reusable Components}
 There are several existing libraries and existing APIs that could be integrated into our system to reduce development time and improve accuracy. Some of the libraries that could be used include:
@@ -1425,7 +1425,7 @@ The development tasks will be completed as following:
     \end{itemize}
   \item Week of Mar. 16th -- Prep Final Demonstration
     \begin{itemize}
-      \item Diagnostic suggestions and Medication suggestions improvement (Pranav)
+      \item Diagnostic suggestions and treatment plan suggestions improvement (Pranav)
       \item Presentation preparation (All)
     \end{itemize}
   \item Week of Mar. 23rd -- Prep Final Demonstration
@@ -1470,7 +1470,7 @@ The costs associated with the project primarily come from cloud infrastructure a
 
   \item [UD\refstepcounter{udnum}\theudnum \label{UD_doc2}:] 
   \textbf{Requirement:} The user documentation must include step-by-step guides for all major functionalities of the system with clear instructions. \\
-  \textbf{Rationale:} The healthcare professional should be able to perform all basic tasks including creating, accessing, and updating patient records, adding a SOAP note, recording audio, editing classified text, and viewing and accepting diagnostic and medication suggestions with minimal training.\\
+  \textbf{Rationale:} The healthcare professional should be able to perform all basic tasks including creating, accessing, and updating patient records, adding a SOAP note, recording audio, editing classified text, and viewing and accepting diagnostic and treatment plan suggestions with minimal training.\\
 
   \item [UD\refstepcounter{udnum}\theudnum \label{UD_doc3}:] 
   \textbf{Requirement:} The user documentation should include answers to frequently asked questions and resolution to common error codes.\\

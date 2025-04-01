@@ -19,6 +19,7 @@
 }
 \usepackage{amsmath, mathtools}
 \usepackage{amsfonts}
+\usepackage{array}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{colortbl}
@@ -113,7 +114,6 @@
 \pagenumbering{roman}
 
 \tableofcontents
-
 ~\newpage
 
 \section*{Revision History}
@@ -125,6 +125,9 @@
 06-01-2025 & 1.1 & Pranav Updated: TA feedback parts (Removed implementation details, fixed wordings, Traceability Matrix)\\
 19-03-2025 & 1.2 & Template Update \\
 24-03-2025 &1.2 & Added Missing sections \\
+31-03-2025 & 1.2 & Pranav added formal specification, ammended requirements, updated trace matrix. \\
+31-03-2025 & 1.2 & Inreet Amended section to include external knowledge and impact \\
+
 
 \bottomrule
 \end{tabularx}
@@ -530,10 +533,35 @@ The work partitioning for this project was done as follows:
 
 \section{Business Data Model and Data Dictionary}
 \subsection{Business Data Model}
-\lips
-\subsection{Data Dictionary}
-\lips
 
+The essential objects/entities for this project and their relations are outlined below. It can be noted that the entities along with their relationships follow the usual model of a hospital based on discussions with our supervisor.
+
+\begin{figure}[H]
+  \includegraphics[width=0.8\textwidth]{DataModel.png}
+  \caption{This is the Buisness Data Model.}
+  % \label{fig:Use-Case Diagram}
+\end{figure}
+
+\subsection{Data Dictionary}
+\begin{center}
+\begin{tabular}{ | m{15em} | m{20em}| m{5em} | } 
+  \hline
+  \textbf{Name}& \textbf{Content} & \textbf{Type} \\ 
+  \hline
+  HealthcareNetwork & Represents a healthcare network. & class \\ 
+  \hline
+  HealthcareNetworkAdmin & Represents a administrator at a healthcare network. & class \\ 
+  \hline
+  Patient & Represents a patient recieving care at a hospital with in a healthcare network. & class \\ 
+  \hline
+  Hospital & Represents a hospital in a healthcare network. & class \\ 
+  \hline
+  SOAPNote & Represents a subjective, objective, assessment, and plan that is attained through a doctor - physician conversation. This includes signs, symptoms and plans.& class \\ 
+  \hline
+  HealthcareProfesional & Represents a healthcare proffesional working at a hospital with in a given healthcare network.& class \\ 
+  \hline
+\end{tabular}
+\end{center}
 \section{The Scope of the Product}
 \subsection{Product Boundary}
 The scope of this project can be be split into the following:
@@ -609,9 +637,6 @@ The scope of this project can be be split into the following:
   \item The system will not be responsible for patient scheduling, billing, or other administrative tasks.
   \item The system will not include development of any hardware components. All needed peripherals will be assumed as apart of the runtime environment.
 \end{itemize}
-
-\subsection{Formalised Math Specification}
-\lips
 
 \section{Functional Requirements}
 
@@ -1103,6 +1128,15 @@ The scope of this project can be be split into the following:
     \begin{itemize}
       \item If the system can't suggest a diagnosis, it should notify the user and offer a manual search option. 
     \end{itemize}
+
+  \textbf{Formalised Math Specification:}
+    \begin{itemize}
+      \item Let $T$ be the set of possible transcriptions: $T$ = $(t_1, t_2, \ldots, t_n)$ where $n$ is a natural number.
+      \item Any which item $t_i$ where $0 \leq i \leq n$, $t_i$ = $f_1$ $\cup$ $f_2$ $\cup$ $\ldots$ $\cup$ $f_j$ where $f_i$ is a fact in the transcriptions.
+      \item Let $D$ be the set of diagnoses: $D$ = $(d_1, d_2, \ldots, d_n)$, where $d_i$ is a diagnosis.
+      \item Let the relation, $R$, of the correct $d_i$ for a certain $t_i$, this relation, $R$ is defined as $R$ $\subseteq$ $T$ $\times$ $D$.
+      \item Therefore any $d_i$ returned for a $t_i$ by the system, ($d_i$, $t_i$) $\in$ $R$.
+    \end{itemize}
   
   
   \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_medicalSuggestions}:] 
@@ -1139,6 +1173,42 @@ The scope of this project can be be split into the following:
   \textbf{Undesired Event Handling:}
   \begin{itemize}
     \item In case no treatment plan suggestions are provided the doctor can manually add a prescription.
+  \end{itemize}
+
+  \item[FR\refstepcounter{reqnum}\thereqnum \label{FR_AIAssist}:] 
+  
+  \textbf{Requirement:} The system should provide a mechanism to traverse and query patient documentation.
+  
+  \textbf{Rationale:} The overhead when finding specific documentation or information regarding a patient is a lot. A solution needs to exist such that the healthcare professional can easily access and query information regarding the patient.
+  
+  \textbf{Fit Criterion:} Queries produce relavant and correct results based on a query without hallucinations 99\% of the time.
+   
+  \textbf{Dependencies:} FR\ref{FR_createRecord}, FR\ref{FR_DictationRecording}, FR\ref{FR_DiagnosticSuggestions}, FR\ref{FR_medicalSuggestions}
+  
+  \textbf{Monitored and Controlled Variables:} accuracy
+  
+  \textbf{Performance Requirements:}
+  \begin{itemize}
+    \item mechanism provides responses in under 3 seconds, and responses are accurate to the query with 99\% accuracy.
+  \end{itemize}
+  
+  \textbf{Hardware Requirements:} 
+  Workstations and other peripherals to access the system.
+  
+  \textbf{Software Requirements:}
+  \begin{itemize}
+    \item Access to patient record database.
+    \item Internet browser to access the system. 
+  \end{itemize}
+  
+  \textbf{Normal Behavior:}
+  \begin{itemize}
+    \item Mechanism provides accurate and relavant reponse based on the query with no hallucinations.
+  \end{itemize}
+  
+  \textbf{Undesired Event Handling:}
+  \begin{itemize}
+    \item Mechansism responds based on a hallucination, or is inaccurate.
   \end{itemize}
 
 \end{itemize}
@@ -1327,7 +1397,7 @@ Once the system is ready for use, there could be several follow-up problems that
     \item Identify potential mitigation strategies.
   \end{itemize}
 
-  \item V and V Plan : Oct. 24 -- Nov. 1  
+  \item V \& V Plan : Oct. 24 -- Nov. 1  
   \begin{itemize}
     \item Develop a verification and validation plan for the system.
     \item Identify different methods required for complete testing of the system.
@@ -1351,9 +1421,9 @@ Once the system is ready for use, there could be several follow-up problems that
     \item Identify areas of improvement and prioritization for remaining functionality.
   \end{itemize}
 
-  \item V and V Report: Feb. 13 -- Mar. 7 
+  \item V \& V Report: Feb. 13 -- Mar. 7 
   \begin{itemize}
-    \item Provide a report of the results for all the functional and non-functional requirements according to the V and V plan.
+    \item Provide a report of the results for all the functional and non-functional requirements according to the V \& V plan.
     \item Provide any changes made during testing and comparison to existing implementation.
   \end{itemize}
   
@@ -1375,7 +1445,6 @@ Once the system is ready for use, there could be several follow-up problems that
     \item Present the final product at the exhibition.
   \end{itemize}
 \end{itemize}
-
 \subsection{Planning of the Development Phases}
 
 The development tasks will be completed as following: 
@@ -1401,20 +1470,20 @@ The development tasks will be completed as following:
       \item Complete final optimizations and refinements (All)
       \item Worker onboarding FR
     \end{itemize}
-  \item Week of Feb. 9th -- Prep V and V Report
+  \item Week of Feb. 9th -- Prep V \& V Report
     \begin{itemize}
       \item Supervisor acceptance meeting + resolve supervisor reviews (All)
     \end{itemize}
-  \item Week of Feb. 16th -- Prep V and V Report
+  \item Week of Feb. 16th -- Prep V \& V Report
     \begin{itemize}
       \item Testing introduce testing suites as per VnV plan (All)
     \end{itemize}
-  \item Week of Feb. 23rd -- Prep V and V Report
+  \item Week of Feb. 23rd -- Prep V \& V Report
     \begin{itemize}
       \item Testing introduce testing suites as per VnV plan (All)
       \item Implement changes due to testing (All)
     \end{itemize}
-  \item Week of Mar. 2nd -- Prep V and V Report
+  \item Week of Mar. 2nd -- Prep V \& V Report
     \begin{itemize}
       \item VnV Report Completion and Submission (All)
     \end{itemize}
@@ -1499,31 +1568,32 @@ This section cannot be completed at this point but will be completed at a later 
     
       \section{Traceability Matrix}
       \begin{table}[H]
-      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
       \hline
-      & \rotatebox{90}{FR\ref{FR_addHealthNetwork}} & \rotatebox{90}{FR\ref{FR_removeHealthNetwork}} & \rotatebox{90}{FR\ref{FR_UpdateHealthNetwork}} & \rotatebox{90}{FR\ref{FR_AddHealthProfessional}} & \rotatebox{90}{FR\ref{FR_RemoveHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_UpdateHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_login}} & \rotatebox{90}{FR\ref{FR_createRecord}} & \rotatebox{90}{FR\ref{FR_deleteRecord}} & \rotatebox{90}{FR\ref{FR_updateRecordtyping}} & \rotatebox{90}{FR\ref{FR_DictationRecording}} & \rotatebox{90}{FR\ref{FR_DiagnosticSuggestions}} & \rotatebox{90}{FR\ref{FR_medicalSuggestions}} & \rotatebox{90}{NFR\ref{NFR_LookAndFeel}} & \rotatebox{90}{NFR\ref{NFR_Usability}} & \rotatebox{90}{NFR\ref{NFR_Performance}} & \rotatebox{90}{NFR\ref{NFR_Operational}} & \rotatebox{90}{NFR\ref{NFR_Maintainability}} & \rotatebox{90}{NFR\ref{NFR_Security}} & \rotatebox{90}{NFR\ref{NFR_Cultural}} & \rotatebox{90}{NFR\ref{NFR_Legal}} \\
+      & \rotatebox{90}{FR\ref{FR_addHealthNetwork}} & \rotatebox{90}{FR\ref{FR_removeHealthNetwork}} & \rotatebox{90}{FR\ref{FR_UpdateHealthNetwork}} & \rotatebox{90}{FR\ref{FR_AddHealthProfessional}} & \rotatebox{90}{FR\ref{FR_RemoveHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_UpdateHealthProfessionals}} & \rotatebox{90}{FR\ref{FR_login}} & \rotatebox{90}{FR\ref{FR_createRecord}} & \rotatebox{90}{FR\ref{FR_deleteRecord}} & \rotatebox{90}{FR\ref{FR_updateRecordtyping}} & \rotatebox{90}{FR\ref{FR_DictationRecording}} & \rotatebox{90}{FR\ref{FR_DiagnosticSuggestions}} & \rotatebox{90}{FR\ref{FR_medicalSuggestions}} & \rotatebox{90}{FR\ref{FR_AIAssist}} & \rotatebox{90}{NFR\ref{NFR_LookAndFeel}} & \rotatebox{90}{NFR\ref{NFR_Usability}} & \rotatebox{90}{NFR\ref{NFR_Performance}} & \rotatebox{90}{NFR\ref{NFR_Operational}} & \rotatebox{90}{NFR\ref{NFR_Maintainability}} & \rotatebox{90}{NFR\ref{NFR_Security}} & \rotatebox{90}{NFR\ref{NFR_Cultural}} & \rotatebox{90}{NFR\ref{NFR_Legal}} \\
       \hline
-      FR\ref{FR_addHealthNetwork} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
-      FR\ref{FR_removeHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
-      FR\ref{FR_UpdateHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
-      FR\ref{FR_AddHealthProfessional} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
-      FR\ref{FR_RemoveHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
-      FR\ref{FR_UpdateHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_login} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - \\ \hline
-      FR\ref{FR_createRecord} & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_deleteRecord} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_updateRecordtyping} & - & - & - & - & - & - & X & X &  - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_DictationRecording} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_DiagnosticSuggestions} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_medicalSuggestions} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_LookAndFeel} & - & - & - & - & - & - & - & - & - & - & - & - & -  & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Usability} & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Performance} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & X & - & - & - & - \\ \hline
-      NFR\ref{NFR_Operational} & - & - & - & - & - & - & - & - & - & - & X & -  & - & - & - & - & - & - & - & - & X \\ \hline
-      NFR\ref{NFR_Maintainability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Security} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Cultural} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
-      NFR\ref{NFR_Legal} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_addHealthNetwork} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & -  \\ \hline
+      FR\ref{FR_removeHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_UpdateHealthNetwork} & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_AddHealthProfessional} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_RemoveHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_UpdateHealthProfessionals} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_login} & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - \\ \hline
+      FR\ref{FR_createRecord} & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_deleteRecord} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_updateRecordtyping} & - & - & - & - & - & - & X & X &  - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_DictationRecording} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_DiagnosticSuggestions} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_medicalSuggestions} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_AIAssist} & - & - & - & - & - & - & - & X & - & - & X & X & X & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_LookAndFeel} & - & - & - & - & - & - & - & - & - & - & - & - & -  & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Usability} & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Performance} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & X & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Operational} & - & - & - & - & - & - & - & - & - & - & X & -  & - & - & - & - & - & - & - & - & X & - \\ \hline
+      NFR\ref{NFR_Maintainability} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Security} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Cultural} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
+      NFR\ref{NFR_Legal} & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
       \end{tabular}
       \caption{Traceability Matrix Showing the Connections Between Requirements}
       \label{Table:A_trace}

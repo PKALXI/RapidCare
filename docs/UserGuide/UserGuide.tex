@@ -106,17 +106,17 @@ The Administration Dashboard provides a comprehensive overview of system operati
 \begin{itemize}
 \item User management controls
 \item System performance metrics
-\item Healthcare network configuration
-\item Staff management tools
+\item Hospital network configuration
+\item Employee management tools
 \item Backup and maintenance utilities
 \end{itemize}
 
 The navigation bar provides quick access to:
 \begin{itemize}
 \item \textbf{Home}: Return to the main dashboard
-\item \textbf{Hospitals}: Manage healthcare facilities within the network
-\item \textbf{Employees}: Administer healthcare professional accounts and permissions
-\item \textbf{Account}: Update administrator profile settings and system preferences
+\item \textbf{Hospitals}: Manage hospital networks
+\item \textbf{Employees}: Manage healthcare professionals
+\item \textbf{Account}: Edit profile information
 \end{itemize}
 
 
@@ -142,7 +142,7 @@ The navigation bar provides quick access to:
 \item \textbf{Home}: Return to the main dashboard
 \item \textbf{Patients}: Access comprehensive patient records
 \item \textbf{Appointments}: Manage and schedule patient appointments
-\item \textbf{Account}: Update profile settings and preferences
+\item \textbf{Account}: Edit profile information.
 \end{itemize}
 
 \subsubsection{Patient Management}
@@ -150,9 +150,10 @@ The navigation bar provides quick access to:
 \toprule
 \textbf{Action} & \textbf{Steps} \\
 \midrule
-Add Patient & Click "+ New Patient", complete form, submit \\
-Search Records & Use search bar with patient name/ID \\
-Edit Information & Click any field, make changes, save \\
+Add Patient & Click "+ Add Patient", Complete Form, "Create Patient" \\
+View Records & Search for patient, "View Record" \\
+Edit Information & Click any field, "Edit", Make Changes, "Save" \\
+Remove Patient & Open Patient Records, "Delete Profile", Confirm Deletion \\
 \bottomrule
 \end{longtable}
 
@@ -161,12 +162,12 @@ RapidCare's voice dictation feature allows you to automatically transcribe patie
 
 \begin{enumerate}
 \item Open the relevant patient record
-\item Click the "Record" button to initiate dictation
+\item Click "Start Recording" to initiate dictation
 \item Speak clearly to record your conversation with the patient
-\item When finished, click the "Stop" button
+\item When finished, click the "Stop Recording"
 \item Review the transcribed text for accuracy
 \item Edit any inaccuracies if needed
-\item Click "Submit" to save the transcription to the patient's chart
+\item Click "Save" to save the transcription to the patient's chart
 \end{enumerate}
 
 \subsection{Text Classification}
@@ -174,7 +175,7 @@ After transcribing the patient conversation, RapidCare's text classification mod
 \begin{enumerate}
 \item The system automatically analyzes the transcribed text using natural language processing
 \item Key symptoms, conditions, and medical terminology are identified and highlighted
-\item The system categorizes the content into relevant clinical sections.
+\item The system categorizes the content into relevant sections.
 \item Important medical entities are extracted and organized in a structured format
 \item The processed text is prepared for the diagnosis suggestion engine
 \item The structured data is stored alongside the raw transcription for comprehensive record-keeping
@@ -185,12 +186,83 @@ After transcribing your conversation with a patient:
 
 \begin{enumerate}
 \item The system will automatically analyze the transcribed text
-\item Within 5 seconds, RapidCare will suggest possible diagnoses based on the symptoms mentioned
-\item For each suggested diagnosis, a confidence score will be displayed
-\item Select the most appropriate diagnosis
-\item Once a diagnosis is selected, the system will suggest relevant medications and treatment plans
-\item Review the suggestions and make any necessary modifications
-\item Confirm the diagnosis and treatment plan to add to the patient's chart
+\item RapidCare will suggest possible diagnoses based on the symptoms mentioned
+\item Review the diagnosis provided
+\item A plan is provided including medication and future plan
+\item Review the diagnosis suggestions and plan and make any necessary modifications
+\item Confirm the diagnosis and treatment plan to add to the patient's chart by clicking "Save"
+\end{enumerate}
+
+\subsection{AI Assist Tool}
+
+AI Assist feature empowers healthcare professionals to quickly gather relevant insights:
+
+\begin{enumerate} 
+\item View the patient's records to access their information. 
+\item Click the AI Assist button to initiate the query. 
+\item Ask any question related to the patient’s data,
+\item The AI will rapidly analyze the data and provide a concise response. 
+\item Review the AI-generated response and incorporate them into the clinical decision-making process. 
+\item Click the "X" button to get out of AI Assist
+\end{enumerate}
+
+\subsection{Managing Hospitals}
+For hospital administrators:
+
+\subsubsection{Adding a Hospital}
+\begin{enumerate}
+\item Log in with administrator credentials
+\item Navigate to "Hospitals"
+\item Click "Add New Hospital"
+\item Complete all required fields
+\item Click "Save" to add the hospital
+\end{enumerate}
+
+\subsubsection{Updating Hospital Information}
+\begin{enumerate}
+\item Navigate to "Hospitals"
+\item Select the hospital to update
+\item Click "Edit" button
+\item Edit the necessary fields
+\item Click "Save" to save changes
+\end{enumerate}
+
+\subsubsection{Removing a Hospital}
+\begin{enumerate}
+\item Navigate to "Hospitals"
+\item Select the hospital to remove
+\item Click "Delete" button
+\item Confirm the deletion when prompted
+\end{enumerate}
+
+\subsection{Managing Healthcare Professionals}
+For hospital administrators:
+
+\subsubsection{Adding Healthcare Professionals}
+\begin{enumerate}
+\item Navigate to "Employees"
+\item Click "Add Healthcare Professional"
+\item Complete all required fields
+\item Set up initial credentials
+\item Click "Save" to add the professional
+\end{enumerate}
+
+\subsubsection{Updating Employee Information}
+\begin{enumerate}
+\item Navigate to "Employees"
+\item Select the employee to modify
+\item Click "Edit" button
+\item Edit the necessary information
+\item Click "Save" to save changes
+\end{enumerate}
+
+\subsubsection{Removing an Employee}
+\begin{enumerate}
+\item Navigate to "Employees"
+\item Search for the employee
+\item Select the professional to remove
+\item Click "Delete" button
+\item Confirm the deletion when prompted
 \end{enumerate}
 
 \subsection{Server Management}
@@ -209,64 +281,6 @@ node server.js --port 3001 --db-config firebaseConfig.json
 \texttt{server restart} & Gracefully restart server \\
 \bottomrule
 \end{tabularx}
-
-\subsection{Managing Healthcare Networks}
-For healthcare network administrators:
-
-\subsubsection{Adding a Healthcare Network}
-\begin{enumerate}
-\item Log in with administrator credentials
-\item Navigate to "Network Management"
-\item Click "Add New Network"
-\item Complete all required fields
-\item Click "Submit" to add the network
-\end{enumerate}
-
-\subsubsection{Updating Network Information}
-\begin{enumerate}
-\item Navigate to "Network Management"
-\item Select the network to update
-\item Edit the necessary fields
-\item Click "Save Changes"
-\end{enumerate}
-
-\subsubsection{Removing a Network}
-\begin{enumerate}
-\item Navigate to "Network Management"
-\item Select the network to remove
-\item Click "Remove Network"
-\item Confirm the deletion when prompted
-\end{enumerate}
-
-\subsection{Managing Healthcare Professionals}
-For healthcare network administrators:
-
-\subsubsection{Adding Healthcare Professionals}
-\begin{enumerate}
-\item Navigate to "Staff Management"
-\item Click "Add Healthcare Professional"
-\item Complete all required fields (name, contact information, role, etc.)
-\item Set up initial credentials
-\item Click "Submit" to add the professional
-\end{enumerate}
-
-\subsubsection{Updating Professional Information}
-\begin{enumerate}
-\item Navigate to "Staff Management"
-\item Search for the healthcare professional
-\item Select the professional to update
-\item Edit the necessary information
-\item Click "Save Changes"
-\end{enumerate}
-
-\subsubsection{Removing Healthcare Professionals}
-\begin{enumerate}
-\item Navigate to "Staff Management"
-\item Search for the healthcare professional
-\item Select the professional to remove
-\item Click "Remove Professional"
-\item Confirm the deletion when prompted
-\end{enumerate}
 
 \section{Troubleshooting}
 \subsection{Common Issues}

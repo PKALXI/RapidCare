@@ -126,6 +126,9 @@
 06-01-2025 & 1.1 & Pranav Updated: TA feedback parts (Removed implementation details, fixed wordings, Traceability Matrix)\\
 19-03-2025 & 1.2 & Template Update \\
 24-03-2025 &1.2 & Added Missing sections \\
+31-03-2025 & 1.2 & Pranav added formal specification, ammended requirements, updated trace matrix. \\
+31-03-2025 & 1.2 & Inreet Amended section to include external knowledge and impact \\
+
 
 \bottomrule
 \end{tabularx}
@@ -1181,7 +1184,7 @@ The scope of this project can be be split into the following:
   
   \textbf{Fit Criterion:} Queries produce relavant and correct results based on a query without hallucinations 99\% of the time.
    
-  \textbf{Dependencies:} FR\ref{FR_DictationRecording}, FR\ref{FR_DiagnosticSuggestions}, FR\ref{FR_createRecord}
+  \textbf{Dependencies:} FR\ref{FR_createRecord}, FR\ref{FR_DictationRecording}, FR\ref{FR_DiagnosticSuggestions}, FR\ref{FR_medicalSuggestions}
   
   \textbf{Monitored and Controlled Variables:} accuracy
   
@@ -1583,7 +1586,7 @@ This section cannot be completed at this point but will be completed at a later 
       FR\ref{FR_DictationRecording} & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\ \hline
       FR\ref{FR_DiagnosticSuggestions} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - & - & - & - \\ \hline
       FR\ref{FR_medicalSuggestions} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - \\ \hline
-      FR\ref{FR_AIAssist} & - & - & - & - & - & - & - & - & - & - & X & X & - & - & - & - & - & - & - & - & - & - \\ \hline
+      FR\ref{FR_AIAssist} & - & - & - & - & - & - & - & X & - & - & X & X & X & - & - & - & - & - & - & - & - & - \\ \hline
       NFR\ref{NFR_LookAndFeel} & - & - & - & - & - & - & - & - & - & - & - & - & -  & - & - & - & - & - & - & - & - & - \\ \hline
       NFR\ref{NFR_Usability} & - & - & - & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & - & - & - \\ \hline
       NFR\ref{NFR_Performance} & - & - & - & - & - & - & - & - & - & - & X & - & - & - & - & - & X & - & - & - & - & - \\ \hline

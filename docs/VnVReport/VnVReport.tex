@@ -545,10 +545,14 @@ Result: Pass
 
   Initial State: System operational with test user accounts and authentication database.
 
-  Input: Simulate multiple concurrent failed login attempts while monitoring credential storage.
+  Input: Simulate multiple unauthorized login attempts using a brute-force attack and credential stuffing techniques while monitoring credential storage.
 
-
-  Output: User credentials remain unchanged, and system maintains stability.
+  Output:
+  \begin{itemize}
+      \item User credentials remain unchanged, and system remains operational.
+      \item All unauthorized actions are blocked.
+      \item Each failed attempt is logged with timestamp, IP address, attempted username.
+  \end{itemize}
 
   Result: Pass
 

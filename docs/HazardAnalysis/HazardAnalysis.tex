@@ -184,8 +184,8 @@ To identify potential hazards, we first define the system boundaries and break i
     This module is responsible for all of the predictions that will occur based on the medical notes.
 
     \begin{itemize}
-        \item PR1: Diagnosis and treatment plan prediction: The prediction module is responsible for using the clinical notes to provide some diagnosis and treatment plan predictions.
-        \item PR2: AI assist: If the healthcare professional wants to review patient previous visits and health conditions, it can be done by running a query in AI assist which will fetch the requested information from the system.  
+        \item PR1: Diagnosis and treatment plan prediction: The prediction module is responsible for using the transcribed text from patient-doctor interaction to provide some diagnosis and treatment plan predictions.
+        \item PR2: AI assist: If the healthcare professional wants to review patient previous visits and health conditions, it can be done by running a query in AI assist which will fetch the requested information based on patient profile and medical history.  
     \end{itemize}
     
     Potential Hazards:
@@ -274,7 +274,7 @@ The following FMEA table lists all potential hazards related to identified syste
     \item [IR\refstepcounter{irnum}\theirnum \label{IR_ErrorDetection}:] The system should provide real-time error detection based on validation checks and provide feedback to users.\\
     \textbf{Rationale:}To prevent user errors and incorrect output, it is vital to check the integrity of user input. Moreover, in the event of an error, the system should communicate its current state, how the input has been interpreted, and any related errors to the user.
 
-    \item [IR\refstepcounter{irnum}\theirnum \label{IR_ValidationScore}:] The system should provide confidence scores on any prediction.\\
+    \item [IR\refstepcounter{irnum}\theirnum \label{IR_ValidationScore}:] The system should provide predictions based on provided medical context.\\
     \textbf{Rationale:} The system should provide results from context and only context such that responses can be verified and hallucinations can be detected. Additionally, this will allow ease of tracebility between accepted medical documenation. Adding model confidence scores will allow healthcare professionals to see how confident the model is with the scores.
     
     \item [IR\refstepcounter{irnum}\theirnum \label{IR_DuplicateRecordDetection}:] The system should provide duplicate record detection for the record in various databases of the system.\\

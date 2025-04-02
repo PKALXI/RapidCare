@@ -194,13 +194,13 @@ This section provides an overview of the module design. Modules are summarized i
   \item [\refstepcounter{mnum} \mthemnum \label{mPVM}:] Patient View Module
   \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Model Module
   \item [\refstepcounter{mnum} \mthemnum \label{mPMM}:] Patient Model Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mBM}:] Broker Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mBM}:] Service Layer Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAAMM}:] Data Layer Module
   \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
   \item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Classification Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAAMM}:] Administrator Account Management Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mPAMM}:] Patient Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis and Treatment Plan Prediction Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mMAI}:] AI Assistant Module
+
 
 \end{description}
 
@@ -219,13 +219,12 @@ This section provides an overview of the module design. Modules are summarized i
 & \mref{mPMM}\\
 & \mref{mBM}\\
 & \mref{mAAMM}\\
-& \mref{mPAMM}\\
 \midrule
 
 \multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mTM}\\
 & \mref{mCM}\\
 & \mref{mDPM}\\
-& \mref{mMPM}\\
+& \mref{mMAI}\\
 \bottomrule
 
 \end{tabular}
@@ -375,7 +374,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{AI Assistant Module (\mref{mAA})}
+\subsubsection{AI Assistant Module (\mref{mMAI})}
 
 \begin{description}
 \item[Secrets:]The algorithms used to predict possible diagnoses.

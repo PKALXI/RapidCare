@@ -1,3 +1,15 @@
+"""
+SOCKET IO Starter code from :
+https://python-socketio.readthedocs.io/en/stable/
+https://python-socketio.readthedocs.io/en/stable/intro.html#client-examples
+"""
+
+"""
+Author: Gurleen Rahi, reviewed by Pranav Kalsi
+Last Updated: April 7th
+Purpose: This allows us to perform audio transcription base d on the sound bytes from the frontend
+"""
+
 import os
 from flask import Flask
 from flask_socketio import SocketIO, emit
@@ -15,14 +27,14 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 load_dotenv("../.env")
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
-# os.environ['OPENAI_API_KEY'] = ""
 
 transcribed_text = ""
 
-
+"""
+This method transcribes the audio chunks
+"""
 @socketio.on("audio_chunk")
 def voice_to_text(audio_chunk):
-    print("HIT-------------------------------")
     transcribed_text = ""
     try:
         audio_segment = AudioSegment.from_file(
@@ -56,4 +68,4 @@ def voice_to_text(audio_chunk):
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    socketio.run(app)

@@ -21,8 +21,6 @@ Last Updated: March 7th
 Purpose: Provides agent class for AI assistant functionality, such that user can Load and Query Patient data.
 """
 
-import os
-from flask import Flask, request, jsonify
 from langchain.chat_models import init_chat_model
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.vectorstores import InMemoryVectorStore
@@ -35,8 +33,6 @@ from langchain_core.tools import tool
 from langchain_community.document_loaders import JSONLoader
 from langchain_community.document_loaders import TextLoader
 from langchain.tools.base import StructuredTool
-
-
 from dotenv import load_dotenv
 import json
 
@@ -91,7 +87,9 @@ class Agent:
 
     def _query_or_respond(self, state: MessagesState):
         # Generate tool call for retrieval or respond.
-        llm_with_tools = self.llm.bind_tools([StructuredTool.from_function(self.retrieve)])
+        llm_with_tools = self.llm.bind_tools(
+            [StructuredTool.from_function(self.retrieve)]
+        )
         response = llm_with_tools.invoke(state["messages"])
         return {"messages": [response]}
 

@@ -2,6 +2,9 @@ import unittest
 import requests
 import openai
 import os
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
 
 """
 gptAssistance method created using the below docs.
@@ -9,9 +12,9 @@ https://platform.openai.com/docs/api-reference
 https://docs.python.org/3/library/unittest.html 
 """
 
-os.environ["OPENAI_API_KEY"] = ""
-
-
+"""
+This method will act as a evaluator to evaluate the response for subjective tests.
+"""
 def gptAssistance(situation, response):
     prompt = f"Given the situation: '{situation}', is the following response relevant? Respond with '1' for relevant and '0' for not appropriate.\nResponse: {response}"
 
@@ -35,6 +38,9 @@ def gptAssistance(situation, response):
 class TestAPI(unittest.TestCase):
     BASE_URL = "http://127.0.0.1:5050"
 
+    """
+    This will test the relevance of the diagnosis and treatment plan for a given conversation.
+    """
     def testConfidence(self):
         conversations = [
             "I have a lot of chest pain",
@@ -70,6 +76,9 @@ class TestAPI(unittest.TestCase):
         print(f"Test 1 Score (Confidence): {success/6}")
         assert (success / 6) >= 0.85
 
+    """
+    Test for a given valid input
+    """
     def testValidInput(self):
         form_data = {
             "transcription": "I have a lot of chest pain, sometimes shortness of breath."
@@ -78,6 +87,9 @@ class TestAPI(unittest.TestCase):
         response = requests.post(f"{self.BASE_URL}/predict", data=form_data)
         assert 200 == response.status_code
 
+    """
+    Test for a given invalid input
+    """
     def testHealthForInvalidInput(self):
         form_data = {}
 

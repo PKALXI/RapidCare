@@ -1,7 +1,7 @@
 """
 Author: Pranav Kalsi
 Last Updated: March 7th
-Purpose: Provides end points agent class for AI assistant functionality, such that user can Load and Query Patient data.
+Purpose: Provides agent class for AI assistant functionality, such that user can Load and Query Patient data.
 """
 
 from flask import Flask, jsonify, request

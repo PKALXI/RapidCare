@@ -4,15 +4,24 @@ https://python-socketio.readthedocs.io/en/stable/
 https://python-socketio.readthedocs.io/en/stable/intro.html#client-examples
 """
 
+"""
+Author: Gurleen Rahi, reviewed by Pranav Kalsi
+Last Updated: April 7th
+Purpose: This allows us to perform audio transcription base d on the sound bytes from the frontend
+"""
+
 import unittest
 import socketio
 import time
 
+# Create socket for testing
 sio = socketio.Client()
 
 transcription_text = ""
 
-
+"""
+Below are the socket events the broker that interacted with this service would use
+"""
 @sio.event
 def connect():
     print("Connected to the server")
@@ -41,6 +50,9 @@ class TestSocketIOTranscription(unittest.TestCase):
         self.PORT = 5000
         self.AUDIO_FILE = "recording.webm"
 
+    """
+    Try valid audio -> Expected pass.
+    """
     def testAudioTranscription(self):
         try:
             sio.connect(f"http://{self.HOST}:{self.PORT}")
@@ -59,6 +71,9 @@ class TestSocketIOTranscription(unittest.TestCase):
         except Exception as e:
             self.fail(f"Test failed with error: {str(e)}")
 
+    """
+    Try invalid audio -> Expected fail.
+    """
     def testInvalidAudio(self):
         try:
             sio.connect(f"http://{self.HOST}:{self.PORT}")

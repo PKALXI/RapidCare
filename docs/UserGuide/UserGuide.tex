@@ -60,15 +60,50 @@ The guide covers installation, setup, and usage of both client and server compon
 \subsection{Overview}
 The system consists of:
 \begin{itemize}
-\item Web-based client interface (React)
-\item Python files backend
-\item Firebase database
+\item Frontend ReactJS.
+\item Python microservices.
+\item Firebase for db and auth.
 \end{itemize}
 
-RapidCare is built to tackle documentation overhead, which currently consumes a significant portion of healthcare professionals' time. By using voice dictation and AI-assisted documentation, the system aims to reduce paperwork time, increase patient throughput, and improve overall care quality.
+RapidCare is built to tackle documentation overhead, which currently consumes a significant portion of healthcare professionals' time. By using dictation and AI-assisted documentation, the system aims to reduce paperwork time, increase patient throughput, and improve overall care quality.
+
+\newpage
 
 \section{Installation}
-%Pranav can complete
+To set up the system, follow these steps:
+\subsection{Frontend Setup}
+\begin{enumerate}
+\item Navigate to the frontend directory.
+\item Install dependencies with legacy peer dependencies support:
+\begin{verbatim}
+npm install --legacy-peer-deps
+\end{verbatim}
+\item Start the React application:
+\begin{verbatim}
+npm start
+\end{verbatim}
+\end{enumerate}
+\subsection{Backend Services Setup}
+For each Python service in the project:
+\begin{enumerate}
+\item Navigate to the service directory.
+\item Install required Python packages:
+\begin{verbatim}
+pip install -r requirements.txt
+\end{verbatim}
+\item Start the service:
+\begin{verbatim}
+python app.py
+\end{verbatim}
+\end{enumerate}
+\subsection{Environment Configuration}
+\begin{enumerate}
+\item Create a new file named \texttt{.env} in the project root directory (\texttt{src}).
+\item Add the OpenAI API key configuration:
+\begin{verbatim}
+OPENAI_API_KEY=<your-key>
+\end{verbatim}
+\end{enumerate}
 
 \newpage
 
@@ -83,15 +118,30 @@ RapidCare is built to tackle documentation overhead, which currently consumes a 
 
 \subsubsection{Logging In}
 \begin{itemize}
-\item Enter admin/admin-provided credentials
-\item Based on credentials users are directed to their respective main page
-\item Click "Login" button
+\item Enter admin/admin-provided credentials.
+\item Based on credentials users are directed to their respective main page.
+\item Click "Login" button.
 \end{itemize}
 
 The system will redirect you to different interfaces based on your selected role:
 \begin{itemize}
-\item \textbf{Admin}: Directs to the administration dashboard with system-wide management tools
-\item \textbf{Healthcare Professionals}: Directs to the hospital main page with their upcoming appointments
+\item \textbf{Admin}: Directs to the administration dashboard with system-wide management tools.
+\item \textbf{Healthcare Professionals}: Directs to the hospital main page with their upcoming appointments.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{signup.png}
+\caption{Admin Registration Interface}
+\label{fig:Registration}
+\end{figure}
+
+
+\subsubsection{Admin Registration}
+\begin{itemize}
+\item Complete the sign-up form with required admin information.
+\item Include network administrator credentials and security information.
+\item Submit application for administrative access.
 \end{itemize}
 
 \subsubsection{Administration Dashboard}
@@ -104,21 +154,12 @@ The system will redirect you to different interfaces based on your selected role
 
 The Administration Dashboard provides a comprehensive overview of system operations, including:
 \begin{itemize}
-\item User management controls
-\item System performance metrics
-\item Hospital network configuration
-\item Employee management tools
-\item Backup and maintenance utilities
+\item User management controls.
+\item System performance metrics.
+\item Hospital network configuration.
+\item Employee management tools.
+\item Hospital management tools.
 \end{itemize}
-
-The navigation bar provides quick access to:
-\begin{itemize}
-\item \textbf{Home}: Return to the main dashboard
-\item \textbf{Hospitals}: Manage hospital networks
-\item \textbf{Employees}: Manage healthcare professionals
-\item \textbf{Account}: Edit profile information
-\end{itemize}
-
 
 \subsubsection{Healthcare Professional Dashboard}
 \begin{figure}[H]
@@ -130,19 +171,11 @@ The navigation bar provides quick access to:
 
 The Healthcare Professional Dashboard provides an intuitive interface for managing patient care, including:
 \begin{itemize}
-\item Daily appointment schedule overview
-\item Patient visit statistics and trends
-\item Quick access to patient records
-\item Upcoming appointment notifications
-\item Performance metrics and visit analytics
-\end{itemize}
-
-The navigation bar provides quick access to:
-\begin{itemize}
-\item \textbf{Home}: Return to the main dashboard
-\item \textbf{Patients}: Access comprehensive patient records
-\item \textbf{Appointments}: Manage and schedule patient appointments
-\item \textbf{Account}: Edit profile information.
+\item Daily appointment schedule overview.
+\item Patient visit statistics and trends.
+\item Quick access to patient records.
+\item Upcoming appointment notifications.
+\item Performance metrics and visit analytics.
 \end{itemize}
 
 \subsubsection{Patient Management}
@@ -150,7 +183,7 @@ The navigation bar provides quick access to:
 \toprule
 \textbf{Action} & \textbf{Steps} \\
 \midrule
-Add Patient & Click "+ Add Patient", Complete Form, "Create Patient" \\
+Add Patient & Click "+ Add Patient", Complete Form, "Create Patient". \\
 View Records & Search for patient, "View Record" \\
 Edit Information & Click any field, "Edit", Make Changes, "Save" \\
 Remove Patient & Open Patient Records, "Delete Profile", Confirm Deletion \\
@@ -158,39 +191,47 @@ Remove Patient & Open Patient Records, "Delete Profile", Confirm Deletion \\
 \end{longtable}
 
 \subsection{Voice-to-Text Transcription}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{vtt.png}
+\caption{Consultation Notes}
+\label{fig:Consultation Notes}
+\end{figure}
+
 RapidCare's voice dictation feature allows you to automatically transcribe patient-provider conversations:
 
 \begin{enumerate}
-\item Open the relevant patient record
-\item Click "Start Recording" to initiate dictation
-\item Speak clearly to record your conversation with the patient
-\item When finished, click the "Stop Recording"
-\item Review the transcribed text for accuracy
-\item Edit any inaccuracies if needed
-\item Click "Save" to save the transcription to the patient's chart
+\item Open the relevant patient record.
+\item Click "Start Recording" to initiate dictation.
+\item Speak clearly to record your conversation with the patient.
+\item When finished, click the "Stop Recording".
+\item Review the transcribed text for accuracy.
+\item Edit any inaccuracies if needed.
+\item Click "Save" to save the transcription to the patient's chart.
 \end{enumerate}
 
 \subsection{Text Classification}
 After transcribing the patient conversation, RapidCare's text classification model processes the content:
 \begin{enumerate}
-\item The system automatically analyzes the transcribed text using natural language processing
-\item Key symptoms, conditions, and medical terminology are identified and highlighted
+\item The system automatically analyzes the transcribed text using natural language processing.
+\item Key symptoms, conditions, and medical terminology are identified and highlighted.
 \item The system categorizes the content into relevant sections.
-\item Important medical entities are extracted and organized in a structured format
-\item The processed text is prepared for the diagnosis suggestion engine
-\item The structured data is stored alongside the raw transcription for comprehensive record-keeping
+\item Important medical entities are extracted and organized in a structured format.
+\item The processed text is prepared for the diagnosis suggestion engine.
+\item The structured data is stored alongside the raw transcription for comprehensive record-keeping.
 \end{enumerate}
 
 \subsection{Diagnosis and Medicine Suggestions}
 After transcribing your conversation with a patient:
 
 \begin{enumerate}
-\item The system will automatically analyze the transcribed text
-\item RapidCare will suggest possible diagnoses based on the symptoms mentioned
-\item Review the diagnosis provided
-\item A plan is provided including medication and future plan
-\item Review the diagnosis suggestions and plan and make any necessary modifications
-\item Confirm the diagnosis and treatment plan to add to the patient's chart by clicking "Save"
+\item The system will automatically analyze the transcribed text.
+\item RapidCare will suggest possible diagnoses based on the symptoms mentioned.
+\item Review the diagnosis provided.
+\item A plan is provided including medication and future plan.
+\item Review the diagnosis suggestions and plan and make any necessary modifications.
+\item Confirm the diagnosis and treatment plan to add to the patient's chart by clicking "Save".
 \end{enumerate}
 
 \subsection{AI Assist Tool}
@@ -200,87 +241,87 @@ AI Assist feature empowers healthcare professionals to quickly gather relevant i
 \begin{enumerate} 
 \item View the patient's records to access their information. 
 \item Click the AI Assist button to initiate the query. 
-\item Ask any question related to the patient’s data,
+\item Ask any question related to the patient's data.
 \item The AI will rapidly analyze the data and provide a concise response. 
 \item Review the AI-generated response and incorporate them into the clinical decision-making process. 
-\item Click the "X" button to get out of AI Assist
+\item Click the "X" button to get out of AI Assist.
 \end{enumerate}
 
 \subsection{Managing Hospitals}
 For hospital administrators:
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{hospital.png}
+\caption{Hospital Management Interface}
+\label{fig:Hospital Management Interface}
+\end{figure}
+
 \subsubsection{Adding a Hospital}
 \begin{enumerate}
-\item Log in with administrator credentials
-\item Navigate to "Hospitals"
-\item Click "Add New Hospital"
-\item Complete all required fields
-\item Click "Save" to add the hospital
+\item Log in with administrator credentials.
+\item Navigate to "Hospitals".
+\item Click "Add New Hospital".
+\item Complete all required fields.
+\item Click "Save" to add the hospital.
 \end{enumerate}
 
 \subsubsection{Updating Hospital Information}
 \begin{enumerate}
-\item Navigate to "Hospitals"
-\item Select the hospital to update
-\item Click "Edit" button
-\item Edit the necessary fields
-\item Click "Save" to save changes
+\item Navigate to "Hospitals".
+\item Select the hospital to update.
+\item Click "Edit" button.
+\item Edit the necessary fields.
+\item Click "Save" to save changes.
 \end{enumerate}
 
 \subsubsection{Removing a Hospital}
 \begin{enumerate}
-\item Navigate to "Hospitals"
-\item Select the hospital to remove
-\item Click "Delete" button
-\item Confirm the deletion when prompted
+\item Navigate to "Hospitals".
+\item Select the hospital to remove.
+\item Click "Delete" button.
+\item Confirm the deletion when prompted.
 \end{enumerate}
+
+\newpage
 
 \subsection{Managing Healthcare Professionals}
 For hospital administrators:
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{employee.png}
+\caption{Employee Management Interface}
+\label{fig:Employee Management Interface}
+\end{figure}
+
 \subsubsection{Adding Healthcare Professionals}
 \begin{enumerate}
-\item Navigate to "Employees"
-\item Click "Add Healthcare Professional"
-\item Complete all required fields
-\item Set up initial credentials
-\item Click "Save" to add the professional
+\item Navigate to "Employees".
+\item Click "Add Healthcare Professional".
+\item Complete all required fields.
+\item Set up initial credentials.
+\item Click "Save" to add the professional.
 \end{enumerate}
 
 \subsubsection{Updating Employee Information}
 \begin{enumerate}
-\item Navigate to "Employees"
-\item Select the employee to modify
-\item Click "Edit" button
-\item Edit the necessary information
-\item Click "Save" to save changes
+\item Navigate to "Employees".
+\item Select the employee to modify.
+\item Click "Edit" button.
+\item Edit the necessary information.
+\item Click "Save" to save changes.
 \end{enumerate}
 
 \subsubsection{Removing an Employee}
 \begin{enumerate}
-\item Navigate to "Employees"
-\item Search for the employee
-\item Select the professional to remove
-\item Click "Delete" button
-\item Confirm the deletion when prompted
+\item Navigate to "Employees".
+\item Search for the employee.
+\item Select the professional to remove.
+\item Click "Delete" button.
+\item Confirm the deletion when prompted.
 \end{enumerate}
 
-\subsection{Server Management}
-\subsubsection{Startup Options}
-\begin{verbatim}
-node server.js --port 3001 --db-config firebaseConfig.json
-\end{verbatim}
-
-\subsubsection{Admin Commands}
-\begin{tabularx}{\textwidth}{lX}
-\toprule
-\textbf{Command} & \textbf{Description} \\
-\midrule
-\texttt{backup create} & Create database backup \\
-\texttt{users list} & List all system users \\
-\texttt{server restart} & Gracefully restart server \\
-\bottomrule
-\end{tabularx}
 
 \section{Troubleshooting}
 \subsection{Common Issues}
@@ -288,36 +329,36 @@ node server.js --port 3001 --db-config firebaseConfig.json
 \toprule
 \textbf{Symptom} & \textbf{Solution} \\
 \midrule
-Login failures & Verify credentials, check caps lock \\
-Slow performance & Clear browser cache, check network \\
-Server crashes & Check logs, verify Firebase connection \\
-Transcription errors & Speak clearly, reduce background noise, review and edit transcriptions \\
+Login failures & Verify credentials, check caps lock. \\
+Slow performance & Clear browser cache, check network. \\
+Server crashes & Check logs, verify Firebase connection. \\
+Transcription errors & Speak clearly, reduce background noise, review and edit transcriptions. \\
 \bottomrule
 \end{longtable}
 
 \subsection{Error Messages}
 \begin{itemize}
-\item \textbf{ERR\_CONNECTION\_REFUSED}: Server may be down or unreachable
-\item \textbf{404 Not Found}: Verify URL or resource path
-\item \textbf{503 Service Unavailable}: Check server status
-\item \textbf{Authentication Failed}: Verify your credentials
+\item \textbf{ERR\_CONNECTION\_REFUSED}: Server may be down or unreachable.
+\item \textbf{404 Not Found}: Verify URL or resource path.
+\item \textbf{503 Service Unavailable}: Check server status.
+\item \textbf{Authentication Failed}: Verify your credentials.
 \end{itemize}
 
 \section{Maintenance}
 \subsection{Backup Procedures}
 \begin{enumerate}
-\item Run \texttt{backup create} command
-\item Store backup files securely in an off-site location
-\item Verify backup integrity regularly by performing test restorations
-\item Maintain a backup schedule to ensure data safety
+\item Run \texttt{backup create} command.
+\item Store backup files securely in an off-site location.
+\item Verify backup integrity regularly by performing test restorations.
+\item Maintain a backup schedule to ensure data safety.
 \end{enumerate}
 
 \subsection{Updates}
 \begin{itemize}
-\item Check GitHub for new releases
-\item Follow upgrade instructions
-\item Test updates in staging environment first
-\item Schedule updates during off-peak hours to minimize disruption
+\item Check GitHub for new releases.
+\item Follow upgrade instructions.
+\item Test updates in staging environment first.
+\item Schedule updates during off-peak hours to minimize disruption.
 \end{itemize}
 
 \section*{Acknowledgment}

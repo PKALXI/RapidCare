@@ -1,5 +1,24 @@
 """
-Header
+STARTER CODE TAKEN FROM THE FOLLOWING SOURCES AND EDITED TO FIT THE USE CASE:
+
+https://python.langchain.com/docs/concepts/prompt_templates/
+https://python.langchain.com/docs/concepts/document_loaders/
+https://python.langchain.com/docs/integrations/document_loaders/json/
+https://python.langchain.com/docs/concepts/embedding_models/
+https://langchain-ai.github.io/langgraph/tutorials/introduction/#part-5-customizing-state
+https://python.langchain.com/docs/how_to/document_loader_pdf/
+https://python.langchain.com/docs/tutorials/rag/
+https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.ChatPromptTemplate.html
+https://langchain-ai.github.io/langgraph/tutorials/introduction/
+https://python.langchain.com/docs/tutorials/chatbot/
+https://python.langchain.com/docs/tutorials/qa_chat_history/
+https://github.com/langchain-ai/langchain/discussions/9404
+"""
+
+"""
+Author: Pranav Kalsi
+Last Updated: April 7th
+Purpose: This helps take a raw transcription and provide a diagnosis along with a treatment plan
 """
 
 from typing import Literal
@@ -22,8 +41,6 @@ from dotenv import load_dotenv
 load_dotenv("../.env")
 app = Flask(__name__)
 CORS(app)
-
-# os.environ['OPENAI_API_KEY'] = ""
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 llm = init_chat_model("gpt-4o-mini", model_provider="openai")
@@ -101,12 +118,14 @@ class State(TypedDict):
 
 
 def analyze_query(state: State):
+    # produce a response
     structured_llm = llm.with_structured_output(Search)
     query = structured_llm.invoke(state["question"])
     return {"query": query}
 
 
 def retrieve(state: State):
+    # Retrieve from the vector store
     query = state["query"]
     retrieved_docs = vector_store.similarity_search(
         query["query"],
@@ -116,6 +135,7 @@ def retrieve(state: State):
 
 
 def generate(state: State):
+    # Generate a response
     docs_content = "\n\n".join(doc.page_content for doc in state["context"])
     messages = prompt.invoke({"question": state["question"], "context": docs_content})
     response = llm.invoke(messages)
@@ -128,6 +148,9 @@ graph_builder.add_edge(START, "analyze_query")
 graph = graph_builder.compile()
 
 
+"""
+This is the endpoint that allows interaction with the RAG Chain
+"""
 @app.route("/predict", methods=["POST"])
 def predict():
     input_message = request.form.get("transcription")

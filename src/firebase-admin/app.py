@@ -1,3 +1,9 @@
+"""
+Author: Pranav Kalsi
+Last Updated: April 7th
+Purpose: This allows us to perform important operation with account and data management.
+"""
+
 from admin import Admin
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -9,7 +15,9 @@ admin = Admin()
 app = Flask(__name__)
 CORS(app)
 
-
+"""
+Endpoint to create a user in the db and a account
+"""
 @app.route("/create_user", methods=["POST"])
 def create_user():
     data = request.json
@@ -27,7 +35,9 @@ def create_user():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
+"""
+Endpoint to delete a user in the db and the associated account
+"""
 @app.route("/delete_user", methods=["DELETE"])
 def delete_user():
     data = request.json

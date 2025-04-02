@@ -12,6 +12,12 @@ https://langchain-ai.github.io/langgraph/tutorials/introduction/
 https://python.langchain.com/docs/tutorials/chatbot/
 """
 
+"""
+Author: Pranav Kalsi
+Last Updated: April 7th
+Purpose: This helps take a raw transcription and split it into the relevant fields.
+"""
+
 from typing import Literal
 import os
 
@@ -19,17 +25,19 @@ from flask_cors import CORS
 
 from flask import Flask, request, jsonify
 from langgraph.graph import START, StateGraph
-from typing_extensions import Annotated, List, TypedDict
+from typing_extensions import Annotated, TypedDict
 from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 
 load_dotenv("../.env")
 
+# Initialize Flask Application
 app = Flask(__name__)
 
 CORS(app)
 
+# llm to chat with
 llm = init_chat_model(
     "gpt-4o-mini", model_provider="openai", api_key=os.environ.get("OPENAI_API_KEY")
 )
@@ -81,18 +89,20 @@ class State(TypedDict):
     question: str
     answer: str
 
-
+# Invokes based on the prompt
 def generate(state: State):
     messages = prompt.invoke({"question": state["question"]})
     response = llm.invoke(messages)
     return {"answer": response.content}
 
-
+# Build the RAG chain
 graph_builder = StateGraph(State).add_sequence([generate])
 graph_builder.add_edge(START, "generate")
 graph = graph_builder.compile()
 
-
+"""
+Endpoint to allow for prediction
+"""
 @app.route("/predict", methods=["POST"])
 def predict():
     input_message = request.form.get("transcription")
@@ -116,4 +126,4 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(port=5010, debug=True)
+    app.run(port=5010)

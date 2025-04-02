@@ -1,7 +1,6 @@
 import unittest
 import requests
 import openai
-import os
 
 """
 gptAssistance method created using the below docs.
@@ -9,7 +8,15 @@ https://platform.openai.com/docs/api-reference
 https://docs.python.org/3/library/unittest.html 
 """
 
+"""
+Author: Pranav Kalsi
+Last Updated: April 7th
+Purpose: Test the classification functionality
+"""
 
+"""
+This method will act as a evaluator to evaluate the response for subjective tests.
+"""
 def gptAssistance(situation, response):
     prompt = f"Given the raw conversation: '{situation}', is the following response correctly extracting the symptom, reason_for_visit, allergies, current_medication from the raw conversion? Respond with '1' for relevant and '0' for not correctly extracted.\nResponse: {response}"
 
@@ -31,8 +38,11 @@ def gptAssistance(situation, response):
 
 
 class TestAPI(unittest.TestCase):
-    BASE_URL = "http://127.0.0.1:5080"
+    BASE_URL = "http://127.0.0.1:5010"
 
+    """
+    This will test the relevance of the classification resp for a given conversation.
+    """
     def testConfidence(self):
         conversations = [
             "Conversation: I have a lot of chest pain. Medications: Nitroglycerin (for potential angina), Aspirin (antiplatelet). Allergies: Penicillin. Current Medication: Lisinopril (blood pressure).",
@@ -68,6 +78,9 @@ class TestAPI(unittest.TestCase):
         print(f"Test 1 Score (Confidence): {success/6}")
         assert (success / 6) >= 0.85
 
+    """
+    Test for a given valid input
+    """
     def testValidInput(self):
         form_data = {
             "transcription": "I have a lot of chest pain, sometimes shortness of breath."
@@ -76,6 +89,9 @@ class TestAPI(unittest.TestCase):
         response = requests.post(f"{self.BASE_URL}/predict", data=form_data)
         assert 200 == response.status_code
 
+    """
+    Test for a given invalid input
+    """
     def testHealthForInvalidInput(self):
         form_data = {}
 

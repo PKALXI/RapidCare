@@ -1,3 +1,12 @@
+//https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
+// https://firebase.google.com/docs/firestore
+
+/**
+ * Author: Pranav Kalsi
+ * Last Modified: March 7th
+ * Purpose: Provide functionality to interact with DB and specific functions
+ */
+
 import {
   collection,
   deleteDoc,
@@ -23,14 +32,14 @@ import {
   patientConverter,
 } from "../firebaseControllers/converters";
 
+// Constants for collection names
 const PATIENT_COLLECTION = "patients";
 const HEALTHCARE_PROFESSIONAL_COLLECTION = "healthcare_professional";
 const HOSPITAL_COLLECTION = "hospitals";
 const ADMIN_COLLECTION = "admin";
 const CHAT_COLLECTION = "chat";
 
-//https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
-//TODO: Add hcp collection
+// Objects representing collections in the db
 const patientCollection = collection(db, PATIENT_COLLECTION).withConverter(
   patientConverter
 );
@@ -53,15 +62,27 @@ const AIChatCollection = collection(db, CHAT_COLLECTION).withConverter(
 );
 
 //https://firebase.google.com/docs/firestore/manage-data/add-data
+/**
+ * This function support add/updating a message in the collection
+ *
+ * @async
+ * @param {IMessage} message 
+ * @returns {*} 
+ */
 const addMessage = async (message: IMessage) => {
   const docRef = doc(AIChatCollection, message.id);
   await setDoc(docRef, message);
 };
 
-const addSoap = async (
-  patientId: string,
-  soapNote: ISoapNote
-) => {
+/**
+ * This method allows addign a SOAP note to a patient, by updating the consultation notes.
+ *
+ * @async
+ * @param {string} patientId 
+ * @param {ISoapNote} soapNote 
+ * @returns {*} 
+ */
+const addSoap = async (patientId: string, soapNote: ISoapNote) => {
   try {
     const patientDocRef = doc(patientCollection, patientId);
     const patientDoc = await getDoc(patientDocRef);
@@ -89,16 +110,37 @@ const addSoap = async (
   }
 };
 
+/**
+ * Add a administrator to the network
+ *
+ * @async
+ * @param {INetworkInfo} admin 
+ * @returns {*} 
+ */
 const addAdmin = async (admin: INetworkInfo) => {
   const docRef = doc(networkInfoCollection, admin.id);
   await setDoc(docRef, admin);
 };
 
+/**
+ * Remove a healthcare professional from the collection
+ *
+ * @async
+ * @param {IHealthcareProfessional} healthCareProfessional 
+ * @returns {*} 
+ */
 const deleteAdmin = async (healthCareProfessional: IHealthcareProfessional) => {
   const docRef = doc(networkInfoCollection, healthCareProfessional.id);
   await deleteDoc(docRef);
 };
 
+/**
+ *  Add a healthcare professional to the repsective collection
+ *
+ * @async
+ * @param {IHealthcareProfessional} healthCareProfessional 
+ * @returns {*} 
+ */
 const addHealthCareProfessional = async (
   healthCareProfessional: IHealthcareProfessional
 ) => {
@@ -109,6 +151,13 @@ const addHealthCareProfessional = async (
   await setDoc(docRef, healthCareProfessional);
 };
 
+/**
+ * Remove healthcare professional from collection
+ *
+ * @async
+ * @param {IHealthcareProfessional} healthCareProfessional 
+ * @returns {*} 
+ */
 const deleteHealthCareProfessional = async (
   healthCareProfessional: IHealthcareProfessional
 ) => {
@@ -119,21 +168,49 @@ const deleteHealthCareProfessional = async (
   await deleteDoc(docRef);
 };
 
+/**
+ * Add hospital to the data base
+ *
+ * @async
+ * @param {IHospital} hospital 
+ * @returns {*} 
+ */
 const addHospital = async (hospital: IHospital) => {
   const docRef = doc(hospitalCollection, hospital.id);
   await setDoc(docRef, hospital);
 };
 
+/**
+ * Delete hospital from the database
+ *
+ * @async
+ * @param {IHospital} hospital 
+ * @returns {*} 
+ */
 const deleteHospital = async (hospital: IHospital) => {
   const docRef = doc(hospitalCollection, hospital.id);
   await deleteDoc(docRef);
 };
 
+/**
+ * Add patient to the collection
+ *
+ * @async
+ * @param {IPatient} patient 
+ * @returns {*} 
+ */
 const addPatient = async (patient: IPatient) => {
   const docRef = doc(patientCollection, patient.id);
   await setDoc(docRef, patient);
 };
 
+/**
+ * Get a patient from the database
+ *
+ * @async
+ * @param {string} id 
+ * @returns {unknown} 
+ */
 const getPatient = async (id: string) => {
   const docRef = doc(patientCollection, id);
   const document = await getDoc(docRef);
@@ -144,16 +221,35 @@ const getPatient = async (id: string) => {
   return null;
 };
 
+/**
+ * updatePatient in the database
+ *
+ * @async
+ * @param {IPatient} patient 
+ * @returns {*} 
+ */
 const updatePatient = async (patient: IPatient) => {
   const docRef = doc(patientCollection, patient.id);
   await setDoc(docRef, patient);
 };
 
+/**
+ * Delete patient from the collection
+ *
+ * @async
+ * @param {IPatient} patient 
+ * @returns {*} 
+ */
 const deletePatient = async (patient: IPatient) => {
   const docRef = doc(patientCollection, patient.id);
   await deleteDoc(docRef);
 };
 
+/**
+ * Sample empty patient template
+ *
+ * @type {IPatient}
+ */
 export const emptyPatient: IPatient = {
   id: "",
   profileInformation: {
@@ -184,6 +280,7 @@ export const emptyPatient: IPatient = {
   referrals: [],
 };
 
+// Export key collections and functions
 export {
   networkInfoCollection,
   addAdmin,

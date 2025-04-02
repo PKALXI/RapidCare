@@ -1,3 +1,9 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: All of the data models in the application
+ */
+
 export interface AppState {
   isUserAdmin: boolean;
   isAuthenticated: boolean;
@@ -5,7 +11,7 @@ export interface AppState {
   healthcareProfessional: IHealthcareProfessionalState | null;
 }
 
-export interface IMessage{
+export interface IMessage {
   id: string;
   sender: string;
   reciever: string;

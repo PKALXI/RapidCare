@@ -1,3 +1,12 @@
+//https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
+// https://firebase.google.com/docs/firestore
+
+/**
+ * Author: Pranav Kalsi
+ * Last Modified: March 7th
+ * Purpose: Provide functionality to pull and push our models to firebase
+ */
+
 import {
   QueryDocumentSnapshot,
   FirestoreDataConverter,
@@ -8,11 +17,10 @@ import {
   IMessage,
   INetworkInfo,
   IPatient,
-  ISoapNote,
 } from "../models/model";
 
-//https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter
-//Adapted to fit interfaces
+//Adapted to fit interfaces the converters simply allow us to convert our models to accepted firestore format and the reverse when pulling data.
+
 const patientConverter: FirestoreDataConverter<IPatient> = {
   toFirestore: (data: IPatient) => {
     return {
@@ -141,7 +149,7 @@ const messageConverter = {
   },
 };
 
-
+// Export the converters needed for CRUD operation
 export {
   networkInfoConverter,
   healthcareProfessionalConverter,

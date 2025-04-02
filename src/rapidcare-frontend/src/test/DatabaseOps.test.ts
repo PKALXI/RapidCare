@@ -1,3 +1,9 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Test the database operations.
+ */
+
 import { db } from "../firebase";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import {
@@ -20,6 +26,7 @@ import {
   mockPatient2,
 } from "../mockData/mockData";
 
+// Test for database operations
 describe("DatabaseOps", () => {
   beforeAll(async () => {
     // Add any necessary setup data here if needed
@@ -29,6 +36,7 @@ describe("DatabaseOps", () => {
     // Clear all collections or specific documents
   });
 
+  // Adding a valid document to the database
   test("should add a valid document to database", async () => {
     await addAdmin(mockAdmin);
     const docSnapshot = await getDoc(doc(db, "admin", mockAdmin.id));
@@ -49,6 +57,7 @@ describe("DatabaseOps", () => {
     expect(docSnapshot3.exists()).toBe(true);
   });
 
+  // Test if duplicates can be added
   test("should not add duplicate document", async () => {
     await addPatient(mockPatient);
     await addPatient(mockPatient);
@@ -61,23 +70,27 @@ describe("DatabaseOps", () => {
     );
     expect(matchingPatients.length).toBe(1);
   });
-
+  
+  //Document retrieval test
   test("should retreive correct existing document", async () => {
     const patient = await getPatient(mockPatient.id);
     expect(patient).toMatchObject(mockPatient);
   });
 
+  // Check for non existent document
   test("should return null for a non-existent document", async () => {
     const patient = await getPatient("1234567");
     expect(patient).toBeNull();
   });
 
+  // Update a patient
   test("should update the correct existing document", async () => {
     await updatePatient(mockPatient2);
     const docSnapshot = await getDoc(doc(db, "patients", mockPatient2.id));
     expect(docSnapshot.data()).toMatchObject(mockPatient2);
   });
 
+  // Delete and admin
   test("deleteAdmin should delete a existing document", async () => {
     await deleteAdmin(mockHealthCareProfessional);
     const docSnapshot = await getDoc(

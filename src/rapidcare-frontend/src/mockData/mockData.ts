@@ -1,10 +1,18 @@
-import { AppState, INetworkInfo } from "../models/model";
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: This is the mock data for the application to test the application flows without the backend
+ */
+
+import { INetworkInfo } from "../models/model";
+
 
 export const mockDashboardMetrics = {
   scheduledVisitsToday: 5,
   newPatientsThisMonth: 20,
   totalPatients: 150,
 };
+
 
 export const mockConsultations = [
   {
@@ -65,6 +73,7 @@ export const mockPatient = {
     },
   },
 };
+
 
 export const mockPatient2 = {
   id: "12345",

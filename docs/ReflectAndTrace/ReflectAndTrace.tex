@@ -2,6 +2,9 @@
 
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage{hyperref}
 
 \title{Reflection and Traceability Report on \progname}
 
@@ -16,56 +19,197 @@
 
 \maketitle
 
-\plt{Reflection is an important component of getting the full benefits from a
-learning experience.  Besides the intrinsic benefits of reflection, this
-document will be used to help the TAs grade how well your team responded to
-feedback.  Therefore, traceability between Revision 0 and Revision 1 is and
-important part of the reflection exercise.  In addition, several CEAB (Canadian
-Engineering Accreditation Board) Learning Outcomes (LOs) will be assessed based
-on your reflections.}
+% \plt{Reflection is an important component of getting the full benefits from a
+% learning experience.  Besides the intrinsic benefits of reflection, this
+% document will be used to help the TAs grade how well your team responded to
+% feedback.  Therefore, traceability between Revision 0 and Revision 1 is and
+% important part of the reflection exercise.  In addition, several CEAB (Canadian
+% Engineering Accreditation Board) Learning Outcomes (LOs) will be assessed based
+% on your reflections.}
 
 \section{Changes in Response to Feedback}
 
-\plt{Summarize the changes made over the course of the project in response to
-feedback from TAs, the instructor, teammates, other teams, the project
-supervisor (if present), and from user testers.}
+% \plt{Summarize the changes made over the course of the project in response to
+% feedback from TAs, the instructor, teammates, other teams, the project
+% supervisor (if present), and from user testers.}
 
-\plt{For those teams with an external supervisor, please highlight how the feedback 
-from the supervisor shaped your project.  In particular, you should highlight the 
-supervisor's response to your Rev 0 demonstration to them.}
+% \plt{For those teams with an external supervisor, please highlight how the feedback 
+% from the supervisor shaped your project.  In particular, you should highlight the 
+% supervisor's response to your Rev 0 demonstration to them.}
 
-\plt{Version control can make the summary relatively easy, if you used issues
-and meaningful commits.  If you feedback is in an issue, and you responded in
-the issue tracker, you can point to the issue as part of explaining your
-changes.  If addressing the issue required changes to code or documentation, you
-can point to the specific commit that made the changes.  Although the links are
-helpful for the details, you should include a label for each item of feedback so
-that the reader has an idea of what each item is about without the need to click
-on everything to find out.}
+% \plt{Version control can make the summary relatively easy, if you used issues
+% and meaningful commits.  If you feedback is in an issue, and you responded in
+% the issue tracker, you can point to the issue as part of explaining your
+% changes.  If addressing the issue required changes to code or documentation, you
+% can point to the specific commit that made the changes.  Although the links are
+% helpful for the details, you should include a label for each item of feedback so
+% that the reader has an idea of what each item is about without the need to click
+% on everything to find out.}
 
-\plt{If you were not organized with your commits, traceability between feedback
-and commits will not be feasible to capture after the fact.  You will instead
-need to spend time writing down a summary of the changes made in response to
-each item of feedback.}
+% \plt{If you were not organized with your commits, traceability between feedback
+% and commits will not be feasible to capture after the fact.  You will instead
+% need to spend time writing down a summary of the changes made in response to
+% each item of feedback.}
 
-\plt{You should address EVERY item of feedback.  A table or itemized list is
-recommended.  You should record every item of feedback, along with the source of
-that feedback and the change you made in response to that feedback.  The
-response can be a change to your documentation, code, or development process.
-The response can also be the reason why no changes were made in response to the
-feedback.  To make this information manageable, you will record the feedback and
-response separately for each deliverable in the sections that follow.}
+% \plt{You should address EVERY item of feedback.  A table or itemized list is
+% recommended.  You should record every item of feedback, along with the source of
+% that feedback and the change you made in response to that feedback.  The
+% response can be a change to your documentation, code, or development process.
+% The response can also be the reason why no changes were made in response to the
+% feedback.  To make this information manageable, you will record the feedback and
+% response separately for each deliverable in the sections that follow.}
 
-\plt{If the feedback is general or incomplete, the TA (or instructor) will not
-be able to grade your response to feedback.  In that case your grade on this
-document, and likely the Revision 1 versions of the other documents will be
-low.} 
+% \plt{If the feedback is general or incomplete, the TA (or instructor) will not
+% be able to grade your response to feedback.  In that case your grade on this
+% document, and likely the Revision 1 versions of the other documents will be
+% low.} 
+
+This section summarizes the changes we have made in regards to the feedback we got from TAs, supervisor, peer review, supervisor, and during usability testing. 
+The changes made can be found in the below able by clicking on associated issues. 
+In order to ease the traceability we have categorized the issue into milestones such as 'TA Feedback Issues', 'Peer Review', and 'Final Doc Updates' which can be found in \href{https://github.com/users/Inreet-Kaur/projects/2/views/1}{Team-25's Capstone Deliverables Project}. Associated PRs for issues can be viewed under specific views created for \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues}{TA feedback},  \href{https://github.com/users/Inreet-Kaur/projects/2/views/10?sliceBy%5Bvalue%5D=Peer+Review}{Peer review}, and \href{https://github.com/users/Inreet-Kaur/projects/2/views/9?sliceBy%5Bvalue%5D=Milestone+8+-+Final+Doc+Updates}{Final documentation updates} issues.
 
 \subsection{SRS and Hazard Analysis}
 
+Changes to SRS and Hazard Analysis along with the feedback, response and associated issues and PRs can be found in the tables below: 
+
+\begin{longtable}{| p{0.1\textwidth} | p{0.4\textwidth} | p{0.3\textwidth} | p{0.1\textwidth} |}
+    \caption{Changes for SRS Documentation} \\
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    TA & Document Content: missing revision history; \newline Document Organisation: Incorrect template; \newline LO Ext. Knowledge: No mention of feedback from supervisor; \newline LO Formalisation: Missing formalisation and other sections related to data types etc. & Template updated to include all relevant sections including formalization. External knowledge from supervisor added. Revision history updated. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=92154285&issue=PKALXI%7CRapidCare%7C166}{\#166} \\
+    \hline
+    TA &  Formatting and Style: Grammar, captilization errors; \newline Focus on Users: Issues with stakeholder and user section; \newline Phase In Plan: missing phase in plan; \newline LO Impact: impact on society is not clear & Fixed grammar, random captilization. Updated stakeholders and users section. Society is listed as a stakeholder along with impact on health safety, cultural diversity etc. Phase in plan added. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=92154311&issue=PKALXI%7CRapidCare%7C167}{\#167} \\
+    \hline
+    TA & Notations and Conventions: use case diagram missing labels & Use case diagram updated & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=92154354&issue=PKALXI%7CRapidCare%7C168}{\#168} \\
+    \hline
+    TA & What not How(Abstract): Constraints listed as requirements; \newline Basis for Design: Vague constriants, HIPAA included which is not applicable; \newline LO Standards: vague requirements & Constriants and NFRs updated to address issues. Compliance is changed to PIPEDA.& \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=92154366&issue=PKALXI%7CRapidCare%7C169}{\#169} \\
+    \hline
+    TA & Complete, Correct and Unambiguous: Unclear requirements; \newline Traceable Requirements: Incorrect traceability matrix; \newline Verificable Requirements: Unclear fit criterion & Outlined requirements and fit criterion reworded. Traceability matrix fixed. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=92154380&issue=PKALXI%7CRapidCare%7C170}{\#170} \\
+    \hline
+\end{longtable}
+
+\begin{longtable}{| p{0.1\textwidth} | p{0.4\textwidth} | p{0.3\textwidth} | p{0.1\textwidth} |}
+    \caption{Changes for Hazard Analysis} \\
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    TA & Spelling and grammar and style: FMEA Table formatting & Formatting fixed. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=92154633&issue=PKALXI%7CRapidCare%7C171}{\#171}\\
+    \hline
+    TA & Recommended Actions: mention user involvement in assumptions & Assumptions updated. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=92154648&issue=PKALXI%7CRapidCare%7C172}{\#172} \\
+    \hline
+\end{longtable}
+
 \subsection{Design and Design Documentation}
 
+Changes to Desgin and Design Documentation along with the feedback, response and associated issues and PRs can be found in the tables below: 
+
+\begin{longtable}{| p{0.1\textwidth} | p{0.4\textwidth} | p{0.3\textwidth} | p{0.1\textwidth} |}
+    \caption{Changes for Design} \\
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    TA & & & \href{}{}\\
+    \hline
+    TA  &  &  & \href{}{} \\
+    \hline
+\end{longtable}
+
+\begin{longtable}{| p{0.1\textwidth} | p{0.4\textwidth} | p{0.3\textwidth} | p{0.1\textwidth} |}
+    \caption{Changes for MG and MIS} \\
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    TA & SoftArchitec: Quality Information: Some secrets are not secrets &  & \href{}{} \\
+    \hline
+    TA & DetDesDoc: EnoughToBuild: Vague and ambious wording &  & \href{}{} \\
+    \hline
+    TA & CI/CD Infrastruture: not working, actions failing & CI/CD fully setup. & \href{}{} \\
+    \hline
+    TA & LO SpecMath: no specific feedback & Already formalised best to our ability. & \href{}{}\\
+    \hline
+    TA & LO ProbSolutions: no specific feedback & Already completed best to our ability. & \href{}{} \\
+    \hline
+    TA & LO Explores: no specific feedback & Already completed best to our ability. & \href{}{} \\
+    \hline
+\end{longtable}
+
 \subsection{VnV Plan and Report}
+
+Changes to VnV Plan and Report along with the feedback, response and associated issues and PRs can be found in the table below: 
+
+\begin{longtable}{| p{0.1\textwidth} | p{0.4\textwidth} | p{0.3\textwidth} | p{0.1\textwidth} |}
+    \caption{Changes for VnV Plan} \\
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    TA & Content: Broken entry in references & Reference issue fixed. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=93054421&issue=PKALXI%7CRapidCare%7C190}{\#190}\\
+    \hline
+    TA & Spelling and grammar and style: Break into paragraphs such that one paragraph talks about one topic. & Formatting fixed. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=93054661&issue=PKALXI%7CRapidCare%7C191}{\#191} \\
+    \hline
+    TA & Plan: VnV Reviews issues. & Updated to remove mutation testing and include a checklist. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=93054750&issue=PKALXI%7CRapidCare%7C194}{\#194}\\
+    \hline
+    TA & System Tests for Functional Requirements are specific: Issues in input and error messages. & Provide concrete inputs and error messages. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=93056576&issue=PKALXI%7CRapidCare%7C197}{\#197}\\
+    \hline
+    TA & Tests for Nonfunctional Requirements are specific: vague tests & Updated tests to include details and concrete details & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=93056734&issue=PKALXI%7CRapidCare%7C198}{\#198}\\
+    \hline
+    TA & Nondynamic testing used as necessary: details missing for static testing & Added details for static testing and fixed errors. & \href{https://github.com/users/Inreet-Kaur/projects/2/views/8?sliceBy%5Bvalue%5D=TA+Feedback+Issues&pane=issue&itemId=93060932&issue=PKALXI%7CRapidCare%7C200}{\#200}\\
+    \hline
+
+\end{longtable}
+
+\begin{longtable}{| p{0.1\textwidth} | p{0.4\textwidth} | p{0.3\textwidth} | p{0.1\textwidth} |}
+    \caption{Changes for VnV Report} \\
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Feedback Source} & \textbf{Feedback Item} & \textbf{Response} & \textbf{Issue} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    TA & & & \href{}{}\\
+    \hline
+    TA &  &  & \href{}{} \\
+    \hline
+\end{longtable}
 
 \section{Challenge Level and Extras}
 

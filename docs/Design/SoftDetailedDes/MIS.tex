@@ -440,21 +440,21 @@ N/A
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} Return live transcription of audio bytes in the request.body.
-    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
+    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error, the error is propagated to the frontend to provide user feedback and retry.
 \end{itemize}
 
 \noindent classifyText(request : FormData):
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} Classifies the request.text into the fields given in request.chart which represents the medical chart data in FormData form. Return map of text classified. 
-    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
+    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error, the error is propagated to the frontend to provide user feedback and retry.
 \end{itemize}
 
 \noindent predictDiagnosisPlan(request : FormData):
 \begin{itemize}
     \item \textbf{Transition:} N/A
     \item \textbf{Output:} Return a predicted diagnosis and treatment plan based on the patient - physician conversation.
-    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error.
+    \item \textbf{Exception:} FailedResponseError: The corresponding service/module has returned an error, , the error is propagated to the frontend to provide user feedback and retry.
 \end{itemize}
 
 
@@ -807,7 +807,7 @@ diagnoseTreatPatient & request : FormData & Prediction of possible Diagnosis and
 \begin{itemize}
 \item transition: N/A
 \item output: Returns the predicted diagnosis and treatment plan for the patient based on the transcribed text. FormData is expected to contain full doctor patient transcription.
-\item exception: InputDimError - The expected request body items were not received, empty or irrelevant to how the patient is feeling.
+\item exception: InputDimError - The expected request body items were not received, empty or irrelevant to how the patient is feeling, error will be propagated to the frontend and user will have to re-provide a transcription.
 \end{itemize}
 
 

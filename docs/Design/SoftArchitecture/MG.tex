@@ -50,6 +50,7 @@
 \midrule
 Jan 9, 2025 & 1.1 & Initial Document\\
 Jan 17,2025 & 1.2 & Revised Document Incorporating Feedback\\
+April 1, 2025 & 1.2 & Further revisions\\
 
 \bottomrule
 \end{tabularx}
@@ -193,13 +194,13 @@ This section provides an overview of the module design. Modules are summarized i
   \item [\refstepcounter{mnum} \mthemnum \label{mPVM}:] Patient View Module
   \item [\refstepcounter{mnum} \mthemnum \label{mAMM}:] Administrator Model Module
   \item [\refstepcounter{mnum} \mthemnum \label{mPMM}:] Patient Model Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mBM}:] Broker Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mBM}:] Service Layer Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mAAMM}:] Data Layer Module
   \item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Transcription Module
   \item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Classification Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mMPM}:] Medicine Prediction Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mAAMM}:] Administrator Account Management Module
-  \item [\refstepcounter{mnum} \mthemnum \label{mPAMM}:] Patient Account Management Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mDPM}:] Diagnosis and Treatment Plan Prediction Module
+  \item [\refstepcounter{mnum} \mthemnum \label{mMAI}:] AI Assistant Module
+
 
 \end{description}
 
@@ -218,13 +219,12 @@ This section provides an overview of the module design. Modules are summarized i
 & \mref{mPMM}\\
 & \mref{mBM}\\
 & \mref{mAAMM}\\
-& \mref{mPAMM}\\
 \midrule
 
 \multirow{3}{0.3\textwidth}{Software Decision Module} & \mref{mTM}\\
 & \mref{mCM}\\
 & \mref{mDPM}\\
-& \mref{mMPM}\\
+& \mref{mMAI}\\
 \bottomrule
 
 \end{tabular}
@@ -270,9 +270,9 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{User Authentication Module (\mref{mUAM})} 
 
 \begin{description}
-\item[Secrets:]The implementation details of the authentication mechanism, including secure storage and validation of user credentials, session management, and MFA logic.
+\item[Secrets:]The implementation details of the authentication mechanism, including secure storage and validation of user credentials, and session management.
 \item[Services:]Authenticates users to grant access to the system based on credentials.
-\item[Implemented By:]Spring, React
+\item[Implemented By:]Firebase, TypeScript
 \item[Type of Module:]Abstract Object
 \end{description}
 
@@ -312,36 +312,26 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Broker Module (\mref{mBM})}
+\subsubsection{Service Layer Module (\mref{mBM})}
 
 \begin{description}
-\item[Secrets:]The logic for generating and validating OAuth tokens, handling service interaction, as well as handling communication protocols.
+\item[Secrets:]The routing interactions between frontend and backend, as well as performing event listening and syncronization.
 \item[Services:]This module provides:
 \begin{itemize}
-    \item OAuth 2.0-based request authentication and authorization for all requests.
-    \item Secure token generation, validation, and renewal. 
-    \item Routing requests between services to fulfill use cases.
+    \item Socket communication, and event listening between the frontend and services.
+    \item Routes requests to microservices.
 \end{itemize}
-\item[Implemented By:]Spring, OAuth
+\item[Implemented By:]TypeScript
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Administrator Account Management Module (\mref{mAAMM})}
+\subsubsection{Data Layer Module (\mref{mAAMM})}
 
 \begin{description}
-\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks and healthcare professionals.
-\item[Implemented By:]MongoDB, Spring
-\item[Type of Module:]Record
-\end{description}
-
-\subsubsection{Patient Account Management Module (\mref{mPAMM})}
-
-\begin{description}
-\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval.
-\item[Services:]Manages secure storage, retrieval, and updates of data related to patient records.
-\item[Implemented By:]MongoDB, Spring
-\item[Type of Module:]Record
+\item[Secrets:]Database schema for indexing strategies, and data caching mechanisms for efficient storage and retrieval of various collection.
+\item[Services:]Manages secure storage, retrieval, and updates of data related to healthcare networks and healthcare professionals which are contained in collections.
+\item[Implemented By:] Firebase
+\item[Type of Module:] Record
 \end{description}
 
 
@@ -375,24 +365,23 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \item[Type of Module:]Library
 \end{description}
 
-\subsubsection{Diagonsis Prediction Module (\mref{mDPM})}
+\subsubsection{Diagonsis and Treatment Plan Prediction Module (\mref{mDPM})}
 
 \begin{description}
-\item[Secrets:]The algorithms used to predict possible diagnoses.
-\item[Services:]Predicts a set of applicable diagnoses for a patient based on patient characteristics, symptoms, and past medical history.
+\item[Secrets:]The retrieval and generation chain used to predict possible diagnoses and treatment plans.
+\item[Services:]Predicts a applicable diagnosis along with a treatment plan based on the patient-physician conversation.
 \item[Implemented By:]Python
 \item[Type of Module:]Abstract Object
 \end{description}
 
-\subsubsection{Medicine Prediction Module (\mref{mMPM})}
+\subsubsection{AI Assistant Module (\mref{mMAI})}
 
 \begin{description}
-\item[Secrets:]The algorithms used to give possible medicines applicable.
-\item[Services:]Predicts a set of applicable medicines for a patient based on patient characteristics, symptoms, and past medical history.
+\item[Secrets:]The algorithms used to predict possible diagnoses.
+\item[Services:] Provides a assistant to pull information regarding a patient. This includes but is not limited to patient symptoms, recent diagnoses, and other demographic information.
 \item[Implemented By:]Python
-\item[Type of Module:]Abstract object
+\item[Type of Module:]Abstract Object
 \end{description}
-
 
 \section{Traceability Matrix} \label{SecTM}
 

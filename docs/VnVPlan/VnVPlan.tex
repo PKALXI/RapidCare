@@ -35,7 +35,10 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 04-11-2024 & 1.0 & Initial Version\\
-10-03-2025 & 1.1 & Updates in Accordance to V and V report\\
+10-03-2025 & 1.1 & Updates in Accordance to VnV report\\
+31-03-2025 & 1.2 & Updated NFR and Security requirement tests to reflect changes in SRS and Hazard Analysis\\
+31-03-2025 & 1.2 & Updates to reflect changes in VnV Report\\
+01-04-2025 & 1.3 & Added Unit testing and updated usability survey\\
 \bottomrule
 \end{tabularx}
 
@@ -64,6 +67,12 @@
   MIS & Module Interface Specification\\
   FR & Functional Requirements\\
   NFR & Non-Functional Requirements\\
+  UI & User Interface\\
+  PIPEDA & Personal Information Protection and Electronic Documents Act\\
+  EHR & Electronic Healthcare Record\\
+  API & Application Programming Interface \\
+  IR & Integrity Requirement \\
+  AC & Access Requirement \\
   \bottomrule
 \end{tabular}\\
 
@@ -81,11 +90,11 @@
 This document provides a comprehensive description of the system tests specific to all requirements for a software application, RapidCare, that aims to streamline the healthcare documentation process aimed to be run as a web application. This document will be used as a verification tool to ensure that system fulfills all the requirements and needs of the user.
 This document will allow for an in-depth description of system tests for functional, non-functional, safety and security requirements. Additionally, it will outline the verification plan for design and implementation which will make sure that all requirements are fulfilled.\\
 Along with this, the document will also include the software validation plan that will validate the requirements by making sure that the client who intends to use this application is satisfied with its features.\\
-The system will allow the users to automate the documentation process by transcribing audio to text and generating reports based on the transcribed data. The system will also provide diagnostics and medicine suggestions based on the reports to further optimize the process.    
+The system will allow the users to automate the documentation process by transcribing audio to text and generating reports based on the transcribed data. The system will also provide diagnostics and treatment plan suggestions based on the reports to further optimize the process.    
 
 \subsection{Objectives} \label{section:2.2}
 
-The objective of verification and validation plan is to build confidence in the correctness of the software and decide if the software is correctly following the requirements. Additionally, we want to achieve adequate usability of our software by making sure it satisfies with the user's needs, thus speeding up the documentation process. Another goal of this document is to test the accuracy of the input data to reflect that the software suggests correct diagnosis based on the written text that has been transcribed from the audio conversation. Since the safety and security of the patient's information is a priority for this software, the plan is to conduct tests to make sure patient's information remains safe and secure.\\
+The objective of verification and validation plan is to build confidence in the correctness of the software and decide if the software is correctly following the requirements. Additionally, we want to achieve adequate usability of our software by making sure it satisfies with the user's needs, thus speeding up the documentation process. Another goal of this document is to test the accuracy of the input data to reflect that the software suggests correct diagnosis based on the text that has been transcribed from the audio conversation. Since the safety and security of the patient's information is a priority for this software, the plan is to conduct tests to make sure patient's information remains safe and secure.\\
 The main focus will be on verifying the system's essential features to make sure it complies with safety regulations and protects patient information and healthcare professionals' confidence. Assuming that the external libraries are already tested by their implementation team, the priority of this document will be to test the requirements of the software to ease the patient care.\\
 Due to time constraints and limited resources, we are not going to test the quality of usability. While the usability is important to test, the priority of this document is to test the fundamental requirements to ensure the software is accurate and reliable. 
 
@@ -102,17 +111,17 @@ As part of the extras for this project, we will accomplish the following extras:
 
 \begin{itemize}
   \item \textbf{Usability testing} -- This is designed for the users to assess how easily they can navigate and use the software. This will ensure that the requirements of the software perfectly align with the user's needs.
-  \item \textbf{User documentation} -- This will include instructions that will help the user to get started with the software. It will have an overview of the software along with some help resources for setup instructions and easy navigation for the user.
+  \item \textbf{User Manual} -- This will include instructions that will help the user to get started with the software. It will have an overview of the software along with some help resources for setup instructions and easy navigation for the user.
 \end{itemize}
 
 \subsection{Relevant Documentation} \label{section:2.4}
 
 The documents that are relevant to this project are:
 \begin{itemize}
-  \item \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf}{SRS} \citep{SRS1}
-  \item \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/HazardAnalysis/HazardAnalysis.pdf}{Hazard analysis}  \citep{HazardAnalysis}
-  \item MG
-  \item MIS
+  \item \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf}{SRS} 
+  \item \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/HazardAnalysis/HazardAnalysis.pdf}{Hazard analysis}
+  \item \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftArchitecture/MG.pdf}{MG}
+  \item \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}
 \end{itemize}
 SRS and Hazard analysis documents list the FR, NFR, safety and security requirements which will assist us in developing tests for each of them. Moreover, MG and MIS documents give a structured approach of system's architecture and interface, ensuring that the system is thoroughly tested. This will help us to develop test cases for vital areas of the software.  
 
@@ -236,7 +245,7 @@ This strategy will be implemented in section \ref{section:4}.
 % that document.}
 % \wss{The details of this section will likely evolve as you get closer to the
 %   implementation.}
-An outline of the CI/CD strategy can be found in section 7 of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/DevelopmentPlan/DevelopmentPlan.pdf}{Development Plan} \citep{DevelopmentPlan}. A list of relevant frameworks will be found in section 10 of the same document.
+An outline of the CI/CD strategy can be found in section 7 of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/DevelopmentPlan/DevelopmentPlan.pdf}{Development Plan}. A list of relevant frameworks will be found in section 10 of the same document.
 
 \subsection{Software Validation Plan} \label{section:3.7}
 
@@ -254,7 +263,7 @@ An outline of the CI/CD strategy can be found in section 7 of the \href{https://
 % as a Rev 0 demo for the supervisor.}
 % \wss{This section might reference back to the SRS verification section.}
 
-Validation of the project is critical and our supervisor will be vital for this process. Our supervisor will make sure that our Software solves the user groups needs. Our supervisor is in an excellent position to validate the software as not only are they a domain expert they also fit the potential user group.\\
+Validation of the project is critical and our supervisor will be vital for this process. Our supervisor will make sure that our software solves the user groups needs. Our supervisor is in an excellent position to validate the software as not only are they a domain expert they also fit the potential user group.\\
 
 In the review sessions we intend on hold with our we ensure to validate the following to ensure the right software is built:
 
@@ -315,7 +324,7 @@ Initial State: The system is set up, open to the relevant section (e.g., Healthc
 
 Input: Invalid input data.
 
-Output: An error message outlining the invalid fields along with a possible steps to guide the users to recover from the error state.
+Output: An error message outlining the invalid fields along with possible steps to guide the users to recover from the error state.
 
 Test Case Derivation: The system will validate the input data and prompt an error message outlining why the system is not able to accept the input data. No new document is added to the database.
 
@@ -353,7 +362,7 @@ Initial State: The system is set up, open to the relevant section (e.g., Healthc
 
 Input: An invalid identifier for the document to be deleted.
 
-Output: An error message outlining the invalid input along with a possible steps to guide the users to recover from the error state.
+Output: An error message outlining the invalid input along with possible steps to guide the users to recover from the error state.
 
 Test Case Derivation: The system should be able to validate the provided identifier and prevent the deletion of any existing document. 
 
@@ -391,7 +400,7 @@ Initial State: The system is set up, open to the relevant section (e.g., Healthc
 
 Input: Invalid input data.
 
-Output: An error message outlining the invalid fields along with a possible steps to guide the users to recover from the error state.
+Output: An error message outlining the invalid fields along with possible steps to guide the users to recover from the error state.
 
 Test Case Derivation: The system should be able to validate the provided input and prevent any invalid updates to the document.
 
@@ -439,7 +448,7 @@ How test will be performed: The test controller will input any invalid credentia
 
 \subsubsection{Voice-to-text-transcription check} \label{section:4.1.5}
 
-This subsection covers FR7 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to transcribe audio data to the written text.
+This subsection covers FR7 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to transcribe audio data to the text.
 
 \begin{enumerate}
 
@@ -453,9 +462,9 @@ Input: A valid audio chunk from the conversation between the healthcare professi
 
 Output: A confirmation message indicating successful transcription and the screen shows the transcribed text.
 
-Test Case Derivation: The system should be able to validate the voice input by processing it and transcribe to written text in real-time.
+Test Case Derivation: The system should be able to validate the voice input by processing it and transcribe to text in real-time.
 
-How test will be performed: The test controller will input a valid audio chunk and check if the system is able to transcribe the valid input. The controller will verify that a confirmation message appears and the voice input is transcribed to written text.
+How test will be performed: The test controller will input a valid audio chunk and check if the system is able to transcribe the valid input. The controller will verify that a confirmation message appears and the voice input is transcribed to text.
 
 
 \item{test-FR11-2} \label{test-FR11-2}
@@ -475,9 +484,9 @@ How test will be performed: The test controller will input an invalid data forma
 \end{enumerate}
 
 
-\subsubsection{Validate output of correct diagonsis and medication} \label{section:4.1.6}
+\subsubsection{Validate output of correct diagonsis and treatment plan} \label{section:4.1.6}
 
-This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to create predictions on the diagnosis and medicines with a high accuracy and confidence.
+This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to create predictions on the diagnosis and treatment plans with a high accuracy and based on the context.
 
 \begin{enumerate}
 
@@ -487,37 +496,35 @@ Control: Automatic
 
 Initial State: Patient's blank chart is present, and a transcription of the Patient-Healthcare Professional conversation is present.
 
-  Input: Correct and complete input data where all the symptoms fields of the chart are filled out.
+Input: Transcribed text from patient-doctor interaction.
 
-Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine.
+Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible treatment plan.
 
 Test Case Derivation: The system will create a validation set of data, where the model will be evaluated. 
 
 How test will be performed: When the model is deployed it will be automatically evaluated such that it will have to have a classification accuracy greater or equal than 85\%.
 
-\end{enumerate}
 
 
 \subsubsection{Validate input data for models} \label{section:4.1.7}
-This subsection covers FR12, FR13, and IR5 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to validate the input data in the charts such that it may be inputted into the prediction module.
+This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to validate the input data in the charts such that it may be inputted into the prediction module.
 
-\begin{enumerate}
 
-\item{test-FR12,13,IR5-1} \label{test-FR12,13,IR5-1}
+\item{test-FR12,13-2} \label{test-FR12,13-2}
 
 Control: Automatic
 
-Initial State: The user has uploaded a blank chart.
+Initial State: The patient's blank chart is present.
 
 Input: Correct and complete input data where the transcription is present.
 
-Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible medicine.
+Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible plan.
 
 Test Case Derivation: The system will test if the chart data is relevant and correct.  
 
 How test will be performed: When the system is deployed the model input will be tested such that it only accepts valid inputs.
 
-\item{test-FR12,13,IR5-2} \label{test-FR12,13,IR5-2}
+\item{test-FR12,13-3} \label{test-FR12,13-3}
 
 Control: Automatic
 
@@ -536,21 +543,20 @@ How test will be performed: When the system is deployed the model input will be 
 
 \subsection{Tests for Nonfunctional Requirements} \label{section:4.2}
 
-\subsubsection{Aesthetic and Design (NFR1)} \label{section:4.2.1}
+\subsubsection{Look and Feel Requirement (NFR1)} \label{section:4.2.1}
 
 \begin{enumerate}
     \item{test-AD1} \label{test-AD1}
     
     Type: Non-functional, Dynamic, Manual
     
-    Initial State: UI is designed and implemented.
+    Initial State: UI is operational and accessible to users.
     
-    Input/Condition: Healthcare workers view the UI under normal operating conditions.
+    Input: Users view the UI under normal operating conditions.
     
-    Output/Result: Feedback collected on UI's aesthetic appeal and simplicity.
+    Output: Feedback collected on UI's aesthetic appeal and simplicity.
     
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of routine UI interactions to perform. They will be asked to complete these interactions using the interface. After they do this, they will be given a UI design survey. In the UI design survey, the supervisor will verify that the interface meets aesthetic appeal and simplicity requirements.
-
+    How this test will be performed: A test group of users will be given the system, and a set of routine UI interactions to perform. They will be asked to complete these interactions using the interface. After they do this, they will be given a Usability survey to verify that the interface meets aesthetic appeal and simplicity requirements.
 
     \item{test-AD2} \label{test-AD2}
     
@@ -558,15 +564,14 @@ How test will be performed: When the system is deployed the model input will be 
     
     Initial State: UI is operational and accessible to users.
     
-    Input/Condition: Users interact with the UI during routine tasks and provides feedback.
+    Input: Users interact with the UI during routine tasks and provide feedback.
     
-    Output/Result: Team members and peers report satisfaction with the UI design.
+    Output: Feedback collected on satisfaction with the UI design.
     
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of common tasks to perform. They will be asked to complete these tasks using the interface. After they do this, they will be given a UI satisfaction survey. In the UI satisfaction survey, the supervisor will verify that at least 80\% of users are satisfied with the design.
+    How this test will be performed: A test group of users will be given the system, and a set of common tasks to perform. They will be asked to complete these tasks using the interface. After they do this, they will be given a Usability survey to verify that at least 80\% of users are satisfied with the design.
 \end{enumerate}
 
 \subsubsection{Usability Requirement (NFR2)} \label{section:4.2.2}
-
 
 \begin{enumerate}
     \item{test-UR1} \label{test-UR1}
@@ -575,57 +580,44 @@ How test will be performed: When the system is deployed the model input will be 
     
     Initial State: System is deployed and accessible.
     
-    Input/Condition: Users navigate and explore the system features independently.
+    Input: Users navigate and explore the system features independently.
     
-    Output/Result: Majority of users can locate core functions without additional guidance.
+    Output: Majority of users can locate core functions without additional guidance. System reflects clear discoverability, affordances, and visibility.
     
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of core functions to locate. They will be asked to find these functions without guidance. After they do this, they will be given a navigation survey. In the navigation survey, the supervisor will verify that users could locate core functions independently.
+    How this test will be performed: A test group of users will be given the system, and a set of core functions to locate. They will be asked to find these functions without guidance. After they do this, they will be given the usability survey to verify that users could locate core functions independently.
 \end{enumerate}
 
 \subsubsection{Performance Requirement (NFR3)} \label{section:4.2.3}
 
 \begin{enumerate}
-
     \item{test-PR1} \label{test-PR1}
     
     Type: Non-functional, Dynamic, Manual
     
     Initial State: Transcription interface open and ready.
     
-    Input/Condition: Real-time voice input provided by healthcare professional.
+    Input: Real-time voice input provided by the user.
     
-    Output/Result: Real-time transcription displayed within a 2 second delay.
+    Output: Real-time transcription displayed within an acceptable time frame (should not exceed 2 minutes).
     
-    How this test will be performed: A test group of healthcare professionals and the supervisor will be given the system, and a set of voice inputs to transcribe. They will be asked to speak these inputs for real-time transcription. After they do this, they will be given a latency survey. In the latency survey, the supervisor will verify that transcription delay remains under 1 second.
+    How this test will be performed: A test group of users will be given the system, and a set of voice inputs to transcribe. They will be asked to speak these inputs for real-time transcription. After they do this, the transcription delay will be noted and should not exceed the specified time frame.
 
-  \end{enumerate}
+\end{enumerate}
 
 \subsubsection{Operational Requirement (NFR4)} \label{section:4.2.4}
 
 \begin{enumerate}
     \item{test-OR1} \label{test-OR1}
     
-    Type: Non-functional, Dynamic, Automated
-    
-    Initial State: System is live and connected to monitoring software.
-    
-    Input/Condition: 7-day operational period with intermittent load testing.
-    
-    Output/Result: Uptime is consistently maintained at 99.9\% or above.
-    
-    How test will be performed: Use uptime monitoring tools to track server availability over the 7-day period.
-
-    \item{test-OR2} \label{test-OR2}
-    
     Type: Non-functional, Dynamic, Manual
     
-    Initial State: System in operational use.
+    Initial State: System is deployed and accessible.
     
-    Input/Condition: Users access the system over a 7-day period under normal and peak loads.
+    Input: Multiple test users perform basic interactions (e.g., logging in, recording voice input, retrieving stored data).
     
-    Output/Result: Log data and user feedback confirm uptime meets standards with no significant disruptions.
+    Output: The system responds within an acceptable time frame, and no critical errors occur.
     
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of usage patterns to follow over 7 days. They will be asked to use the system according to these patterns while monitoring performance. After they do this, they will be given an uptime survey. In the uptime survey, the supervisor will verify that no significant disruptions occurred during the test period.
+    How test will be performed: A test group of users will be given the system, and a set of common tasks to perform. After they complete these tasks, any abnormal behavior and errors will be noted.
 \end{enumerate}
 
 \subsubsection{Maintainability Requirement (NFR5)} \label{section:4.2.5}
@@ -635,26 +627,13 @@ How test will be performed: When the system is deployed the model input will be 
     
     Type: Non-functional, Dynamic, Manual
     
-    Initial State: System running on the latest version with recent update logs.
+    Initial State: System is deployed and accessible.
     
-    Input/Condition: Regular software update is applied for bug fixes and improvements.
+    Input: Review and modify system components (e.g., refactoring code, adding new functionality).
     
-    Output/Result: System successfully applies updates without impacting stability.
+    Output: System successfully applies updates without impacting stability.
     
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of software updates to apply. They will be asked to implement these updates following standard procedures. After they do this, they will be given a stability survey. In the stability survey, the supervisor will verify that system functionality remained stable after updates.
-
-
-    \item{test-MR2} \label{test-MR2}
-    
-    Type: Non-functional, Dynamic, Manual
-
-    Initial State: Previous version of the system with identified bugs or issues.
-
-    Input/Condition: Apply updates addressing known issues.
-
-    Output/Result: System functions as expected with resolved issues and no new errors introduced.
-
-    How this test will be performed: While developers update the system, a test group of users and a supervisor will monitor it. The group will test functionality as updates are deployed, after which they'll complete a regression survey. The supervisor will verify that issues are resolved without introducing new errors.
+    How this test will be performed: A set of software updates will be applied, and it will be verified that system functionality remained stable after updates, ensuring that the system supports regular updates for bug fixes and feature enhancements.
 \end{enumerate}
 
 \subsubsection{Security Requirement (NFR6)} \label{section:4.2.6}
@@ -664,13 +643,13 @@ How test will be performed: When the system is deployed the model input will be 
     
     Type: Non-functional, Dynamic, Manual
     
-    Initial State: System fully operational with access logs enabled.
+    Initial State: System is deployed and accessible.
     
-    Input/Condition: Simulate unauthorized access attempts.
+    Input: Simulate unauthorized access attempts.
     
-    Output/Result: Unauthorized attempts are blocked; access logs capture details.
+    Output: Unauthorized attempts are blocked and access logs capture details.
     
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of unauthorized access scenarios. They will be asked to attempt these scenarios while monitoring system responses. After they do this, they will be given an access control survey. In the access control survey, the supervisor will verify that all unauthorized attempts were properly blocked and logged.
+    How this test will be performed: A test group of users will be given the system, and a set of unauthorized access scenarios. They will be asked to attempt these scenarios while monitoring system responses. After they do this, it will be verified that all unauthorized attempts were properly blocked.
 \end{enumerate}
 
 \subsubsection{Cultural Requirement (NFR7)} \label{section:4.2.7}
@@ -680,14 +659,14 @@ How test will be performed: When the system is deployed the model input will be 
   
   Type: Non-functional, Dynamic, Manual
   
-  Initial State: System operational with default settings.
+  Initial State: System is deployed and accessible.
   
-  Input/Condition: User interacts with the system in a culturally diverse context, including input that may contain sensitive language.
+  Input: User interacts with the system in a culturally diverse context, including input that may contain sensitive language.
   
-  Output/Result: System processes the input and responds appropriately, ensuring cultural sensitivity and avoiding any inappropriate language in its output.
+  Output: System processes the input and responds appropriately, ensuring cultural sensitivity and avoiding any inappropriate language in its output.
   
-  How this test will be performed: A test group of users and the supervisor will be given the system and a set of culturally diverse input scenarios. These scenarios will include region-specific phrases, idioms, and potentially sensitive language. Users will interact with the system using these inputs, and the supervisor will verify that the system responds in a culturally appropriate manner. A survey will be conducted to assess the system's ability to handle cultural sensitivity, and the supervisor will evaluate the results to ensure compliance with cultural appropriateness standards.
-  \end{enumerate}
+  How this test will be performed: A test group of users will be given the system and a set of culturally diverse input scenarios. Users will interact with the system using these inputs and it will be verified that the system responds in a culturally appropriate manner.
+\end{enumerate}
 
 \subsubsection{Legal Requirement (NFR8)} \label{section:4.2.8}
 
@@ -696,40 +675,27 @@ How test will be performed: When the system is deployed the model input will be 
     
     Type: Non-functional, Dynamic, Manual
     
-    Initial State: System is fully functional and contains patient records.
+    Initial State: System is deployed and accessible.
     
-    Input/Condition: Conduct a compliance audit against PIPEDA and other relevant data protection standards.
+    Input: Conduct a compliance audit against PIPEDA and other relevant data protection standards.
     
-    Output/Result: System passes all compliance checks with no exceptions.
+    Output: System passes all compliance checks and shows relevant disclaimers with no exceptions.
     
-    How test will be performed: A certified compliance auditor verifies data handling and data access policies.
-
-    \item{test-LR2} \label{test-LR2}
-    
-    Type: Non-functional, Dynamic, Automated
-    
-    Initial State: System storing and transmitting patient data over a network.
-    
-    Input/Condition: Monitor data handling and transfer processes during operation.
-    
-    Output/Result: All patient data is handled in compliance with regulations, without any unauthorized access or data breaches.
-    
-    How test will be performed: Automated compliance tools track data handling practices over a defined period, and alerts are set up for any regulatory deviations.
+    How test will be performed: A certified compliance auditor verifies data handling and data access policies, ensuring that the system displays appropriate medical disclaimers and feedback to the users.
 \end{enumerate}
 
-\subsubsection{Scalability (NFR9)} \label{section:4.2.9}
+\subsubsection{Scalability Requirement (NFR9)} \label{section:4.2.9}
 
 \begin{enumerate}
-
     \item{test-S1} \label{test-S1}
     
     Type: Non-functional, Dynamic, Automated
     
     Initial State: System deployed on a test server environment capable of scaling horizontally.
-    
-    Input/Condition: Simulate an increasing number of concurrent users accessing the system, starting from 100 users up to 10,000 users.
-    
-    Output/Result: System maintains consistent performance and response times without a drop in performance.
+
+    Input: Simulate an increasing number of concurrent users.
+
+    Output: System maintains consistent performance and response times without degradation.
     
     How test will be performed: Use load testing tools like Apache to simulate concurrent user traffic and monitor system response times, server load, and throughput during the test.
     
@@ -744,37 +710,15 @@ How test will be performed: When the system is deployed the model input will be 
 
     \item{test-AC1-1} \label{test-AC1-1}
     
-    Type: Functional, Dynamic, Automated
-    
-    Initial State: System deployed with authentication module enabled and test user accounts configured.
-    
-    Input/Condition: Attempt to access protected resources with invalid credentials 5 times consecutively from the same IP address.
-    
-    Output/Result: 
-    \begin{itemize}
-        \item System logs each failed attempt
-        \item Account is temporarily locked after 5 failed attempts
-        \item Security team receives notification
-        \item User receives lockout notification
-    \end{itemize}
-    
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of sample invalid credentials for the system. They will be asked to use these credentials repeatedly to attempt system access. After they do this, they will be given a security test survey. In the security test survey, the supervisor will verify the logging, lockout, and notification requirements are met.
-
-    \item{test-AC1-2}  \label{test-AC1-2}
-    
     Type: Functional, Dynamic, Manual
     
-    Initial State: System operational with authentication logs enabled.
+    Initial State: System is deployed and accessible.
     
-    Input/Condition: Attempt to access system resources without authentication.
+    Input: Attempt to access system with invalid credentials.
     
-    Output/Result: 
-    \begin{itemize}
-        \item All unauthorized access attempts are blocked
-        \item Each attempt is logged with timestamp, IP address, and attempted resource
-    \end{itemize}
+    Output: All unauthorized access attempts are blocked.
     
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of protected resources to access. They will be asked to attempt accessing these resources without authentication. After they do this, they will be given a security test survey. In the security test survey, the supervisor will verify that access was properly blocked and logged.
+    How this test will be performed: A test group of users will be given the system. They will be asked to attempt access the system with invalid credentials and it will be verified that access was properly blocked.
 \end{enumerate}
 
 \subsubsection{AC2}
@@ -784,18 +728,13 @@ How test will be performed: When the system is deployed the model input will be 
     
     Type: Functional, Dynamic, Manual
     
-    Initial State: System operational with standard user and admin accounts configured.
+    Initial State: System is deployed and accessible.
     
-    Input/Condition: Attempt to create, update, and delete user accounts using non-admin credentials.
+    Input: Attempt to create, update, and delete user accounts using non-admin credentials.
     
-    Output/Result:
-    \begin{itemize}
-        \item All unauthorized actions are blocked
-        \item Actions are logged with user details
-        \item Security team can review blocked attempts
-    \end{itemize}
-    
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of standard user credentials. They will be asked to attempt various administrative operations using these credentials. After they do this, they will be given a security test survey. In the security test survey, the supervisor will verify that administrative actions were properly restricted and logged.
+    Output: System correctly displays UI based on the role and access permissions.
+
+    How this test will be performed: A test group of users will be given the system, and a set of non-admin user credentials. They will be asked to attempt various administrative operations using these credentials and it will be verified that the users were not able to access those options based on the permissions.
 
 \end{enumerate}
 
@@ -807,13 +746,13 @@ How test will be performed: When the system is deployed the model input will be 
     
     Type: Non-functional, Dynamic, Automated
     
-    Initial State: System operational with test user accounts and authentication database.
+    Initial State: System is deployed and accessible.
     
-    Input/Condition: Simulate multiple concurrent failed login attempts while monitoring credential storage.
+    Input: Simulate multiple concurrent failed login attempts while monitoring credential storage.
+
+    Output: User credentials remain unchanged, and system maintains stability.
     
-    Output/Result: User credentials remain unchanged and system maintains stability.
-    
-    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of test credentials for concurrent authentication testing. They will be asked to perform multiple simultaneous authentication attempts. After they do this, they will be given a system integrity survey. In the system integrity survey, the supervisor will verify that all credentials remained intact and system stability was maintained.
+    How this test will be performed: A test group of users and the supervisor will be given the system, and a set of test credentials for concurrent authentication testing. They will be asked to perform multiple simultaneous authentication attempts and it will be verified that all credentials remained intact and system stability was maintained.
 
   \end{enumerate}
 
@@ -821,15 +760,15 @@ How test will be performed: When the system is deployed the model input will be 
   
   \begin{enumerate}
 
-    \item{test-IR2-1} \label{test-IR2-1} %Generate error messages
+    \item{test-IR2-1} \label{test-IR2-1} 
     
     Type: Functional, Dynamic, Manual
     
     Initial State: The system is set up, open to the relevant section and ready to take the user input.
     
-    Input/Condition: Submit an invalid data input.
+    Input: Submit an invalid data input.
     
-    Output/Result: An error message is displayed to the user. No data is added to any database. 
+    Output: An error message is displayed to the user with feedback to recover from error state. No data is added to any database. 
     
     How test will be performed: The test controller will input an invalid data input and check if the system is able to validate and reject the invalid data. The controller will verify that an error message appears.
 
@@ -840,15 +779,15 @@ How test will be performed: When the system is deployed the model input will be 
   \begin{enumerate}
 
 
-    \item{test-IR3-1}  \label{test-IR3-1} %Validation of confidence score
+    \item{test-IR3-1}  \label{test-IR3-1}
     
     Type: Functional, Dynamic, Automated
     
-    Initial State: The prediction model is ready for to predict medication and diagnosis.
+    Initial State: The prediction model is ready for to predict trestment plan and diagnosis.
     
-    Input/Condition: A test set of various patient medical charts will be inputted.
-    
-    Output/Result: The prediction will create a diagnosis prediction based on the chart and a medication prediction based on the diagnosis. Each prediction will include a confidence score and the confidence score of the testing set must exceed 85\%.
+    Input: A test set of various patient medical charts.
+
+    Output: The prediction includes a diagnosis and treatment prediction, each with a confidence score exceeding 85\%.
     
     How test will be performed: Automated testing of model outputs and confidence scores this assists in understanding how sure the model is in its classification.
 
@@ -858,54 +797,35 @@ How test will be performed: When the system is deployed the model input will be 
     
   \begin{enumerate}
 
-    \item{test-IR4-1} \label{test-IR4-1} %: Duplicate record detection
+    \item{test-IR4-1} \label{test-IR4-1}
     
     Type: Functional, Dynamic, Manual
     
-    Initial State: The system is set up, open to the relevant section and ready to take the user input. A document already exists in the relevant database.
-    
-    Input/Condition: A new input with the same data as an existing document.
-    
-    Output/Result: An error message. No new document is added to the database.
+    Initial State: System is set up, open to the relevant section, and ready to take user input. A document already exists in the relevant database.
+
+    Input: A new input with the same data as an existing document.
+  
+    Output: An error message is displayed. No new document is added to the database.  
     
     How test will be performed: The test controller will have a new input with the same data as an existing document and check if the system is able to validate and reject the duplicate record. The controller will verify that an error message appears.
 
   \end{enumerate}
 
-  \subsubsection{IR6}
+  \subsubsection{IR5}
     
   \begin{enumerate}
 
-    \item{test-IR6-1} \label{test-IR6-1} % Classification of data for report generation
+    \item{test-IR5-1} \label{test-IR5-1}   
     
     Type: Functional, Dynamic, Manual
     
-    Initial State: The system is set up, open to the relevant section and ready to take the user input. A document already exists in the relevant database.
-    
-    Input/Condition: The written text transcribed from the audio data.
-    
-    Output/Result: The data is correctly classified in the generated report with no diagnosis errors.
-    
-    How test will be performed: The test controller will have a new data input and check if the system is able to validate and classify the data accurately. The controller will verify that there are no diagnosis errors in the generated report.
+    Initial State: System is set up, open to the relevant section, and ready to take user input.
 
-  \end{enumerate}
+    Input: Audio conversation between the patient and healthcare professional.
 
-\subsubsection{IR7}
-    
-\begin{enumerate}
+    Output: The transcribed text from the input data matches the conversation with minimal to no interference.
 
-
-    \item{test-IR7-1} \label{test-IR7-1} % Filter background noise for accuracy 
-    
-    Type: Functional, Dynamic, Manual
-    
-    Initial State: The system is set up, open to the relevant section and ready to take the user input.
-    
-    Input/Condition: The audio conversation between the patient and healthcare professional.
-    
-    Output/Result: The written text transcribed from the input data matches with the conversation with minimal to no interference.
-
-    How test will be performed: The test controller will have a new data input and check if the system is able to validate and classify the data accurately. The controller will verify that the generated text matches the spoken conversation.
+    How test will be performed: The test controller will have a new data input and check if the system is able to validate and classify the data accurately. The controller will verify that the generated text matches the spoken conversation with 90\% percent accuracy. The accuracy will be assessed by comparing the system's output to the human transcription and calculating the percentage of correct words.
 
 \end{enumerate}
 
@@ -917,35 +837,35 @@ How test will be performed: When the system is deployed the model input will be 
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
   \hline
-   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 & FR14\\
+   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13\\
   \hline
-  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  test-FR1,4,8-\ref{test-FR1,4,8-1} & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
-  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & & \\
+  test-FR1,4,8-\ref{test-FR1,4,8-2} & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
-  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR2,5,9-\ref{test-FR2,5,9-1} & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR2,5,9-\ref{test-FR2,5,9-2} & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-1} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
   \hline
-  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & & \\
+  test-FR3,6,10,11-\ref{test-FR3,6,10,11-2} & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
   \hline
-  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & & \\
+  test-FR7-\ref{test-FR7-1} & & & & & & & $\times$ & & & & & & \\
   \hline
-  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & & \\
+  test-FR7-\ref{test-FR7-2} & & & & & & & $\times$ & & & & & & \\
   \hline
-  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & & \\
+  test-FR11-\ref{test-FR11-1} & & & & & & & & & & & $\times$ & & \\
   \hline
-  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & & \\
+  test-FR11-\ref{test-FR11-2} & & & & & & & & & & & $\times$ & & \\
   \hline
-  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  test-FR12,13-\ref{test-FR12,13-1} & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  test-FR12,13-\ref{test-FR12,13-2} & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-2} & & & & & & & & & & & & $\times$ & $\times$ & \\
+  test-FR12,13-\ref{test-FR12,13-3} & & & & & & & & & & & & $\times$ & $\times$ \\
   \hline
 \end{tabular}
 \caption{\bf Functional Requirements Tests Traceability} \label{tab:fr-test-traceability}
@@ -960,7 +880,7 @@ How test will be performed: When the system is deployed the model input will be 
     \hline
     test-AD\ref{test-AD1} & $\times$ & & & & & & & & \\
     \hline
-    test-AD\ref{test-AD2} &  $\times$ & & & & & & & & \\
+    test-AD\ref{test-AD2} & $\times$ & & & & & & & & \\
     \hline
     test-UR\ref{test-UR1} & & $\times$ & & & & & & &  \\
     \hline
@@ -968,19 +888,13 @@ How test will be performed: When the system is deployed the model input will be 
     \hline
     test-OR\ref{test-OR1} & & & & $\times$ & & & & &  \\
     \hline
-    test-OR\ref{test-OR2} & & & & $\times$ & & & & & \\
-    \hline
     test-MR\ref{test-MR1} & & & & & $\times$ & & & &\\
-    \hline
-    test-MR\ref{test-MR2} & & & & & $\times$ & & & &  \\
     \hline
     test-SR\ref{test-SR1} & & & & & & $\times$ & & & \\
     \hline
     test-CR\ref{test-CR1} & & & & & & & $\times$ & &\\
     \hline
     test-LR\ref{test-LR1} & & & & & & & & $\times$ &\\
-    \hline
-    test-LR\ref{test-LR2} & & & & & & & & $\times$ & \\
     \hline
     test-S\ref{test-S1} & & & & & & & & & $\times$ \\
     \hline
@@ -992,27 +906,21 @@ How test will be performed: When the system is deployed the model input will be 
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
   \hline
-  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 & IR6 & IR7 \\
+  Test ID & AC1 & AC2 & IR1 & IR2 & IR3 & IR4 & IR5 \\
   \hline
-  test-AC1-\ref{test-AC1-1} & $\times$ & & & & & & & & \\
+  test-AC1-\ref{test-AC1-1} & $\times$ & & & & & & \\
   \hline
-  test-AC1-\ref{test-AC1-2} & $\times$ & & & & & & & & \\
+  test-AC2-\ref{test-AC2-1} & & $\times$ & & & & &  \\
   \hline
-  test-AC2-\ref{test-AC2-1} & & $\times$ & & & & & & &  \\
+  test-IR1-\ref{test-IR1-1} & & & $\times$ & & & &  \\
   \hline
-  test-IR1-\ref{test-IR1-1} & & & $\times$ & & & & & &  \\
+  test-IR2-\ref{test-IR2-1}  & & & & $\times$ & & & \\
   \hline
-  test-IR2-\ref{test-IR2-1}  & & & & $\times$ & & & & & \\
+  test-IR3-\ref{test-IR3-1}  & & & & & $\times$ & & \\
   \hline
-  test-IR3-\ref{test-IR3-1}  & & & & & $\times$ & & & & \\
+  test-IR4-\ref{test-IR4-1}  & & & & & & $\times$ & \\
   \hline
-  test-IR4-\ref{test-IR4-1}  & & & & & & $\times$ & & & \\
-  \hline
-  test-FR12,13,IR5-\ref{test-FR12,13,IR5-1}  & & & & & & & $\times$ & & \\
-  \hline
-  test-IR6-\ref{test-IR6-1}  & & & & & & & & $\times$ & \\
-  \hline
-  test-IR7-\ref{test-IR7-1}  & & & & & & & & & $\times$ \\
+  test-IR5-\ref{test-IR5-1}  & & & & & & & $\times$  \\
   \hline
 \end{tabular}
 \caption{\bf Safety and Security Requirements Tests Traceability} \label{tab:sns-test-traceability}
@@ -1024,8 +932,6 @@ How test will be performed: When the system is deployed the model input will be 
 
 \section {Unit Test Description}
 
-To be completed in Rev 1.
-
 \subsection{Unit Testing Scope}
 
 % \wss{What modules are outside of the scope.  If there are modules that are
@@ -1033,6 +939,14 @@ To be completed in Rev 1.
 %   verifying them.  There may also be modules that are part of your software, but
 %   have a lower priority for verification than others.  If this is the case,
 %   explain your rationale for the ranking of module importance.}
+
+\section{Unit Testing Scope}
+
+ While comprehensive testing will e performed on several critical modules, certain modules like Serivce Layer module, Patient and Administrator model modules, and views in Patient View and Adminstrator view modules will not tested. This is due to various reasons.\\
+ Service Layer Module was not included in the unit testing scope as it used primarily for routing interactions and focus was placed on testing the core functionalities rather than the service layer, which is expected to be stable and well-defined.\\
+ Patient Model and Administrator Model Modules were not included in unit testing scope as they just provide the data structure for for various objects. The tests for integrity of the data are included in the Data Layer Module tests.\\
+UI Components in Administrator View and Patient View Modules were not included in unit testing. This is because user acceptance testing and usability testing would provide better insights for overall user experience and interaction with the system can be evaluated in a more holistic manner.\\
+By prioritizing the verification of core functionalities, we aimed to ensure that the most essential aspects of the system were thoroughly tested.
 
 \subsection{Tests for Functional Requirements}
 
@@ -1047,45 +961,257 @@ To be completed in Rev 1.
 %   perspective and from a white box perspective.  Explain to the reader how the
 %   tests were selected.}
 
-% \begin{enumerate}
+This section will include unit tests for functional requirements organised by different modules Details of the functional requiremnts can be found in \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf}{SRS} and details about different modules can be found in \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS} and \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftArchitecture/MG.pdf}{MG}.
 
-% \item{test-id1\\}
+\subsubsection{User Authentication Module}
 
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-%   be automatic}
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: \wss{The expected result for the given inputs}
+This subsection covers User Authentication Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. This module focuses on the authentication mechanism, including secure storage and validation of user credentials, and session management. The tests outlined below are designed to verify both the functionality and security of the authentication mechanisms. These tests were selected based on the situations users will encounter under normal conditions and also considers potential edge cases to ensure comprehensive coverage of the authentication functionality.
 
-% Test Case Derivation: \wss{Justify the expected value given in the Output field}
+\textbf{Control:} Automatic \\ 
+\textbf{Initial State:} The default email and password are initialized as variables and given a default value.\\ 
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct registration and login functionality of Firebase Authentication, ensuring valid user creation and authentication processes, as well as error handling for invalid credentials.\\ 
+\textbf{Test Procedure:} The tests are performed as follows:
+\begin{enumerate}
+  \item Sign up using valid credentials:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the valid credentials of email and password.
+      \item \textbf{Output:} The user object is returned by the signup function.
+      \item \textbf{Test Derivation:} Verifies that the signup function correctly works and creates a new user account when the valid credentials are provided.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will simulate the input of valid email and password into the signup function. The system will be monitored to ensure that a user object is returned.
+    \end{itemize}
 
-% How test will be performed: 
-					
-% \item{test-id2\\}
+  \item Sign up throwing errors with invalid credentials:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the invalid credentials of email and password.
+      \item \textbf{Output:} An error thrown up by the signup function.
+      \item \textbf{Test Derivation:} Verifies that the signup function correctly throws an error when the invalid credentials are provided.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will simulate the input of invalid email and password into the signup function. The system will be monitored to ensure that an error is thrown.
+    \end{itemize}
 
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-%   be automatic}
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: \wss{The expected result for the given inputs}
+  \item Login using valid credentials:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the valid credentials of email and password. 
+      \item \textbf{Output:} The user object is returned by the signin function.
+      \item \textbf{Test Derivation:} Verifies that the signin function correctly authenticates the user when valid credentials are provided.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will simulate the input of valid email and password into the signin function. The system will be monitored to ensure that a user object is returned.
+    \end{itemize}
 
-% Test Case Derivation: \wss{Justify the expected value given in the Output field}
+  \item Login throwing errors with invalid credentials:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the invalid credentials of email and password. 
+      \item \textbf{Output:} An error thrown up by the signin function.
+      \item \textbf{Test Derivation:} Verifies that the signin function correctly throws an error when the invalid credentials are provided.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will simulate the input of invalid email and password into the signin function. The system will be monitored to ensure that an error message is displayed.
+    \end{itemize}
+\end{enumerate}
 
-% How test will be performed: 
+\subsubsection{Data Layer Module}
 
-% \item{...\\}
-    
-% \end{enumerate}
+This subsection covers Data Layer Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. The Data Layer Module is responsible for managing the storage and retrieval of data, including patient records and healthcare professionals records. The tests in this section were selected to validate the core functionalities of adding, updating, deleting, and retrieving data. They encompass both typical user interactions and potential error conditions to ensure that the data layer operates reliably and securely.
 
-% \subsubsection{Module 2}
+\textbf{Control:} Automatic\\ 
+\textbf{Initial State:} Provides mock data of healthcare professionals, healthcare networks and patients.\\ 
+ \textbf{Test Case Derivation:} The expected behavior is derived from the correct functionality of onboarding, updating, and removing the healthcare networks, healthcare professionals and patient records.\\ 
+\textbf{Test Procedure:} The tests are performed as follows:
+\begin{enumerate}
+  \item Adding valid documents to the database:
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
+      \item \textbf{Output:} Successful addition of valid information of healthcare networks, healthcare professionals and patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that addHealthcareProfessional, addHospital and addPatient functions work correctly ensuring proper document creation. The functions addHealthcareProfessional and addHospital add the documents if they don't exist in the database. However, if they do, then these functions update the data in those documents. The function addPatient is only used to add a new patient record in the database.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will call the addHealthcareProfessional, addHospital, and addPatient functions with valid mock data. The database will be checked to confirm that the records have been added successfully.
+    \end{itemize}
 
-% ...
+  \item No duplicate addition of patient document in the system:
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the patients are given as input.  
+      \item \textbf{Output:} No specific output is returned by the test function itself. However, the test asserts a specific state in the database. 
+      \item \textbf{Test Derivation:} Verifies that the addPatient function correctly handles attempts to add duplicate patient records. It ensures that only one patient record is created even if the addPatient function is called multiple times.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will call the addPatient function multiple times with the same mock data. The database will be checked to ensure that only one record exists.
+    \end{itemize}
+
+    Note: Test for invalid document format: \\ 
+    Since, we have implemented validate input function in the UI module, this ensures that no invalid output is taken by the system. In addition to this, TypeScript has type checking on the parameters therefore invalid objects cannot be passed.
+
+  \item Deleting existing documents from the database:
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
+      \item \textbf{Output:} Successful deletion of valid information of healthcare networks, healthcare professionals and patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that deleteHealthCareProfessional, deleteHospital and deletePatient functions work correctly ensuring proper document deletion.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will call the deleteHealthCareProfessional, deleteHospital, and deletePatient functions with valid mock data. The database will be checked to confirm that the records have been deleted successfully.
+    \end{itemize}
+
+  \item Updating existing patient documents in the database:
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the patients are given as input.  
+      \item \textbf{Output:} Successful update of valid information of the patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that updatePatient function works correctly ensuring proper patient record update.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will call the updatePatient function with valid mock data. The database will be checked to confirm that the record has been updated successfully.
+    \end{itemize}
+
+  \item Retrieve correct existing document:
+    \begin{itemize}
+      \item \textbf{Input:} Mock id of the patients are given as input.  
+      \item \textbf{Output:} Retrieval of the correct patient object from the database. 
+      \item \textbf{Test Derivation:} Verifies that the getPatient function correctly retrieves an existing patient document from the database after providing patient id.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will call the getPatient function with a valid patient id and check that the returned object matches the expected patient data.
+    \end{itemize}
+
+  \item Retrieve non-existing document:
+    \begin{itemize}
+      \item \textbf{Input:} Non-existent mock id of the patients are given as input.  
+      \item \textbf{Output:} Returns null. 
+      \item \textbf{Test Derivation:} Verifies that the getPatient function correctly handles situations when a non-existing patient document from the database is requested to retrieve after providing a non-existing patient id.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will call the getPatient function with a non-existing patient id or invalid patient id and check that the returned value is null.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Administrator View Module and Patient View Module}
+
+This subsection covers Administrator View Module and Patient View Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. These modules provide the user interface for both administrators and patients. The tests included in this section were used to verify correct behaviour of different functions implemented to verify input in different fields ensuring that the system correctly rejects an invalid input by the user and cover all edge cases.
+
+\textbf{Control:} Automatic\\ 
+\textbf{Initial State:} No specific initialization is required as tests solely focus on validating fields.\\ 
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct implementation of data validation rules and age calculation logic, ensuring accurate identification of invalid input, acceptance of valid input, and precise calculation of age based on provided dates.\\ 
+\textbf{Test Procedure:} The tests are performed as follows:\\
+\begin{enumerate}
+  \item Should return appropriate error for invalid field input:
+    \begin{itemize}
+      \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
+      \item \textbf{Output:} Returns appropriate error messages on receiving invalid input.
+      \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies invalid input values for different field types. It ensures that the function returns appropriate error messages for invalid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will input various invalid values for different field types and check that the appropriate error messages are returned.
+    \end{itemize}
+
+  \item Should return an empty string for valid field input:
+    \begin{itemize}
+      \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
+      \item \textbf{Output:} Returns an empty string on receiving valid input.
+      \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies valid input values for different field types. It ensures that the function returns an empty string for valid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will input various valid values for different field types and check that an empty string is returned for the error.
+    \end{itemize}
+
+  \item Correct calculation of age:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth.    
+      \item \textbf{Output:} Returns a number representing the calculated age.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly calculates the age for a given date of birth.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will input a valid date of birth and check that the returned age is correct.
+    \end{itemize}
+
+  \item Calculation of age for future dates:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth in the future.    
+      \item \textbf{Output:} Returns 0.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth in the future.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will input a future date of birth and check that the returned age is 0.
+    \end{itemize}
+
+  \item Calculation of age for the present date:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth representing today's date.    
+      \item \textbf{Output:} Returns 0.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth with today's date.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will input today's date as the date of birth and check that the returned age is 0.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Diagnosis and Treatment Plan Prediction Module}
+
+This subsection covers Diagnosis and Treatment Plan Prediction Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. This module is responsible for providing diagnosis and treatment plan based on the transcribed text from the patient doctor interaction. The tests below were selected to verify the correctness and accuracy of the prediction based on the given context. However, these tests are just preliminary analysis; further stress testing would be required to verify the accuracy of the predictions.
+
+\textbf{Control:} Automatic\\ 
+\textbf{Initial State:} A predefined set of conversation is used for testing. It also assumes that Open API Key is configured correctly.\\ 
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses. We will review the manual test by our supervisor.\\ 
+\textbf{Test Procedure:} The tests are performed as follows:\\
+
+\begin{enumerate}
+  \item Confidence score test:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the list of strings which represent patient conversation.   
+      \item \textbf{Output:} There is no direct output. This test asserts a condition based on the number of successful evaluations.
+      \item \textbf{Test Derivation:} Verifies that the testConfidence function correctly sends each conversation to the API endpoint. The test calculates the success rate based on the number of relevant responses and asserts that the success rate is above a certain threshold (0.85). Due to the output of this test not being deterministic, we have used a strategy that involves using a third independent AI agent to evaluate the confidence. This allows for an initial benchmark of the confidence on the service's performance. 
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will send the predefined text to the API endpoint and verify if the the success rate of the responses meets the specified threshold.
+    \end{itemize}
+
+  \item Valid data input test:
+    \begin{itemize}
+      \item \textbf{Input:} A dictionary that contains a valid transcription of a patient conversation. 
+      \item \textbf{Output:} Returns a response object from the API endpoint.
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes valid input data. It sends POST request with valid transcription to the API endpoint and asserts that the response status code is 200, indicating successful processing of the input.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will send a POST request with valid transcription data to the API endpoint and check that the response status code is 200.
+    \end{itemize}
+
+  \item Invalid data input test:
+    \begin{itemize}
+      \item \textbf{Input:} A dictionary that contains an empty string of invalid transcription of a patient conversation.    
+      \item \textbf{Output:} Returns a response object from the API endpoint.
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes invalid input data. It sends POST request with invalid and missing transcription to the API endpoint and asserts that the response status code is 400, successful identification of invalid input.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will send a POST request with invalid transcription data to the API endpoint and check that the response status code is 400.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Transcription Module}
+
+This subsection covers Transcription Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. The Transcription Module is responsible for converting audio input from patient interactions into text format. The tests in this section were selected to verify the accuracy and reliability of the transcription process. The tests include both normal and edge scenarios to ensure that the system can handle a range of valid and invalid inputs effectively and meet the critical need for accurate transcriptions in healthcare settings.
+
+\textbf{Control:} Manual\\
+\textbf{Initial State:} The audio files are provided as input for the tests and Socket.IO Server is running at a specified host.\\
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of a Socket.IO server that receives audio chunks, performs transcription, and emits transcription results or errors. The tests ensure that the server correctly transcribes valid audio data to match the asserted string, handles invalid audio input, and emits appropriate events with accurate transcription results or error indicators.\\
+\textbf{Test Procedure:} The tests are performed as follows:\\
+
+\begin{enumerate}
+  \item Test for valid audio file:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the path to the valid audio file.   
+      \item \textbf{Output:} Asserts the transcribed text equal to the string containing expected output.
+      \item \textbf{Test Derivation:} Verifies the audio transcription functionality of the Socket.IO server. It establishes a connection with the server and sends the audio data in chunks and then emits the transcribed text. 
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will connect to the Socket.IO server, send the valid audio file, and check that the emitted transcribed text matches the expected string.
+    \end{itemize}
+
+  \item Test for invalid audio file:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the path to the invalid audio file. 
+      \item \textbf{Output:} Returns an empty string.  
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles invalid input data. It establishes the connection with the server and asserts that transcription\_text remains empty indicating that the invalid input is correctly handled.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will connect to the Socket.IO server, send the invalid audio file, and check that the emitted transcribed text is empty.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Classification Module}
+
+This subsection covers Classification Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. The Classification Module processes the transcribed text to automatically fill patients charts with appropriate values for each field such as symptoms, allergies, and medications. The tests included in this section were chosen to assess whether the service can accurately classify and extract relevant data ensuring that it meets the necessary performance and accuracy standards.
+
+\textbf{Control:} Automatic\\
+\textbf{Initial State:} A list of pre-defined conversation containing patient's symptoms, allergies, medications is initialized.\\
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient conversations, extracts key information (symptoms, reason for visit, allergies, current medications), and provides relevant responses. The tests ensure that the API accurately extracts information from various conversation formats, handles both valid and invalid input data, and maintains a high level of confidence in generating appropriate responses.\\
+\textbf{Test Procedure:} The tests are performed as follows:\\
+
+\begin{enumerate}
+  \item Confidence score test:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the list of strings representing the patient conversation consisting of medications, allergies and current medications.   
+      \item \textbf{Output:} There is no direct output. This test asserts a condition based on the number of successful evaluations.
+      \item \textbf{Test Derivation:} Verifies the confidence of the API in correctly extracting information from patient conversations. It iterates through the list sending conversation to the API endpoint. We will test it manually with our supervisor. Due to the output of this test not being deterministic, we have used a strategy that involves using a third independent AI agent to evaluate the confidence. This allows for an initial benchmark of the confidence on the service's performance.  
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will send the predefined conversations to the API endpoint and monitor the success rate of the responses.
+    \end{itemize}
+
+  \item Test for valid input:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the valid patient transcription. 
+      \item \textbf{Output:} Returns a response object from the API endpoint. 
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes valid input data. It sends POST request with valid input to the API endpoint and asserts that the response status code is 200, indicating successful processing of the input.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will send a POST request with valid input data to the API endpoint and check that the response status code is 200.
+    \end{itemize}
+
+    \item Test for invalid input:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is an empty dictionary. 
+      \item \textbf{Output:} Returns a response object from the API endpoint. 
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles empty input data. It sends POST request with empty input to the API endpoint and asserts that the response status code is 400, indicating successful processing of the input.
+      \item \textbf{How test will be performed:} This test is automated and will be executed by running the unit test suite, which will send a POST request with empty input data to the API endpoint and check that the response status code is 400.
+    \end{itemize}
+\end{enumerate}
 
 \newpage
 				
@@ -1175,10 +1301,10 @@ graduate attribute of Lifelong Learning.
   There are obstacles in any team project that must be overcome for it to proceed successfully. To ensure seamless operations, we had to develop a strategy for contributions. We had to collectively make a list of tests that are needed to be conducted for functional requirements, non-functional requirements, and safety and security requirements. We also needed to create a schedule to contribute to the template and review each other's work in the best way possible.
 
   \item What knowledge and skills will the team collectively need to acquire to successfully complete the verification and validation of your project? Examples of possible knowledge and skills include dynamic testing knowledge, static testing knowledge, specific tool usage, Valgrind etc.  You should look to identify at least one item for each team member.\\
-  As different abilities are added to the overall development plan, the project progresses more quickly thanks to the diversified knowledge of the team members. Technical expertise such as static and dynamic testing knowledge are very helpful to come up with a successful verification and validation plan for our project. Knowledge about how the external libraries can be used is also an asset for validating the system. Finally, being able to work on backend programming with an understanding of different server-side technologies, like Python, Java, and React.js will be helpful in creating a dynamic database that secures patient data.
+  As different abilities are added to the overall development plan, the project progresses more quickly thanks to the diversified knowledge of the team members. Technical expertise such as static and dynamic testing knowledge are very helpful to come up with a successful verification and validation plan for our project. Knowledge about how the external libraries can be used is also an asset for validating the system. Finally, being able to work on backend programming with an understanding of different server-side technologies, like Python, and React.js will be helpful in creating a dynamic database that secures patient data.
 
   \item For each of the knowledge areas and skills identified in the previous question, what are at least two approaches to acquiring the knowledge or mastering the skill?  Of the identified approaches, which will each team member pursue, and why did they make this choice?\\
-  One can use a variety of resources to learn Java from Spring and Python from Flask to become effective in backend programming. With these resources, developers can gain practical experience by building web applications that offer them flexibility. Using LeetCode to practice coding skills is an additional strategy. This allows users to modify the difficulty of the problems and proceed with their solution. Moreover, setting goals and taking regular pauses between tasks might help with time management and allow one to work more effectively. It’s critical that each member of the team grasp every talent for everyone to be moving at the same speed. This is because it’s a fantastic chance to learn and implement it in practical situations.
+  One can use a variety of resources to learn Python from Flask to become effective in backend programming. With these resources, developers can gain practical experience by building web applications that offer them flexibility. Using LeetCode to practice coding skills is an additional strategy. This allows users to modify the difficulty of the problems and proceed with their solution. Moreover, setting goals and taking regular pauses between tasks might help with time management and allow one to work more effectively. It's critical that each member of the team grasp every talent for everyone to be moving at the same speed. This is because it's a fantastic chance to learn and implement it in practical situations.
 \end{enumerate}
 
 \end{document}

@@ -140,8 +140,8 @@ The system will redirect you to different interfaces based on your selected role
 \subsubsection{Admin Registration}
 \begin{itemize}
 \item Complete the sign-up form with required admin information.
-\item Include network administrator credentials and security information.
-\item Submit application for administrative access.
+\item Include network administrator credentials.
+\item Click "Sign Up" for administrative access.
 \end{itemize}
 
 \subsubsection{Administration Dashboard}
@@ -152,11 +152,9 @@ The system will redirect you to different interfaces based on your selected role
 \label{fig:admin_dashboard}
 \end{figure}
 
-The Administration Dashboard provides a comprehensive overview of system operations, including:
+The Administration Dashboard provides a comprehensive overview of network and provide network statistics, including:
 \begin{itemize}
-\item User management controls.
-\item System performance metrics.
-\item Hospital network configuration.
+\item Account management tools.
 \item Employee management tools.
 \item Hospital management tools.
 \end{itemize}
@@ -174,8 +172,8 @@ The Healthcare Professional Dashboard provides an intuitive interface for managi
 \item Daily appointment schedule overview.
 \item Patient visit statistics and trends.
 \item Quick access to patient records.
-\item Upcoming appointment notifications.
-\item Performance metrics and visit analytics.
+\item Appointment management tools.
+\item Account management tools.
 \end{itemize}
 
 \subsubsection{Patient Management}
@@ -183,56 +181,61 @@ The Healthcare Professional Dashboard provides an intuitive interface for managi
 \toprule
 \textbf{Action} & \textbf{Steps} \\
 \midrule
-Add Patient & Click "+ Add Patient", Complete Form, "Create Patient". \\
-View Records & Search for patient, "View Record" \\
+Add Patient & Navigate to "Patients" tab on navbar, Click "+ Add Patient", Complete Form, "Create Patient". \\
+View Records & Search for patient, Click "View Record" \\
 Edit Information & Click any field, "Edit", Make Changes, "Save" \\
-Remove Patient & Open Patient Records, "Delete Profile", Confirm Deletion \\
+Remove Patient & Open Patient Records, Click "Delete Profile", Confirm Deletion \\
 \bottomrule
 \end{longtable}
 
-\subsection{Voice-to-Text Transcription}
+\subsubsection{Patient Record Tabs}
+Once inside a patient's record, you will find several tabs on the left sidebar. Each tab serves a specific purpose in organizing and managing patient data:
+
+\begin{itemize}
+    \item \textbf{Profile Information} – Displays the patient’s personal details (e.g., name, age, contact info). Click "Edit" to update any field.
+    \item \textbf{Medical History} – Shows medical history, allergies, family history, and current medication. Editable via the "Edit" button.
+    \item \textbf{Consultation Notes} – Used to add SOAP notes for each consultation. Click "Add New" to open the voice-enabled SOAP note interface.
+    \item \textbf{Lab Reports} – Upload and view  lab documents. Use the "Add New" button to upload a new report.
+    \item \textbf{Prescriptions} – Manage prescription plans. Click "Add New" to generate a medication plan for the patient.
+    \item \textbf{Referrals} – Create and view referrals to other services or specialists (e.g., blood test, ultrasound). Click "Add New" and select the referral type from the drop-down.
+\end{itemize}
+
+Each tab is designed to streamline the documentation process and ensure structured, accessible patient data.
+
+
+\subsection{Add a SOAP Note}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{vtt.png}
-\caption{Consultation Notes}
-\label{fig:Consultation Notes}
+\caption{SOAP Note}
+\label{fig:SOAP Note}
 \end{figure}
 
-RapidCare's voice dictation feature allows you to automatically transcribe patient-provider conversations:
+RapidCare provides an end-to-end smart documentation flow under the \textbf{Consultation Notes} tab, allowing healthcare professionals to streamline SOAP note creation with AI-powered tools. Here’s how the process works:
 
 \begin{enumerate}
-\item Open the relevant patient record.
-\item Click "Start Recording" to initiate dictation.
-\item Speak clearly to record your conversation with the patient.
-\item When finished, click the "Stop Recording".
-\item Review the transcribed text for accuracy.
-\item Edit any inaccuracies if needed.
-\item Click "Save" to save the transcription to the patient's chart.
+    \item Log in as a healthcare professional and navigate to the \textbf{Patients} tab on the navigation bar.
+    \item Search for and select the patient by clicking \textbf{View Record}.
+    \item Inside the patient’s record, open the \textbf{Consultation Notes} tab from the sidebar.
+    \item Click \textbf{Add New} to initiate a SOAP note. A structured pop-up will appear.
+    \item Press \textbf{Start Recording} to begin capturing the patient-provider conversation.
+    \item After the consultation, click \textbf{Stop Recording}. The voice-to-text microservice transcribes the recorded audio in real time.
+    \item Simultaneously, the \textbf{Text Classification} microservice processes the transcription:
+    \begin{itemize}
+        \item It identifies symptoms, conditions, and medical terminology.
+        \item Extracts key medical entities and organizes them into structured SOAP sections.
+    \end{itemize}
+    \item The transcribed and classified text is then passed to the \textbf{Diagnosis Suggestion Engine}, which:
+    \begin{itemize}
+        \item Suggests possible diagnoses based on the symptoms mentioned.
+        \item Recommends a treatment plan, including medications and next steps.
+    \end{itemize}
+    \item The healthcare professional can review and modify any part of the classified text, diagnosis, or treatment plan.
+    \item Once satisfied, click \textbf{Save} to finalize and store the SOAP note in the patient’s chart.
 \end{enumerate}
 
-\subsection{Text Classification}
-After transcribing the patient conversation, RapidCare's text classification model processes the content:
-\begin{enumerate}
-\item The system automatically analyzes the transcribed text using natural language processing.
-\item Key symptoms, conditions, and medical terminology are identified and highlighted.
-\item The system categorizes the content into relevant sections.
-\item Important medical entities are extracted and organized in a structured format.
-\item The processed text is prepared for the diagnosis suggestion engine.
-\item The structured data is stored alongside the raw transcription for comprehensive record-keeping.
-\end{enumerate}
-
-\subsection{Diagnosis and Medicine Suggestions}
-After transcribing your conversation with a patient:
-
-\begin{enumerate}
-\item The system will automatically analyze the transcribed text.
-\item RapidCare will suggest possible diagnoses based on the symptoms mentioned.
-\item Review the diagnosis provided.
-\item A plan is provided including medication and future plan.
-\item Review the diagnosis suggestions and plan and make any necessary modifications.
-\item Confirm the diagnosis and treatment plan to add to the patient's chart by clicking "Save".
-\end{enumerate}
+This automated workflow significantly reduces manual input, improves accuracy, and accelerates clinical documentation.
 
 \subsection{AI Assist Tool}
 
@@ -244,8 +247,11 @@ AI Assist feature empowers healthcare professionals to quickly gather relevant i
 \item Ask any question related to the patient's data.
 \item The AI will rapidly analyze the data and provide a concise response. 
 \item Review the AI-generated response and incorporate them into the clinical decision-making process. 
-\item Click the "X" button to get out of AI Assist.
+\item Click the "X" button to exit the AI Assist panel.
 \end{enumerate}
+
+AI Assist enhances the decision-making process by surfacing relevant insights without requiring manual review of lengthy records.
+
 
 \subsection{Managing Hospitals}
 For hospital administrators:
@@ -283,8 +289,6 @@ For hospital administrators:
 \item Confirm the deletion when prompted.
 \end{enumerate}
 
-\newpage
-
 \subsection{Managing Healthcare Professionals}
 For hospital administrators:
 
@@ -298,10 +302,19 @@ For hospital administrators:
 \subsubsection{Adding Healthcare Professionals}
 \begin{enumerate}
 \item Navigate to "Employees".
-\item Click "Add Healthcare Professional".
+\item Click "Add New Employee".
 \item Complete all required fields.
 \item Set up initial credentials.
 \item Click "Save" to add the professional.
+\end{enumerate}
+
+\subsubsection{Filtering Employees by Hospital}
+\begin{enumerate}
+    \item Navigate to "Employees".
+    \item Click on the drop-down labeled "Filter by Hospital".
+    \item Select a hospital from the list.
+    \item The employee list will automatically update to display only employees associated with the selected hospital.
+    \item To reset the view, select "All Hospitals" from the drop-down.
 \end{enumerate}
 
 \subsubsection{Updating Employee Information}
@@ -317,9 +330,64 @@ For hospital administrators:
 \begin{enumerate}
 \item Navigate to "Employees".
 \item Search for the employee.
-\item Select the professional to remove.
+\item Select the employee to remove.
 \item Click "Delete" button.
 \item Confirm the deletion when prompted.
+\end{enumerate}
+
+\subsection{Manage Administrator Network Account}
+For hospital administrators:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{account.png}
+\caption{Adminstrator Account Management}
+\label{fig:Adminstrator Account Management}
+\end{figure}
+
+\subsubsection{Editing Account Information}
+\begin{enumerate}
+    \item Navigate to "Account".
+    \item Click the "Edit Information" button.
+    \item Modify any necessary details.
+    \item Click "Save" to apply changes.
+\end{enumerate}
+
+\subsubsection{Logging Out}
+\begin{enumerate}
+    \item Navigate to "Account".
+    \item Click the "Logout" button.
+\end{enumerate}
+
+\subsubsection{Deleting Your Account}
+\begin{enumerate}
+    \item Navigate to "Account".
+    \item Click the "Delete Account" button.
+    \item Confirm the deletion when prompted. This action is irreversible and will permanently remove your account from the system.
+\end{enumerate}
+
+\subsection{Manage Healthcare Professional Account}
+For healthcare professionals:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{employee_account.png}
+\caption{Employee Account Management}
+\label{fig:Employee Account Management}
+\end{figure}
+
+\subsubsection{Editing Account Information}
+\begin{enumerate}
+    \item Navigate to "Account".
+    \item Click the "Edit Information" button.
+    \item Modify any necessary account details.
+    \item Click "Save" to apply changes.
+\end{enumerate}
+
+\subsubsection{Logging Out}
+\begin{enumerate}
+    \item Navigate to "Account".
+    \item Click the "Logout" button.
 \end{enumerate}
 
 

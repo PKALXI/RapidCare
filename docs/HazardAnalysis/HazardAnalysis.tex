@@ -184,9 +184,8 @@ To identify potential hazards, we first define the system boundaries and break i
     This module is responsible for all of the predictions that will occur based on the medical notes.
 
     \begin{itemize}
-        \item PR1: Diagnosis Prediction: The prediction module is responsible for using the clinical notes to provide some diagnosis predictions. The goal of this module is to associate symptoms with common diagnoses. This allows for a lateral view of possible patient diagnoses.
-        \item PR2: Plan Prediction: The prediction module is responsible for using the clinical notes to provide some treatment plan predictions.
-        \item PR3: AI assist: If the healthcare professional wants to review patient previous visits and health conditions, it can be done by running a query in AI assist which will fetch the requested information from the system.  
+        \item PR1: Diagnosis and treatment plan prediction: The prediction module is responsible for using the clinical notes to provide some diagnosis and treatment plan predictions.
+        \item PR2: AI assist: If the healthcare professional wants to review patient previous visits and health conditions, it can be done by running a query in AI assist which will fetch the requested information from the system.  
     \end{itemize}
     
     Potential Hazards:
@@ -275,8 +274,8 @@ The following FMEA table lists all potential hazards related to identified syste
     \item [IR\refstepcounter{irnum}\theirnum \label{IR_ErrorDetection}:] The system should provide real-time error detection based on validation checks and provide feedback to users.\\
     \textbf{Rationale:}To prevent user errors and incorrect output, it is vital to check the integrity of user input. Moreover, in the event of an error, the system should communicate its current state, how the input has been interpreted, and any related errors to the user.
 
-    \item [IR\refstepcounter{irnum}\theirnum \label{IR_ValidationScore}:] The system should provide confidence scores on any prediction. Additionally, after each model training session, the validation accuracy score must be outputted.\\
-    \textbf{Rationale:} To understand the bias in any data and in the model. Using validation scores for training and test sets, the model can be evaluated to detect underfitting and overfitting. Additionally, adding model confidence scores will allow healthcare professionals to see how confident the model is with the scores.
+    \item [IR\refstepcounter{irnum}\theirnum \label{IR_ValidationScore}:] The system should provide confidence scores on any prediction.\\
+    \textbf{Rationale:} The system should provide results from context and only context such that responses can be verified and hallucinations can be detected. Additionally, this will allow ease of tracebility between accepted medical documenation. Adding model confidence scores will allow healthcare professionals to see how confident the model is with the scores.
     
     \item [IR\refstepcounter{irnum}\theirnum \label{IR_DuplicateRecordDetection}:] The system should provide duplicate record detection for the record in various databases of the system.\\
     \textbf{Rationale:} To prevent confusion and medical errors resulting from duplicate entries, the system should validate and flag potential duplicate records before they are created.

@@ -272,7 +272,7 @@ This subsection covers FR11 from of the \href{https://github.com/Inreet-Kaur/cap
 
 \subsection{Validate output of correct diagnosis and treatment plan} \label{section:3.6}
 
-This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to create predictions on the diagnosis and treatment plan with a high accuracy and confidence.
+This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to create predictions on the diagnosis and treatment plan with a high accuracy and based on the context.
 
 \begin{enumerate}
 
@@ -280,7 +280,7 @@ This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet
   
   Initial State: Patient's blank chart is present, and a transcription of the Patient-Healthcare Professional conversation is present.
 
-  Input: Correct and complete input data where all the symptoms fields of the chart are filled out.
+  Input: Transcribed text from patient-doctor interaction.
 
   Expected Output: A suggestion on what the diagnosis should be based on the symptoms, then based on the diagnosis provide possible plan of treatment.
 

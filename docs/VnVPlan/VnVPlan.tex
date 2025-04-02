@@ -822,9 +822,9 @@ How test will be performed: When the system is deployed the model input will be 
 
     Input: Audio conversation between the patient and healthcare professional.
 
-    Output: The text transcribed from the input data matches the conversation with minimal to no interference.
+    Output: The transcribed text from the input data matches the conversation with minimal to no interference.
 
-    How test will be performed: The test controller will have a new data input and check if the system is able to validate and classify the data accurately. The controller will verify that the generated text matches the spoken conversation.
+    How test will be performed: The test controller will have a new data input and check if the system is able to validate and classify the data accurately. The controller will verify that the generated text matches the spoken conversation with 90\% percent accuracy. The accuracy will be assessed by comparing the system's output to the human transcription and calculating the percentage of correct words.
 
 \end{enumerate}
 
@@ -931,8 +931,6 @@ How test will be performed: When the system is deployed the model input will be 
 
 \section {Unit Test Description}
 
-To be completed in Rev 1.
-
 \subsection{Unit Testing Scope}
 
 % \wss{What modules are outside of the scope.  If there are modules that are
@@ -940,6 +938,14 @@ To be completed in Rev 1.
 %   verifying them.  There may also be modules that are part of your software, but
 %   have a lower priority for verification than others.  If this is the case,
 %   explain your rationale for the ranking of module importance.}
+
+\section{Unit Testing Scope}
+
+ While comprehensive testing will e performed on several critical modules, certain modules like Serivce Layer module, Patient and Administrator model modules, and views in Patient View and Adminstrator view modules will not tested. This is due to various reasons.\\
+ Service Layer Module was not included in the unit testing scope as it used primarily for routing interactions and focus was placed on testing the core functionalities rather than the service layer, which is expected to be stable and well-defined.\\
+ Patient Model and Administrator Model Modules were not included in unit testing scope as they just provide the data structure for for various objects. The tests for integrity of the data are included in the Data Layer Module tests.\\
+UI Components in Administrator View and Patient View Modules were not included in unit testing. This is because user acceptance testing and usability testing would provide better insights for overall user experience and interaction with the system can be evaluated in a more holistic manner.\\
+By prioritizing the verification of core functionalities, we aimed to ensure that the most essential aspects of the system were thoroughly tested.
 
 \subsection{Tests for Functional Requirements}
 
@@ -954,45 +960,258 @@ To be completed in Rev 1.
 %   perspective and from a white box perspective.  Explain to the reader how the
 %   tests were selected.}
 
-% \begin{enumerate}
+This section will include unit tests for functional requirements organised by different modules Details of the functional requiremnts can be found in \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf}{SRS} and details about different modules can be found in \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS} and \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftArchitecture/MG.pdf}{MG}.
 
-% \item{test-id1\\}
+\subsubsection{User Authentication Module}
 
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-%   be automatic}
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: \wss{The expected result for the given inputs}
+This subsection covers User Authentication Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. This module focuses on the authentication mechanism, including secure storage and validation of user credentials, and session management. The tests outlined below are designed to verify both the functionality and security of the authentication mechanisms. These tests were selected based on the situations users will encounter under normal conditions and also considers potential edge cases to ensure comprehensive coverage of the authentication functionality.
 
-% Test Case Derivation: \wss{Justify the expected value given in the Output field}
+\textbf{Control:} Automatic \\ 
+\textbf{Initial State:} The default email and password are initialized as variables and given a default value.\\ 
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct registration and login functionality of Firebase Authentication, ensuring valid user creation and authentication processes, as well as error handling for invalid credentials.\\ 
+\textbf{Test Procedure:} The tests are performed as follows:
+\begin{enumerate}
+  \item Sign up using valid credentials:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the valid credentials of email and password.
+      \item \textbf{Output:} The user object is returned by the signup function.
+      \item \textbf{Test Derivation:} Verifies that the signup function correctly works and creates a new user account when the valid credentials are provided.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
 
-% How test will be performed: 
-					
-% \item{test-id2\\}
+  \item Sign up throwing errors with invalid credentials:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the invalid credentials of email and password.
+      \item \textbf{Output:} An error thrown up by the signup function.
+      \item \textbf{Test Derivation:} Verifies that the signup function correctly throws error when the invalid credentials are provided.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
 
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-%   be automatic}
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: \wss{The expected result for the given inputs}
+  \item Login using valid credentials:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the valid credentials of email and password. 
+      \item \textbf{Output:} The user object is returned by the signin function.
+      \item \textbf{Test Derivation:} Verifies that the signin function correctly authenticates the user when valid credentials are provided.
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
 
-% Test Case Derivation: \wss{Justify the expected value given in the Output field}
+  \item Login throwing errors with invalid credentials:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test are the invalid credentials of email and password. 
+      \item \textbf{Output:} An error thrown up by the signin function.
+      \item \textbf{Test Derivation:} Verifies that the signin function correctly throws error when the invalid credentials are provided.
+      \item \textbf{How test will be performed:} 
+  \end{itemize}
+\end{enumerate}
 
-% How test will be performed: 
+\subsubsection{Data Layer Module}
 
-% \item{...\\}
-    
-% \end{enumerate}
+This subsection covers Data Layer Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. The Data Layer Module is responsible for managing the storage and retrieval of data, including patient records and healthcare professionals records. The tests in this section were selected to validate the core functionalities of adding, updating, deleting, and retrieving data. They encompass both typical user interactions and potential error conditions to ensure that the data layer operates reliably and securely.
 
-% \subsubsection{Module 2}
+\textbf{Control:} Automatic\\ 
+\textbf{Initial State:} Provides mock data of healthcare professionals, healthcare networks and patients.\\ 
+ \textbf{Test Case Derivation:} The expected behavior is derived from the correct functionality of onboarding, updating, and removing the healthcare networks, healthcare professionals and patient records.\\ 
+\textbf{Test Procedure:} The tests are performed as follows:
+\begin{enumerate}
+  \item Adding valid documents to the database:
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
+      \item \textbf{Output:} Successful addition of valid information of healthcare networks, healthcare professionals and patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that addHealthcareProfessional, addHospital and addPatient functions work correctly ensuring proper document creation. The functions addHealthcareProfessional and addHospital add the documents if they don't exist in the database. However, if they do, then these functions update the data in those documents. The function addPatient is only used to add a new patient record in the database.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
 
-% ...
+  \item No duplicate addition of patient document in the system:
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the patients are given as input.  
+      \item \textbf{Output:} No specific output is returned by the test function itself. However, the test asserts a specific state in the database. 
+      \item \textbf{Test Derivation:} Verifies that the addPatient function correctly handles attempts to add duplicate patient records. It ensures that only one patient record is created even if the addPatient function is called multiple times.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+
+    Note: Test for invalid document format: \\ 
+    Since, we have implemented validate input function in the UI module, this ensures that no invalid output is taken by the system. In addition to this, TypeScript has type checking on the parameters therefore invalid objects cannot be passed.
+
+  \item Deleting existing documents from the database:
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the healthcare professionals, healthcare networks and patients are given as input.  
+      \item \textbf{Output:} Successful deletion of valid information of healthcare networks, healthcare professionals and patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that deleteHealthCareProfessional, deleteHospital and deletePatient functions work correctly ensuring proper document deletion.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+
+  \item Updating existing patient documents in the database:
+    \begin{itemize}
+      \item \textbf{Input:} Mock data of the patients are given as input.  
+      \item \textbf{Output:} Successful update of valid information of the patients in the database. 
+      \item \textbf{Test Derivation:} Verifies that updatePatient function works correctly ensuring proper patient record update.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+
+  \item Retrieve correct existing document:
+    \begin{itemize}
+      \item \textbf{Input:} Mock id of the patients are given as input.  
+      \item \textbf{Output:} Retrieval of the correct patient object from the database. 
+      \item \textbf{Test Derivation:} Verifies that the getPatient function correctly retrieves an existing patient document from the database after providing patient id.
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
+
+  \item Retrieve non-existing document:
+    \begin{itemize}
+      \item \textbf{Input:} Non-existent mock id of the patients are given as input.  
+      \item \textbf{Output:} Returns null. 
+      \item \textbf{Test Derivation:} Verifies that the getPatient function correctly handles situations when a non-existing patient document from the database is requested to retrieve after providing a non-existing patient id.
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Administrator View Module and Patient View Module}
+
+This subsection covers Administrator View Module and Patient View Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. These modules provide the user interface for both administrators and patients. The tests included in this section were used to verify correct behaviour of different functions implemented to verify input in different fields ensuring that the system correctly rejects an invalid input by the user and cover all edge cases.
+
+\textbf{Control:} Automatic\\ 
+\textbf{Initial State:} No specific initialization is required as tests solely focus on validating fields.\\ 
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct implementation of data validation rules and age calculation logic, ensuring accurate identification of invalid input, acceptance of valid input, and precise calculation of age based on provided dates.\\ 
+\textbf{Test Procedure:} The tests are performed as follows:\\
+\begin{enumerate}
+  \item Should return appropriate error for invalid field input:
+    \begin{itemize}
+      \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
+      \item \textbf{Output:} Returns appropriate error messages on receiving invalid input.
+      \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies invalid input values for different field types. It ensures that the function returns appropriate error messages for invalid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
+
+  \item Should return an empty string for valid field input:
+    \begin{itemize}
+      \item \textbf{Input:} The inputs for this test are the actual value of the field and a string representing the field type.   
+      \item \textbf{Output:} Returns an empty string on receiving valid input.
+      \item \textbf{Test Derivation:} Verifies that the validateField function correctly identifies valid input values for different field types. It ensures that the function returns an empty string for valid email formats, phone numbers, dates, and numerical values for age, weight, and height.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+
+  \item Correct calculation of age:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth.    
+      \item \textbf{Output:} Returns a number representing the calculated age.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly calculates the age for a given date of birth.
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
+
+  \item Calculation of age for future dates:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth in the future.    
+      \item \textbf{Output:} Returns 0.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth in the future.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+
+  \item Calculation of age for the present date:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the date of birth representing today's date.    
+      \item \textbf{Output:} Returns 0.
+      \item \textbf{Test Derivation:} Verifies that the calculateAge function correctly handles the age for a given date of birth with today's date.
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Diagnosis and Treatment Plan Prediction Module}
+
+This subsection covers Diagnosis and Treatment Plan Prediction Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. This module is responsible for providing diagnosis and treatment plan based on the transcribed text from the patient doctor interaction. The test below were selected to verify the correctness and accuracy of the prediction based on the given context. However, these test are just preliminary analysis further stress testing would be required to verify the accuracy of the predictions.
+
+\textbf{Control:} Automatic\\ 
+\textbf{Initial State:} A predefined set of conversation is used for testing. It also assumes that Open API Key is configured correctly.\\ 
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient inputs and provides relevant responses, ensuring accurate handling of valid and invalid input data, as well as a high confidence level in generating appropriate responses. We will review the manual test by our supervisor.\\ 
+\textbf{Test Procedure:} The tests are performed as follows:\\
+
+\begin{enumerate}
+  \item Confidence score test:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the list of strings which represent patient conversation.   
+      \item \textbf{Output:} There is no direct output. This test asserts a condition based on the number of successful evaluations.
+      \item \textbf{Test Derivation:} Verifies that the testConfidence function correctly sends each conversation to the API endpoint. The test calculates the success rate based on the number of relevant responses and asserts that the success rate is above a certain threshold (0.85). Due to the output of this test not being the deterministic, we have used a strategy that involves using a third independent AI agent to evaluate the confidence. This allows for an initial benchmark of the confidence on the service's performance. 
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
+
+  \item Valid data input test:
+    \begin{itemize}
+      \item \textbf{Input:} A dictionary that contains a valid transcription of a patient conversation. 
+      \item \textbf{Output:} Returns a response object from API endpoint.
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes valid input data. It sends POST request with valid transcription to the API endpoint and asserts that the response status code is 200, indicating successful processing of the input.
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
+
+  \item Invalid data input test:
+    \begin{itemize}
+      \item \textbf{Input:} A dictionary that contains an empty string of invalid transcription of a patient conversation.    
+      \item \textbf{Output:} Returns a response object from API endpoint.
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes invalid input data. It sends POST request with invalid and missing transcription to the API endpoint and asserts that the response status code is 400, successful identification of invalid input.
+      \item \textbf{How test will be performed:} 
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Transcription Module}
+
+This subsection covers Transcription Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. The Transcription Module is responsible for converting audio input from patient interactions into text format. The tests in this section were selected to verify the accuracy and reliability of the transcription process. The tests include both normal and edge scanerios to ensure that the system can handle a range of valid and invalid inputs effectively and meet the critical need for accurate transcriptions in healthcare settings.
+
+\textbf{Control:} Manual\\
+\textbf{Initial State:} The audio files are provided as input for the tests and Socket.IO Server is running at a specified host.\\
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of a Socket.IO server that receives audio chunks, performs transcription, and emits transcription results or errors. The tests ensure that the server correctly transcribes valid audio data to match the asserted string, handles invalid audio input, and emits appropriate events with accurate transcription results or error indicators.\\
+\textbf{Test Procedure:} The tests are performed as follows:\\
+
+\begin{enumerate}
+  \item Test for valid audio file:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the path to the valid audio file.   
+      \item \textbf{Output:} Asserts the transcribed text equal to the string containing expected output.
+      \item \textbf{Test Derivation:} Verifies the audio transcription functionality of the Socket.IO server. It establishes a connection with the server and sends the audio data in chunks and then emits the transcribed text. 
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+
+  \item Test for invalid audio file:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the path to the invalid audio file. 
+      \item \textbf{Output:} Returns an empty string.  
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles invalid input data. It establishes the connection with the server and asserts that transcription\_text remains empty indicating that the invalid input is correctly handled.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Classification Module}
+
+This subsection covers Classification Module from \href{https://github.com/PKALXI/RapidCare/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{MIS}. The Classification Module processes the transcribed text to automatically fill patients charts with appropriate values for each fields such as symptoms, allergies, and medications. The tests included in this section were chosen to assess whether the service can accurately classify and extract relevant data ensuring that it meets the necessary performance and accuracy standards.
+
+\textbf{Control:} Automatic\\
+\textbf{Initial State:} A list of pre-defined conversation containing patient's symptoms, allergies, medications is initialized.\\
+\textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of an API endpoint that processes patient conversations, extracts key information (symptoms, reason for visit, allergies, current medications), and provides relevant responses. The tests ensure that the API accurately extracts information from various conversation formats, handles both valid and invalid input data, and maintains a high level of confidence in generating appropriate responses.\\
+\textbf{Test Procedure:} The tests are performed as follows:\\
+
+\begin{enumerate}
+  \item Confidence score test:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the list of strings representing the patient conversation consisting of medications, allergies and current medications.   
+      \item \textbf{Output:} There is no direct output. This test asserts a condition based on the number of successful evaluations.
+      \item \textbf{Test Derivation:} Verifies the confidence of the API in correctly extracting information from patient conversations. It iterates through the list sending conversation to the API endpoint. We will test it manually with our supervisor. Due to the output of this test not being the deterministic, we have used a strategy that involves using a third independent AI agent to evaluate the confidence. This allows for an initial benchmark of the confidence on the service's performance.  
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+
+  \item Test for valid input:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is the valid patient transcription. 
+      \item \textbf{Output:} Returns a response object from the API endpoint. 
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles and processes valid input data. It sends POST request with valid input to the API endpoint and asserts that the response status code is 200, indicating successful processing of the input.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+
+    \item Test for invalid input:
+    \begin{itemize}
+      \item \textbf{Input:} The input for this test is an empty dictionary. 
+      \item \textbf{Output:} Returns a response object from the API endpoint. 
+      \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles empty input data. It sends POST request with empty input to the API endpoint and asserts that the response status code is 400, indicating successful processing of the input.
+      \item \textbf{How test will be performed:}
+    \end{itemize}
+\end{enumerate}
+
 
 \newpage
 				

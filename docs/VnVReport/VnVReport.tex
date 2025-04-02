@@ -549,7 +549,7 @@ Result: Pass
 
   Input: Audio conversation between the patient and healthcare professional.
 
-  Output: The text transcribed from the input data matches the conversation with minimal to no interference.
+  Output: The transcribed text from the input data matches the conversation with minimal to no interference.
 
   Result: Pass
 
@@ -566,7 +566,7 @@ N/A
 
 \subsubsection{User Authentication Module}
 
-  \textbf{Control:} Manual \\
+  \textbf{Control:} Automatic \\
   \textbf{Initial State:} The default email and password are initialized as variables and given a default value.\\
   \textbf{Test Case Derivation:} The expected behavior is derived from the correct registration and login functionality of Firebase Authentication, ensuring valid user creation and authentication processes, as well as error handling for invalid credentials.\\
   \textbf{Test Procedure:} The tests are performed as follows:
@@ -587,7 +587,7 @@ N/A
         \item \textbf{Result:} Pass 
       \end{itemize}
 
-    \item Sign in using valid credentials:
+    \item Login using valid credentials:
       \begin{itemize}
         \item \textbf{Input:} The input for this test are the valid credentials of email and password. 
         \item \textbf{Output:} The user object is returned by the signin function.
@@ -595,7 +595,7 @@ N/A
         \item \textbf{Result:} Pass 
       \end{itemize}
 
-    \item Sign in throwing errors with invalid credentials:
+    \item Loginin throwing errors with invalid credentials:
       \begin{itemize}
         \item \textbf{Input:} The input for this test are the invalid credentials of email and password. 
         \item \textbf{Output:} An error thrown up by the signin function.
@@ -605,9 +605,9 @@ N/A
   \end{enumerate}
 
 
-\subsubsection{Administrator Account Management Module and Patient Account Management Module}
+\subsubsection{Data Layer Module}
 
-  \textbf{Control:} Manual\\
+  \textbf{Control:} Automatic\\
   \textbf{Initial State:} Provides mock data of healthcare professionals, healthcare networks and patients.\\
   \textbf{Test Case Derivation:} The expected behavior is derived from the correct functionality of onboarding, updating, and removing the healthcare networks, healthcare professionals and patient records.\\
   \textbf{Test Procedure:} The tests are performed as follows:
@@ -666,7 +666,7 @@ N/A
 
 \subsubsection{Administrator View Module and Patient View Module}
 
-  \textbf{Control:} Manual\\
+  \textbf{Control:} Automatic\\
   \textbf{Initial State:} No specific initialization is required as tests solely focus on validating fields.\\
   \textbf{Test Case Derivation:} The expected behavior is derived from the correct implementation of data validation rules and age calculation logic, ensuring accurate identification of invalid input, acceptance of valid input, and precise calculation of age based on provided dates.\\
   \textbf{Test Procedure:} The tests are performed as follows:\\
@@ -715,7 +715,7 @@ N/A
 
   \subsection{Software Decision Module}
 
-  \subsubsection{Diagnosis Prediction Module and Medicine Prediction Module}
+  \subsubsection{Diagnosis and Treatment Plan Prediction Module}
 
   \textbf{Control:} Automatic\\
   \textbf{Initial State:} A predefined set of conversation is used for testing. It also assumes that Open API Key is configured correctly.\\
@@ -750,16 +750,16 @@ N/A
 
   \subsubsection{Transcription Module}
 
-  \textbf{Control:} Manual\\
+  \textbf{Control:} Automatic\\
   \textbf{Initial State:} The audio files are provided as input for the tests and Socket.IO Server is running at a specified host.\\
-  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of a Socket.IO server that receives audio chunks, performs transcription, and emits transcription results or errors. The tests ensure that the server correctly transcribes valid audio data, handles invalid audio input, and emits appropriate events with accurate transcription results or error indicators.\\
+  \textbf{Test Case Derivation:} The expected behavior is derived from the correct functioning of a Socket.IO server that receives audio chunks, performs transcription, and emits transcription results or errors. The tests ensure that the server correctly transcribes valid audio data to match the asserted string, handles invalid audio input, and emits appropriate events with accurate transcription results or error indicators.\\
   \textbf{Test Procedure:} The tests are performed as follows:\\
 
   \begin{enumerate}
     \item Test for valid audio file:
       \begin{itemize}
         \item \textbf{Input:} The input for this test is the path to the valid audio file.   
-        \item \textbf{Output:} Returns a string containing transcribed text from the audio file.
+        \item \textbf{Output:} Asserts the transcribed text equal to the string containing expected output.
         \item \textbf{Test Derivation:} Verifies the audio transcription functionality of the Socket.IO server. It establishes a connection with the server and sends the audio data in chunks and then emits the transcribed text. 
         \item \textbf{Result:} Pass
       \end{itemize}
@@ -767,7 +767,7 @@ N/A
     \item Test for invalid audio file:
       \begin{itemize}
         \item \textbf{Input:} The input for this test is the path to the invalid audio file. 
-        \item \textbf{Output:} Returns an empty string containing transcribed text from the audio file.  
+        \item \textbf{Output:} Returns an empty string.  
         \item \textbf{Test Derivation:} Verifies that the API endpoint correctly handles invalid input data. It establishes the connection with the server and asserts that transcription\_text remains empty indicating that the invalid input is correctly handled.
         \item \textbf{Result:} Pass
       \end{itemize}

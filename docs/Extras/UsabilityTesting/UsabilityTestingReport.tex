@@ -1,4 +1,5 @@
-\documentclass{article}
+\documentclass[12pt, titlepage]{article}
+
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 \usepackage{titlesec}
@@ -90,17 +91,26 @@
     morekeywords={true, false, null}
 }
 
-\title{Usability Testing Report: \progname} 
+
+\input{../../Comments}
+\input{../../Common}
+
+\begin{document}
+
+\title{Usability Testing Report \progname{}} 
 \author{\authname}
 \date{\today}
 	
 \maketitle
 
-\begin{document}
+
 
 \newpage
 
 \tableofcontents
+
+\listoffigures
+
 \newpage
 
 \section{Executive Summary}
@@ -250,6 +260,7 @@ The feedback from the participants were as follows:
     \end{enumerate}
 \end{enumerate}
 
+\newpage
 The figures below show the participants' response for all questions:
 
 \begin{figure}[h]
@@ -266,6 +277,8 @@ The figures below show the participants' response for all questions:
     \label{FigUH}
 \end{figure}
 
+\newpage
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{UserNeeds.png}
@@ -279,6 +292,8 @@ The figures below show the participants' response for all questions:
     \caption{Participant Feedback for UI}
     \label{FigUH}
 \end{figure}
+
+\newpage
 
 \begin{figure}[h]
     \centering
@@ -294,11 +309,11 @@ The figures below show the participants' response for all questions:
     \label{FigUH}
 \end{figure}
 
+\newpage
+
 \subsection{Issues}
 
 There were no technical issues experienced with the software by any of the participants.
-
-\newpage
 
 \section{Recommendations}
 

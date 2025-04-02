@@ -51,6 +51,8 @@
 Jan 9, 2025 & 1.1 & Initial Document\\
 Jan 17,2025 & 1.2 & Revised Document Incorporating Feedback\\
 April 1, 2025 & 1.2 & Further revisions\\
+April 1, 2025 & 1.3 Update to incorporate feedback and changes in requirements of the project.\\
+April 1, 2025 & 1.4 & Updated Tracability matrix. \\
 
 \bottomrule
 \end{tabularx}
@@ -164,7 +166,7 @@ adapted here is called design for change.
 \begin{description}
 \item[\refstepcounter{acnum} \actheacnum \label{acLogin}:] The system should support different authentication methods, such as password-based, biometric login etc.
 \item[\refstepcounter{acnum} \actheacnum \label{acTransSpeed}:] The transcription module needs to be optimized to enhance the transcription speed from audio data to written text in real-time. 
-\item[\refstepcounter{acnum} \actheacnum \label{acPredModules}:] The diagnosis prediction and medicine prediction modules should be updated with the latest medical knowledge based on the new medical research.
+\item[\refstepcounter{acnum} \actheacnum \label{acPredModules}:] The diagnosis and treatment plan prediction module should be updated with the latest medical knowledge based on the new medical research.
 \item[\refstepcounter{acnum} \actheacnum \label{acRealTime}:] The system shall enable real-time streaming of audio input to written text to ensure immediate transcription without delays.   
 \end{description}
 
@@ -270,7 +272,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash (\emph{
 \subsubsection{User Authentication Module (\mref{mUAM})} 
 
 \begin{description}
-\item[Secrets:]The implementation details of the authentication mechanism, including secure storage and validation of user credentials, session management, and MFA logic.
+\item[Secrets:]The implementation details of the authentication mechanism, including secure storage and validation of user credentials, and session management.
 \item[Services:]Authenticates users to grant access to the system based on credentials.
 \item[Implemented By:]Firebase, TypeScript
 \item[Type of Module:]Abstract Object
@@ -395,20 +397,20 @@ This section shows traceability matrices between the modules and the requirement
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-FR1 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
-FR2 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
-FR3 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
-FR4 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
-FR5 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
-FR6 & \mref{mUAM}, \mref{mAVM}, \mref{mAMM}, \mref{mBM}, \mref{mAAMM}\\
+FR1 & \mref{mAVM}, \mref{mBM}, \mref{mAAMM}\\
+FR2 & \mref{mAVM}, \mref{mBM}, \mref{mAAMM}\\
+FR3 & \mref{mAVM}, \mref{mBM}, \mref{mAAMM}\\
+FR4 & \mref{mAVM}, \mref{mBM}, \mref{mAAMM}\\
+FR5 & \mref{mAVM}, \mref{mBM}, \mref{mAAMM}\\
+FR6 & \mref{mAVM}, \mref{mBM}, \mref{mAAMM}\\
 FR7 & \mref{mUAM}, \mref{mBM}, \mref{mAAMM}\\
-FR8 & \mref{mUAM}, \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
-FR9 & \mref{mUAM}, \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
-FR10 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mPAMM}\\
-FR11 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mTM}, \mref{mCM}, \mref{mPAMM}\\
-FR12 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mDPM}, \mref{mPAMM}\\
-FR13 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mMPM}, \mref{mPAMM}\\
-FR14 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mPAMM}\\
+FR8 & \mref{mUAM}, \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mAAMM}\\
+FR9 & \mref{mUAM}, \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mAAMM}\\
+FR10 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mAAMM}\\
+FR11 & \mref{mPVM}, \mref{mPMM}, \mref{mBM}, \mref{mTM}, \mref{mCM}, \mref{mAAMM}\\
+FR12 & \mref{mPVM}, \mref{mBM}, \mref{mDPM}\\
+FR13 & \mref{mPVM}, \mref{mBM}, \mref{mDPM}\\
+FR14 & \mref{mPVM}, \mref{mMAI}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Functional Requirements and Modules}
@@ -424,10 +426,10 @@ FR14 & \mref{mUAM}, \mref{mAVM}, \mref{mBM}, \mref{mPAMM}\\
 NFR1 & \mref{mAVM}, \mref{mPVM}\\
 NFR2 & \mref{mAVM}, \mref{mPVM}\\
 NFR3 & \mref{mTM}\\
-NFR4 & \mref{mAAMM}, \mref{mPAMM}\\
+NFR4 & All\\
 NFR5 & All \\
-NFR6 & \mref{mUAM}, \mref{mPAMM}\\
-NFR7 & \mref{mPVM}\\
+NFR6 & \mref{mUAM}, \mref{mAAMM}\\
+NFR7 & \mref{mPVM}, \mref{mAVM}, \mref{mCM}, \mref{mDPM}, \mref{mMAI}\\
 NFR8 & All \\
 NFR9 & All \\
 \bottomrule
@@ -444,13 +446,11 @@ NFR9 & All \\
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
 AC1 & \mref{mBM}\\
-AC2 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAAMM}\\
-IR1 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}, \mref{mAAMM}\\
+AC2 & \mref{mUAM}, \mref{mBM}, \mref{mAVM}\\
+IR1 & \mref{mUAM}, \mref{mBM}, \mref{mAAMM}\\
 IR2 & All \\
-IR3 & \mref{mDPM}, \mref{mMPM}\\
-IR4 & \mref{mAAMM}, \mref{mPAMM}\\
-IR5 & \mref{mDPM}, \mref{mMPM}\\
-IR6 & \mref{mPVM}, \mref{mCM}\\
+IR3 & \mref{mDPM}\\
+IR4 & \mref{mAAMM}\\
 IR7 & \mref{mPVM}, \mref{mTM}\\
 \bottomrule
 \end{tabular}
@@ -466,7 +466,7 @@ IR7 & \mref{mPVM}, \mref{mTM}\\
 \midrule
 \acref{acLogin} & \mref{mUAM}\\
 \acref{acTransSpeed} & \mref{mTM}\\
-\acref{acPredModules} & \mref{mDPM}, \mref{mMPM}\\
+\acref{acPredModules} & \mref{mDPM}\\
 \acref{acRealTime} & \mref{mBM}, \mref{mPVM}, \mref{mTM}, \mref{mCM}\\
 \bottomrule
 \end{tabular}

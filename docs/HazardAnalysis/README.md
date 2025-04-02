@@ -2,5 +2,4 @@
 
 The folders and files for this folder are as follows:
 
-- HazardAnalysis.tex: This is the latex code for the hazard analysis conducted for RapidCare.
-- HazardAnalysis.pdf: This is the output and the full Hazard Analysis report for the RapidCare application.
+- HazardAnalysis.pdf: This file includes the Hazard Analysis for this project. It has information about the potential hazards that the system can encounter as well as potential solutions to resolve them.

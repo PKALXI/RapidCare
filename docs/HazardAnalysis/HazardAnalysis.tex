@@ -93,7 +93,7 @@
 24-10-2024 & Inreet Kaur & Intro, Scope\\
 24-10-2024 & Pranav Kalsi & FMEA Table, Safety + Security Reqs, Roadmap, Document Compilation Fix..\\
 25-10-2024 & Gurleen Rahi & Reflection.\\
-29-03-2025 & Gurleen Rahi & Modified Modules.\\
+31-03-2024 & Gurleen Rahi & Updated FMEA + Components, Sercurity Requirements to match SRS, address Peer feedback and TA feedback. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -184,9 +184,8 @@ To identify potential hazards, we first define the system boundaries and break i
     This module is responsible for all of the predictions that will occur based on the medical notes.
 
     \begin{itemize}
-        \item PR1: Diagnosis Prediction: The prediction module is responsible for using the clinical notes to provide some diagnosis predictions. The goal of this module is to associate symptoms with common diagnoses. This allows for a lateral view of possible patient diagnoses.
-        \item PR2: Medicine Prediction: Once a diagnosis is selected through the model or manual entry, the corresponding frequently used medication will also be provided.
-        \item PR3: AI assist: If the healthcare professional wants to review patient previous visits and health conditions, it can be done by running a query in AI assist which will fetch the requested information from the system.  
+        \item PR1: Diagnosis and treatment plan prediction: The prediction module is responsible for using the transcribed text from patient-doctor interaction to provide some diagnosis and treatment plan predictions.
+        \item PR2: AI assist: If the healthcare professional wants to review patient previous visits and health conditions, it can be done by running a query in AI assist which will fetch the requested information based on patient profile and medical history.  
     \end{itemize}
     
     Potential Hazards:
@@ -203,9 +202,9 @@ To identify potential hazards, we first define the system boundaries and break i
 The following assumptions are made regarding both the software and hardware components of the system:
 
 \begin{itemize}
-    \item \textbf{Stable Network Connection:} It is assumed that the network connection between the client and server will be stable. If the connection is unstable, it could cause interruptions to the process, which results in significant issues in the system’s performance.
+    \item \textbf{Stable Network Connection:} It is assumed that the network connection between the client and server will be stable. If the connection is unstable, it could cause interruptions to the process, which results in significant issues in the system's performance.
         
-    \item \textbf{Reliable Hardware:} It is assumed that there won’t be any major hardware failures. Although hardware problems are rare, they could severely affect system availability and accuracy, especially in critical healthcare environment.
+    \item \textbf{Reliable Hardware:} It is assumed that there won't be any major hardware failures. Although hardware problems are rare, they could severely affect system availability and accuracy, especially in critical healthcare environment.
 
     \item \textbf{Well Intentioned Inputs:} We will assume that the user will enter input with good intention and will not be attempting to break the system or overload the system with the requests.
     
@@ -238,7 +237,7 @@ The following FMEA table lists all potential hazards related to identified syste
         \midrule
         General & \raggedright Provide continuous access to the system & \raggedright App closes unexpectedly & \raggedright Unsaved progress is lost; Delayed medical access to patients & \raggedright Loss of power or internet; Software failure & \raggedright User reports; System logs & \raggedright Implement automatic data backups and recovery system. & NFR4 & H3 \\
         \midrule
-        User Authentication & \raggedright Verify user credentials & \raggedright User cannot log in to the system & \raggedright User cannot access any system data or functions & \raggedright Invalid credentials; Database failure & \raggedright Failed login attempts & \raggedright Reset credentials. Verify database connectivity & IR\ref{IR_Autentication} & H5 \\
+        User Authentication & \raggedright Verify user credentials & \raggedright User cannot log in to the system & \raggedright User cannot access any system data or functions & \raggedright Invalid credentials; Database failure & \raggedright Failed login attempts & \raggedright Reset credentials. Verify database connectivity & AC\ref{AC_Authentication}; IR\ref{IR_Autentication} & H5 \\
         \midrule
         Account Management & \raggedright Manage user accounts (create, update, delete) & \raggedright Account cannot be created, updated, or deleted & \raggedright User unable to register, update info, or remove account & \raggedright Database failure; Validation errors & \raggedright Log account creation, update, and deletion attempts & \raggedright Check database integrity. Implement Validation checks for inputs. & AC\ref{AC_AuthorizedPersonnel} & H6 \\ 
         \midrule
@@ -275,8 +274,8 @@ The following FMEA table lists all potential hazards related to identified syste
     \item [IR\refstepcounter{irnum}\theirnum \label{IR_ErrorDetection}:] The system should provide real-time error detection based on validation checks and provide feedback to users.\\
     \textbf{Rationale:}To prevent user errors and incorrect output, it is vital to check the integrity of user input. Moreover, in the event of an error, the system should communicate its current state, how the input has been interpreted, and any related errors to the user.
 
-    \item [IR\refstepcounter{irnum}\theirnum \label{IR_ValidationScore}:] The system should provide confidence score on any prediction. Additionally, after each model training session validation accuracy score must be outputted.\\
-    \textbf{Rationale:} To understand the bias in any data and in the model. Using validation scores for training and test sets the model can be evaluated to detect underfitting and overfitting. Additionally, adding model confidence scores will allow  the healthcare professionals to see how confident the model is with the scores.
+    \item [IR\refstepcounter{irnum}\theirnum \label{IR_ValidationScore}:] The system should provide predictions based on provided medical context.\\
+    \textbf{Rationale:} The system should provide results from context and only context such that responses can be verified and hallucinations can be detected. Additionally, this will allow ease of tracebility between accepted medical documenation. Adding model confidence scores will allow healthcare professionals to see how confident the model is with the scores.
     
     \item [IR\refstepcounter{irnum}\theirnum \label{IR_DuplicateRecordDetection}:] The system should provide duplicate record detection for the record in various databases of the system.\\
     \textbf{Rationale:} To prevent confusion and medical errors resulting from duplicate entries, the system should validate and flag potential duplicate records before they are created.
@@ -300,9 +299,7 @@ Covered in SRS
 % \wss{Which safety requirements will be implemented as part of the capstone timeline?
 % Which requirements will be implemented in the future?}
 
-After the hazard analysis we identified a lot of new safety and security requirements. In terms of the scope of the capstone project, in terms of these requirements the team will aim to deliver all of the mentioned requirements in this document including the mentioned access and integrity requirements. To add in our feedback we will first prioritize critical components and incrementally integrate changes by assigning the tickets to the respective developers.
-
-IR\ref{IR_ValidationScore} may be simplified to just attempting to mitigate model bias. The roadmap will re-assessed towards the end of the project to see if features can be augmented to complete the requirements.
+After the hazard analysis we identified a lot of new safety and security requirements. In terms of the scope of the capstone project, in terms of these requirements the team will aim to deliver all of the mentioned requirements in this document including the mentioned access and integrity requirements. To add in our feedback we will first prioritize critical components and incrementally integrate changes by assigning the tickets to the respective developers. The roadmap will re-assessed towards the end of the project to see if features can be augmented to complete the requirements.
 
 
 \newpage{}
@@ -310,7 +307,9 @@ IR\ref{IR_ValidationScore} may be simplified to just attempting to mitigate mode
 \section{References}
 
 \begin{itemize}
-    \item [1] N. G. Leveson and J. P. Thomas, “STPA handbook (MIT-Stamp-001),” STPA Handbook, https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf (accessed Oct. 9, 2024).
+    \item [1] N. G. Leveson and J. P. Thomas, "STPA handbook (MIT-Stamp-001)," STPA Handbook,
+    https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf \\
+    (accessed Oct. 9, 2024).
 \end{itemize}
 
 \newpage{}

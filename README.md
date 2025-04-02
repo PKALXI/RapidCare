@@ -16,4 +16,16 @@ The folders and files for this project are as follows:
 - docs - Documentation for the project
 - refs - Reference material used for the project, including papers
 - src - Source code
-- test - Test cases
+
+The features of this project are as follows:
+
+- UI: User-friendly and intuitive UI to streamline navigation and ease of use for healthcare professionals.
+- Transcription Service: Transcribes captured audio from patient-doctor interaction from frontend using socket communication.
+- Classification Service: Processes and classify transcribed text using LangGraph to automatically fill appropriate fields of the patient records.
+- Diagnosis and Plan prediction: Provides suggestions for diagnosis and treatment plans by analysing patient-doctor conversation, with context ensuring adherence to standard protocols.
+- AI-Assist: Allows to query the patient records regarding the previous visits, medical history, and other general information, allowing healthcare professionals to quickly access relevant information.
+
+
+
+
+

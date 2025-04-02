@@ -12,6 +12,12 @@ https://langchain-ai.github.io/langgraph/tutorials/introduction/
 https://python.langchain.com/docs/tutorials/chatbot/
 """
 
+"""
+Author: Pranav Kalsi
+Last Updated: April 7th
+Purpose: This helps take a raw transcription and split it into the relevant fields.
+"""
+
 from typing import Literal
 import os
 

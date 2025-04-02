@@ -15,6 +15,12 @@ https://python.langchain.com/docs/tutorials/qa_chat_history/
 https://github.com/langchain-ai/langchain/discussions/9404
 """
 
+"""
+Author: Pranav Kalsi
+Last Updated: March 7th 
+Purpose: Provides agent class for AI assistant functionality, such that user can Load and Query Patient data.
+"""
+
 import os
 from flask import Flask, request, jsonify
 from langchain.chat_models import init_chat_model
@@ -40,18 +46,19 @@ load_dotenv("../.env")
 
 class Agent:
     def __init__(self):
+        # initialize models + vector stores
         self.llm = init_chat_model("gpt-4o-mini", model_provider="openai")
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
         self.vector_store = InMemoryVectorStore(self.embeddings)
 
     def load_patient_data(self, patient_data):
         """Loads, chunks, and indexes documents into vector store."""
+        # store patient data in a temp file
         temp_file_path = "temp_patient_data.json"
         with open(temp_file_path, "w") as temp_file:
             json.dump(patient_data, temp_file)
 
-        print(f"Patient data saved to temporary file: {temp_file_path}")
-
+        # Load and split JSON data
         json_loader = JSONLoader(
             file_path=temp_file_path,
             jq_schema=".",
@@ -68,26 +75,28 @@ class Agent:
         self.vector_store.add_documents(documents=text_splits)
 
     def clear_patient_data(self):
+        # Clear the vector store and memory that checkpoints the convo
         self.vector_store = InMemoryVectorStore(self.embeddings)
         self.memory = MemorySaver()
 
     def retrieve(self, query: str):
-        """Retrieve relevant information based on query."""
+        # Retrieve the relevant context based on the query
         retrieved_docs = self.vector_store.similarity_search(query, k=2)
         serialized = "\n\n".join(
             (f"Source: {doc.metadata}\nContent: {doc.page_content}")
             for doc in retrieved_docs
         )
 
-        print('RETRIEVED: ',retrieved_docs)
         return serialized, retrieved_docs
 
     def _query_or_respond(self, state: MessagesState):
+        # Generate tool call for retrieval or respond.
         llm_with_tools = self.llm.bind_tools([StructuredTool.from_function(self.retrieve)])
         response = llm_with_tools.invoke(state["messages"])
         return {"messages": [response]}
 
     def _generate(self, state: MessagesState):
+        # Generate the answer
         recent_tool_messages = [
             message for message in reversed(state["messages"]) if message.type == "tool"
         ]
@@ -111,6 +120,7 @@ class Agent:
         return {"messages": [response]}
 
     def build_graph(self):
+        # Build the graph for RAG functions.
         graph_builder = StateGraph(MessagesState)
 
         tools = ToolNode([StructuredTool.from_function(self.retrieve)])
@@ -130,7 +140,7 @@ class Agent:
         self.graph = graph_builder.compile(checkpointer=self.memory)
 
     def query(self, hcp_query):
-        """Runs the query through the graph."""
+        # Runs the query through the graph.
         config = {"configurable": {"thread_id": "abc123"}}
 
         messages = [{"role": "user", "content": hcp_query}]

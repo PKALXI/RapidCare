@@ -7,7 +7,7 @@ https://python-socketio.readthedocs.io/en/stable/intro.html#client-examples
 """
 Author: Gurleen Rahi, reviewed by Pranav Kalsi
 Last Updated: April 7th
-Purpose: This allows us to perform audio transcription base d on the sound bytes from the frontend
+Purpose: This allows us to perform audio transcription based on the sound bytes from the frontend
 """
 
 import os

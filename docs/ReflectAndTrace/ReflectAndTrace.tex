@@ -309,13 +309,13 @@ Our design decisions from the start were heavily focused around the single respo
 
 Additionally, using a modular framework like ReactJS, even the frontend was built in a modular fashion. This design also was easy to test as each module having a single responsibility and single endpoint. This meant the tests could be clear and concise, this inturn made the VnVReport clear and easy to understand.\\
 
-
+\noindent
 \textbf{How did limitations,assumptions, and constraints influence your decisions?}\\
 The number one assumption of low load influenced our design. When the application is up each microservice only has one worker running. If we assumed for a larger load, we could have added more worker, which would entail adding a load balancing module.\\
 
 Another assumption that influenced our design was the access to data hierarchy. What we mean by this is we limited the scope by addressing all of the healthcare admin as one entity, and all healthcare professionals as 1 entity. This inturn simplified our database rules in our data layer module. \\
 
-Lastlu
+Lastly, we had a resource limitation interims of budget. Having an LLM based application incurs API costs. We chose to build a light weight applications with cheaper models. If the budget of the project increased we would have added a distributed, decentralized vector store for more efficient retrieval for our LLMs.\\
 
 
 

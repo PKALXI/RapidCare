@@ -8,3 +8,6 @@ The folders and files for this project are as follows:
 - firebase-admin - This folder contains the code for performing important operations with account and data management.
 - rapidcare-frontend - This folder contains information about all the important operations to manage frontend of the system and the associated unit tests.
 - voice-to-text - This folder contains the code and the unit tests to transcribe audio conversation to text.
+
+  The following link was used to add supplemented and auto-generated links in JSDocs.
+  https://marketplace.visualstudio.com/items?itemName=crystal-spider.jsdoc-generator

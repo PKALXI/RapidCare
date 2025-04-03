@@ -1,26 +1,100 @@
 \documentclass[12pt, titlepage]{article}
 
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{pdflscape}
-\usepackage{tabularx}
-\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{titlesec}
 \usepackage{hyperref}
-\usepackage{float}
 \usepackage[round]{natbib}
-
+\usepackage{hyperref}
 \hypersetup{
-    colorlinks,
-    citecolor=blue,
-    filecolor=black,
-    linkcolor=red,
-    urlcolor=blue
+  bookmarks=true,         % show bookmarks bar?
+  colorlinks=true,      % false: boxed links; true: colored links
+  linkcolor=red,          % color of internal links (change box color
+  % with linkbordercolor)
+  citecolor=green,        % color of links to bibliography
+  filecolor=magenta,      % color of file links
+  urlcolor=cyan           % color of external links
+}
+\usepackage{float}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single,
+    language=Python
 }
 
-\input{../Comments}
-\input{../Common}
+\usepackage{enumitem}
 
-\title{User Guide for \progname} 
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{ulem}
+
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+
+\usepackage{pdflscape}
+
+\usepackage{makecell}
+\usepackage{ragged2e}
+
+\usepackage{fontawesome5} 
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    commentstyle=\color{gray},
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    stringstyle=\color{red},
+    keywordstyle=\color{blue},
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    morekeywords={true, false, null}
+}
+
+\input{../../Comments}
+\input{../../Common}
+
+\title{User Guide for \progname{}} 
 \author{\authname}
 \date{\today}
 
@@ -52,7 +126,7 @@
 
 \section{Introduction}
 \subsection{Purpose}
-This document serves as the user guide for RapidCare, a healthcare management system designed to streamline patient record management and medical operations. RapidCare addresses the growing shortage of family doctors in Ontario and the resulting strain on emergency rooms by reducing documentation overhead, thus allowing healthcare professionals to focus more on patient care.
+This document serves as the user guide for RapidCare, an Electronic Healthcare Record system designed to streamline patient record management and medical operations. RapidCare addresses the growing shortage of family doctors in Ontario and the resulting strain on emergency rooms by reducing documentation overhead, thus allowing healthcare professionals to focus more on patient care.
 
 \subsection{Scope}
 The guide covers installation, setup, and usage of both client and server components of RapidCare. It details the process of patient documentation, voice dictation for medical notes, automated diagnosis and medicine suggestions, and healthcare network management.
@@ -71,6 +145,7 @@ RapidCare is built to tackle documentation overhead, which currently consumes a 
 
 \section{Installation}
 To set up the system, follow these steps:
+
 \subsection{Frontend Setup}
 \begin{enumerate}
 \item Navigate to the frontend directory.
@@ -83,6 +158,7 @@ npm install --legacy-peer-deps
 npm start
 \end{verbatim}
 \end{enumerate}
+
 \subsection{Backend Services Setup}
 For each Python service in the project:
 \begin{enumerate}
@@ -96,6 +172,7 @@ pip install -r requirements.txt
 python app.py
 \end{verbatim}
 \end{enumerate}
+
 \subsection{Environment Configuration}
 \begin{enumerate}
 \item Create a new file named \texttt{.env} in the project root directory (\texttt{src}).
@@ -119,14 +196,14 @@ OPENAI_API_KEY=<your-key>
 \subsubsection{Logging In}
 \begin{itemize}
 \item Enter admin/admin-provided credentials.
-\item Based on credentials users are directed to their respective main page.
-\item Click "Login" button.
+\item Click the "Login" button to access your dashboard.
+\item Based on your role, you will be directed to the appropriate interface.
 \end{itemize}
 
 The system will redirect you to different interfaces based on your selected role:
 \begin{itemize}
 \item \textbf{Admin}: Directs to the administration dashboard with system-wide management tools.
-\item \textbf{Healthcare Professionals}: Directs to the hospital main page with their upcoming appointments.
+\item \textbf{Healthcare Professionals}: Directs to the healthcare professional dashboard with recent stats and list of upcoming appointments.
 \end{itemize}
 
 \begin{figure}[H]
@@ -136,12 +213,12 @@ The system will redirect you to different interfaces based on your selected role
 \label{fig:Registration}
 \end{figure}
 
-
 \subsubsection{Admin Registration}
 \begin{itemize}
 \item Complete the sign-up form with required admin information.
 \item Include network administrator credentials.
 \item Click "Sign Up" for administrative access.
+\item You will be redirected to the login page, where you can log in with your credentials.
 \end{itemize}
 
 \subsubsection{Administration Dashboard}
@@ -152,7 +229,7 @@ The system will redirect you to different interfaces based on your selected role
 \label{fig:admin_dashboard}
 \end{figure}
 
-The Administration Dashboard provides a comprehensive overview of network and provide network statistics, including:
+The Administration Dashboard provides a comprehensive overview of network management and statistics, including:
 \begin{itemize}
 \item Account management tools.
 \item Employee management tools.
@@ -181,10 +258,15 @@ The Healthcare Professional Dashboard provides an intuitive interface for managi
 \toprule
 \textbf{Action} & \textbf{Steps} \\
 \midrule
-Add Patient & Navigate to "Patients" tab on navbar, Click "+ Add Patient", Complete Form, "Create Patient". \\
-View Records & Search for patient, Click "View Record" \\
-Edit Information & Click any field, "Edit", Make Changes, "Save" \\
-Remove Patient & Open Patient Records, Click "Delete Profile", Confirm Deletion \\
+View Patients & Navigate to the "Patients" tab on the navbar. \\
+\midrule
+Add Patient & Navigate to the "Patients" tab on the navbar. \newline Click "+ Add Patient". \newline Complete the form and hit the "Create Patient" button to create a new record. \\
+\midrule
+View Records & Search for a patient record and click on the "View Record" button. \\
+\midrule
+Edit Information & Search for a patient record and click on the "View Record" button. \newline Click on the "Edit" button for a particular tab. \newline The edit modal will open up. \newline Make changes and hit the "Save" button. \\
+\midrule
+Remove Patient & Search for a patient record and click on the "Delete Profile" button. \newline Confirm deletion when prompted. \\
 \bottomrule
 \end{longtable}
 
@@ -206,16 +288,15 @@ Once inside a patient's record, you will find several tabs on the left sidebar. 
 \end{figure}
     
 \begin{itemize}
-    \item \textbf{Profile Information} – Displays the patient’s personal details (e.g., name, age, contact info). Click "Edit" to update any field.
+    \item \textbf{Profile Information} – Displays the patient's personal details (e.g., name, age, contact info). Click "Edit" to update any field.
     \item \textbf{Medical History} – Shows medical history, allergies, family history, and current medication. Editable via the "Edit" button.
     \item \textbf{Consultation Notes} – Used to add SOAP notes for each consultation. Click "Add New" to open the voice-enabled SOAP note interface.
-    \item \textbf{Lab Reports} – Upload and view  lab documents. Use the "Add New" button to upload a new report.
+    \item \textbf{Lab Reports} – Upload and view lab documents. Use the "Add New" button to upload a new report.
     \item \textbf{Prescriptions} – Manage prescription plans. Click "Add New" to generate a medication plan for the patient.
     \item \textbf{Referrals} – Create and view referrals to other services or specialists (e.g., blood test, ultrasound). Click "Add New" and select the referral type from the drop-down.
 \end{itemize}
 
 Each tab is designed to streamline the documentation process and ensure structured, accessible patient data.
-
 
 \subsection{Add a SOAP Note}
 
@@ -226,12 +307,12 @@ Each tab is designed to streamline the documentation process and ensure structur
 \label{fig:SOAP Note}
 \end{figure}
 
-RapidCare provides an end-to-end smart documentation flow under the \textbf{Consultation Notes} tab, allowing healthcare professionals to streamline SOAP note creation with AI-powered tools. Here’s how the process works:
+RapidCare provides an end-to-end smart documentation flow under the \textbf{Consultation Notes} tab, allowing healthcare professionals to streamline SOAP note creation with AI-powered tools. Here's how the process works:
 
 \begin{enumerate}
     \item Log in as a healthcare professional and navigate to the \textbf{Patients} tab on the navigation bar.
     \item Search for and select the patient by clicking \textbf{View Record}.
-    \item Inside the patient’s record, open the \textbf{Consultation Notes} tab from the sidebar.
+    \item Inside the patient's record, open the \textbf{Consultation Notes} tab from the sidebar.
     \item Click \textbf{Add New} to initiate a SOAP note. A structured pop-up will appear.
     \item Press \textbf{Start Recording} to begin capturing the patient-provider conversation.
     \item After the consultation, click \textbf{Stop Recording}. The voice-to-text microservice transcribes the recorded audio in real time.
@@ -240,39 +321,38 @@ RapidCare provides an end-to-end smart documentation flow under the \textbf{Cons
         \item It identifies symptoms, conditions, and medical terminology.
         \item Extracts key medical entities and organizes them into structured SOAP sections.
     \end{itemize}
-    \item The transcribed and classified text is then passed to the \textbf{Diagnosis Suggestion Engine}, which:
+    \item The transcribed text is then passed to the \textbf{Diagnosis and Treatment Plan Service}, which:
     \begin{itemize}
         \item Suggests possible diagnoses based on the symptoms mentioned.
         \item Recommends a treatment plan, including medications and next steps.
     \end{itemize}
     \item The healthcare professional can review and modify any part of the classified text, diagnosis, or treatment plan.
-    \item Once satisfied, click \textbf{Save} to finalize and store the SOAP note in the patient’s chart.
+    \item Once satisfied, click \textbf{Save} to finalize and store the SOAP note in the patient's chart.
 \end{enumerate}
 
 This automated workflow significantly reduces manual input, improves accuracy, and accelerates clinical documentation.
 
 \subsection{AI Assist Tool}
 
-AI Assist feature empowers healthcare professionals to quickly gather relevant insights:
+The AI Assist feature empowers healthcare professionals to quickly gather relevant insights:
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{AI.png}
-\caption{AI Assist tool}
+\caption{AI Assist Tool}
 \label{fig:AI Assist tool}
 \end{figure}
 
 \begin{enumerate} 
 \item View the patient's records to access their information. 
-\item Click the AI Assist button to initiate the query. 
+\item Click the "AI Assist" button to initiate the query. 
 \item Ask any question related to the patient's data.
 \item The AI will rapidly analyze the data and provide a concise response. 
-\item Review the AI-generated response and incorporate them into the clinical decision-making process. 
+\item Review the AI-generated response and incorporate it into the clinical decision-making process. 
 \item Click the "X" button to exit the AI Assist panel.
 \end{enumerate}
 
 AI Assist enhances the decision-making process by surfacing relevant insights without requiring manual review of lengthy records.
-
 
 \subsection{Managing Hospitals}
 For hospital administrators:
@@ -297,7 +377,7 @@ For hospital administrators:
 \begin{enumerate}
 \item Navigate to "Hospitals".
 \item Select the hospital to update.
-\item Click "Edit" button.
+\item Click the "Edit" button.
 \item Edit the necessary fields.
 \item Click "Save" to save changes.
 \end{enumerate}
@@ -306,7 +386,7 @@ For hospital administrators:
 \begin{enumerate}
 \item Navigate to "Hospitals".
 \item Select the hospital to remove.
-\item Click "Delete" button.
+\item Click the "Delete" button.
 \item Confirm the deletion when prompted.
 \end{enumerate}
 
@@ -342,7 +422,7 @@ For hospital administrators:
 \begin{enumerate}
 \item Navigate to "Employees".
 \item Select the employee to modify.
-\item Click "Edit" button.
+\item Click the "Edit" button.
 \item Edit the necessary information.
 \item Click "Save" to save changes.
 \end{enumerate}
@@ -352,7 +432,7 @@ For hospital administrators:
 \item Navigate to "Employees".
 \item Search for the employee.
 \item Select the employee to remove.
-\item Click "Delete" button.
+\item Click the "Delete" button.
 \item Confirm the deletion when prompted.
 \end{enumerate}
 
@@ -362,8 +442,8 @@ For hospital administrators:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{account.png}
-\caption{Adminstrator Account Management}
-\label{fig:Adminstrator Account Management}
+\caption{Administrator Account Management}
+\label{fig:Administrator Account Management}
 \end{figure}
 
 \subsubsection{Editing Account Information}
@@ -411,17 +491,16 @@ For healthcare professionals:
     \item Click the "Logout" button.
 \end{enumerate}
 
-
 \section{Troubleshooting}
 \subsection{Common Issues}
 \begin{longtable}{p{0.3\textwidth}p{0.6\textwidth}}
 \toprule
 \textbf{Symptom} & \textbf{Solution} \\
 \midrule
-Login failures & Verify credentials, check caps lock. \\
-Slow performance & Clear browser cache, check network. \\
-Server crashes & Check logs, verify Firebase connection. \\
-Transcription errors & Speak clearly, reduce background noise, review and edit transcriptions. \\
+Login failures & Verify credentials and check caps lock. \\ 
+Slow performance & Clear browser cache and check network connection. \\ 
+Server crashes & Check logs and verify Firebase connection. \\ 
+Transcription errors & Speak clearly, reduce background noise, and review/edit transcriptions. \\ 
 \bottomrule
 \end{longtable}
 
@@ -436,7 +515,7 @@ Transcription errors & Speak clearly, reduce background noise, review and edit t
 \section{Maintenance}
 \subsection{Backup Procedures}
 \begin{enumerate}
-\item Run \texttt{backup create} command.
+\item Run the \texttt{backup create} command.
 \item Store backup files securely in an off-site location.
 \item Verify backup integrity regularly by performing test restorations.
 \item Maintain a backup schedule to ensure data safety.
@@ -446,7 +525,7 @@ Transcription errors & Speak clearly, reduce background noise, review and edit t
 \begin{itemize}
 \item Check GitHub for new releases.
 \item Follow upgrade instructions.
-\item Test updates in staging environment first.
+\item Test updates in a staging environment first.
 \item Schedule updates during off-peak hours to minimize disruption.
 \end{itemize}
 

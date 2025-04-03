@@ -1,3 +1,9 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Display the list of appointment
+ */
+
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -12,11 +18,13 @@ import {
 } from "@mui/material";
 
 const AppointmentsList = () => {
+  // Get redux access
   const healthcareProfessional = useSelector(
     (state: RootState) => state.app.healthcareProfessional
   );
   const consultations = healthcareProfessional?.consultations;
 
+  //Display all appointments
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

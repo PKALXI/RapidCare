@@ -1,3 +1,9 @@
+/** @file 
+ * Author: Moamen Ahemed
+ * Last Updated/reviewed: April 7th
+ * Purpose: This is the login component
+ */
+
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLoginState, setHpData, setHnData } from "../redux/appActions";
@@ -23,6 +29,7 @@ const Login: React.FC = () => {
 
   const isPasswordMatch = password === confirmPassword;
 
+  // Submission of a login attempt
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -33,13 +40,15 @@ const Login: React.FC = () => {
           setError("Passwords do not match.");
           return;
         }
-
+        
+        // signUp of firebase
         const user = await signUp(email, password);
         if (!user) {
           setError("Account creation failed. Please try again.");
           return;
         }
 
+        // set the model
         const networkInfo: INetworkInfo = {
           id: user.uid,
           networkName: networkName,
@@ -55,15 +64,17 @@ const Login: React.FC = () => {
         alert("Account successfully created! You can now log in.");
         setIsSignUp(false);
       } else {
+        // Try to sign in user and check if the account exists
         const person = await signIn(email, password);
         const docId = person.uid;
-
+ 
         const docRef = doc(networkInfoCollection, docId);
         const docSnap = await getDoc(docRef);
 
         const d2 = doc(healthcareProfessionalCollection, docId);
         const d2Snap = await getDoc(d2);
-
+        
+        // Check if user exists in database
         if (docSnap.exists()) {
           console.log("Document exists:", docSnap.data());
           dispatch(setLoginState(true, true));
@@ -71,7 +82,8 @@ const Login: React.FC = () => {
         } else {
           console.log("User does not exist");
         }
-
+        
+        // check the login state admin or healthcare professional
         if (d2Snap.exists()) {
           console.log("Called");
           dispatch(setLoginState(false, true));
@@ -89,6 +101,7 @@ const Login: React.FC = () => {
     }
   };
 
+  // Render component based on where user is logging in or signing up
   return (
     <div className="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow-md text-center">
       <h2 className="text-2xl font-bold mb-6">

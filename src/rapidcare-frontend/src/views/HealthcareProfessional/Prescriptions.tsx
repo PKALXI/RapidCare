@@ -1,5 +1,16 @@
+/**
+ * Author: Inreet Kaur, Gurleen Rahi
+ * Last Modified: March 7th
+ * Purpose: Display patients 
+ *
+ * FIREBASE and backend Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React, { useState, useRef } from "react";
-//import { useReactToPrint } from "react-to-print";
 import { IPatient, IPrescription } from "../../models/model";
 import {
   Card,
@@ -14,26 +25,25 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
-// import { addDocument } from "../../redux/appActions";
-// import { doc } from "firebase/firestore";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib"; // Import pdf-lib
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { saveAs } from "file-saver";
 import toast from "react-hot-toast";
-import { v4 as uuidv4 } from "uuid";
 
 interface PrescriptionsProps {
   patient: IPatient;
 }
 
 const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
+  // initial state
   const initialFormData: IPrescription = {
     id: "",
     date: "",
     plan: "",
     patientName: patient.profileInformation?.demographics?.name || "",
   };
+
+  // State for component
   const [formData, setSelectedNote] = useState<IPrescription>(initialFormData);
-  const dispatch = useDispatch();
   const [form, setSelectedPrescription] = useState<IPrescription | null>(null);
   const componentRef = useRef<HTMLDivElement>(null);
   const [openUploadModal, setOpenUploadModal] = useState(false);
@@ -53,6 +63,7 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
     }));
   };
 
+  // Generate PDF from form
   const generatePdf = async () => {
     try {
       const pdfDoc = await PDFDocument.create();
@@ -107,24 +118,19 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
     setOpenViewModal(true);
   };
 
+  // Modal control
   const handleCloseModal = () => {
     setOpenViewModal(false);
     setSelectedPrescription(null);
   };
 
+  // Save PDF
   const handleSave = async () => {
     try {
       if (!formData.plan) {
         toast.error("Please add prescription details");
         return;
       }
-      // const newPrescription: IPrescription = {
-      //     id: uuidv4(),
-      //     date: new Date().toISOString(),
-      //     plan: formData.plan,
-      //     patientName: patient.profileInformation?.demographics?.name || ''
-      // };
-      //update in backend
 
       toast.success("Prescription saved successfully");
       setOpenViewModal(false);
@@ -135,6 +141,7 @@ const Prescription: React.FC<PrescriptionsProps> = ({ patient }) => {
     }
   };
 
+  // Component
   return (
     <div>
       <div className="flex justify-between">

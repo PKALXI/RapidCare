@@ -1,3 +1,14 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Medical history tab
+ *
+ * FIREBASE Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
 import { useState, ChangeEvent } from "react";
 import { IPatient, IMedicalHistory } from "../../models/model";
 import {
@@ -20,22 +31,30 @@ interface MedicalHistoryProps {
 }
 
 const MedicalHistory: React.FC<MedicalHistoryProps> = ({ patient }) => {
+  // Modal control
   const [open, setOpen] = useState(false);
+
+  // Initial form data state
   const initialFormData = {
     medicalHistory: patient.medicalHistory?.medicalHistory || "",
     familyHistory: patient.medicalHistory?.familyHistory || "",
     allergies: patient.medicalHistory?.allergies || "",
     medications: patient.medicalHistory?.medications || "",
   };
+  
+  // Formdata state
   const [formData, setFormData] = useState<IMedicalHistory>(initialFormData);
 
+  // Modal open
   const handleOpen = () => setOpen(true);
 
+  // Model close
   const handleClose = () => {
     setOpen(false);
     setFormData(initialFormData);
   };
 
+  // Change in form data
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -46,6 +65,7 @@ const MedicalHistory: React.FC<MedicalHistoryProps> = ({ patient }) => {
     }));
   };
 
+  // Save the updated patient
   const handleSave = async () => {
     try {
       const updatedPatient = {
@@ -61,6 +81,7 @@ const MedicalHistory: React.FC<MedicalHistoryProps> = ({ patient }) => {
     }
   };
 
+  // Display modal, and medical histories
   return (
     <div className="pb-32">
       <div className="flex justify-between mb-4">

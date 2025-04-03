@@ -1,5 +1,11 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Test the helper functions
+ */
 import { validateField, calculateAge } from "../helpers/helper";
 
+// Test the validate field functionality
 describe("validateField function", () => {
   test("should return appropriate error for invalid field input", () => {
     expect(validateField("email", "invalid-email")).toBe(
@@ -58,6 +64,7 @@ describe("validateField function", () => {
   });
 });
 
+// Test the calculate age function
 describe("calculateAge function", () => {
   test("should correctly calculate age", () => {
     expect(calculateAge("2000-01-01")).toBeGreaterThan(20);

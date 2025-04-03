@@ -1,3 +1,12 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Navigation functions
+ */
+
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, InputBase, Button } from "@mui/material";
@@ -9,6 +18,7 @@ const Navbar = () => {
   const isUserAdmin = useSelector((state: RootState) => state.app.isUserAdmin);
 
   return (
+    // Search functions
     <AppBar position="static" sx={{ backgroundColor: "black" }}>
       <Toolbar>
         <h1 className="text-2xl font-bold mx-16">RapidCare</h1>
@@ -25,6 +35,7 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* Navigation/Ops buttons */}
         <div>
           <ul className="flex space-x-8">
             <li>

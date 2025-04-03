@@ -1,3 +1,11 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: View and upload documents
+ */
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React, { useState } from "react";
 import { IPatient, IDocument } from "../../models/model";
 import {
@@ -21,11 +29,14 @@ interface DocumentsProps {
 }
 
 const Documents: React.FC<DocumentsProps> = ({ patient }) => {
+  // Get redux layer
   const dispatch = useDispatch();
   const documents = patient.documents || [];
   const [selectedDocument, setSelectedDocument] = useState<IDocument | null>(
     null
   );
+
+  // Modal control
   const [openUploadModal, setOpenUploadModal] = useState(false);
   const [openViewModal, setOpenViewModal] = useState(false);
 
@@ -34,6 +45,7 @@ const Documents: React.FC<DocumentsProps> = ({ patient }) => {
   };
 
   //Need to change
+  // File upload logic
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -57,16 +69,19 @@ const Documents: React.FC<DocumentsProps> = ({ patient }) => {
     }
   };
 
+  // model open
   const handleOpenDocument = (document: IDocument) => {
     setSelectedDocument(document);
     setOpenViewModal(true);
   };
 
+  // modal clost
   const handleCloseModal = () => {
     setOpenViewModal(false);
     setSelectedDocument(null);
   };
 
+  // document open and close
   return (
     <div>
       <div className="flex justify-between">

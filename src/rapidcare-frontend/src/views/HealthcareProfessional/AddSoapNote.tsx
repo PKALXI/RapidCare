@@ -1,3 +1,15 @@
+/**
+ * Author: Pranav Kalsi, Inreet Kaur, Gurleen Rahi
+ * Last Modified: March 7th
+ * Purpose: Append a SOAP note to a patient
+ *
+ * FIREBASE and backend Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   Card,
@@ -65,6 +77,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
 
   const dispatch = useDispatch();
 
+  // updates in formdata
   const handleChange = (
     section: "subjective" | "objective" | "assessment" | "base",
     field: string,
@@ -103,13 +116,18 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
+        // initialize media recorder
         const mediaRecorder = new MediaRecorder(stream, {
           mimeType: "audio/webm;codecs=opus",
         });
+
+        // Set reference in component state
         mediaRecorderRef.current = mediaRecorder;
 
+        // Blobs (audio parts)
         let chunks: BlobPart[] = [];
 
+        // Start recording when data is available
         mediaRecorder.ondataavailable = (event) => {
           chunks.push(event.data);
         };
@@ -120,6 +138,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
           chunks = [];
         };
 
+        // every second push blobs so full words can be captured
         mediaRecorder.start(1000);
       })
       .catch((err) => {
@@ -129,6 +148,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
       });
   };
 
+  // Stop recording to trigger send of bytes
   const stopRecording = () => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
@@ -139,14 +159,14 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
     }
   };
 
+  // Callback function to get called by the respective broker to make sure items aren't being sent twice.
   const handleTranscriptionCallback = useCallback((transcribedText: string) => {
-    console.log("WE GOT THE TEXT: " + transcribedText);
     handleChange("base", "transcription", transcribedText);
     brokerReference.current?.diagnosePredictText(transcribedText, setNote);
     brokerReference.current?.classifyPredictText(transcribedText, setNote);
-    console.log("DESCRIPTION---: " + transcribedText); // Optionally log the transcription
   }, []);
 
+  // Save the SOAP note (append to patient)
   const handleSave = () => {
     try {
       // Save in backend
@@ -165,6 +185,7 @@ const AddSoapNote: React.FC<AddSoapNoteProps> = ({
   };
 
   return (
+    // New SOAP not modal with recording and and saveing UI
     <Modal open={open} onClose={() => setOpen(false)}>
       <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[85vh] flex flex-col">
         <Box className="flex justify-between items-center p-2">

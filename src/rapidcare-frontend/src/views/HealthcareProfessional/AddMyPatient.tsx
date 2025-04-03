@@ -1,3 +1,15 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Add a new patient into sys. w/ consultation note
+ *
+ * FIREBASE Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import {
   Card,
@@ -18,6 +30,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { calculateAge } from "../../helpers/helper";
 
 const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
+  // Set initial formData
   const [formData, setFormData] = useState({
     name: "",
     gender: "",
@@ -46,15 +59,15 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
     followUp: "",
   });
 
+  // Update the FormData
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Submit formdata and add patient to db
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    toast.success("HELLO");
-
     e.preventDefault();
     const newPatient: IPatient = {
       id: uuidv4(),
@@ -122,6 +135,7 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <>
       <Toaster />
+      {/* Add new patient form and logic */}
       <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[90vh] flex flex-col">
         <form onSubmit={handleSubmit}>
           <Box className="flex justify-between items-center p-2">
@@ -451,6 +465,8 @@ const AddPatient = ({ closeModal }: { closeModal: () => void }) => {
               </CardContent>
             </Card>
           </Box>
+
+          {/* Recording and create button */}
           <Box className="flex justify-between px-16 py-2 sticky bottom-0">
             <Button variant="contained" color="primary">
               Start Recording

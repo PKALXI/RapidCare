@@ -1,3 +1,15 @@
+/**
+ * Author: Pranav Kalsi, Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Edit patient info
+ *
+ * FIREBASE and backend Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import { useEffect, useState } from "react";
 import {
   Button,
@@ -37,12 +49,12 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({
   patientId,
   profileInformation,
 }) => {
+
+  // Load empty patient into state
   const dispatch = useDispatch();
   const [patient, setPatient] = useState(emptyPatient);
-  /* 
-        CURRENTLY EACH FIELD IS POPULATED WITH NOTHING...The image of DB doc is pulled and edited can be optimized
-    */
 
+  // Set the data to be editied 
   const [formData, setFormData] = useState({
     demographics: {
       name: patient.profileInformation?.demographics?.name || "",
@@ -79,8 +91,10 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({
     },
   });
 
+  // catch any errors
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  // Fetch a particulate patient and review the form data
   useEffect(() => {
     const fetchPatient = async () => {
       if (patientId) {
@@ -147,6 +161,7 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({
     fetchPatient();
   }, [patientId]);
 
+  // Handle state change
   const handleChange = (
     section: keyof IProfileInfo,
     field: string,
@@ -160,6 +175,7 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({
     setErrors((prev) => ({ ...prev, [`${section}-${field}`]: errorMessage }));
   };
 
+  // Store in the db
   const updateEntry = () => {
     try {
       const newPatient: IPatient = {
@@ -187,22 +203,14 @@ const EditProfileInfo: React.FC<EditProfileInfoProps> = ({
     }
   };
 
+  // modal control
   const handleClose = () => {
     // setFormData(profileInformation);
     setErrors({});
     setOpen(false);
   };
 
-  const handleSave = () => {
-    if (Object.values(errors).some((error) => error)) {
-      return;
-    }
-    //Backend update
-
-    // dispatch(updatePatientProfileInfo(patientId, formData));
-    setOpen(false);
-  };
-
+  // Display dialog for edits
   return (
     <Dialog open={open} fullWidth>
       <Box className="p-4 flex justify-between items-center">

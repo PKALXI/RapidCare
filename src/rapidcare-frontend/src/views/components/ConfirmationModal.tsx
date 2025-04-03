@@ -1,3 +1,12 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Confirm operation modal
+ */
+
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import { Modal, Box, Typography, Button } from "@mui/material";
 
 interface ConfirmationModalProps {

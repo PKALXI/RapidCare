@@ -1,3 +1,15 @@
+/**
+ * Author: Pranav Kalsi, Inreet Kaur, Gurleen Rahi
+ * Last Modified: March 7th
+ * Purpose: Display patient profile
+ *
+ * FIREBASE and backend Related operations + AI Chat and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -37,18 +49,22 @@ import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import AIChat from "./AIChat";
 
 const PatientProfile = () => {
+  // patient id
   const { patientId } = useParams<{ patientId: string }>();
+
+  // Navigation
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const healthcareProfessional = useSelector(
     (state: RootState) => state.app.healthcareProfessional
   );
-  // const patient = healthcareProfessional?.patients?.find((p) => p.id === patientId);
+
+  // Patient state
   const [patient, setPatient] = useState<IPatient>(emptyPatient);
   const [activeTab, setActiveTab] = useState("Profile Information");
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openChat, setOpenChat] = useState(false);
 
+  // DB listener
   useEffect(() => {
     const q = query(patientCollection, where("id", "==", patientId));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -58,20 +74,7 @@ const PatientProfile = () => {
     });
   }, [patientId]);
 
-  // useEffect(() => {
-  //     const fetchPatient = async () => {
-  //         if (patientId) {
-  //             const patientData = await getPatient(patientId);
-  //             if (patientData) {
-  //                 setPatient(patientData);
-  //             }else{
-  //                 alert('NOTHING')
-  //             }
-  //         }
-  //     };
-  //     fetchPatient();
-  // }, [patientId]);
-
+  // Close profile and return to patient list
   const handleCloseProfile = () => {
     // unsubscribe();
     // console.log('called!');
@@ -79,10 +82,12 @@ const PatientProfile = () => {
     navigate("/patients");
   };
 
+  // Delete patient 
   const handleDeleteClick = () => {
     setOpenDeleteModal(true);
   };
 
+  // Delete patient
   const handleDeleteConfirm = () => {
     try {
       // dispatch(deletePatient(patient.id));
@@ -96,39 +101,47 @@ const PatientProfile = () => {
     }
   };
 
+  // Cancel delete operation
   const handleDeleteCancel = () => {
     setOpenDeleteModal(false);
   };
 
-  const handleOpenChat = () =>{
+  // open AI chat
+  const handleOpenChat = () => {
     setOpenChat(true);
-  }
+  };
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <Navbar />
-      {!openChat && <Button
-        variant="contained"
-        // endIcon={}
-        sx={{
-          position: "fixed",
-          bottom: 50,
-          right: 30,
-          borderRadius: "50%",
-          minWidth: 0,
-          padding: 2,
-          zIndex: 1000,
-        }}
-        onClick={handleOpenChat}
-      >
-        <TipsAndUpdatesIcon />
-      </Button>}
+      {/* AI Chat Icon*/}
+      {!openChat && (
+        <Button
+          variant="contained"
+          // endIcon={}
+          sx={{
+            position: "fixed",
+            bottom: 50,
+            right: 30,
+            borderRadius: "50%",
+            minWidth: 0,
+            padding: 2,
+            zIndex: 1000,
+          }}
+          onClick={handleOpenChat}
+        >
+          <TipsAndUpdatesIcon />
+        </Button>
+      )}
 
+      {/* AI Chat */}
       {openChat && (
         <div className="fixed bottom-8 right-8 z-1000">
           <AIChat setOpenChat={setOpenChat} patient={patient} />
         </div>
       )}
+
+      {/* Navigation sidebar */}
       <Box className="flex flex-col flex-grow">
         <Box className="flex justify-between mt-6 mb-2 px-32">
           <Box className="flex justify-center">

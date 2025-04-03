@@ -1,3 +1,12 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Component for displaying lists, etc...
+ */
+
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import { Typography, Grid } from "@mui/material";
 
 const DataRow = ({

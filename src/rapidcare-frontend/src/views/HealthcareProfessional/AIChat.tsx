@@ -1,3 +1,10 @@
+/**
+ * Author: Pranav Kalsi
+ * Last Modified: March 7th
+ * Purpose: the AI chat functionality
+ *
+ * FIREBASE and backend Related operations and respective state management completed by Pranav Kalsi
+ */
 // https://mui.com/material-ui/material-icons/?query=send&selected=Send
 // https://mui.com/material-ui/react-text-field/
 // https://mui.com/material-ui/react-button/
@@ -17,19 +24,21 @@ import {
 } from "../../firebaseControllers/DatabaseOps";
 import { v4 as uuidv4 } from "uuid";
 
-
 const AIChat = (props: any) => {
+  // state variables
   const [patient, setPatient] = useState<IPatient>(props.patient);
   const brokerReference = useRef<AIBrokerModule | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState<IMessage[]>([]);
 
+  // Close the chat
   const handleClose = () => {
     brokerReference.current?.clearStore();
     props.setOpenChat(false);
   };
 
+  // Load all of the chats
   useEffect(() => {
     const unsubscribeChats = onSnapshot(AIChatCollection, (querySnapshot) => {
       const messageList: IMessage[] = querySnapshot.docs
@@ -43,10 +52,11 @@ const AIChat = (props: any) => {
 
       setMessages(messageList);
     });
-    console.log("Open");
 
+    // activate loading bar
     setIsLoading(true);
 
+    // Set a reference to the broker and make an initial hit
     brokerReference.current = new AIBrokerModule();
     brokerReference.current.setVectorStore(props.patient, setIsLoading);
 
@@ -55,8 +65,9 @@ const AIChat = (props: any) => {
     };
   }, []);
 
+  // Send a query to the backend for the AI to answer
   const sendQuery = (event: React.FormEvent) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault(); // Prevent reload
     const response = brokerReference.current?.queryAI(
       query,
       patient.profileInformation?.demographics?.name || ""
@@ -69,15 +80,15 @@ const AIChat = (props: any) => {
       message: query,
     };
 
-    // console.log("Message sent:", message);
     setQuery("");
     console.log(response);
 
+    // Add message to db for display
     addMessage(humanMessage);
-    // addMessage(botMessage);
   };
 
   return (
+    // AI chat box
     <div className="bg-slate-100 p-3">
       <div className="flex">
         <div className="ml-1">
@@ -91,6 +102,7 @@ const AIChat = (props: any) => {
         </div>
       </div>
 
+      {/* Loading, and chat box availbel when context is loaded */}
       {isLoading ? (
         <CircularProgress />
       ) : (

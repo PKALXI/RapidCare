@@ -1,3 +1,15 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Display list of patients
+ *
+ * FIREBASE Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React, { useEffect, useState } from "react";
 import Footer from "../components/AppFooter";
 import Navbar from "../components/AppNavBar";
@@ -19,21 +31,23 @@ import { onSnapshot } from "firebase/firestore";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const PatientList = () => {
+  // Modal control navigation etc...
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // const healthcareProfessional = useSelector((state: RootState) => state.app.healthcareProfessional);
-  // const patients = healthcareProfessional?.patients;
+  // Patient list
   const [patients, setPatients] = useState<IPatient[]>([]);
 
+  // Close modal
   const closeModal = () => {
     setOpen(false);
   };
 
   //https://firebase.google.com/docs/firestore/query-data/listen
   useEffect(() => {
+    // Listen to updates from db patient collection
     const unsub = onSnapshot(patientCollection, (querySnapshot) => {
       const patientList: IPatient[] = querySnapshot.docs.map((doc) =>
         doc.data()
@@ -70,6 +84,8 @@ const PatientList = () => {
             </Grid>
           </Grid>
         </Card>
+
+        {/* Display list of patients */}
         {patients?.map((patient) => (
           <Card key={patient.id} className="mb-4 p-2">
             <CardContent>
@@ -108,6 +124,7 @@ const PatientList = () => {
           </Card>
         ))}
 
+        {/* Submit function*/}
         <div className="flex justify-center my-6">
           <Button variant="contained" color="primary" onClick={handleOpen}>
             <AddCircleIcon />

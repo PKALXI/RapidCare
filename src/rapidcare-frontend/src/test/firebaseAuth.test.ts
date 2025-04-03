@@ -1,3 +1,9 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Test the authentication operations.
+ */
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,

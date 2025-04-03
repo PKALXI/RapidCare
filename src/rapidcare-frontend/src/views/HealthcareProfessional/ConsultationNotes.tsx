@@ -1,3 +1,12 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Display the SOAP notes and add 
+ */
+
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React, { useState } from "react";
 import { IPatient, ISoapNote } from "../../models/model";
 import {
@@ -19,6 +28,7 @@ interface ConsultationNotesProps {
 }
 
 const ConsultationNotes: React.FC<ConsultationNotesProps> = ({ patient }) => {
+  // consultation note sate
   const consultationNotes = patient.consultationNotes || [];
   const [selectedNote, setSelectedNote] = useState<ISoapNote | null>(null);
   const [openNote, setOpenNote] = useState(false);
@@ -49,6 +59,7 @@ const ConsultationNotes: React.FC<ConsultationNotesProps> = ({ patient }) => {
         </Button>
       </Box>
 
+      {/* Display existing consultation notes */}
       <Grid container spacing={2}>
         {consultationNotes?.map((note) => (
           <Grid item xs={12} sm={6} md={4} key={note.id}>
@@ -70,6 +81,7 @@ const ConsultationNotes: React.FC<ConsultationNotesProps> = ({ patient }) => {
         ))}
       </Grid>
 
+      {/* open note for viewing */}
       <Modal open={openNote} onClose={handleCloseNote}>
         <Box className="w-3/4 mx-auto my-10 bg-white p-4 rounded relative max-h-[85vh] overflow-y-auto">
           <div className="flex justify-between items-center p-2">
@@ -264,7 +276,8 @@ const ConsultationNotes: React.FC<ConsultationNotesProps> = ({ patient }) => {
           )}
         </Box>
       </Modal>
-
+      
+      {/* Add soap modal */}
       <AddSoapNote
         open={openSoapNote}
         setOpen={setOpenSoapNote}

@@ -1,3 +1,12 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Admin Account
+ */
+
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import { useState } from "react";
 import {
   Button,
@@ -41,11 +50,14 @@ const AdminAccount = () => {
       address: "",
     }
   );
+
+  // Outline any errors and setup redux layer access
   const [errors, setErrors] = useState<any>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
+  // Change for any items
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNetworkInfo({ ...formData, [name]: value });
@@ -55,11 +67,11 @@ const AdminAccount = () => {
     }
   };
 
+  // Save any changes
   const handleSave = () => {
     if (Object.values(errors).some((error) => error)) {
       return;
     }
-
     try {
       // Save data in backend
       dispatch(saveNetworkInfo(formData));
@@ -71,6 +83,7 @@ const AdminAccount = () => {
     }
   };
 
+  // Handle open modal
   const handleOpenModal = () => {
     setOpenModal(true);
     if (healthNetworkAdmin?.networkInfo) {
@@ -78,11 +91,13 @@ const AdminAccount = () => {
     }
   };
 
+  // Close the modal
   const handleCloseModal = () => {
     setOpenModal(false);
     setErrors({});
   };
 
+  // Logout of the account
   const handleLogout = () => {
     try {
       dispatch(resetState());
@@ -94,6 +109,7 @@ const AdminAccount = () => {
     }
   };
 
+  // Delete click
   const handleDeleteClick = () => {
     setOpenDeleteModal(true);
   };
@@ -118,6 +134,7 @@ const AdminAccount = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      {/* Information of admin displayed */}
       {healthNetworkAdmin?.isOnboardingComplete ||
       healthNetworkAdmin?.networkInfo ? (
         <Container className="flex-grow pt-6">
@@ -157,6 +174,7 @@ const AdminAccount = () => {
                 </Typography>
               </div>
 
+            {/* CRUD functions */}
               <div className="flex justify-center mt-6 gap-4">
                 <Button
                   variant="contained"
@@ -196,6 +214,7 @@ const AdminAccount = () => {
         </div>
       )}
 
+      {/* Edit/Add function via modal */}
       <Modal open={openModal} onClose={handleCloseModal}>
         <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
           <div className="p-2 flex justify-between items-center">
@@ -288,7 +307,8 @@ const AdminAccount = () => {
           </div>
         </Box>
       </Modal>
-
+      
+      {/* Delete confirmation */}
       <ConfirmationModal
         open={openDeleteModal}
         onClose={handleDeleteCancel}

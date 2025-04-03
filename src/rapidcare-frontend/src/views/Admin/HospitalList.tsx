@@ -1,3 +1,15 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Display the list of hospitals
+ *
+ * FIREBASE Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React, { useEffect, useState } from "react";
 import {
   Button,
@@ -13,9 +25,6 @@ import {
 } from "@mui/material";
 import Footer from "../components/AppFooter";
 import Navbar from "../components/AppNavBar";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../redux/store";
-//import { useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import { IHospital } from "../../models/model";
 import { validateField } from "../../helpers/helper";
@@ -30,9 +39,10 @@ import toast from "react-hot-toast";
 import ConfirmationModal from "../components/ConfirmationModal";
 
 const HospitalList = () => {
-  //const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
-  // const hospitals = healthNetworkAdmin?.hospitals;
+  // Set list of hospitals Initially none
   const [hospitals, setHospitals] = useState<IHospital[]>([]);
+
+  // Modal data to come from here
   const initialFormData: IHospital = {
     id: "",
     name: "",
@@ -42,6 +52,8 @@ const HospitalList = () => {
     bedCapacity: 0,
     operatingHours: "",
   };
+
+  // State management for component
   const [formData, setHospitalInfo] = useState<IHospital>(initialFormData);
   const [isEditing, setEditingHospital] = useState(false);
   const [errors, setErrors] = useState<any>({});
@@ -62,6 +74,7 @@ const HospitalList = () => {
     return () => unsub();
   }, []);
 
+  // Handle change on input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setHospitalInfo({ ...formData, [name]: value });
@@ -71,11 +84,13 @@ const HospitalList = () => {
     }
   };
 
+  // Delete logic
   const handleDeleteClick = (hospital: IHospital) => {
     setHospitalToDelete(hospital);
     setOpenDeleteModal(true);
   };
 
+  // Delete feedback
   const handleDeleteConfirm = () => {
     try {
       if (hospitalToDelete) {
@@ -90,11 +105,13 @@ const HospitalList = () => {
     }
   };
 
+  // Cancel delete operation
   const handleDeleteCancel = () => {
     setOpenDeleteModal(false);
     setHospitalToDelete(null);
   };
 
+  // Save hospital
   const handleSave = () => {
     if (Object.values(errors).some((error) => error)) {
       return;
@@ -102,6 +119,7 @@ const HospitalList = () => {
 
     try {
       if (isEditing) {
+        // edit hospital logic
         const newHospital: IHospital = {
           id: formData.id,
           name: formData.name,
@@ -114,6 +132,7 @@ const HospitalList = () => {
         addHospital(newHospital);
         toast.success("Hospital updated successfully");
       } else {
+        // Add a new hospital
         const newHospital: IHospital = {
           id: uuidv4(),
           name: formData.name,
@@ -126,6 +145,8 @@ const HospitalList = () => {
         addHospital(newHospital);
         toast.success("Hospital added successfully");
       }
+
+      // Close the modal
       handleCloseModal();
     } catch (error) {
       toast.error(
@@ -135,16 +156,19 @@ const HospitalList = () => {
     }
   };
 
+  // Open the modal to add hospital
   const handleAdd = () => {
     setOpenModal(true);
   };
 
+  // Edit hospital information
   const handleEdit = (hospital: IHospital) => {
     setEditingHospital(true);
     setHospitalInfo(hospital);
     setOpenModal(true);
   };
 
+  // Close the modal
   const handleCloseModal = () => {
     setHospitalInfo(initialFormData);
     setEditingHospital(false);
@@ -152,6 +176,7 @@ const HospitalList = () => {
     setErrors({});
   };
 
+  // Functional component for list and modal display
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -178,6 +203,8 @@ const HospitalList = () => {
             </Grid>
           </Grid>
         </Card>
+
+        {/* Display list of hospitals */}
         {hospitals?.map((hospital) => (
           <Card key={hospital.id} className="mb-4 p-2">
             <CardContent>
@@ -223,6 +250,7 @@ const HospitalList = () => {
         </div>
       </Container>
 
+      {/* Modal to add Hospital  */}
       <Modal open={openModal} onClose={handleCloseModal}>
         <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
           <div className="p-2 flex justify-between items-center">
@@ -303,6 +331,7 @@ const HospitalList = () => {
         </Box>
       </Modal>
 
+      {/* Confirm the delete */}
       <ConfirmationModal
         open={openDeleteModal}
         onClose={handleDeleteCancel}

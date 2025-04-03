@@ -1,6 +1,12 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Provide app actions for redux layer
+ */
+
+// https://react-redux.js.org/introduction/getting-started
+
 import {
-  IHealthcareProfessionalState,
-  IHealthNetworkAdminState,
   IProfileInfo,
   IDocument,
   INetworkInfo,
@@ -8,6 +14,7 @@ import {
   IHealthcareProfessional,
 } from "../models/model";
 
+// Action codes.
 export const SET_LOGIN_STATE = "SET_LOGIN_STATE";
 export const SET_HP_DATA = "SET_HP_DATA";
 export const SET_HN_DATA = "SET_HN_DATA";
@@ -24,6 +31,8 @@ export const UPDATE_EMPLOYEE = "UPDATE_EMPLOYEE";
 export const DELETE_HOSPITAL = "DELETE_HOSPITAL";
 export const DELETE_EMPLOYEE = "DELETE_EMPLOYEE";
 
+
+// State management actions below
 export const resetState = () => ({
   type: RESET_STATE,
 });

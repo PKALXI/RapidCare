@@ -1,3 +1,10 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Physically manages app states
+ */
+
+// https://react-redux.js.org/introduction/getting-started
 import { configureStore } from "@reduxjs/toolkit";
 import appReducer from "./appReducer";
 

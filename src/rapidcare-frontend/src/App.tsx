@@ -1,3 +1,15 @@
+/**
+ * Author: Pranav Kalsi, Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Append a SOAP note to a patient
+ *
+ * FIREBASE and backend Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import "./App.css";
 import React from "react";
 import {
@@ -25,6 +37,7 @@ const App: React.FC = () => {
     (state: RootState) => state.app
   );
 
+  // Set app routes
   return (
     <>
       <Toaster />

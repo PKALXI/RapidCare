@@ -1,5 +1,15 @@
-import { IHealthcareProfessionalState } from "../models/model";
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Provide helper functionality for helper
+ */
 
+/**
+ * 
+ * @param {string} field
+ * @param {string | number | boolean} value
+ * @returns {string} 
+ */
 export const validateField = (
   field: string,
   value: string | number | boolean
@@ -57,6 +67,10 @@ export const validateField = (
   return errorMessage;
 };
 
+/** 
+ * @param {string} dob 
+ * @returns {number} 
+ */
 export const calculateAge = (dob: string) => {
   const birthDate = new Date(dob);
   const currentDate = new Date();

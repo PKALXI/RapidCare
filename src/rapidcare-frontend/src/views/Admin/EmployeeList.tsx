@@ -1,3 +1,15 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Display the list of Employees
+ *
+ * FIREBASE Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import { useState, useEffect } from "react";
 import {
   Button,
@@ -13,8 +25,6 @@ import {
 } from "@mui/material";
 import Footer from "../components/AppFooter";
 import Navbar from "../components/AppNavBar";
-//import { useSelector } from "react-redux";
-//import { RootState } from "../../redux/store";
 import CloseIcon from "@mui/icons-material/Close";
 import { IHealthcareProfessional, IHospital } from "../../models/model";
 import { validateField } from "../../helpers/helper";
@@ -30,12 +40,12 @@ import toast from "react-hot-toast";
 import ConfirmationModal from "../components/ConfirmationModal";
 
 const EmployeeList = () => {
-  //const healthNetworkAdmin = useSelector((state: RootState) => state.app.healthNetworkAdmin);
+  // State for various models
   const [hospitals, setHospitals] = useState<IHospital[]>([]);
   const [employees, setEmployees] = useState<IHealthcareProfessional[]>([]);
   const [selectedHospital, setSelectedHospital] = useState<string>("");
-  // const hospitals = healthNetworkAdmin?.hospitals || [];
-  // const employees = healthNetworkAdmin?.healthcareProfessionals || [];
+
+  // Initial healthcare professional state data. 
   const initialFormData: IHealthcareProfessional = {
     id: "",
     name: "",
@@ -46,14 +56,16 @@ const EmployeeList = () => {
     phone: "",
     employmentStatus: "",
   };
-  const [formData, setEmployeeInfo] =
-    useState<IHealthcareProfessional>(initialFormData);
+
+  // formData of healthcare professional data
+  const [formData, setEmployeeInfo] = useState<IHealthcareProfessional>(initialFormData);
+
+  // Editing states
   const [isEditing, setEditingEmployee] = useState(false);
   const [errors, setErrors] = useState<any>({});
   const [openModal, setOpenModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [employeeToDelete, setEmployeeToDelete] =
-    useState<IHealthcareProfessional | null>(null);
+  const [employeeToDelete, setEmployeeToDelete] = useState<IHealthcareProfessional | null>(null);
 
   //https://firebase.google.com/docs/firestore/query-data/listen
   useEffect(() => {
@@ -70,6 +82,7 @@ const EmployeeList = () => {
       }
     );
 
+    // live listing of firestore
     const unsubscribeHCP = onSnapshot(
       healthcareProfessionalCollection,
       (querySnapshot) => {
@@ -93,6 +106,7 @@ const EmployeeList = () => {
     };
   }, [selectedHospital]);
 
+  // Change items in the employee info
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEmployeeInfo({ ...formData, [name]: value });
@@ -102,6 +116,7 @@ const EmployeeList = () => {
     }
   };
 
+  // Handle saving of the acouint then hit the backend to save it
   const handleSave = () => {
     if (Object.values(errors).some((error) => error)) {
       return;
@@ -165,15 +180,18 @@ const EmployeeList = () => {
     }
   };
 
+  // Open modal to add healthcare professional
   const handleAdd = () => {
     setOpenModal(true);
   };
 
+  // Handle delete of a healtcare professional
   const handleDeleteClick = (employee: IHealthcareProfessional) => {
     setEmployeeToDelete(employee);
     setOpenDeleteModal(true);
   };
 
+  // delete user and delete account
   const handleDeleteConfirm = () => {
     try {
       if (employeeToDelete) {
@@ -212,17 +230,20 @@ const EmployeeList = () => {
     }
   };
 
+  // cancel delete operation
   const handleDeleteCancel = () => {
     setOpenDeleteModal(false);
     setEmployeeToDelete(null);
   };
 
+  // edit state for editting a hcp
   const handleEdit = (employee: IHealthcareProfessional) => {
     setEditingEmployee(true);
     setEmployeeInfo(employee);
     setOpenModal(true);
   };
 
+  // close modal
   const handleCloseModal = () => {
     setEmployeeInfo(initialFormData);
     setEditingEmployee(false);
@@ -280,6 +301,7 @@ const EmployeeList = () => {
             </Grid>
           </Grid>
         </Card>
+        {/* Display employees */}
         {employees
           .filter(
             (emp) => !selectedHospital || emp.hospital === selectedHospital
@@ -329,6 +351,7 @@ const EmployeeList = () => {
         </div>
       </Container>
 
+      {/* Modal */}
       <Modal open={openModal} onClose={handleCloseModal}>
         <Box className="w-3/4 mx-auto mt-16 bg-white p-4 rounded relative">
           <div className="p-2 flex justify-between items-center">
@@ -431,7 +454,8 @@ const EmployeeList = () => {
           </div>
         </Box>
       </Modal>
-
+      
+      {/* Confirmation for Delete */}
       <ConfirmationModal
         open={openDeleteModal}
         onClose={handleDeleteCancel}

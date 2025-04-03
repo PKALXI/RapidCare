@@ -1,3 +1,15 @@
+/**
+ * Author: Pranav Kalsi, Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: display info
+ *
+ * FIREBASE and backend Related operations and respective state management completed by Pranav Kalsi
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import { useEffect, useState } from "react";
 import { IPatient, IProfileInfo } from "../../models/model";
 import {
@@ -25,11 +37,13 @@ interface ProfileInformationProps {
 const ProfileInformation: React.FC<ProfileInformationProps> = ({
   patientId,
 }) => {
+  // Component state
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const [patient, setPatient] = useState(emptyPatient);
   const q = query(patientCollection, where("id", "==", patientId));
 
+  // Use effect setting patient
   useEffect(() => {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -39,6 +53,7 @@ const ProfileInformation: React.FC<ProfileInformationProps> = ({
     return () => unsubscribe();
   }, []);
 
+  // Modal to view profile information
   return (
     <div className="pb-32">
       <Box className="flex justify-between">

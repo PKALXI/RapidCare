@@ -1,3 +1,11 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Admin dashboard
+ */
+
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
 import {
   Button,
   Card,
@@ -18,24 +26,29 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BarChart } from "@mui/x-charts/BarChart";
 
+
 const AdminDashboard = () => {
   const healthNetworkAdmin = useSelector(
     (state: RootState) => state.app.healthNetworkAdmin
   );
-  // const isOnboardingComplete = healthNetworkAdmin?.isOnboardingComplete;
+
+  // Redux and functional component analysis
   const isOnboardingComplete = true;
   const dashboardMetrics = healthNetworkAdmin?.dashboardMetrics;
   const hospitals = healthNetworkAdmin?.hospitals;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // handleComplete 
   const handleComplete = () => {
     dispatch(setOnboardingStatus(true));
   };
 
   return (
+    // functional component
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      {/* Onboarding not required */}
       {isOnboardingComplete ? (
         <div className="flex-grow p-6 pb-16">
           <Grid container spacing={2}>
@@ -134,6 +147,7 @@ const AdminDashboard = () => {
           </Grid>
         </div>
       ) : (
+        // Onboarding required
         <div className="flex items-center flex-grow justify-center">
           <Card className="p-4 text-center space-y-4">
             <CardContent>

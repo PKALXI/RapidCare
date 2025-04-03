@@ -1,3 +1,14 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Referral display
+ *
+ */
+
+// https://firebase.google.com/
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
+
 import React, { useState } from "react";
 import { IPatient, IDocument } from "../../models/model";
 import {
@@ -24,6 +35,7 @@ interface ReferralsProps {
 }
 
 const Referrals: React.FC<ReferralsProps> = ({ patient }) => {
+  // component states for display and operations
   const referrals = patient.referrals || [];
   const [selectedDocument, setSelectedDocument] = useState<IDocument | null>(
     null
@@ -34,6 +46,7 @@ const Referrals: React.FC<ReferralsProps> = ({ patient }) => {
   const [pdfData, setPdfData] = useState<string | null>(null);
   const [pdfDoc, setPdfDoc] = useState<PDFDocument | null>(null);
 
+  // Load PDF from redux
   const loadPDF = async (type: string): Promise<void> => {
     let pdfUrl = "";
     if (type === "blood-test")
@@ -66,12 +79,14 @@ const Referrals: React.FC<ReferralsProps> = ({ patient }) => {
     }
   };
 
+  // handle change
   const handleTypeChange = (event: SelectChangeEvent): void => {
     const type = event.target.value;
     setSelectedType(type);
     loadPDF(type);
   };
 
+  // Save operation
   const handleSave = async (): Promise<void> => {
     if (!pdfDoc || !pdfData) {
       toast.error("No PDF to save");
@@ -82,13 +97,6 @@ const Referrals: React.FC<ReferralsProps> = ({ patient }) => {
       const form = pdfDoc.getForm();
       form.flatten();
       const finalPdfBytes = await pdfDoc.save();
-      // const newDocument: IDocument = {
-      //     documentId: uuidv4(),
-      //     name: `${selectedType}-requisition.pdf`,
-      //     type: "pdf",
-      //     url: URL.createObjectURL(new Blob([finalPdfBytes], { type: "application/pdf" }))
-      // };
-      // Update patient's referrals in backend
       toast.success("Referral saved successfully");
       setAddModal(false);
     } catch (error) {
@@ -97,20 +105,24 @@ const Referrals: React.FC<ReferralsProps> = ({ patient }) => {
     }
   };
 
+  // referral control (adding a viewing modal)
   const handleAddNew = (): void => {
     setAddModal(true);
   };
 
+  // open modal
   const handleOpenDocument = (document: IDocument): void => {
     setSelectedDocument(document);
     setOpenViewModal(true);
   };
 
+  // close modal
   const handleCloseModal = (): void => {
     setOpenViewModal(false);
     setSelectedDocument(null);
   };
 
+  // functional display code
   return (
     <div>
       <div className="flex justify-between">

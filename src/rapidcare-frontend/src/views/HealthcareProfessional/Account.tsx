@@ -1,3 +1,12 @@
+/**
+ * Author: Inreet Kaur
+ * Last Modified: March 7th
+ * Purpose: Display the account actions
+ *
+ */
+
+// https://mui.com/material-ui/material-icons/
+// https://mui.com/material-ui/
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -15,12 +24,15 @@ import {
 import toast from "react-hot-toast";
 
 const AccountSettings = () => {
+
+  // redux access 
   const healthcareProfessional = useSelector(
     (state: RootState) => state.app.healthcareProfessional?.user
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Logout
   const handleLogout = () => {
     try {
       dispatch(resetState());
@@ -32,6 +44,7 @@ const AccountSettings = () => {
     }
   };
 
+  // Display information of user
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

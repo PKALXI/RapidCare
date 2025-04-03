@@ -323,6 +323,29 @@ This subsection covers FR12 and FR13 from of the \href{https://github.com/Inreet
 
 \end{enumerate}
 
+\subsection{Validate AI Assistant Results} \label{section:3.8}
+This subsection covers FR-14 from of the \href{https://github.com/Inreet-Kaur/capstone/blob/main/docs/SRS/SRS.pdf} {SRS document} by testing that the system is able to effectively query the patient data.
+
+\begin{enumerate}
+
+\item{test-FR14,14-1} \label{test-FR14-1}
+
+Control: Manual
+
+Initial State: The patient's profile is loaded and AI 
+
+Input: Query regarding the patient is present.
+
+Output: A answer directly from the patient data (demographic information, SOAP Notes, etc...)
+
+Test Case Derivation: Manually users will test if the chart data is relevant and correct.  
+
+How test will be performed: User will perform 5 common queries which will be common queries healthcare professionals need, phrased 2 different ways each.
+
+Result: Pass.
+\end{enumerate}
+
+
 \section{Nonfunctional Requirements Evaluation} \label{section:4}
 
 \subsection{Look and Feel Requirement} \label{section:4.1}
@@ -835,36 +858,39 @@ See SRS Documentation at \href{https://github.com/Inreet-Kaur/capstone/blob/main
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
   \hline
-   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 \\
+   Test ID & FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & FR8 & FR9 & FR10 & FR11 & FR12 & FR13 & FR14 \\
   \hline
-  test-FR1,4,8-1 & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR1,4,8-1 & $\times$ & & & $\times$ & & & & $\times$ & & & & & &\\
   \hline
-  test-FR1,4,8-2 & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
+  test-FR1,4,8-2 & $\times$ & & & $\times$ & & & & $\times$ & & & & & &\\
   \hline
-  test-FR2,5,9-1 & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
+  test-FR2,5,9-1 & & $\times$ & & & $\times$ & & & & $\times$ & & & & & \\
   \hline
   test-FR2,5,9-2 & & $\times$ & & & $\times$ & & & & $\times$ & & & & \\
   \hline
-  test-FR3,6,10,11-1 & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
+  test-FR3,6,10,11-1 & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & &\\
   \hline
-  test-FR3,6,10,11-2 & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & \\
+  test-FR3,6,10,11-2 & & & $\times$ & & & $\times$ & & & & $\times$ & $\times$ & & &\\
   \hline
-  test-FR7-1 & & & & & & & $\times$ & & & & & & \\
+  test-FR7-1 & & & & & & & $\times$ & & & & & & &\\
   \hline
-  test-FR7-2 & & & & & & & $\times$ & & & & & & \\
+  test-FR7-2 & & & & & & & $\times$ & & & & & & &\\
   \hline
-  test-FR11-1 & & & & & & & & & & & $\times$ & & \\
+  test-FR11-1 & & & & & & & & & & & $\times$ & & &\\
   \hline
-  test-FR11-2 & & & & & & & & & & & $\times$ & & \\
+  test-FR11-2 & & & & & & & & & & & $\times$ & & &\\
   \hline
-  test-FR12,13-1 & & & & & & & & & & & & $\times$ & $\times$ \\
+  test-FR12,13-1 & & & & & & & & & & & & $\times$ & $\times$ &\\
   \hline
-  test-FR12,13-2 & & & & & & & & & & & & $\times$ & $\times$ \\
+  test-FR12,13-2 & & & & & & & & & & & & $\times$ & $\times$ &\\
   \hline
-  test-FR12,13-3 & & & & & & & & & & & & $\times$ & $\times$ \\
+  test-FR12,13-3 & & & & & & & & & & & & $\times$ & $\times$ &\\
   \hline
+  test-FR14-1 & & & & & & & & & & & & & &$\times$ \\
+  \hline
+
 \end{tabular}
 \caption{\bf Functional Requirements Tests Requirement Traceability} \label{tab:fr-test-traceability}
 \end{table}

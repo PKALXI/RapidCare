@@ -84,7 +84,7 @@ class Agent:
             for doc in retrieved_docs
         )
 
-        return serialized, retrieved_docslasjsglksjfkl
+        return serialized, retrieved_docs
 
     def _query_or_respond(self, state: MessagesState):
         # Generate tool call for retrieval or respond.

@@ -76,6 +76,7 @@ class Agent:
         self.memory = MemorySaver()
 
     def retrieve(self, query: str):
+        """Retrieve the relevant context based on the query."""
         # Retrieve the relevant context based on the query
         retrieved_docs = self.vector_store.similarity_search(query, k=2)
         serialized = "\n\n".join(
@@ -83,7 +84,7 @@ class Agent:
             for doc in retrieved_docs
         )
 
-        return serialized, retrieved_docs
+        return serialized, retrieved_docslasjsglksjfkl
 
     def _query_or_respond(self, state: MessagesState):
         # Generate tool call for retrieval or respond.

@@ -7,6 +7,17 @@ Details to run, build, and install the ReactJS frontend, enter the folder ```rap
 - To install dependencies, the user has to run ```npm install --legacy-peer-deps```.
 - To start the application, run: ```npm start```
 
+## Setting up FFMPEG for backend
+- Install ffmpeg for Windows by navigating to this link: https://ffmpeg.org/download.html
+- Extract the ZIP file and add it to your system path.
+- To add it to your system path, do the following:
+  - Right-click on This PC and select Properties.
+  - Click on Advanced system settings and go to Environment Variables section.
+  - Under System variables, select Path variable and click Edit.
+  - Add path to the bin folder inside the ffmpeg directory.
+  - Click OK to save the changes.
+- Verify the installation and re-run the python file.
+
 ## Installing and Running the Python Microservices
 - CD into each of the microservices: ```AI-assist, classifier, diag-med-pred, firebase-admin, voice-to-text```.
 - To install requirements needed to run the python file, the user has to run ```pip install -r requirements.txt```.

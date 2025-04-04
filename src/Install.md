@@ -2,6 +2,11 @@
 
 To install the system, the user has to do the following:
 
+## Pre-Requisites
+- Make sure to have C++ on your machine.
+- Python & pip installed
+- Make sure to create a ```.env``` file in the ```/src``` folder and add: ```OPEN_AI_KEY=<your-key>```
+
 ## Setting up the frontend
 Details to run, build, and install the ReactJS frontend, enter the folder ```rapidcare-frontend``` and see the README.md. Below is overview of installing and running the application
 - To install dependencies, the user has to run ```npm install --legacy-peer-deps```.

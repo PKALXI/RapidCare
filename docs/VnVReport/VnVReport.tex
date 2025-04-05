@@ -489,9 +489,9 @@ This subsection covers NFR8 from of the \href{https://github.com/PKALXI/RapidCar
 
 Initial State:  System is deployed and accessible.
 
-Input: Conduct a compliance audit with PIPEDA and other relevant data protection standards.
+Input: Ensure healthcare professional can only see their respective patient in dashboard.
 
-Output: System passes all compliance checks and shows relevant disclaimers with no exceptions.
+Output: System does not show patients outside the respective healthcare professional care.
 
 Result: Pass
 
@@ -855,7 +855,7 @@ N/A
 % the supervisor (when one exists) shaped the final product.  In particular 
 % the feedback from the Rev 0 demo to the supervisor (or to potential users) 
 % should be highlighted.}
-Based on the feedback received during the Rev 0 demo, we focused on ensuring that we prioritize critical and necessary requirements in the final implementation. We incorporated user feedback messages in accordance with the functional tests. Additionally, we updated the functions responsible for validating input data to cover the edge cases discovered during testing, ensuring that the system can handle unexpected or invalid inputs gracefully. In addition to this, certain tests were removed while other were updated due to change in requirements and hazard analysis. These changes are reflected both in verification and validation plan as well as the report. Furthermore, we placed a strong emphasis on UI and usability testing. This involved gathering feedback on the aesthetic appeal and functionality of the user interface, ensuring that users could navigate the system intuitively and efficiently. Iterative testing process allowed us to refine the system significantly and make several design adjustments leading to a more user-friendly application.
+Based on the feedback received during the Rev 0 demo, we focused on ensuring that we prioritize critical and necessary requirements in the final implementation. The critical items we were told to focus on was the SOAP note creation along with the AI Assist functionality. We incorporated user feedback messages in accordance with the functional tests to ensure the user is constantly informed regarding the app state. In addition to this, certain tests were removed while other were updated in alignment to the requirements and hazard analysis. These changes are reflected both in verification and validation plan as well as the report. Furthermore, we placed a strong emphasis on UI and usability testing. This involved gathering feedback on the aesthetic appeal and functionality of the user interface, ensuring that users could navigate the system intuitively and efficiently. For, example adding a disclaimer in the footer to remind the user that the app is a supplement to aid the healthcare professional and does not replace the healthcare professional all together. Iterative testing process allowed us to refine the system significantly and make several design adjustments leading to a more user-friendly application.
 
 \section{Automated Testing}
 
